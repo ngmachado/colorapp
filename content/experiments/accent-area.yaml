@@ -1,0 +1,25 @@
+# Experiment template. Fixed factors are stated so a reader sees what the design does not test.
+id: 'accent-area'
+title: 'Does an accent help?'
+question: 'Does adding an accent, and how large, change preference?'
+hypothesis: 'A small accent is preferred over none and over a large accent for the same colours.'
+factors:
+  - name: 'accent area'
+    levels:
+      - 'none'
+      - 'small (preset-1 trim)'
+      - 'large (preset-3 sleeves)'
+fixed:
+  - 'garment: original colour-block jacket, front view, fixed region preset'
+  - 'background: neutral'
+  - 'material: flat region colouring'
+  - 'presentation: equal sizes, randomised order and side'
+  - 'colours: fixed three-role palette'
+task_wording: 'Which jacket do you prefer?'
+response_mode: 'pairwise'
+criteria:
+  - 'personal preference'
+  - 'willingness to wear'
+planned_interpretation: 'Pairwise wins by accent level.'
+limitations: 'Area levels are tied to the preset geometry; "small" and "large" are measured visible shares, not free percentages.'
+variants_per_cell: 1

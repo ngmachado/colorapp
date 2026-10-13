@@ -1,0 +1,26 @@
+# Experiment template. Fixed factors are stated so a reader sees what the design does not test.
+id: 'proportion-swap'
+title: 'Same colours, changing areas'
+question: 'Does reassigning area among the same three colours change preference?'
+hypothesis: 'Area allocation changes preference even when the palette is unchanged.'
+factors:
+  - name: 'allocation (dominant/secondary/accent)'
+    levels:
+      - '70/20/10'
+      - '10/20/70'
+      - '45/45/10'
+      - '33/33/33'
+fixed:
+  - 'garment: original colour-block jacket, front view, fixed region preset'
+  - 'background: neutral'
+  - 'material: flat region colouring'
+  - 'presentation: equal sizes, randomised order and side'
+  - 'colours: fixed'
+task_wording: 'Which arrangement do you prefer?'
+response_mode: 'pairwise'
+criteria:
+  - 'personal preference'
+  - 'perceived balance'
+planned_interpretation: 'Wins by allocation, with measured visible shares reported next to the nominal split.'
+limitations: 'Measured visible shares depend on the preset; nominal splits are targets.'
+variants_per_cell: 1

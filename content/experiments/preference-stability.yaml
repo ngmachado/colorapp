@@ -1,0 +1,23 @@
+# Experiment template. Fixed factors are stated so a reader sees what the design does not test.
+id: 'preference-stability'
+title: 'Is preference stable?'
+question: 'Does this user make the same choices when a subset is repeated in a later session?'
+hypothesis: 'Pairwise choices on a repeated subset agree above chance.'
+factors:
+  - name: 'session'
+    levels:
+      - 'first'
+      - 'repeat (later session, re-randomised order)'
+fixed:
+  - 'garment: original colour-block jacket, front view, fixed region preset'
+  - 'background: neutral'
+  - 'material: flat region colouring'
+  - 'presentation: equal sizes, randomised order and side'
+  - 'subset: same candidate pairs in both sessions'
+task_wording: 'Which jacket do you prefer?'
+response_mode: 'pairwise'
+criteria:
+  - 'personal preference'
+planned_interpretation: 'Agreement rate between sessions with an interval.'
+limitations: 'Agreement describes this user; it is a check on the data, not a finding about taste.'
+variants_per_cell: 1

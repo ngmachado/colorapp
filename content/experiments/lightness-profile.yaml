@@ -1,0 +1,25 @@
+# Experiment template. Fixed factors are stated so a reader sees what the design does not test.
+id: 'lightness-profile'
+title: 'Lightness profile'
+question: 'Which role-wise lightness arrangement is preferred?'
+hypothesis: 'A profile with clear lightness separation between roles is preferred over a flat one.'
+factors:
+  - name: 'lightness profile'
+    levels:
+      - 'dark body / light accent'
+      - 'light body / dark accent'
+      - 'flat'
+      - 'graded'
+fixed:
+  - 'garment: original colour-block jacket, front view, fixed region preset'
+  - 'background: neutral'
+  - 'material: flat region colouring'
+  - 'presentation: equal sizes, randomised order and side'
+  - 'hue and chroma: fixed'
+task_wording: 'Rate the balance of light and dark.'
+response_mode: 'rating'
+criteria:
+  - 'perceived balance'
+planned_interpretation: 'Mean rating per profile with intervals; relate to measured lightness separation.'
+limitations: 'Measured separation is reported in a named lightness coordinate (OKLab L).'
+variants_per_cell: 1

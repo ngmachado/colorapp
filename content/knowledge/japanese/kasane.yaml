@@ -1,0 +1,97 @@
+# yaml-language-server: $schema=../schema.json
+# Layered combinations (kasane no irome). Order is inner-to-outer by layer_index: 0 = lining (裏), 1 = outer (表).
+# Seasons keep the source's wording. Interpretation: historical-description as reported by the cited page, unverified.
+
+- type: concept
+  id: ja-suo
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-ja-kasane-no-irome, locator: 'table row 梅 (裏: 濃蘇芳)' }
+  label: 蘇芳
+  description: Japanese colour term for the red dye from sappanwood; appears as a lining colour in the kasane table.
+  tags: { tradition: japanese, language: ja }
+
+- type: name
+  id: ja-suo-name
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-ja-kasane-no-irome, locator: 'table row 梅' }
+  concept: ja-suo
+  script: 蘇芳
+  language: ja
+  transliteration: { system: Hepburn, value: suō }
+  confidence: { transcription: 1 }
+
+- type: concept
+  id: ja-ao
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-ja-kasane-no-irome, locator: 'table row 菖蒲 (表: 青, 裏: 青)' }
+  label: 青
+  description: Japanese colour term covering blue and green ranges; appears as both layers of 菖蒲. Not the same record as Chinese 青 (zh-qing).
+  tags: { tradition: japanese, language: ja }
+
+- type: name
+  id: ja-ao-name
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-ja-kasane-no-irome, locator: 'table row 菖蒲' }
+  concept: ja-ao
+  script: 青
+  language: ja
+  transliteration: { system: Hepburn, value: ao }
+  confidence: { transcription: 1 }
+
+- type: combination
+  id: ja-kasane-ume-1
+  review_state: discovered
+  rights_status: unreviewed
+  evidence:
+    {
+      source: wikipedia-ja-kasane-no-irome,
+      locator: 'table row 梅, first variant (表 白 / 裏 濃蘇芳)',
+    }
+  label: 梅 (ume), first variant
+  order_documented: true
+  relationship_type: kasane (outer and lining)
+  season: '五節より春まで着る (worn from the Gosechi through spring)'
+  interpretation: historical-description
+  items:
+    - {
+        concept: ja-suo,
+        layer_index: 0,
+        position: lining,
+        role: lining,
+        visibility: '濃蘇芳 (dark suō) per the table',
+      }
+    - { concept: ja-shiro, layer_index: 1, position: outer, role: outer }
+  notes: The table gives the depth modifier 濃 (dark) on the lining; the concept records the base term 蘇芳.
+
+- type: combination
+  id: ja-kasane-ayame
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-ja-kasane-no-irome, locator: 'table row 菖蒲' }
+  label: 菖蒲 (ayame)
+  order_documented: true
+  relationship_type: kasane (outer and lining)
+  season: '四月薄衣に着る (worn in the fourth month with thin garments)'
+  interpretation: historical-description
+  items:
+    - { concept: ja-ao, layer_index: 0, position: lining, role: lining }
+    - { concept: ja-ao, layer_index: 1, position: outer, role: outer }
+  notes: Both layers use the same term; thin silk lets the lining show through, so the same name need not mean the same appearance.
+
+- type: combination
+  id: ja-kasane-beni-momiji
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-ja-kasane-no-irome, locator: 'table row 紅紅葉 (表 紅 / 裏 紅)' }
+  label: 紅紅葉 (beni momiji)
+  order_documented: true
+  relationship_type: kasane (outer and lining)
+  season: '十月一日より練衣綿を入れて着る (worn from the first day of the tenth month, with padded glossed silk)'
+  interpretation: historical-description
+  items:
+    - { concept: ja-beni, layer_index: 0, position: lining, role: lining }
+    - { concept: ja-beni, layer_index: 1, position: outer, role: outer }

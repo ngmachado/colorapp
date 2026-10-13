@@ -1,0 +1,26 @@
+# Experiment template. Fixed factors are stated so a reader sees what the design does not test.
+id: 'chroma-profile'
+title: 'Chroma profile'
+question: 'Which role-wise chroma arrangement is preferred?'
+hypothesis: 'One high-chroma role with quieter supports is preferred over equal chroma.'
+factors:
+  - name: 'chroma profile'
+    levels:
+      - 'one strong, two quiet'
+      - 'all equal'
+      - 'all quiet'
+      - 'all strong'
+fixed:
+  - 'garment: original colour-block jacket, front view, fixed region preset'
+  - 'background: neutral'
+  - 'material: flat region colouring'
+  - 'presentation: equal sizes, randomised order and side'
+  - 'hue and lightness: fixed'
+task_wording: 'Rate visual interest and balance.'
+response_mode: 'rating'
+criteria:
+  - 'visual interest'
+  - 'perceived balance'
+planned_interpretation: 'Mean rating per profile; relate to chroma spread and neutral share.'
+limitations: 'Near-neutral share uses the app threshold shown on screen.'
+variants_per_cell: 1

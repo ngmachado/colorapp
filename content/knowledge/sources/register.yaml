@@ -1,0 +1,148 @@
+# yaml-language-server: $schema=../schema.json
+# Source register. Every other record points at one of these through `evidence`.
+# access_date is the day the page was opened for this register.
+
+- type: source
+  id: cie-ilv-2020
+  review_state: bibliographic
+  rights_status: verified-restricted
+  author: CIE (International Commission on Illumination)
+  title: 'CIE S 017:2020 International Lighting Vocabulary, 2nd edition (e-ILV)'
+  publisher: CIE
+  date: '2020'
+  url: https://cie.co.at/e-ilv
+  access_date: '2026-10-13'
+  rights_notes: Terms are free to read online (entries at /eilvterm/<number>); definition text is CIE copyright, cite rather than reproduce.
+
+- type: source
+  id: iep-wuxing-littlejohn
+  review_state: bibliographic
+  rights_status: verified-restricted
+  author: Ronnie Littlejohn
+  title: 'Wuxing (Wu-hsing)'
+  publisher: Internet Encyclopedia of Philosophy (ISSN 2161-0002)
+  url: https://iep.utm.edu/wuxing/
+  access_date: '2026-10-13'
+  rights_notes: Copyright IEP and its authors. Short quotations with citation only.
+  notes: Section numbers in locators follow the article's own headings ("3. Wuxing Before the Han Dynasty", "4. Wuxing During the Han Dynasty and After").
+
+- type: source
+  id: seigensha-wada-vol1
+  review_state: bibliographic
+  rights_status: verified-restricted
+  author: Sanzo Wada
+  title: A Dictionary of Color Combinations
+  publisher: Seigensha Art Publishing, Inc.
+  date: '2010-07-01'
+  isbn: '978-4-86152-247-5'
+  url: https://en.seigensha.com/books/978-4-86152-247-5
+  access_date: '2026-10-13'
+  rights_notes: >-
+    Publisher describes the book as "a collection of 348 color combinations". 352 pages, softcover.
+    Reuse beyond private purposes requires permission (see seigensha-use-guidelines). No combination is reproduced in this content.
+
+- type: source
+  id: seigensha-wada-vol2
+  review_state: bibliographic
+  rights_status: verified-restricted
+  author: Sanzo Wada
+  title: A Dictionary of Color Combinations Vol. 2
+  publisher: Seigensha Art Publishing, Inc.
+  date: '2020-03-01'
+  isbn: '978-4-86152-772-2'
+  url: https://en.seigensha.com/books/978-4-86152-772-2
+  access_date: '2026-10-13'
+  rights_notes: >-
+    Publisher describes 72 colour patterns themed on the twelve months of the Japanese year (three to seven colours each)
+    plus 165 combinations from early to mid-twentieth-century design, with 172 removable colour chips. 336 pages.
+    Reuse beyond private purposes requires permission. No combination is reproduced in this content.
+
+- type: source
+  id: seigensha-use-guidelines
+  review_state: bibliographic
+  rights_status: verified-restricted
+  author: Seigensha Art Publishing, Inc.
+  title: Guidelines on Use of Our Works
+  url: https://en.seigensha.com/copyrighted-materials/
+  access_date: '2026-10-13'
+  rights_notes: >-
+    "Use beyond private purposes is strictly prohibited", including copying, reproduction, republication, modification,
+    dissemination, use as educational material and posting on the Internet. Inside pages require permission.
+    Requests via the Contact Us form or international@seigensha.com. Digital databases and apps are not addressed specifically.
+
+- type: source
+  id: japan-house-living-colours
+  review_state: bibliographic
+  rights_status: verified-restricted
+  author: Japan House London
+  title: 'Living Colours: Kasane – the Language of Japanese Colour Combinations'
+  date: '2019'
+  url: https://www.japanhouselondon.uk/whats-on/living-colours-kasane-the-language-of-japanese-colour-combinations/
+  access_date: '2026-10-13'
+  notes: >-
+    Exhibition with the Yoshioka Dyeing Workshop, Kyoto (Yoshioka Sachio, 5th generation; Sarasa, 6th). Related events during
+    London Craft Week, 8–12 May 2019. The page describes kasane as "a concept of layering colours" first seen in the Heian period
+    (794–1185) and names no specific colours.
+
+- type: source
+  id: wikipedia-ja-kasane-no-irome
+  review_state: discovered
+  rights_status: unreviewed
+  author: Wikipedia contributors (Japanese)
+  title: 襲の色目
+  url: https://ja.wikipedia.org/wiki/襲の色目
+  access_date: '2026-10-13'
+  rights_notes: Text CC BY-SA 4.0 (attribution and share-alike). A reviewer must decide whether share-alike terms suit this database.
+  notes: >-
+    Article is tagged as lacking adequate sources. Its one in-text reference for the concept is 満佐須計装束抄. Bibliography lists
+    有識故実大辞典, 譜説かさねの色目配彩考 and かさねの色目. Table lists the outermost layer first; 表 = outer, 裏 = lining.
+    Use only as a discovery route; verify each layering against a primary or scholarly source before publication.
+
+- type: source
+  id: wikipedia-en-traditional-colors-of-japan
+  review_state: discovered
+  rights_status: unreviewed
+  author: Wikipedia contributors (English)
+  title: Traditional colors of Japan
+  url: https://en.wikipedia.org/wiki/Traditional_colors_of_Japan
+  date: '2026-08-31'
+  access_date: '2026-10-13'
+  rights_notes: Text CC BY-SA 4.0. Colour values carry no per-value source on the page.
+  notes: >-
+    Bibliography lists Hibi & Fukuda, The Colors of Japan (2000); Nagasaki, Nihon no dentoshoku (2001); Nihon Shikisai Gakkai
+    handbook (1985); color-term.com. Only one value on the page is footnoted to a source. Treat every hex value as a modern
+    approximation of unknown method.
+
+- type: source
+  id: wikipedia-en-wuxing
+  review_state: discovered
+  rights_status: unreviewed
+  author: Wikipedia contributors (English)
+  title: Wuxing (Chinese philosophy)
+  url: https://en.wikipedia.org/wiki/Wuxing_(Chinese_philosophy)
+  access_date: '2026-10-13'
+  rights_notes: Text CC BY-SA 4.0.
+  notes: The correspondences table (colour, direction, season per phase) carries no citation. Use only where the IEP article is silent, and say so.
+
+- type: source
+  id: wiktionary-en
+  review_state: discovered
+  rights_status: unreviewed
+  author: Wiktionary contributors (English)
+  title: Wiktionary, the free dictionary
+  url: https://en.wiktionary.org/
+  access_date: '2026-10-13'
+  rights_notes: Text CC BY-SA 4.0. Locators give the entry path.
+
+- type: source
+  id: bogushevskaya-2023-chinese-color-language
+  review_state: discovered
+  rights_status: verified-restricted
+  author: Victoria Bogushevskaya
+  title: Chinese Color Language
+  publisher: 'Encyclopedia of Color Science and Technology, Springer'
+  date: '2023'
+  url: https://doi.org/10.1007/978-3-030-89862-5_433
+  access_date: '2026-10-13'
+  rights_notes: Springer; full text is access-controlled. Pages 132–147 per the foundation document's register.
+  notes: Listed as a research route for Chinese colour terms. Not opened for this register (login wall); no record cites it as evidence yet.

@@ -1,0 +1,24 @@
+# Experiment template. Fixed factors are stated so a reader sees what the design does not test.
+id: 'hue-relationship'
+title: 'Is the hue relationship important?'
+question: 'Do analogous, complementary and free-form candidates differ in preference when other constraints match?'
+hypothesis: 'Hue structure explains part of the preference once lightness and chroma are matched.'
+factors:
+  - name: 'structure'
+    levels:
+      - 'analogous'
+      - 'complementary'
+      - 'free-form'
+fixed:
+  - 'garment: original colour-block jacket, front view, fixed region preset'
+  - 'background: neutral'
+  - 'material: flat region colouring'
+  - 'presentation: equal sizes, randomised order and side'
+  - 'lightness and chroma profiles matched across structures'
+task_wording: 'Which jacket suits the brief better?'
+response_mode: 'pairwise'
+criteria:
+  - 'fit to brief'
+planned_interpretation: 'Wins by structure against the free-form baseline.'
+limitations: 'Free-form is the baseline; a win for a scheme is a pattern for this user, not a universal rule.'
+variants_per_cell: 1

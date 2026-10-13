@@ -1,0 +1,8 @@
+**/node_modules
+**/.next
+**/dist
+.git
+data
+docs
+*.md
+!README.md

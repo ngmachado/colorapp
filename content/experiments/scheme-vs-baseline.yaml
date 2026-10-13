@@ -1,0 +1,24 @@
+# Experiment template. Fixed factors are stated so a reader sees what the design does not test.
+id: 'scheme-vs-baseline'
+title: 'Does the constraint help?'
+question: 'Does a wheel scheme improve results over an unconstrained sample for this brief?'
+hypothesis: 'Scheme-generated palettes are rated higher than free-form palettes of matched lightness and chroma.'
+factors:
+  - name: 'generator'
+    levels:
+      - 'triadic'
+      - 'split-complementary'
+      - 'free-form'
+fixed:
+  - 'garment: original colour-block jacket, front view, fixed region preset'
+  - 'background: neutral'
+  - 'material: flat region colouring'
+  - 'presentation: equal sizes, randomised order and side'
+task_wording: 'Rate how well this jacket fits the brief.'
+response_mode: 'rating'
+criteria:
+  - 'fit to brief'
+  - 'visual interest'
+planned_interpretation: 'Compare rating distributions per generator; report the difference with an interval.'
+limitations: 'A matched free-form sample is required; without it the comparison is meaningless.'
+variants_per_cell: 1

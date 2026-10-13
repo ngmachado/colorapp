@@ -1,0 +1,50 @@
+# Original interactive exercises. None reproduces a protected plate or diagram.
+
+- id: exercise-one-colour-two-surroundings
+  kind: exercise
+  title: One colour, two surroundings
+  summary: Identical central samples sit on two different backgrounds. You judge whether they look the same before the numbers are shown.
+  exercise:
+    steps:
+      - Look at the two central squares and decide whether they are the same colour.
+      - Answer same, different or not sure.
+      - Then the app reveals that the two squares have identical coordinates and shows the backgrounds' coordinates.
+    reveal: Numeric identity of the central samples, shown only after the answer.
+    explores: Relational appearance (simultaneous contrast), not design ability.
+  sources: [cie-ilv-2020]
+
+- id: exercise-equal-hue-changing-structure
+  kind: exercise
+  title: Equal hue, changing structure
+  summary: The hue family is locked while lightness and chroma change. You see what changes visually, not just which numbers move.
+  exercise:
+    steps:
+      - Lock the hue; move only lightness and observe.
+      - Lock the hue; move only chroma and observe.
+      - Compare the two sequences side by side with the gamut warning visible.
+    explores: Lightness and chroma as separate controls in a named space.
+  sources: [cie-ilv-2020]
+
+- id: exercise-same-colours-changing-areas
+  kind: exercise
+  title: Same colours, changing areas
+  summary: The palette is fixed and only the area allocation changes, for example 70/20/10 against 10/20/70. Then placement is fixed and chroma varies.
+  exercise:
+    steps:
+      - Keep three colours constant and swap their area shares.
+      - Rate each arrangement against the same brief.
+      - Repeat with placement fixed and the accent's chroma varied.
+    explores: Proportion as a variable independent of colour.
+  sources: []
+
+- id: exercise-same-palette-different-context
+  kind: exercise
+  title: Same palette, different context
+  summary: The same palette is shown as a swatch grid and on the garment. The numbers are identical; the impression often is not.
+  exercise:
+    steps:
+      - View the palette as a swatch strip.
+      - View it applied to the fixed garment, front and back.
+      - Note which colours appear to change and compare with the measured visible areas.
+    explores: Context, area and adjacency effects on appearance.
+  sources: []

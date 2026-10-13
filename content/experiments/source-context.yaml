@@ -1,0 +1,23 @@
+# Experiment template. Fixed factors are stated so a reader sees what the design does not test.
+id: 'source-context'
+title: 'Does source context affect judgement?'
+question: 'Does seeing a documented source change the rating of the same palette?'
+hypothesis: 'Ratings differ between blinded and attributed presentations of the same candidate.'
+factors:
+  - name: 'attribution'
+    levels:
+      - 'blinded'
+      - 'with permitted source context'
+fixed:
+  - 'garment: original colour-block jacket, front view, fixed region preset'
+  - 'background: neutral'
+  - 'material: flat region colouring'
+  - 'presentation: equal sizes, randomised order and side'
+  - 'candidates: identical in both conditions'
+task_wording: 'Rate how much you like this jacket.'
+response_mode: 'rating'
+criteria:
+  - 'personal preference'
+planned_interpretation: 'Within-candidate difference between conditions, blinded first.'
+limitations: 'Only records with permitted display may appear in the attributed condition.'
+variants_per_cell: 1

@@ -1,0 +1,19 @@
+{
+  "name": "@sca/colour-engine",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "oracle": "python3 scripts/oracle.py > src/fixtures/oracle.json"
+  },
+  "dependencies": {
+    "colorjs.io": "0.7.1"
+  },
+  "devDependencies": {
+    "fast-check": "^4.10.2"
+  }
+}

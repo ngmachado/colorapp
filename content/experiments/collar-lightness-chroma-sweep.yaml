@@ -1,0 +1,35 @@
+# Experiment template. Fixed factors are stated so a reader sees what the design does not test.
+id: 'collar-lightness-chroma-sweep'
+title: 'Collar lightness and chroma sweep'
+question: 'How do collar lightness and chroma change preference when body and sleeves are fixed?'
+hypothesis: 'There is a preferred band of collar lightness and chroma relative to the body for this user.'
+factors:
+  - name: 'collar lightness (OKLCh L)'
+    levels:
+      - '0.35'
+      - '0.45'
+      - '0.55'
+      - '0.65'
+      - '0.75'
+      - '0.85'
+  - name: 'collar chroma (OKLCh C)'
+    levels:
+      - '0.02'
+      - '0.06'
+      - '0.10'
+      - '0.14'
+      - '0.18'
+fixed:
+  - 'garment: original colour-block jacket, front view, fixed region preset'
+  - 'background: neutral'
+  - 'material: flat region colouring'
+  - 'presentation: equal sizes, randomised order and side'
+  - 'body and sleeves: one fixed palette'
+task_wording: 'Rate how well the collar works with the rest of the jacket.'
+response_mode: 'rating'
+criteria:
+  - 'perceived balance'
+  - 'personal preference'
+planned_interpretation: 'Plot mean rating against L and C with intervals; look for a band, not a single best value.'
+limitations: 'One body palette only; the band may move with a different body colour.'
+variants_per_cell: 1

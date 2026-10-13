@@ -1,0 +1,58 @@
+# Experiment template. Fixed factors are stated so a reader sees what the design does not test.
+id: 'jacket-structure-study'
+title: 'Jacket structure study (10 × 5 × 5 × 5 × 4)'
+question: 'Which colour structures does this user prefer on one colour-block jacket?'
+hypothesis: 'Preference differs between generation structures when hue, lightness profile, chroma profile and placement are matched.'
+factors:
+  - name: 'starting hue'
+    levels:
+      - '0°'
+      - '36°'
+      - '72°'
+      - '108°'
+      - '144°'
+      - '180°'
+      - '216°'
+      - '252°'
+      - '288°'
+      - '324°'
+  - name: 'generation structure'
+    levels:
+      - 'monochromatic'
+      - 'analogous'
+      - 'complementary'
+      - 'triadic'
+      - 'free-form'
+  - name: 'lightness profile'
+    levels:
+      - 'L1'
+      - 'L2'
+      - 'L3'
+      - 'L4'
+      - 'L5'
+  - name: 'chroma profile'
+    levels:
+      - 'C1'
+      - 'C2'
+      - 'C3'
+      - 'C4'
+      - 'C5'
+  - name: 'visible role allocation'
+    levels:
+      - 'preset-1'
+      - 'preset-2'
+      - 'preset-3'
+      - 'preset-4'
+fixed:
+  - 'garment: original colour-block jacket, front view, fixed region preset'
+  - 'background: neutral'
+  - 'material: flat region colouring'
+  - 'presentation: equal sizes, randomised order and side'
+task_wording: 'Which of these two jackets suits the brief better?'
+response_mode: 'pairwise'
+criteria:
+  - 'fit to brief'
+  - 'personal preference'
+planned_interpretation: 'Descriptive comparison of pairwise wins by structure, split by preset. Held-out cells kept for later model checks.'
+limitations: 'Results describe this user and this garment. 5,000 cells × 2 seeded variants before rejection and deduplication; survivors are an output, not a target.'
+variants_per_cell: 2

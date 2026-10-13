@@ -1,0 +1,321 @@
+# yaml-language-server: $schema=../schema.json
+# Japanese candidate vocabulary. Everything here is in review state `discovered`: the spellings were read from the
+# cited page and the colour values are that page's uncited modern approximations. Nothing is publication-ready.
+
+- type: concept
+  id: ja-ai
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-en-traditional-colors-of-japan, locator: 'table row 藍色' }
+  label: 藍色
+  description: Japanese traditional colour name; the cited page glosses it as "Indigo color".
+  tags: { tradition: japanese, language: ja }
+
+- type: name
+  id: ja-ai-name
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-en-traditional-colors-of-japan, locator: 'table row 藍色' }
+  concept: ja-ai
+  script: 藍色
+  language: ja
+  transliteration: { system: Hepburn, value: ai-iro }
+  meaning: 'Indigo color'
+  confidence: { transcription: 1 }
+  notes: Candidate list says "Ai" (藍, the indigo plant); the cited page lists the colour name 藍色 (ai-iro).
+
+- type: representation
+  id: ja-ai-srgb-wikipedia
+  review_state: discovered
+  rights_status: unreviewed
+  evidence:
+    { source: wikipedia-en-traditional-colors-of-japan, locator: 'table row 藍色, hex #264348' }
+  concept: ja-ai
+  space: srgb
+  coords: [0.14902, 0.26275, 0.28235]
+  white: D65
+  method: 'sRGB hex #264348 as listed on the cited page (which gives no per-value source), divided by 255.'
+  approximation_status: modern-approximation
+
+- type: concept
+  id: ja-murasaki
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-en-traditional-colors-of-japan, locator: 'table row 紫' }
+  label: 紫
+  description: Japanese traditional colour name; the cited page glosses it as "Purple".
+  tags: { tradition: japanese, language: ja }
+
+- type: name
+  id: ja-murasaki-name
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-en-traditional-colors-of-japan, locator: 'table row 紫' }
+  concept: ja-murasaki
+  script: 紫
+  language: ja
+  transliteration: { system: Hepburn, value: murasaki }
+  meaning: 'Purple'
+  confidence: { transcription: 1 }
+
+- type: representation
+  id: ja-murasaki-srgb-wikipedia
+  review_state: discovered
+  rights_status: unreviewed
+  evidence:
+    { source: wikipedia-en-traditional-colors-of-japan, locator: 'table row 紫, hex #4F284B' }
+  concept: ja-murasaki
+  space: srgb
+  coords: [0.30980, 0.15686, 0.29412]
+  white: D65
+  method: 'sRGB hex #4F284B as listed on the cited page (which gives no per-value source), divided by 255.'
+  approximation_status: modern-approximation
+
+- type: concept
+  id: ja-kachi-iro
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-en-traditional-colors-of-japan, locator: 'table row 褐色' }
+  label: 褐色
+  description: Japanese traditional colour name; the cited page glosses it as "Coarse wool color".
+  tags: { tradition: japanese, language: ja }
+
+- type: name
+  id: ja-kachi-iro-name
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-en-traditional-colors-of-japan, locator: 'table row 褐色' }
+  concept: ja-kachi-iro
+  script: 褐色
+  language: ja
+  transliteration: { system: Hepburn, value: kachi-iro }
+  meaning: 'Coarse wool color'
+  confidence: { transcription: 1 }
+  notes: The foundation document's candidate list spells it 勝色; the cited page lists 褐色 (kachi-iro). Both spellings exist historically. Verify with a dictionary before publication.
+
+- type: representation
+  id: ja-kachi-iro-srgb-wikipedia
+  review_state: discovered
+  rights_status: unreviewed
+  evidence:
+    { source: wikipedia-en-traditional-colors-of-japan, locator: 'table row 褐色, hex #181B26' }
+  concept: ja-kachi-iro
+  space: srgb
+  coords: [0.09412, 0.10588, 0.14902]
+  white: D65
+  method: 'sRGB hex #181B26 as listed on the cited page (which gives no per-value source), divided by 255.'
+  approximation_status: modern-approximation
+
+- type: concept
+  id: ja-uguisu-iro
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-en-traditional-colors-of-japan, locator: 'table row 鶯色' }
+  label: 鶯色
+  description: Japanese traditional colour name; the cited page glosses it as "Japanese bush warbler-colored".
+  tags: { tradition: japanese, language: ja }
+
+- type: name
+  id: ja-uguisu-iro-name
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-en-traditional-colors-of-japan, locator: 'table row 鶯色' }
+  concept: ja-uguisu-iro
+  script: 鶯色
+  language: ja
+  transliteration: { system: Hepburn, value: uguisu-iro }
+  meaning: 'Japanese bush warbler-colored'
+  confidence: { transcription: 1 }
+
+- type: representation
+  id: ja-uguisu-iro-srgb-wikipedia
+  review_state: discovered
+  rights_status: unreviewed
+  evidence:
+    { source: wikipedia-en-traditional-colors-of-japan, locator: 'table row 鶯色, hex #645530' }
+  concept: ja-uguisu-iro
+  space: srgb
+  coords: [0.39216, 0.33333, 0.18824]
+  white: D65
+  method: 'sRGB hex #645530 as listed on the cited page (which gives no per-value source), divided by 255.'
+  approximation_status: modern-approximation
+
+- type: concept
+  id: ja-asagi
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-en-traditional-colors-of-japan, locator: 'table row 浅葱色' }
+  label: 浅葱色
+  description: Japanese traditional colour name; the cited page glosses it as "Light blue color".
+  tags: { tradition: japanese, language: ja }
+
+- type: name
+  id: ja-asagi-name
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-en-traditional-colors-of-japan, locator: 'table row 浅葱色' }
+  concept: ja-asagi
+  script: 浅葱色
+  language: ja
+  transliteration: { system: Hepburn, value: asagi-iro }
+  meaning: 'Light blue color'
+  confidence: { transcription: 1 }
+  notes: Not to be confused with 浅黄 (asagi, light yellow), which the page lists separately.
+
+- type: representation
+  id: ja-asagi-srgb-wikipedia
+  review_state: discovered
+  rights_status: unreviewed
+  evidence:
+    { source: wikipedia-en-traditional-colors-of-japan, locator: 'table row 浅葱色, hex #48929B' }
+  concept: ja-asagi
+  space: srgb
+  coords: [0.28235, 0.57255, 0.60784]
+  white: D65
+  method: 'sRGB hex #48929B as listed on the cited page (which gives no per-value source), divided by 255.'
+  approximation_status: modern-approximation
+
+- type: concept
+  id: ja-kitsune-iro
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-en-traditional-colors-of-japan, locator: 'table row 狐色' }
+  label: 狐色
+  description: Japanese traditional colour name; the cited page glosses it as "Fox-color".
+  tags: { tradition: japanese, language: ja }
+
+- type: name
+  id: ja-kitsune-iro-name
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-en-traditional-colors-of-japan, locator: 'table row 狐色' }
+  concept: ja-kitsune-iro
+  script: 狐色
+  language: ja
+  transliteration: { system: Hepburn, value: kitsune-iro }
+  meaning: 'Fox-color'
+  confidence: { transcription: 1 }
+
+- type: representation
+  id: ja-kitsune-iro-srgb-wikipedia
+  review_state: discovered
+  rights_status: unreviewed
+  evidence:
+    { source: wikipedia-en-traditional-colors-of-japan, locator: 'table row 狐色, hex #985629' }
+  concept: ja-kitsune-iro
+  space: srgb
+  coords: [0.59608, 0.33725, 0.16078]
+  white: D65
+  method: 'sRGB hex #985629 as listed on the cited page (which gives no per-value source), divided by 255.'
+  approximation_status: modern-approximation
+
+- type: concept
+  id: ja-sakura-iro
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-en-traditional-colors-of-japan, locator: 'table row 桜色' }
+  label: 桜色
+  description: Japanese traditional colour name; the cited page glosses it as "Cherry blossom color".
+  tags: { tradition: japanese, language: ja }
+
+- type: name
+  id: ja-sakura-iro-name
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-en-traditional-colors-of-japan, locator: 'table row 桜色' }
+  concept: ja-sakura-iro
+  script: 桜色
+  language: ja
+  transliteration: { system: Hepburn, value: sakura-iro }
+  meaning: 'Cherry blossom color'
+  confidence: { transcription: 1 }
+
+- type: representation
+  id: ja-sakura-iro-srgb-wikipedia
+  review_state: discovered
+  rights_status: unreviewed
+  evidence:
+    { source: wikipedia-en-traditional-colors-of-japan, locator: 'table row 桜色, hex #FCC9B9' }
+  concept: ja-sakura-iro
+  space: srgb
+  coords: [0.98824, 0.78824, 0.72549]
+  white: D65
+  method: 'sRGB hex #FCC9B9 as listed on the cited page (which gives no per-value source), divided by 255.'
+  approximation_status: modern-approximation
+
+- type: concept
+  id: ja-moegi
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-en-traditional-colors-of-japan, locator: 'table row 萌黄' }
+  label: 萌黄
+  description: Japanese traditional colour name; the cited page glosses it as "Fresh onion".
+  tags: { tradition: japanese, language: ja }
+
+- type: name
+  id: ja-moegi-name
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-en-traditional-colors-of-japan, locator: 'table row 萌黄' }
+  concept: ja-moegi
+  script: 萌黄
+  language: ja
+  transliteration: { system: Hepburn, value: moegi }
+  meaning: 'Fresh onion'
+  confidence: { transcription: 1 }
+  notes: Page romanises as "Mo'egi".
+
+- type: representation
+  id: ja-moegi-srgb-wikipedia
+  review_state: discovered
+  rights_status: unreviewed
+  evidence:
+    { source: wikipedia-en-traditional-colors-of-japan, locator: 'table row 萌黄, hex #5B8930' }
+  concept: ja-moegi
+  space: srgb
+  coords: [0.35686, 0.53725, 0.18824]
+  white: D65
+  method: 'sRGB hex #5B8930 as listed on the cited page (which gives no per-value source), divided by 255.'
+  approximation_status: modern-approximation
+
+- type: concept
+  id: ja-beni
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-ja-kasane-no-irome, locator: 'table row 紅紅葉' }
+  label: 紅
+  description: Japanese colour term for red from safflower; appears as a layer colour in the kasane table (紅紅葉).
+  tags: { tradition: japanese, language: ja }
+
+- type: name
+  id: ja-beni-name
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-ja-kasane-no-irome, locator: 'table row 紅紅葉' }
+  concept: ja-beni
+  script: 紅
+  language: ja
+  transliteration: { system: Hepburn, value: beni }
+  confidence: { transcription: 1 }
+  notes: The English "Traditional colors of Japan" page has no standalone 紅 entry; no digital value is recorded.
+
+- type: concept
+  id: ja-shiro
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-ja-kasane-no-irome, locator: 'table row 梅' }
+  label: 白
+  description: Japanese colour term for white; appears as the outer layer colour in the kasane table (梅).
+  tags: { tradition: japanese, language: ja }
+
+- type: name
+  id: ja-shiro-name
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-ja-kasane-no-irome, locator: 'table row 梅' }
+  concept: ja-shiro
+  script: 白
+  language: ja
+  transliteration: { system: Hepburn, value: shiro }
+  confidence: { transcription: 1 }
+  notes: No digital value is recorded; "white" here is a dyed or undyed silk, not a display white.

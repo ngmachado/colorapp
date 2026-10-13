@@ -1,0 +1,91 @@
+# Palette structures. They are generators and teaching tools, not guarantees of attractiveness.
+# Angles are this app's proposed defaults on the OKLCh wheel; the same numbers on another wheel give other colours.
+
+- id: structure-monochromatic
+  kind: structure
+  title: Monochromatic
+  summary: Hold one hue family; vary lightness and chroma. Asks whether hierarchy can emerge without hue contrast.
+  rule:
+    {
+      hue_space: oklch,
+      description: 'all entries share the base hue; lightness and chroma vary within bounds',
+      defaults: { hue_tolerance_deg: 0 },
+    }
+  sources: [w3c-css-color-4]
+
+- id: structure-analogous
+  kind: structure
+  title: Analogous
+  summary: Neighbouring hues within a configurable span. Asks how narrow the span can become before accents disappear.
+  rule:
+    {
+      hue_space: oklch,
+      description: 'hues within ±span of the base hue',
+      defaults: { span_deg: 30 },
+    }
+  sources: [w3c-css-color-4]
+
+- id: structure-complementary
+  kind: structure
+  title: Complementary
+  summary: Two hues near 180° apart. Compare a small accent against two equally large opposing areas.
+  rule:
+    { hue_space: oklch, description: 'base hue and base + 180°', defaults: { separation_deg: 180 } }
+  sources: [w3c-css-color-4]
+
+- id: structure-split-complementary
+  kind: structure
+  title: Split-complementary
+  summary: A base hue and two hues either side of its opposite. Vary the split angle and the lightness balance.
+  rule:
+    {
+      hue_space: oklch,
+      description: 'base hue, base + 180° − split, base + 180° + split',
+      defaults: { split_deg: 30 },
+    }
+  sources: [w3c-css-color-4]
+
+- id: structure-triadic
+  kind: structure
+  title: Triadic
+  summary: Three hues about 120° apart. Compare equal chroma with one dominant hue and quieter supports.
+  rule:
+    {
+      hue_space: oklch,
+      description: 'base hue, base + 120°, base + 240°',
+      defaults: { separation_deg: 120 },
+    }
+  sources: [w3c-css-color-4]
+
+- id: structure-tetradic
+  kind: structure
+  title: Tetradic (rectangular)
+  summary: Two opposing pairs; the rectangle angle may vary. Tests whether four strong colours compete for attention.
+  rule:
+    {
+      hue_space: oklch,
+      description: 'base, base + angle, base + 180°, base + 180° + angle',
+      defaults: { angle_deg: 60 },
+    }
+  sources: [w3c-css-color-4]
+
+- id: structure-neutral-accent
+  kind: structure
+  title: Neutral plus accent
+  summary: Most of the area goes to near-neutrals and a smaller accent. Change the accent's area, chroma and position independently.
+  rule:
+    {
+      hue_space: oklch,
+      description: 'n − 1 entries under the near-neutral chroma threshold, one accent above it',
+      defaults: { neutral_chroma_max: 0.02, accent_share: 0.1 },
+    }
+  sources: [w3c-css-color-4]
+
+- id: structure-free-form
+  kind: structure
+  title: Free-form baseline
+  summary: Sample without a harmony constraint. Always kept as the baseline, because without it the app cannot tell "this generator makes a recognisable pattern" from "this pattern improves the result".
+  rule:
+    { hue_space: oklch, description: 'uniform sampling within the declared bounds', defaults: {} }
+  explanation_limits: Never describe a wheel scheme as the default truth and free-form as the exception.
+  sources: []

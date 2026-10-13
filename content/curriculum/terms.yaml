@@ -1,0 +1,119 @@
+# Colour literacy terms. Each summary states the distinction the learner should leave with.
+# Sources are knowledge source record ids (content/knowledge/sources). Definitions are paraphrased, not reproduced.
+
+- id: hue
+  kind: term
+  title: Hue
+  summary: Hue is the red, yellow, green or blue character of a colour. It is an angle, so controls for it should be circular, and it becomes unstable near neutral, where chroma is close to zero.
+  key_terms:
+    - { term: OKLCh hue, distinction: "degrees on the OKLCh wheel; the app's working hue" }
+    - { term: HSL hue, distinction: 'degrees on the HSL wheel; not the same angles as OKLCh' }
+  misconception: Equal angle steps are equal visual steps. They are not, and the size of the error depends on the wheel.
+  explanation_limits: The app may say which wheel an angle belongs to. It may not call one wheel "correct".
+  sources: [cie-ilv-2020, w3c-css-color-4]
+
+- id: lightness
+  kind: term
+  title: Lightness
+  summary: Lightness is how bright a surface looks relative to a similarly lit white. It is not the amount of light emitted and not an arbitrary "brightness" slider.
+  key_terms:
+    - { term: CIELAB L*, distinction: '0 to 100, D50 reference white in this app' }
+    - {
+        term: OKLab L,
+        distinction: '0 to 1, D65 reference white; a different scale, not a rescaling of L*',
+      }
+  explanation_limits: Always name the lightness coordinate in use.
+  sources: [cie-ilv-2020, w3c-css-color-4]
+
+- id: brightness-vs-luminance
+  kind: term
+  title: Brightness and luminance
+  summary: Brightness is what you perceive; luminance is a measured photometric quantity with units. Store the quantity you actually have, and say which.
+  key_terms:
+    - { term: brightness, distinction: 'perceptual attribute, no units' }
+    - { term: luminance, distinction: 'photometric quantity, cd/m²' }
+    - { term: relative luminance Y, distinction: '0 to 1, used for WCAG contrast' }
+  sources: [cie-ilv-2020]
+
+- id: chroma-vs-saturation
+  kind: term
+  title: Chroma and saturation
+  summary: Chroma relates colourfulness to a reference white; saturation relates it to the colour's own brightness. They are different controls and the names must not be swapped.
+  key_terms:
+    - { term: OKLCh chroma, distinction: 'distance from the neutral axis in OKLab' }
+    - {
+        term: CIELCh chroma,
+        distinction: 'distance from the neutral axis in CIELAB; different numbers',
+      }
+    - { term: HSL saturation, distinction: 'a ratio in the HSL model; neither of the above' }
+  misconception: Saturation and chroma are two words for one slider.
+  sources: [cie-ilv-2020, w3c-css-color-4]
+
+- id: value
+  kind: term
+  title: Value
+  summary: '"Value" means different things in different systems. Munsell value is a lightness scale from a colour-order system; HSV value is the largest RGB channel. Say which one you mean.'
+  key_terms:
+    - { term: HSV value, distinction: 'max(R, G, B) in an RGB space; not perceptual' }
+    - {
+        term: Munsell value,
+        distinction: 'lightness step in the Munsell system; not implemented in this app',
+      }
+  sources: [cie-ilv-2020, w3c-css-color-4]
+
+- id: warm-cool
+  kind: term
+  title: Warm and cool
+  summary: Warm and cool are contextual design descriptions, not a numerical property of every colour. They are separate from correlated colour temperature, which describes a light source in kelvin.
+  misconception: A kelvin number describes the colour of a garment.
+  explanation_limits: The app may record warm or cool as a user label. It may not compute it as a fact.
+  sources: [cie-ilv-2020]
+
+- id: neutral
+  kind: term
+  title: Neutral and near-neutral
+  summary: Neutral is an operational category. This app calls a colour near-neutral when its OKLCh chroma is below a threshold that is always shown, because the right cutoff depends on the task.
+  explanation_limits: Show the threshold whenever the label is shown.
+  sources: [cie-ilv-2020]
+
+- id: tints-shades-tones
+  kind: term
+  title: Tints, shades and tones
+  summary: Painters' words for mixing a colour with white, black or grey. In the app they are directions of travel in lightness and chroma, in a named space, not pigment recipes.
+  explanation_limits: Interpolating coordinates is not mixing dyes or pigments.
+  sources: [w3c-css-color-4]
+
+- id: additive-subtractive
+  kind: term
+  title: Additive and subtractive mixing
+  summary: Screens add light; dyes and pigments remove it. Mixing display channels or interpolating coordinates says nothing reliable about mixing fabric dyes.
+  explanation_limits: An RGB-only mode must not promise a physical material match.
+  sources: [w3c-css-color-4]
+
+- id: chromatic-adaptation
+  kind: term
+  title: Chromatic adaptation
+  summary: The eye adjusts to the light it is under, so the same object looks different under different illuminants and a white stays "white". The app records a Bradford adaptation whenever it converts between D65 and D50 references.
+  key_terms:
+    - { term: D65, distinction: 'reference white for sRGB, OKLab and XYZ-D65 in this app' }
+    - { term: D50, distinction: 'reference white for CIELAB as in CSS Color 4' }
+  sources: [cie-ilv-2020, w3c-css-color-4]
+
+- id: simultaneous-contrast
+  kind: term
+  title: Simultaneous contrast
+  summary: A colour's appearance shifts with its surroundings. Identical samples on different backgrounds can look different, so a swatch grid and a garment can show the same numbers differently.
+  sources: [cie-ilv-2020]
+
+- id: afterimages
+  kind: term
+  title: Afterimages
+  summary: After looking at a strong colour, a complementary impression appears on a neutral field. It is a property of the viewer, not of the palette, and it is one reason to randomise presentation order.
+  sources: [cie-ilv-2020]
+
+- id: pattern-scale
+  kind: term
+  title: Pattern scale
+  summary: The same two colours in a fine stripe read differently from the same colours in large blocks. Scale is a design variable the app records separately from colour.
+  explanation_limits: A comparison must state whether colour, placement or scale changed.
+  sources: [cie-ilv-2020]

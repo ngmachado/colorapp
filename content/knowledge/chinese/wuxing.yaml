@@ -1,0 +1,403 @@
+# yaml-language-server: $schema=../schema.json
+# Wuxing (五行), the Five Phases, as a sourced learning module. Phases and colour categories are separate concepts.
+# Every relationship names the passage it rests on. The IEP article states colour/season/direction only for wood and fire;
+# the remaining correspondences come from an uncited Wikipedia table and are marked as such.
+
+- type: concept
+  id: zh-wuxing
+  review_state: bibliographic
+  rights_status: verified-restricted
+  evidence: { source: iep-wuxing-littlejohn, locator: 'introduction' }
+  label: Wuxing (五行), the Five Phases
+  description: >-
+    "These five phases are wood (mu), fire (huo), earth (tu), metal (jin), and water (shui)" (IEP, introduction).
+    A framework of interconnected processes and correspondences, not five chemical elements and not a colour standard.
+  tags: { tradition: chinese, language: zh }
+
+- type: concept
+  id: zh-wuxing-wood
+  review_state: bibliographic
+  rights_status: verified-restricted
+  evidence: { source: iep-wuxing-littlejohn, locator: 'introduction' }
+  label: Wood (木, mù)
+  tags: { tradition: chinese, kind: phase }
+- type: concept
+  id: zh-wuxing-fire
+  review_state: bibliographic
+  rights_status: verified-restricted
+  evidence: { source: iep-wuxing-littlejohn, locator: 'introduction' }
+  label: Fire (火, huǒ)
+  tags: { tradition: chinese, kind: phase }
+- type: concept
+  id: zh-wuxing-earth
+  review_state: bibliographic
+  rights_status: verified-restricted
+  evidence: { source: iep-wuxing-littlejohn, locator: 'introduction' }
+  label: Earth (土, tǔ)
+  tags: { tradition: chinese, kind: phase }
+- type: concept
+  id: zh-wuxing-metal
+  review_state: bibliographic
+  rights_status: verified-restricted
+  evidence: { source: iep-wuxing-littlejohn, locator: 'introduction' }
+  label: Metal (金, jīn)
+  tags: { tradition: chinese, kind: phase }
+- type: concept
+  id: zh-wuxing-water
+  review_state: bibliographic
+  rights_status: verified-restricted
+  evidence: { source: iep-wuxing-littlejohn, locator: 'introduction' }
+  label: Water (水, shuǐ)
+  tags: { tradition: chinese, kind: phase }
+
+# Phase names in script. Characters are read from the Wikipedia navigation box; romanisation from the IEP article.
+- type: name
+  id: zh-wuxing-wood-name
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-en-wuxing, locator: 'Classical elements navigation box' }
+  concept: zh-wuxing-wood
+  script: 木
+  language: zh
+  transliteration: { system: Hanyu Pinyin, value: mù }
+- type: name
+  id: zh-wuxing-fire-name
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-en-wuxing, locator: 'Classical elements navigation box' }
+  concept: zh-wuxing-fire
+  script: 火
+  language: zh
+  transliteration: { system: Hanyu Pinyin, value: huǒ }
+- type: name
+  id: zh-wuxing-earth-name
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-en-wuxing, locator: 'Classical elements navigation box' }
+  concept: zh-wuxing-earth
+  script: 土
+  language: zh
+  transliteration: { system: Hanyu Pinyin, value: tǔ }
+- type: name
+  id: zh-wuxing-metal-name
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-en-wuxing, locator: 'Classical elements navigation box' }
+  concept: zh-wuxing-metal
+  script: 金
+  language: zh
+  transliteration: { system: Hanyu Pinyin, value: jīn }
+- type: name
+  id: zh-wuxing-water-name
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-en-wuxing, locator: 'Classical elements navigation box' }
+  concept: zh-wuxing-water
+  script: 水
+  language: zh
+  transliteration: { system: Hanyu Pinyin, value: shuǐ }
+
+# The five colour categories (wu se). The IEP article lists them in English only:
+# "five colors (wu se – green, yellow, black, red, and white)" (section 3). Characters and pinyin from Wiktionary.
+- type: concept
+  id: zh-qing
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wiktionary-en, locator: '/wiki/青' }
+  label: 青 (qīng)
+  description: A colour category covering blue and green; "In fact, 青 covered both green and blue" (Wiktionary). Do not force it into one hue.
+  tags: { tradition: chinese, kind: colour-category }
+- type: name
+  id: zh-qing-name
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wiktionary-en, locator: '/wiki/青' }
+  concept: zh-qing
+  script: 青
+  language: zh
+  transliteration: { system: Hanyu Pinyin, value: qīng }
+  meaning: 'blue-green; blue (of sky, stone); green (of grass, plants, mountains); black (of hair, cloth, silk thread)'
+  confidence: { transcription: 1 }
+- type: concept
+  id: zh-chi
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wiktionary-en, locator: '/wiki/赤' }
+  label: 赤 (chì)
+  description: Red colour category; the IEP article's "red" in the five colours.
+  tags: { tradition: chinese, kind: colour-category }
+- type: name
+  id: zh-chi-name
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wiktionary-en, locator: '/wiki/赤' }
+  concept: zh-chi
+  script: 赤
+  language: zh
+  transliteration: { system: Hanyu Pinyin, value: chì }
+  meaning: 'red, crimson (literary)'
+  confidence: { transcription: 1 }
+- type: concept
+  id: zh-huang
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wiktionary-en, locator: '/wiki/黃 (黄 is the simplified form)' }
+  label: 黄 (huáng)
+  description: Yellow colour category; the IEP article's "yellow" in the five colours.
+  tags: { tradition: chinese, kind: colour-category }
+- type: name
+  id: zh-huang-name
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wiktionary-en, locator: '/wiki/黃 (黄 is the simplified form)' }
+  concept: zh-huang
+  script: 黄
+  language: zh
+  transliteration: { system: Hanyu Pinyin, value: huáng }
+  aliases: [黃]
+  meaning: 'yellow'
+  confidence: { transcription: 1 }
+- type: concept
+  id: zh-bai
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wiktionary-en, locator: '/wiki/白' }
+  label: 白 (bái)
+  description: White colour category; the IEP article's "white" in the five colours.
+  tags: { tradition: chinese, kind: colour-category }
+- type: name
+  id: zh-bai-name
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wiktionary-en, locator: '/wiki/白' }
+  concept: zh-bai
+  script: 白
+  language: zh
+  transliteration: { system: Hanyu Pinyin, value: bái }
+  meaning: 'white'
+  confidence: { transcription: 1 }
+- type: concept
+  id: zh-hei
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wiktionary-en, locator: '/wiki/黑' }
+  label: 黑 (hēi)
+  description: Black colour category; the IEP article's "black" in the five colours.
+  tags: { tradition: chinese, kind: colour-category }
+- type: name
+  id: zh-hei-name
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wiktionary-en, locator: '/wiki/黑' }
+  concept: zh-hei
+  script: 黑
+  language: zh
+  transliteration: { system: Hanyu Pinyin, value: hēi }
+  meaning: 'black'
+  confidence: { transcription: 1 }
+
+# Colour associations. Symbolic, not hue-angle harmony and not mixing rules.
+- type: relationship
+  id: zh-wuxing-wood-qing
+  review_state: bibliographic
+  rights_status: verified-restricted
+  evidence:
+    {
+      source: iep-wuxing-littlejohn,
+      locator: 'section 4: "Wood is also correlated with the color blue-green, the spring season, the direction east"',
+    }
+  from: zh-wuxing-wood
+  to: zh-qing
+  edge: associated-with
+- type: relationship
+  id: zh-wuxing-fire-chi
+  review_state: bibliographic
+  rights_status: verified-restricted
+  evidence:
+    {
+      source: iep-wuxing-littlejohn,
+      locator: 'section 3: "(wood, green, spring; or fire, red, summer)"',
+    }
+  from: zh-wuxing-fire
+  to: zh-chi
+  edge: associated-with
+- type: relationship
+  id: zh-wuxing-earth-huang
+  review_state: discovered
+  rights_status: unreviewed
+  evidence:
+    {
+      source: wikipedia-en-wuxing,
+      locator: 'correspondences table, row Earth: colour Yellow (uncited)',
+    }
+  from: zh-wuxing-earth
+  to: zh-huang
+  edge: associated-with
+  notes: Not stated in the IEP article. Needs a scholarly source before leaving the research queue.
+- type: relationship
+  id: zh-wuxing-metal-bai
+  review_state: discovered
+  rights_status: unreviewed
+  evidence:
+    {
+      source: wikipedia-en-wuxing,
+      locator: 'correspondences table, row Metal: colour White (uncited)',
+    }
+  from: zh-wuxing-metal
+  to: zh-bai
+  edge: associated-with
+  notes: Not stated in the IEP article. Needs a scholarly source before leaving the research queue.
+- type: relationship
+  id: zh-wuxing-water-hei
+  review_state: discovered
+  rights_status: unreviewed
+  evidence:
+    {
+      source: wikipedia-en-wuxing,
+      locator: 'correspondences table, row Water: colour Black (uncited)',
+    }
+  from: zh-wuxing-water
+  to: zh-hei
+  edge: associated-with
+  notes: Not stated in the IEP article. Needs a scholarly source before leaving the research queue.
+
+# Generating cycle: "wood produced fire, fire produced earth, earth produced metal, metal produced water, and water produced wood" (IEP, section 4).
+- {
+    type: relationship,
+    id: zh-wuxing-gen-wood-fire,
+    review_state: bibliographic,
+    rights_status: verified-restricted,
+    evidence: { source: iep-wuxing-littlejohn, locator: 'section 4: "wood produced fire"' },
+    from: zh-wuxing-wood,
+    to: zh-wuxing-fire,
+    edge: generates,
+  }
+- {
+    type: relationship,
+    id: zh-wuxing-gen-fire-earth,
+    review_state: bibliographic,
+    rights_status: verified-restricted,
+    evidence: { source: iep-wuxing-littlejohn, locator: 'section 4: "fire produced earth"' },
+    from: zh-wuxing-fire,
+    to: zh-wuxing-earth,
+    edge: generates,
+  }
+- {
+    type: relationship,
+    id: zh-wuxing-gen-earth-metal,
+    review_state: bibliographic,
+    rights_status: verified-restricted,
+    evidence: { source: iep-wuxing-littlejohn, locator: 'section 4: "earth produced metal"' },
+    from: zh-wuxing-earth,
+    to: zh-wuxing-metal,
+    edge: generates,
+  }
+- {
+    type: relationship,
+    id: zh-wuxing-gen-metal-water,
+    review_state: bibliographic,
+    rights_status: verified-restricted,
+    evidence: { source: iep-wuxing-littlejohn, locator: 'section 4: "metal produced water"' },
+    from: zh-wuxing-metal,
+    to: zh-wuxing-water,
+    edge: generates,
+  }
+- {
+    type: relationship,
+    id: zh-wuxing-gen-water-wood,
+    review_state: bibliographic,
+    rights_status: verified-restricted,
+    evidence: { source: iep-wuxing-littlejohn, locator: 'section 4: "water produced wood"' },
+    from: zh-wuxing-water,
+    to: zh-wuxing-wood,
+    edge: generates,
+  }
+
+# Controlling cycle: "wood conquered earth, metal conquered wood, fire conquered metal, water conquered fire, and earth conquered water" (IEP, section 4).
+- {
+    type: relationship,
+    id: zh-wuxing-ctl-wood-earth,
+    review_state: bibliographic,
+    rights_status: verified-restricted,
+    evidence: { source: iep-wuxing-littlejohn, locator: 'section 4: "wood conquered earth"' },
+    from: zh-wuxing-wood,
+    to: zh-wuxing-earth,
+    edge: controls,
+  }
+- {
+    type: relationship,
+    id: zh-wuxing-ctl-metal-wood,
+    review_state: bibliographic,
+    rights_status: verified-restricted,
+    evidence: { source: iep-wuxing-littlejohn, locator: 'section 4: "metal conquered wood"' },
+    from: zh-wuxing-metal,
+    to: zh-wuxing-wood,
+    edge: controls,
+  }
+- {
+    type: relationship,
+    id: zh-wuxing-ctl-fire-metal,
+    review_state: bibliographic,
+    rights_status: verified-restricted,
+    evidence: { source: iep-wuxing-littlejohn, locator: 'section 4: "fire conquered metal"' },
+    from: zh-wuxing-fire,
+    to: zh-wuxing-metal,
+    edge: controls,
+  }
+- {
+    type: relationship,
+    id: zh-wuxing-ctl-water-fire,
+    review_state: bibliographic,
+    rights_status: verified-restricted,
+    evidence: { source: iep-wuxing-littlejohn, locator: 'section 4: "water conquered fire"' },
+    from: zh-wuxing-water,
+    to: zh-wuxing-fire,
+    edge: controls,
+  }
+- {
+    type: relationship,
+    id: zh-wuxing-ctl-earth-water,
+    review_state: bibliographic,
+    rights_status: verified-restricted,
+    evidence: { source: iep-wuxing-littlejohn, locator: 'section 4: "earth conquered water"' },
+    from: zh-wuxing-earth,
+    to: zh-wuxing-water,
+    edge: controls,
+  }
+
+# Seasons and directions, as cultural assertions attached to the phase.
+- type: cultural-assertion
+  id: zh-wuxing-wood-season-direction
+  review_state: bibliographic
+  rights_status: verified-restricted
+  evidence: { source: iep-wuxing-littlejohn, locator: 'section 4' }
+  concept: zh-wuxing-wood
+  claim: Wood is correlated with the spring season and the direction east.
+  passage: 'Wood is also correlated with the color blue-green, the spring season, the direction east'
+  period: Han dynasty and after, per the section heading
+- type: cultural-assertion
+  id: zh-wuxing-fire-season
+  review_state: bibliographic
+  rights_status: verified-restricted
+  evidence: { source: iep-wuxing-littlejohn, locator: 'section 3' }
+  concept: zh-wuxing-fire
+  claim: Fire is correlated with summer.
+  passage: '(wood, green, spring; or fire, red, summer)'
+  period: Before the Han dynasty, per the section heading
+- type: cultural-assertion
+  id: zh-wuxing-table-remaining
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-en-wuxing, locator: 'correspondences table (uncited)' }
+  concept: zh-wuxing
+  claim: >-
+    The table gives Fire: south; Earth: centre, intermediate season; Metal: west, autumn; Water: north, winter.
+    These are not confirmed by the IEP article and await a scholarly source.
+- type: cultural-assertion
+  id: zh-qing-grue
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wiktionary-en, locator: '/wiki/青, usage notes' }
+  concept: zh-qing
+  claim: 青 covered both green and blue until modern times; blue and black senses are more common in Classical Chinese, green in modern Chinese.
+  passage: 'In fact, 青 covered both green and blue.'

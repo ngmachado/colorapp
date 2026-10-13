@@ -1,0 +1,15 @@
+# Source-aware introductions. Each page in the app links to the knowledge records it summarises.
+
+- id: tradition-wuxing
+  kind: tradition
+  title: Wuxing, the Five Phases
+  summary: Wood, fire, earth, metal and water describe interconnected processes and correspondences, not chemical elements. Colour associations are symbolic relationships with a source, never hue-angle rules or mixing rules.
+  explanation_limits: Show the generating and controlling cycles as documented relationships. A palette adapted from them is an adaptation, labelled as such.
+  sources: [iep-wuxing-littlejohn]
+
+- id: tradition-japanese-colour
+  kind: tradition
+  title: Japanese colour names, dictionaries and layering
+  summary: An authored dictionary (Wada), a traditional vocabulary (nihon no iro) and a clothing practice (kasane) are three different kinds of record. The app keeps them apart and shows each record's evidence and status.
+  explanation_limits: Do not prefilter Japanese records as "muted" or "minimalist". Wada records show bibliographic data only until permission exists.
+  sources: [seigensha-wada-vol1, seigensha-wada-vol2, japan-house-living-colours]

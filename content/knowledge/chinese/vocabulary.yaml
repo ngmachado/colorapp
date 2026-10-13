@@ -1,0 +1,63 @@
+# yaml-language-server: $schema=../schema.json
+# Chinese dictionary sample: material-linked colour terms, discovered via Wiktionary. No digital values; none are offered by the source.
+
+- type: concept
+  id: zh-zhusha
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wiktionary-en, locator: '/wiki/朱砂' }
+  label: 朱砂 (zhūshā), cinnabar
+  description: Mineral pigment term; Wiktionary glosses 朱 as "vermilion". Related terms listed there include 丹砂 (dānshā) and 辰砂 (chénshā). A material reference, not a single appearance.
+  tags: { tradition: chinese, kind: material-term }
+- type: name
+  id: zh-zhusha-name
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wiktionary-en, locator: '/wiki/朱砂' }
+  concept: zh-zhusha
+  script: 朱砂
+  language: zh
+  transliteration: { system: Hanyu Pinyin, value: zhūshā }
+  aliases: [硃砂, 朱沙]
+  meaning: 'cinnabar'
+  confidence: { transcription: 1 }
+
+- type: concept
+  id: zh-zhe
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wiktionary-en, locator: '/wiki/赭' }
+  label: 赭 (zhě), ochre
+  description: Red-earth and ochre term; current sense "reddish brown; burnt ochre". Historical senses include dye and the red clothing of convicts (赭衣).
+  tags: { tradition: chinese, kind: material-term }
+- type: name
+  id: zh-zhe-name
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wiktionary-en, locator: '/wiki/赭' }
+  concept: zh-zhe
+  script: 赭
+  language: zh
+  transliteration: { system: Hanyu Pinyin, value: zhě }
+  meaning: 'red soil; ochre; reddish brown'
+  confidence: { transcription: 1 }
+
+- type: concept
+  id: zh-mo
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wiktionary-en, locator: '/wiki/墨' }
+  label: 墨 (mò), ink
+  description: Chinese ink and, by extension, "black; ink-coloured; dark". A material and a colour sense in one term.
+  tags: { tradition: chinese, kind: material-term }
+- type: name
+  id: zh-mo-name
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wiktionary-en, locator: '/wiki/墨' }
+  concept: zh-mo
+  script: 墨
+  language: zh
+  transliteration: { system: Hanyu Pinyin, value: mò }
+  meaning: 'Chinese ink or ink in general; black, ink-coloured, dark'
+  confidence: { transcription: 1 }

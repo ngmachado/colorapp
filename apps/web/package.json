@@ -1,0 +1,27 @@
+{
+  "name": "@sca/web",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@sca/colour-engine": "workspace:*",
+    "@sca/db": "workspace:*",
+    "@sca/garment": "workspace:*",
+    "@sca/generator": "workspace:*",
+    "@sca/knowledge": "workspace:*",
+    "better-sqlite3": "^12.6.0",
+    "next": "^15.5.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0"
+  }
+}

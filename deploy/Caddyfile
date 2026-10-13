@@ -1,0 +1,5 @@
+# Replace "localhost" with your domain for a public certificate.
+localhost {
+	tls internal
+	reverse_proxy app:3000
+}
