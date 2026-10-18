@@ -59,7 +59,7 @@ Zero-cost setup: Vercel Hobby, Neon free tier, Resend free tier. The knowledge b
 
 1. The repo is linked to a Neon project (`.neon`, `neon.ts`). `pnpm env:pull` pulls `DATABASE_URL` (pooled) and `DATABASE_URL_UNPOOLED` into `apps/web/.env.local`; `neon deploy` applies `neon.ts`.
 2. Create a Google OAuth client (Google Cloud console → APIs & Services → Credentials → OAuth client ID, type Web application) with the authorised redirect URI `https://<your-domain>/api/auth/callback/google`, and publish the consent screen so anyone can sign in. Optionally also a Resend API key with a verified domain for the email link.
-3. Import the repository in Vercel with the repository root as the project root. The root `vercel.json` declares one service, `web`, rooted at `apps/web` and public at `/`; its build command is `pnpm -w content:build && pnpm build`. There are no other services and no bindings: the app only talks to Neon and Resend.
+3. Import the repository in Vercel with **Root Directory** `apps/web`. No `vercel.json` is needed: the app's `build` script compiles the knowledge base before `next build`, so the function always ships a release.
 4. Set the environment variables: `DATABASE_URL`, `DATABASE_URL_UNPOOLED`, `AUTH_SECRET` (`openssl rand -base64 32`), `AUTH_GOOGLE_ID`, `AUTH_GOOGLE_SECRET`; and, for the email link, `AUTH_RESEND_KEY` and `EMAIL_FROM`.
 5. Deploy. Migrations run on the first request; the account, library and sign-in pages are the smoke test.
 

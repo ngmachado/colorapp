@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { unstable_rethrow } from 'next/navigation';
 import type { ReactNode } from 'react';
 import { ACCOUNTS } from '@/lib/accounts';
 import { currentUser } from '@/lib/current-user';
@@ -26,6 +27,8 @@ export async function Toolbar({
   // The bar is on every page. A database that is down or unconfigured must not take the
   // Dictionary and Theory down with it, so here, and only here, a failure reads as signed out.
   const user = await currentUser().catch((e: unknown) => {
+    // Next signals "render this dynamically" with an error of its own; that one must pass through.
+    unstable_rethrow(e);
     console.error('toolbar: current user unavailable', e);
     return null;
   });
