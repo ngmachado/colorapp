@@ -2,6 +2,7 @@ import type { Source } from '@sca/knowledge';
 import Link from 'next/link';
 import { Toolbar } from '@/components/toolbar';
 import { knowledge } from '@/lib/knowledge';
+import { ACCOUNTS } from '@/lib/accounts';
 import { namePoints } from '@/lib/palette-names';
 
 export const dynamic = 'force-dynamic';
@@ -171,7 +172,7 @@ export default function Home() {
           <div className="flex flex-col gap-1.5">
             <span className="font-semibold text-[var(--fg)]">About</span>
             <Link href="/about">About this release</Link>
-            <Link href="/account">Your data</Link>
+            {ACCOUNTS ? <Link href="/account">Your data</Link> : null}
           </div>
           <span className="ml-auto self-end font-mono">
             release {inv.content_version.slice(0, 8)} · self-hosted · no tracking

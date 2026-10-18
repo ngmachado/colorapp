@@ -26,7 +26,6 @@ const ROUTES = [
 ];
 
 export default async function warm(config: FullConfig) {
-  const base = config.projects[0]?.use.baseURL;
-  if (!base) return;
-  for (const r of ROUTES) await fetch(base + r).catch(() => undefined);
+  const bases = [...new Set(config.projects.map((p) => p.use.baseURL).filter(Boolean))] as string[];
+  for (const base of bases) for (const r of ROUTES) await fetch(base + r).catch(() => undefined);
 }

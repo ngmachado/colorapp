@@ -23,6 +23,7 @@ import { Wheel, type OverlayPoint } from '@/components/wheel';
 import { contrastGrade, oklchOfHex, parseHex } from '@/lib/contrast';
 import { nearestPoint, type NamePoint } from '@/lib/nearest';
 import { hexesIn } from '@/lib/lab-links';
+import { addPalette } from '@/lib/local-library';
 import { stateParams, type Oklch } from '@/lib/palette-param';
 import type { ColourSet } from '@/lib/systems';
 
@@ -88,6 +89,8 @@ interface Props {
   seedNote?: string;
   /** Documented sets the wheel panel can load whole. */
   sets?: ColourSet[];
+  /** Save into this browser's Library instead of the server's (no accounts configured). */
+  localLibrary?: boolean;
 }
 /** Keyboard shortcuts, shown behind the ? key. */
 const KEYS: [string, string][] = [
@@ -243,7 +246,7 @@ function HexField({
  * editable; the URL always holds the current palette; the view can simulate a colour-vision deficiency.
  * Any colour can be typed or picked; every edit can be undone; a contrast table grades each pair.
  */
-export function Columns({ points, initial, seedNote, sets = [] }: Props) {
+export function Columns({ points, initial, seedNote, sets = [], localLibrary = false }: Props) {
   const [palette, setPalette] = useState<Oklch[]>(initial.palette);
   const [sourceIds, setSourceIds] = useState<(string | null)[]>(
     initial.sourceIds ?? initial.palette.map(() => null),
@@ -653,6 +656,24 @@ export function Columns({ points, initial, seedNote, sets = [] }: Props) {
   };
 
   async function save() {
+    if (localLibrary) {
+      const entry = addPalette(localStorage, {
+        palette,
+        structure,
+        seed,
+        locked,
+        labels,
+        sourceIds,
+      });
+      return setNotice(
+        <>
+          Saved in this browser as “{entry.note}”, with its locks, names and records.{' '}
+          <Link href="/library" className="underline underline-offset-2">
+            Open the Library
+          </Link>
+        </>,
+      );
+    }
     const res = await fetch('/api/palettes', {
       method: 'POST',
       body: JSON.stringify({ palette, structure, seed, locked, labels, sourceIds }),

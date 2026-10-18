@@ -3,6 +3,7 @@ import { Structure } from '@sca/generator';
 import type { Representation } from '@sca/knowledge';
 import { Columns, type Oklch } from '@/components/lab/columns';
 import { Toolbar } from '@/components/toolbar';
+import { ACCOUNTS } from '@/lib/accounts';
 import { knowledge } from '@/lib/knowledge';
 import { namePoints } from '@/lib/palette-names';
 import { oklchOfHex } from '@/lib/contrast';
@@ -112,6 +113,7 @@ export default async function Lab({ searchParams }: { searchParams: Promise<Para
           initial={{ palette, locked, structure, seed, sourceIds, labels }}
           seedNote={note ?? 'Generate a palette. Lock the colours you like. Generate again.'}
           sets={documentedSets()}
+          localLibrary={!ACCOUNTS}
         />
       </main>
     </>

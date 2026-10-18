@@ -11,6 +11,11 @@ const g = globalThis as typeof globalThis & { __scaDb?: { db: Db; ready: Promise
  */
 function handle() {
   if (!g.__scaDb) {
+    // A hosted deployment has no writable disk, so the embedded fallback cannot apply there.
+    if (!process.env.DATABASE_URL && process.env.VERCEL)
+      throw new Error(
+        'DATABASE_URL is not set: add the Neon connection string to the Vercel project',
+      );
     const { db, migrate, pool } = connect(
       process.env.DATABASE_URL ?? 'pglite://data/pg',
       process.env.DATABASE_URL_UNPOOLED,

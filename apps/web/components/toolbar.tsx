@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
+import { ACCOUNTS } from '@/lib/accounts';
 import { currentUser } from '@/lib/current-user';
 
 const NAV = [
@@ -22,7 +23,12 @@ export async function Toolbar({
   middle?: ReactNode;
   children?: ReactNode;
 }) {
-  const user = await currentUser();
+  // The bar is on every page. A database that is down or unconfigured must not take the
+  // Dictionary and Theory down with it, so here, and only here, a failure reads as signed out.
+  const user = await currentUser().catch((e: unknown) => {
+    console.error('toolbar: current user unavailable', e);
+    return null;
+  });
   return (
     <header className="flex min-h-14 shrink-0 flex-wrap items-center gap-x-5 gap-y-1 border-b border-[var(--line)] bg-[var(--surface)] px-5 py-2">
       <a
@@ -57,11 +63,11 @@ export async function Toolbar({
           <Link href="/account" className="text-sm text-[var(--muted)] hover:text-[var(--fg)]">
             {user.email ?? 'Account'}
           </Link>
-        ) : (
+        ) : ACCOUNTS ? (
           <Link href="/signin" className="btn btn-primary">
             Sign in
           </Link>
-        )}
+        ) : null}
       </div>
     </header>
   );

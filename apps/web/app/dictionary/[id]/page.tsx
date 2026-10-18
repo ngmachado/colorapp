@@ -11,6 +11,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Citation, Field, ShortCite } from '@/components/record';
 import { SaveColour } from '@/components/save-colour';
+import { ACCOUNTS } from '@/lib/accounts';
 import { Wheel } from '@/components/wheel';
 import { recordHref, recordTitle } from '@/components/search';
 import { Toolbar } from '@/components/toolbar';
@@ -173,7 +174,7 @@ export default async function Entry({ params }: { params: Promise<{ id: string }
         <Link href="/theory" className="btn">
           In theory
         </Link>
-        <SaveColour conceptId={id} />
+        <SaveColour conceptId={id} label={concept.label} hex={hex} local={!ACCOUNTS} />
       </Toolbar>
       <main id="main" className="flex flex-col">
         <div

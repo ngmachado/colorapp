@@ -5,10 +5,14 @@ import { join, resolve } from 'node:path';
 const g = globalThis as typeof globalThis & { __scaKnowledge?: Knowledge };
 
 function repoRoot(): string {
-  let dir = process.cwd();
-  for (let i = 0; i < 5; i++) {
-    if (existsSync(join(dir, 'pnpm-workspace.yaml'))) return dir;
-    dir = resolve(dir, '..');
+  // Walk up from the working directory and, failing that, from this module: a traced server bundle
+  // keeps the repository layout but may start its process elsewhere.
+  for (const start of [process.cwd(), import.meta.dirname ?? process.cwd()]) {
+    let dir = start;
+    for (let i = 0; i < 8; i++) {
+      if (existsSync(join(dir, 'pnpm-workspace.yaml'))) return dir;
+      dir = resolve(dir, '..');
+    }
   }
   return process.cwd();
 }
@@ -39,7 +43,12 @@ export function knowledge(): Knowledge {
     if (existsSync(current)) path = current;
     else if (files.length) path = join(dataDir, files.at(-1)!);
     else {
-      const { records, problems } = loadContent(join(root, 'content', 'knowledge'));
+      const contentDir = join(root, 'content', 'knowledge');
+      if (!existsSync(contentDir))
+        throw new Error(
+          `no knowledge release: looked for ${current}, data/knowledge-*.sqlite and ${contentDir} (cwd ${process.cwd()})`,
+        );
+      const { records, problems } = loadContent(contentDir);
       if (problems.length)
         throw new Error(`content has ${problems.length} problem(s); run pnpm content:check`);
       const inv = buildKnowledgeDb(records, join(dataDir, 'knowledge-build.sqlite'));

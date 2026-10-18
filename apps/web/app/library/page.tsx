@@ -2,6 +2,8 @@ import { colour, toHex } from '@sca/colour-engine';
 import { revalidatePath } from 'next/cache';
 import Link from 'next/link';
 import { AutoForm } from '@/components/auto-form';
+import { LocalLibrary } from '@/components/local-library';
+import { ACCOUNTS } from '@/lib/accounts';
 import { Toolbar } from '@/components/toolbar';
 import { currentUser } from '@/lib/current-user';
 import { stateParams, type Oklch } from '@/lib/palette-param';
@@ -60,6 +62,13 @@ export default async function Library({
   const sp = await searchParams;
   const raw = sp.q;
   const q = (Array.isArray(raw) ? raw[0] : raw)?.trim().toLowerCase() ?? '';
+  if (!ACCOUNTS)
+    return (
+      <>
+        <Toolbar current="/library" middle="kept in this browser" />
+        <LocalLibrary />
+      </>
+    );
   const user = await currentUser();
   const projects = user ? await user.data.projects.list() : [];
   const byName = (name: string) => projects.find((p) => p.name === name);
