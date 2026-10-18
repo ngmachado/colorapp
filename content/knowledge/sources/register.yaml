@@ -146,3 +146,96 @@
   access_date: '2026-10-13'
   rights_notes: Springer; full text is access-controlled. Pages 132–147 per the foundation document's register.
   notes: Listed as a research route for Chinese colour terms. Not opened for this register (login wall); no record cites it as evidence yet.
+
+- type: source
+  id: wikipedia-ja-nihon-no-iro-ichiran
+  review_state: discovered
+  rights_status: unreviewed
+  author: Wikipedia contributors (Japanese)
+  title: 日本の色の一覧
+  url: https://ja.wikipedia.org/wiki/日本の色の一覧
+  access_date: '2026-10-14'
+  rights_notes: Text CC BY-SA 4.0. The page names no source for its hex values.
+  notes: >-
+    The introduction states the values are sRGB hex codes for the HTML color attribute and that the listed colours are
+    "近似色であり一例" (approximate colours, one example each); it also says some listed colours are not actually in use.
+    Treat every value as a modern approximation of unknown method. Discovery route only.
+
+- type: source
+  id: wikipedia-zh-chinese-traditional-colours
+  review_state: discovered
+  rights_status: unreviewed
+  author: Wikipedia contributors (Chinese)
+  title: 中国传统色彩
+  url: https://zh.wikipedia.org/wiki/中国传统色彩
+  access_date: '2026-10-14'
+  rights_notes: Text CC BY-SA 4.0. The page names no source for its hex values and carries a banner (2025-05-23) asking for sources.
+  notes: >-
+    Entries are grouped by hue family (红色系, 黄色系, 白色系, 黑色系). Several families are headings without rows.
+    Only 雪藍 has a footnoted external reference. Treat every value as a modern approximation of unknown method. Discovery route only.
+
+- type: source
+  id: goethe-1840-theory-of-colours-eastlake
+  review_state: bibliographic
+  rights_status: verified-reusable
+  author: Johann Wolfgang von Goethe; translated with notes by Charles Lock Eastlake
+  title: "Goethe's Theory of Colours"
+  publisher: John Murray, London (1840); Project Gutenberg eBook 50572 (2015, updated 2024)
+  date: '1840'
+  url: https://www.gutenberg.org/ebooks/50572
+  access_date: '2026-10-14'
+  rights_notes: >-
+    Public domain text distributed under the Project Gutenberg License ("almost no restrictions whatsoever" in the United States
+    and most other countries; readers elsewhere check local law). Passages may be quoted with the paragraph number.
+  notes: >-
+    Goethe's own paragraph numbers are the locators (the text prints each as "NNN."). Part VI, "Effect of colour with reference
+    to moral associations", runs from 758; "Completeness and Harmony" begins at 803. Eastlake's notes are cited as "Note X".
+
+- type: source
+  id: chevreul-1890-principles-martel
+  review_state: bibliographic
+  rights_status: verified-reusable
+  author: Michel Eugène Chevreul; translated by Charles Martel
+  title: The Principles of Harmony and Contrast of Colours, and Their Applications to the Arts
+  publisher: George Bell and Sons, London (per Internet Archive metadata)
+  date: '1890'
+  edition: Third edition, with a new introduction for the unscientific reader and a complete index
+  url: https://archive.org/details/b21285676
+  archive_id: b21285676
+  access_date: '2026-10-14'
+  rights_notes: >-
+    Scan from the Wellcome Collection, whose record states the work can be used for any purpose without restriction under
+    copyright law. The OCR text is used for locators; passages are checked against the page images before promotion.
+  notes: >-
+    Chevreul's numbered paragraphs are printed as "(16.)" and are the locators. The translator's preface to the third edition
+    is dated September 1860; the Internet Archive dates this printing 1890. The OCR does not show the title-page imprint, so the
+    publisher is taken from the archive record.
+
+- type: source
+  id: itten-art-of-color-wiley
+  review_state: bibliographic
+  rights_status: verified-restricted
+  author: Johannes Itten; translated by Ernst van Haagen
+  title: 'The Art of Color: The Subjective Experience and Objective Rationale of Color'
+  publisher: John Wiley & Sons, New York (first English edition Reinhold, New York, 1961)
+  date: '1973'
+  isbn: '978-0-471-28928-9'
+  access_date: '2026-10-14'
+  rights_notes: In copyright. Bibliographic record only; nothing is reproduced from the book.
+  notes: >-
+    Bookseller and library records disagree on the Wiley printing date (1973, 1997 and 2004 appear). ISBN and translator from
+    those records; confirm against the book before promotion.
+
+- type: source
+  id: albers-interaction-of-color-yale-2013
+  review_state: bibliographic
+  rights_status: verified-restricted
+  author: Josef Albers
+  title: 'Interaction of Color: 50th Anniversary Edition'
+  publisher: Yale University Press, New Haven
+  date: '2013'
+  isbn: '978-0-300-17935-4'
+  access_date: '2026-10-14'
+  rights_notes: In copyright. Bibliographic record only; nothing is reproduced from the book.
+  notes: First published 1963 as a limited silkscreen edition; paperback 1971. Details from bookseller listings; confirm before promotion.
+

@@ -79,4 +79,25 @@ describe('repository content (chunk 3 acceptance)', () => {
         expect(r.review_state, r.id).toBe('discovered');
     }
   });
+
+  test('Western passages quote only public-domain sources, with a paragraph locator and the passage text', () => {
+    const western = records.filter(
+      (r) => r.type === 'cultural-assertion' && /^(goethe|chevreul)-/.test(r.id),
+    );
+    expect(western.length).toBeGreaterThanOrEqual(9);
+    for (const a of western) {
+      if (a.type !== 'cultural-assertion') continue;
+      const src = byId.get(a.evidence.source);
+      expect(src?.type, a.id).toBe('source');
+      expect(src?.rights_status, a.id).toBe('verified-reusable');
+      expect(a.evidence.locator, a.id).toBeTruthy();
+      expect(a.passage?.length ?? 0, a.id).toBeGreaterThan(40);
+    }
+    const restricted = records.filter((r) => r.type === 'source' && /^(itten|albers)-/.test(r.id));
+    expect(restricted).toHaveLength(2);
+    for (const s of restricted) {
+      const citing = records.filter((r) => r.type !== 'source' && r.evidence.source === s.id);
+      expect(citing, `records citing ${s.id}`).toEqual([]);
+    }
+  });
 });

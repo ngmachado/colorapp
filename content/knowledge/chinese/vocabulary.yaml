@@ -61,3 +61,45 @@
   transliteration: { system: Hanyu Pinyin, value: mò }
   meaning: 'Chinese ink or ink in general; black, ink-coloured, dark'
   confidence: { transcription: 1 }
+
+# Display approximations from the Chinese Wikipedia page 中国传统色彩 (discovery route only; the page names no source).
+
+- type: representation
+  id: zh-chi-srgb-zhwiki
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 赤 (English "Scarlet", alias 猩紅), hex #C3272B' }
+  concept: zh-chi
+  space: srgb
+  coords: [0.76471, 0.15294, 0.16863]
+  white: D65
+  method: 'sRGB hex #C3272B as listed on the cited page (which names no source), divided by 255.'
+  approximation_status: modern-approximation
+  notes: The page describes 赤 as a red between 絳 and 朱. 赤 as a Wuxing colour category is a word, not one appearance; this is one modern reading.
+
+- type: representation
+  id: zh-zhe-srgb-zhwiki
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 赭 (red section, "朱褐混合的顏色"), hex #9C5333' }
+  concept: zh-zhe
+  space: srgb
+  coords: [0.61176, 0.32549, 0.20000]
+  white: D65
+  method: 'sRGB hex #9C5333 as listed on the cited page (which names no source), divided by 255.'
+  approximation_status: modern-approximation
+  notes: The same page lists a separate entry 赭色 under 黄色系 as #CC7722. The two entries disagree; the single-character entry is used here.
+
+- type: representation
+  id: zh-zhusha-srgb-zhwiki
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 丹 (listed with alias 硃砂, "靚麗的朱色"), hex #FF4C00' }
+  concept: zh-zhusha
+  space: srgb
+  coords: [1.00000, 0.29804, 0.00000]
+  white: D65
+  method: 'sRGB hex #FF4C00 for the entry 丹, which the page gives as the same colour as 硃砂 (朱砂); as listed (no source named), divided by 255.'
+  approximation_status: modern-approximation
+  notes: Indirect mapping through the alias 硃砂; the concept is a mineral pigment term, so any single value is an illustration.
+

@@ -35,6 +35,10 @@ export const EdgeType = z.enum([
   'derived-from',
   'generates',
   'controls',
+  /** Goethe's diameters: the complement the eye demands (an after-image, not a hue angle). */
+  'complement-of',
+  /** Goethe's chords that skip one colour: the characteristic pairs. */
+  'characteristic-with',
 ]);
 export const SpaceId = z.enum([
   'srgb',

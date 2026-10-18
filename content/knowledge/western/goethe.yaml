@@ -1,0 +1,404 @@
+# yaml-language-server: $schema=../schema.json
+# Goethe's colour circle (1810) as a sourced system: six colours, two sides, three complements, four characteristic chords.
+# Every passage is copied from the Eastlake translation (Project Gutenberg 50572) with Goethe's paragraph number. Nothing is written from memory.
+# Display values are the app's own approximations: Goethe gives no measurements. They carry rights_status "approximate" and say so in method.
+# review_state "extracted": copied 2026-10-17; rights-check and specialist review pending.
+
+# ---- the system and its two sides ----
+
+- type: concept
+  id: goethe-circle
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '696–707' }
+  label: Goethe's colour circle
+  description: >-
+    Two principles in polarity, yellow (plus) and blue (minus), each deepening towards red; their simple union is green,
+    their deepened junction pure red, which Goethe calls purpur. Six colours on a circle: diameters give the complements
+    the eye demands, chords that skip a colour give the characteristic pairs. A system of felt oppositions, not a wheel rule.
+  tags: { tradition: western, system: goethe, kind: system, period: '1810' }
+
+- type: concept
+  id: goethe-plus
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '696, 764' }
+  label: Plus side (Goethe)
+  description: >-
+    Yellow and its deepening towards red. Goethe's table under 696 sets against it: action, light, brightness, force,
+    warmth, proximity, repulsion, affinity with acids.
+  tags: { tradition: western, system: goethe, kind: side }
+
+- type: concept
+  id: goethe-minus
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '696, 777' }
+  label: Minus side (Goethe)
+  description: >-
+    Blue and its deepening towards red. Goethe's table under 696 sets against it: negation, shadow, darkness, weakness,
+    coldness, distance, attraction, affinity with alkalis.
+  tags: { tradition: western, system: goethe, kind: side }
+
+# ---- the six colours ----
+
+- type: concept
+  id: goethe-yellow
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '765–771' }
+  label: Yellow (Goethe)
+  description: The colour nearest the light; the pole of the plus side.
+  tags: { tradition: western, system: goethe, kind: colour, side: plus }
+
+- type: concept
+  id: goethe-red-yellow
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '772–776' }
+  label: Red-yellow (Goethe)
+  description: Yellow condensed towards red; orange. Goethe's yellow-red (minium, cinnabar) is its further deepening.
+  tags: { tradition: western, system: goethe, kind: colour, side: plus }
+
+- type: concept
+  id: goethe-red
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '703, 792–800' }
+  label: Red, purpur (Goethe)
+  description: The culmination where the deepened extremes of both sides meet; Goethe calls it purpur to set it apart.
+  tags: { tradition: western, system: goethe, kind: colour, side: culmination }
+
+- type: concept
+  id: goethe-blue-red
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '786–791' }
+  label: Blue-red (Goethe)
+  description: Blue deepened towards red; violet, and lilac when attenuated.
+  tags: { tradition: western, system: goethe, kind: colour, side: minus }
+
+- type: concept
+  id: goethe-blue
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '778–785' }
+  label: Blue (Goethe)
+  description: The colour that brings a principle of darkness with it; the pole of the minus side.
+  tags: { tradition: western, system: goethe, kind: colour, side: minus }
+
+- type: concept
+  id: goethe-green
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '697, 801–802' }
+  label: Green (Goethe)
+  description: The simple union of yellow and blue in their first state; the colour the eye reposes on.
+  tags: { tradition: western, system: goethe, kind: colour, side: union }
+
+# ---- display approximations: the app's own values, not Goethe's ----
+
+- type: representation
+  id: goethe-yellow-display
+  review_state: extracted
+  rights_status: approximate
+  evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '765' }
+  concept: goethe-yellow
+  space: oklch
+  coords: [0.9, 0.18, 100]
+  method: >-
+    Display approximation chosen by the app's editors on 2026-10-17. Goethe gives no measurement; the hue is placed where
+    sRGB shows a pure yellow, lightness and chroma set so the six colours sit inside sRGB. Not a historical value.
+  approximation_status: modern-approximation
+
+- type: representation
+  id: goethe-red-yellow-display
+  review_state: extracted
+  rights_status: approximate
+  evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '772' }
+  concept: goethe-red-yellow
+  space: oklch
+  coords: [0.74, 0.17, 55]
+  method: >-
+    Display approximation chosen by the app's editors on 2026-10-17. Goethe gives no measurement; the hue is placed where
+    sRGB shows an orange, lightness and chroma set so the six colours sit inside sRGB. Not a historical value.
+  approximation_status: modern-approximation
+
+- type: representation
+  id: goethe-red-display
+  review_state: extracted
+  rights_status: approximate
+  evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '792' }
+  concept: goethe-red
+  space: oklch
+  coords: [0.55, 0.22, 20]
+  method: >-
+    Display approximation chosen by the app's editors on 2026-10-17. Goethe describes pure red as fine carmine on white
+    porcelain, inclining neither to yellow nor to blue; the hue is placed at a carmine, inside sRGB. Not a historical value.
+  approximation_status: modern-approximation
+
+- type: representation
+  id: goethe-blue-red-display
+  review_state: extracted
+  rights_status: approximate
+  evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '786' }
+  concept: goethe-blue-red
+  space: oklch
+  coords: [0.45, 0.2, 305]
+  method: >-
+    Display approximation chosen by the app's editors on 2026-10-17. Goethe gives no measurement; the hue is placed where
+    sRGB shows a violet, lightness and chroma set so the six colours sit inside sRGB. Not a historical value.
+  approximation_status: modern-approximation
+
+- type: representation
+  id: goethe-blue-display
+  review_state: extracted
+  rights_status: approximate
+  evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '778' }
+  concept: goethe-blue
+  space: oklch
+  coords: [0.5, 0.16, 255]
+  method: >-
+    Display approximation chosen by the app's editors on 2026-10-17. Goethe gives no measurement; the hue is placed where
+    sRGB shows a pure blue, lightness and chroma set so the six colours sit inside sRGB. Not a historical value.
+  approximation_status: modern-approximation
+
+- type: representation
+  id: goethe-green-display
+  review_state: extracted
+  rights_status: approximate
+  evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '801' }
+  concept: goethe-green
+  space: oklch
+  coords: [0.65, 0.16, 145]
+  method: >-
+    Display approximation chosen by the app's editors on 2026-10-17. Goethe gives no measurement; the hue is placed where
+    sRGB shows a green, lightness and chroma set so the six colours sit inside sRGB. Not a historical value.
+  approximation_status: modern-approximation
+
+# ---- membership ----
+
+- { type: relationship, id: goethe-circle-has-yellow, review_state: extracted, rights_status: verified-reusable, evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '707' }, from: goethe-yellow, to: goethe-circle, edge: member-of }
+- { type: relationship, id: goethe-circle-has-red-yellow, review_state: extracted, rights_status: verified-reusable, evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '707' }, from: goethe-red-yellow, to: goethe-circle, edge: member-of }
+- { type: relationship, id: goethe-circle-has-red, review_state: extracted, rights_status: verified-reusable, evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '707' }, from: goethe-red, to: goethe-circle, edge: member-of }
+- { type: relationship, id: goethe-circle-has-blue-red, review_state: extracted, rights_status: verified-reusable, evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '707' }, from: goethe-blue-red, to: goethe-circle, edge: member-of }
+- { type: relationship, id: goethe-circle-has-blue, review_state: extracted, rights_status: verified-reusable, evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '707' }, from: goethe-blue, to: goethe-circle, edge: member-of }
+- { type: relationship, id: goethe-circle-has-green, review_state: extracted, rights_status: verified-reusable, evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '707' }, from: goethe-green, to: goethe-circle, edge: member-of }
+- { type: relationship, id: goethe-plus-has-yellow, review_state: extracted, rights_status: verified-reusable, evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '764' }, from: goethe-yellow, to: goethe-plus, edge: member-of, notes: 'The colours on the plus side are yellow, red-yellow (orange), yellow-red (minium, cinnabar).' }
+- { type: relationship, id: goethe-plus-has-red-yellow, review_state: extracted, rights_status: verified-reusable, evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '764' }, from: goethe-red-yellow, to: goethe-plus, edge: member-of, notes: 'The colours on the plus side are yellow, red-yellow (orange), yellow-red (minium, cinnabar).' }
+- { type: relationship, id: goethe-minus-has-blue, review_state: extracted, rights_status: verified-reusable, evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '777' }, from: goethe-blue, to: goethe-minus, edge: member-of, notes: 'The colours on the minus side are blue, red-blue, and blue-red.' }
+- { type: relationship, id: goethe-minus-has-blue-red, review_state: extracted, rights_status: verified-reusable, evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '777' }, from: goethe-blue-red, to: goethe-minus, edge: member-of, notes: 'The colours on the minus side are blue, red-blue, and blue-red.' }
+
+# ---- the three complements (diameters, 810) ----
+
+- { type: relationship, id: goethe-yellow-demands-blue-red, review_state: extracted, rights_status: verified-reusable, evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '810' }, from: goethe-yellow, to: goethe-blue-red, edge: complement-of, notes: 'Yellow demands Red-blue. An after-image complement, not an OKLCh opposite.' }
+- { type: relationship, id: goethe-blue-demands-red-yellow, review_state: extracted, rights_status: verified-reusable, evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '810' }, from: goethe-blue, to: goethe-red-yellow, edge: complement-of, notes: 'Blue demands Red-yellow. An after-image complement, not an OKLCh opposite.' }
+- { type: relationship, id: goethe-red-demands-green, review_state: extracted, rights_status: verified-reusable, evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '810' }, from: goethe-red, to: goethe-green, edge: complement-of, notes: 'Red demands Green. An after-image complement, not an OKLCh opposite.' }
+
+# ---- the four characteristic chords (819–822) ----
+
+- { type: relationship, id: goethe-yellow-and-blue, review_state: extracted, rights_status: verified-reusable, evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '819' }, from: goethe-yellow, to: goethe-blue, edge: characteristic-with, notes: 'The simplest of such combinations. It may be said that it contains too little, for since every trace of red is wanting in it, it is defective as compared with the whole scale.' }
+- { type: relationship, id: goethe-yellow-and-red, review_state: extracted, rights_status: verified-reusable, evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '820' }, from: goethe-yellow, to: goethe-red, edge: characteristic-with, notes: 'This is a somewhat preponderating combination, but it has a serene and magnificent effect. The two extremes of the active side are seen together without conveying any idea of progression from one to the other.' }
+- { type: relationship, id: goethe-blue-and-red, review_state: extracted, rights_status: verified-reusable, evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '821' }, from: goethe-blue, to: goethe-red, edge: characteristic-with, notes: 'The two ends of the passive side, with the excess of the upper end of the active side. The effect of this juxtaposition approaches that of the blue-red produced by their union.' }
+- { type: relationship, id: goethe-red-yellow-and-blue-red, review_state: extracted, rights_status: verified-reusable, evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '822' }, from: goethe-red-yellow, to: goethe-blue-red, edge: characteristic-with, notes: 'These, when placed together, as the deepened extremes of both sides, have something exciting, elevated: they give us a presentiment of red, which in physical experiments is produced by their union.' }
+
+# ---- what Goethe says of each, by paragraph ----
+
+- type: cultural-assertion
+  id: goethe-polarity
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '696' }
+  concept: goethe-circle
+  claim: Colour is determined towards one of two sides, a polarity Goethe names plus and minus; his table sets yellow, action, light, brightness, force, warmth, proximity against blue, negation, shadow, darkness, weakness, coldness, distance.
+  passage: 'Considered in a general point of view, colour is determined towards one of two sides. It thus presents a contrast which we call a polarity, and which we may fitly designate by the expressions plus and minus.'
+  period: '1810 (German original); 1840 (this translation)'
+  context: Part VI, Effect of colour with reference to moral associations; the table follows the paragraph
+
+- type: cultural-assertion
+  id: goethe-complements
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '809–810' }
+  concept: goethe-circle
+  claim: A diameter turned round the circle marks the complements at its two ends; they reduce to three contrasts.
+  passage: 'The index, as it revolves round the whole circle, indicates at its two extremes the complemental colours, which, after all, may be reduced to three contrasts. Yellow demands Red-blue, Blue demands Red-yellow, Red demands Green, and contrariwise.'
+  period: '1810 (German original); 1840 (this translation)'
+  context: Part VI, "Completeness and Harmony"
+  notes: After-image complements. The app's complementary rule is a hue-angle rule on the OKLCh wheel and is not this.
+
+- type: cultural-assertion
+  id: goethe-non-characteristic
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '826–828' }
+  concept: goethe-circle
+  claim: Neighbouring colours on the circle, found by the shorter chords, are non-characteristic; yellow with yellow-red, yellow-red with red, blue with blue-red, blue-red with red.
+  passage: 'These combinations may justly be called non-characteristic, inasmuch as the colours are too nearly alike for their impression to be significant. Yet most of these recommend themselves to a certain degree, since they indicate a progressive state, though its relations can hardly be appreciable.'
+  period: '1810 (German original); 1840 (this translation)'
+  context: Part VI, "Combinations non-characteristic"
+
+- type: cultural-assertion
+  id: goethe-yellow-character
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '766' }
+  concept: goethe-yellow
+  claim: Pure yellow carries brightness and has a serene, gay, softly exciting character.
+  passage: 'In its highest purity it always carries with it the nature of brightness, and has a serene, gay, softly exciting character.'
+  period: '1810 (German original); 1840 (this translation)'
+  context: Part VI, under "Yellow"
+
+- type: cultural-assertion
+  id: goethe-yellow-warm
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '768' }
+  concept: goethe-yellow
+  claim: Yellow gives a warm and agreeable impression and belongs, in painting, to the illumined side.
+  passage: 'We find from experience, again, that yellow excites a warm and agreeable impression. Hence in painting it belongs to the illumined and emphatic side.'
+  period: '1810 (German original); 1840 (this translation)'
+  context: Part VI, under "Yellow"
+
+- type: cultural-assertion
+  id: goethe-yellow-sullied
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '770' }
+  concept: goethe-yellow
+  claim: Yellow is extremely liable to contamination; sullied, or tending to the minus side, it turns disagreeable.
+  passage: 'If, however, this colour in its pure and bright state is agreeable and gladdening, and in its utmost power is serene and noble, it is, on the other hand, extremely liable to contamination, and produces a very disagreeable effect if it is sullied, or in some degree tends to the minus side.'
+  period: '1810 (German original); 1840 (this translation)'
+  context: Part VI, under "Yellow"
+
+- type: cultural-assertion
+  id: goethe-red-yellow-warmth
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '773' }
+  concept: goethe-red-yellow
+  claim: Red-yellow gives warmth and gladness, the hue of the intenser glow of fire and of the setting sun.
+  passage: 'The red-yellow gives an impression of warmth and gladness, since it represents the hue of the intenser glow of fire, and of the milder radiance of the setting sun.'
+  period: '1810 (German original); 1840 (this translation)'
+  context: Part VI, under "Red-yellow"
+
+- type: cultural-assertion
+  id: goethe-yellow-red-power
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '774' }
+  concept: goethe-red-yellow
+  claim: Deepened further to yellow-red, the cheerful sensation of red-yellow becomes an intolerably powerful impression.
+  passage: 'The agreeable, cheerful sensation which red-yellow excites, increases to an intolerably powerful impression in bright yellow-red.'
+  period: '1810 (German original); 1840 (this translation)'
+  context: Part VI, under "Yellow-red"; yellow-red is the step between red-yellow and red
+
+- type: cultural-assertion
+  id: goethe-blue-contradiction
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '779' }
+  concept: goethe-blue
+  claim: Blue is powerful but on the negative side, a stimulating negation, a contradiction between excitement and repose.
+  passage: 'This colour has a peculiar and almost indescribable effect on the eye. As a hue it is powerful, but it is on the negative side, and in its highest purity is, as it were, a stimulating negation. Its appearance, then, is a kind of contradiction between excitement and repose.'
+  period: '1810 (German original); 1840 (this translation)'
+  context: Part VI, under "Blue"
+
+- type: cultural-assertion
+  id: goethe-blue-retires
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '780–781' }
+  concept: goethe-blue
+  claim: A blue surface seems to retire, and we love to contemplate it because it draws us after it.
+  passage: 'As the upper sky and distant mountains appear blue, so a blue surface seems to retire from us. But as we readily follow an agreeable object that flies from us, so we love to contemplate blue, not because it advances to us, but because it draws us after it.'
+  period: '1810 (German original); 1840 (this translation)'
+  context: Part VI, under "Blue"
+
+- type: cultural-assertion
+  id: goethe-blue-cold
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '782–783' }
+  concept: goethe-blue
+  claim: Blue gives an impression of cold and reminds us of shade; rooms hung in pure blue seem larger but empty and cold.
+  passage: 'Blue gives us an impression of cold, and thus, again, reminds us of shade. We have before spoken of its affinity with black. Rooms which are hung with pure blue, appear in some degree larger, but at the same time empty and cold.'
+  period: '1810 (German original); 1840 (this translation)'
+  context: Part VI, under "Blue"
+
+- type: cultural-assertion
+  id: goethe-blue-red-disturbs
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '787' }
+  concept: goethe-blue-red
+  claim: Blue deepened into red gains an active character while staying on the passive side; it disturbs rather than enlivens.
+  passage: 'Blue deepens very mildly into red, and thus acquires a somewhat active character, although it is on the passive side. Its exciting power is, however, of a very different kind from that of the red-yellow. It may be said to disturb rather than enliven.'
+  period: '1810 (German original); 1840 (this translation)'
+  context: Part VI, under "Red-blue"
+
+- type: cultural-assertion
+  id: goethe-lilac
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '789' }
+  concept: goethe-blue-red
+  claim: Attenuated, this colour is lilac, lively without gladness.
+  passage: 'In a very attenuated state, this colour is known to us under the name of lilac; but even in this degree it has a something lively without gladness.'
+  period: '1810 (German original); 1840 (this translation)'
+  context: Part VI, under "Red-blue"
+
+- type: cultural-assertion
+  id: goethe-purpur-culmination
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '703' }
+  concept: goethe-red
+  claim: Pure red appears where the two deepened extremes meet; Goethe appropriates the term purpur to it for its excellence.
+  passage: 'And such is the fact, for pure red appears; a colour to which, from its excellence, we have appropriated the term "purpur."'
+  period: '1810 (German original); 1840 (this translation)'
+  context: Part VI, "Completeness the result of variety"
+
+- type: cultural-assertion
+  id: goethe-red-carmine
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '792' }
+  concept: goethe-red
+  claim: Pure red is to be imagined as fine carmine dried on white porcelain, bordering on neither yellow nor blue.
+  passage: 'We are to imagine an absolutely pure red, like fine carmine suffered to dry on white porcelain. We have called this colour "purpur" by way of distinction, although we are quite aware that the purple of the ancients inclined more to blue.'
+  period: '1810 (German original); 1840 (this translation)'
+  context: Part VI, under "Red"
+
+- type: cultural-assertion
+  id: goethe-red-dignity
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '796' }
+  concept: goethe-red
+  claim: Red conveys gravity and dignity in its deep state and grace and attractiveness in its light tint.
+  passage: 'It conveys an impression of gravity and dignity, and at the same time of grace and attractiveness. The first in its dark deep state, the latter in its light attenuated tint; and thus the dignity of age and the amiableness of youth may adorn itself with degrees of the same hue.'
+  period: '1810 (German original); 1840 (this translation)'
+  context: Part VI, under "Red"
+
+- type: cultural-assertion
+  id: goethe-green-union
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '697' }
+  concept: goethe-green
+  claim: When the two principles are so balanced that neither is recognised, the union is a quality by itself; this union is green.
+  passage: 'If these specific, contrasted principles are combined, the respective qualities do not therefore destroy each other: for if in this intermixture the ingredients are so perfectly balanced that neither is to be distinctly recognised, the union again acquires a specific character; it appears as a quality by itself in which we no longer think of combination. This union we call green.'
+  period: '1810 (German original); 1840 (this translation)'
+  context: Part VI, "Combination of the two principles"
+
+- type: cultural-assertion
+  id: goethe-green-repose
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '802' }
+  concept: goethe-green
+  claim: The eye and the mind repose on green as on a simple colour, which is why it is chosen for rooms lived in constantly.
+  passage: 'The eye experiences a distinctly grateful impression from this colour. If the two elementary colours are mixed in perfect equality so that neither predominates, the eye and the mind repose on the result of this junction as upon a simple colour. The beholder has neither the wish nor the power to imagine a state beyond it. Hence for rooms to live in constantly, the green colour is most generally selected.'
+  period: '1810 (German original); 1840 (this translation)'
+  context: Part VI, under "Green"

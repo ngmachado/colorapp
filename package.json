@@ -15,7 +15,9 @@
     "format": "prettier --write .",
     "check": "pnpm lint && pnpm typecheck && pnpm test && pnpm content:check",
     "content:check": "pnpm --filter @sca/db knowledge validate",
-    "content:build": "pnpm --filter @sca/db knowledge build"
+    "content:build": "pnpm --filter @sca/db knowledge build",
+    "e2e": "pnpm --filter @sca/web e2e",
+    "env:pull": "neon env pull && cp .env.local apps/web/.env.local"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.0",
@@ -33,5 +35,9 @@
       "better-sqlite3",
       "esbuild"
     ]
+  },
+  "dependencies": {
+    "@neon/config": "^1.9.2",
+    "@neon/env": "^1.6.3"
   }
 }

@@ -142,6 +142,14 @@ export function openKnowledge(path: string) {
     'SELECT record_id, from_id, to_id, edge FROM relationship WHERE from_id = ? OR to_id = ?',
   );
   const qInventory = db.prepare('SELECT inventory FROM release');
+  const qByType = db.prepare('SELECT json FROM record WHERE type = ? ORDER BY id');
+  const qByConcept = db.prepare('SELECT json FROM record WHERE concept_id = ? ORDER BY type, id');
+  const qBySource = db.prepare('SELECT json FROM record WHERE source_id = ? ORDER BY type, id');
+  const qOklab = db.prepare(
+    'SELECT record_id AS id, concept_id, l, a, b FROM representation_oklab',
+  );
+  const parse = (rows: unknown[]) =>
+    (rows as { json: string }[]).map((r) => JSON.parse(r.json) as KnowledgeRecord);
   return {
     release,
     record(id: string): KnowledgeRecord | undefined {
@@ -165,6 +173,26 @@ export function openKnowledge(path: string) {
         to_id: string;
         edge: string;
       }[];
+    },
+    /** All records of one type, in id order. The release is small enough to filter in memory. */
+    byType<T extends KnowledgeRecord['type']>(type: T): Extract<KnowledgeRecord, { type: T }>[] {
+      return parse(qByType.all(type)) as Extract<KnowledgeRecord, { type: T }>[];
+    },
+    /** Names, representations, samples and assertions attached to a concept. */
+    forConcept(conceptId: string): KnowledgeRecord[] {
+      return parse(qByConcept.all(conceptId));
+    },
+    /** Records that cite a source. Empty for a restricted source whose content is not reproduced. */
+    citing(sourceId: string): KnowledgeRecord[] {
+      return parse(qBySource.all(sourceId));
+    },
+    /** Combinations that include a concept. */
+    combinationsFor(conceptId: string) {
+      return this.byType('combination').filter((c) => c.items.some((i) => i.concept === conceptId));
+    },
+    /** Every representation's OKLab point, for the colour-space map. */
+    oklabPoints() {
+      return qOklab.all() as { id: string; concept_id: string; l: number; a: number; b: number }[];
     },
     inventory(): Inventory {
       return JSON.parse((qInventory.get() as { inventory: string }).inventory) as Inventory;

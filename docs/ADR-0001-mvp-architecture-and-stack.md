@@ -270,3 +270,16 @@ Option A keeps Option B available: the generator and colour engine are pure pack
 3. **Mobile sync strategy.** Decide when `apps/mobile` starts. Candidates: simple push/pull API (recommended first), or a CRDT library if real-time multi-device editing turns out to matter.
 
 Decided and closed: framework (Next.js), hosting (self-hosted Docker Compose), database (SQLite).
+
+## Amendment, 2026-10-18: hosting on Vercel, user data in Postgres
+
+The self-hosted SQLite plan above is superseded for the app database. The decider chose Vercel for hosting with no running costs at this phase. Vercel functions have no durable disk, so user data (accounts, sessions, saved palettes and colours) moved to Postgres through the same Drizzle schema package:
+
+- **Production:** Neon free tier over `DATABASE_URL=postgres://…`, node-postgres driver. Compute suspends between requests; the project never pauses.
+- **Development:** PGlite, an embedded Postgres, in `apps/web/data/pg`. Nothing to install.
+- **Tests and browser tests:** PGlite in memory (`pglite://memory`).
+- **Sign-in mail:** Auth.js Resend provider when `AUTH_RESEND_KEY` is set, SMTP (Mailpit) otherwise.
+- **Knowledge release:** still read-only SQLite, built during the Vercel build and traced into the function as `data/knowledge-current.sqlite`.
+- **Schema:** reduced to what the app uses. Experiment, evaluation and job tables left with the dropped scope and can return from git history when experiments do.
+
+Self-hosting still works: `docker compose up` runs the app against a Postgres container. The SQLite-for-mobile argument no longer applies to the app database; it still applies to the knowledge release, which a mobile app could bundle unchanged.

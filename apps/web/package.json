@@ -7,21 +7,34 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "e2e": "playwright test"
   },
   "dependencies": {
+    "@auth/drizzle-adapter": "^1.11.3",
+    "@electric-sql/pglite": "^0.5.10",
+    "@noble/hashes": "^2.4.0",
     "@sca/colour-engine": "workspace:*",
     "@sca/db": "workspace:*",
-    "@sca/garment": "workspace:*",
     "@sca/generator": "workspace:*",
     "@sca/knowledge": "workspace:*",
+    "@vercel/functions": "^3.10.1",
     "better-sqlite3": "^12.6.0",
     "next": "^15.5.0",
+    "next-auth": "5.0.0-beta.32",
+    "nodemailer": "^10.1.0",
+    "pg": "^8.23.1",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "yaml": "^2.9.1"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.64.0",
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/nodemailer": "^8.0.2",
     "@types/react": "^19.2.0",
-    "@types/react-dom": "^19.2.0"
+    "@types/react-dom": "^19.2.0",
+    "tailwindcss": "^4.3.3"
   }
 }

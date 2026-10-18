@@ -1,9 +1,11 @@
-import { eq } from 'drizzle-orm';
 import { expect, test } from 'vitest';
-import { openDb, schema, SCHEMA_VERSION } from './index';
+import { getMeta, openDb, SCHEMA_VERSION } from './index';
 
-test('opens an in-memory database and records the schema version', () => {
-  const db = openDb(':memory:');
-  const row = db.select().from(schema.meta).where(eq(schema.meta.key, 'schema_version')).get();
-  expect(row?.value).toBe(SCHEMA_VERSION);
+test('opens an embedded database and records the schema version', async () => {
+  const db = await openDb('pglite://memory');
+  expect(await getMeta(db, 'schema_version')).toBe(SCHEMA_VERSION);
+});
+
+test('refuses a URL it does not understand', async () => {
+  await expect(openDb('mysql://x')).rejects.toThrow('DATABASE_URL');
 });

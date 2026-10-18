@@ -1,0 +1,151 @@
+{
+  "garment": "colour-block-jacket-v1",
+  "svgHash": "5b2842786fe1c5aa",
+  "width": 1600,
+  "views": {
+    "front": {
+      "pixels": 1511930,
+      "regionShare": {
+        "body": 0.37329638276904353,
+        "sleeve-left": 0.13692961975752846,
+        "sleeve-right": 0.1369322653826566,
+        "collar": 0.07725225374190604,
+        "lining": 0.020657041000575423,
+        "cuffs": 0.04419252214057529,
+        "trim": 0.06834707956056167,
+        "buttons": 0.006492364064473884,
+        "panel-a": 0.022879366108219296,
+        "panel-b": 0.1130211054744598
+      },
+      "adjacency": [
+        {
+          "a": "body",
+          "b": "trim",
+          "share": 0.21480629075565785
+        },
+        {
+          "a": "body",
+          "b": "panel-b",
+          "share": 0.15266589950134254
+        },
+        {
+          "a": "body",
+          "b": "collar",
+          "share": 0.12255466052934408
+        },
+        {
+          "a": "body",
+          "b": "sleeve-left",
+          "share": 0.09158036056770234
+        },
+        {
+          "a": "body",
+          "b": "sleeve-right",
+          "share": 0.09158036056770234
+        },
+        {
+          "a": "trim",
+          "b": "buttons",
+          "share": 0.08592251630226314
+        },
+        {
+          "a": "body",
+          "b": "panel-a",
+          "share": 0.0713463751438435
+        },
+        {
+          "a": "lining",
+          "b": "cuffs",
+          "share": 0.06137322593018796
+        },
+        {
+          "a": "trim",
+          "b": "panel-b",
+          "share": 0.04602991944764097
+        },
+        {
+          "a": "sleeve-left",
+          "b": "cuffs",
+          "share": 0.03068661296509398
+        },
+        {
+          "a": "sleeve-right",
+          "b": "cuffs",
+          "share": 0.03068661296509398
+        },
+        {
+          "a": "body",
+          "b": "cuffs",
+          "share": 0.0007671653241273494
+        }
+      ]
+    },
+    "back": {
+      "pixels": 1480152,
+      "regionShare": {
+        "body": 0.5186251141774628,
+        "sleeve-left": 0.13986941881644588,
+        "sleeve-right": 0.13987212124160223,
+        "collar": 0.0356720120636259,
+        "lining": 0,
+        "cuffs": 0.04514130981142477,
+        "trim": 0.034936952421102695,
+        "buttons": 0,
+        "panel-a": 0,
+        "panel-b": 0.08588307146833568
+      },
+      "adjacency": [
+        {
+          "a": "body",
+          "b": "trim",
+          "share": 0.17278617710583152
+        },
+        {
+          "a": "body",
+          "b": "sleeve-left",
+          "share": 0.16220302375809936
+        },
+        {
+          "a": "body",
+          "b": "sleeve-right",
+          "share": 0.16220302375809936
+        },
+        {
+          "a": "collar",
+          "b": "panel-b",
+          "share": 0.13822894168466524
+        },
+        {
+          "a": "body",
+          "b": "panel-b",
+          "share": 0.1365010799136069
+        },
+        {
+          "a": "sleeve-left",
+          "b": "cuffs",
+          "share": 0.06911447084233262
+        },
+        {
+          "a": "sleeve-right",
+          "b": "cuffs",
+          "share": 0.06911447084233262
+        },
+        {
+          "a": "sleeve-left",
+          "b": "panel-b",
+          "share": 0.044060475161987044
+        },
+        {
+          "a": "sleeve-right",
+          "b": "panel-b",
+          "share": 0.044060475161987044
+        },
+        {
+          "a": "body",
+          "b": "cuffs",
+          "share": 0.0017278617710583153
+        }
+      ]
+    }
+  }
+}

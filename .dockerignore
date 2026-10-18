@@ -6,3 +6,7 @@ data
 docs
 *.md
 !README.md
+**/data
+**/.e2e
+**/test-results
+**/playwright-report

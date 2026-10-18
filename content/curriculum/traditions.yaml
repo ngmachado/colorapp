@@ -13,3 +13,11 @@
   summary: An authored dictionary (Wada), a traditional vocabulary (nihon no iro) and a clothing practice (kasane) are three different kinds of record. The app keeps them apart and shows each record's evidence and status.
   explanation_limits: Do not prefilter Japanese records as "muted" or "minimalist". Wada records show bibliographic data only until permission exists.
   sources: [seigensha-wada-vol1, seigensha-wada-vol2, japan-house-living-colours]
+
+- id: tradition-western
+  kind: tradition
+  title: Western theories, Goethe to Albers
+  summary: Goethe's circle of felt oppositions (1810), Chevreul's law of simultaneous contrast (1839), Itten's twelve-part circle and seven contrasts (1961) and Albers's exercises in relativity (1963) are four different claims about colour, made for different reasons. Only the two public-domain texts are quoted, by the author's paragraph numbers; Itten and Albers are cited, not reproduced.
+  explanation_limits: Goethe's and Chevreul's complements are after-image and pigment complements, not OKLCh opposites; the app must not present its wheel rules as theirs. A structure named after a theory is a modern adaptation.
+  sources: [goethe-1840-theory-of-colours-eastlake, chevreul-1890-principles-martel, itten-art-of-color-wiley, albers-interaction-of-color-yale-2013]
+

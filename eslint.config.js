@@ -3,11 +3,12 @@ import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
 // Shared packages must run unchanged in the browser, a Web Worker, Node and React Native.
+// Only src/ is pure; a package's scripts/ may use Node to generate files into src/.
 const purePackages = [
-  'packages/colour-engine/**',
-  'packages/generator/**',
-  'packages/garment/**',
-  'packages/knowledge/**',
+  'packages/colour-engine/src/**',
+  'packages/generator/src/**',
+  'packages/garment/src/**',
+  'packages/knowledge/src/**',
 ];
 const nodeBuiltins = [
   'fs',

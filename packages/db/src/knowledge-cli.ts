@@ -7,7 +7,7 @@ import {
   parseExperiments,
 } from '@sca/knowledge';
 import { parse as parseYaml } from 'yaml';
-import { existsSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
+import { copyFileSync, existsSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { buildKnowledgeDb, loadContent, readContentDir } from './knowledge';
 
@@ -55,6 +55,8 @@ switch (command) {
     mkdirSync(resolve(out, '..'), { recursive: true });
     rmSync(out, { force: true });
     buildKnowledgeDb(records, out);
+    // A stable name for deployments, which trace one file and cannot rely on timestamps.
+    if (!outArg) copyFileSync(out, join(root, 'data', 'knowledge-current.sqlite'));
     writeFileSync(out.replace(/\.sqlite$/, '.inventory.md'), inventoryMarkdown(inv));
     writeFileSync(out.replace(/\.sqlite$/, '.inventory.json'), JSON.stringify(inv, null, 2));
     console.log(`✓ built ${out} (${records.length} records, version ${inv.content_version})`);

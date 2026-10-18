@@ -1,6 +1,0 @@
-# Continuous backup of the app database to the "backups" volume.
-# Swap the replica for an S3-compatible bucket when one is available.
-dbs:
-  - path: /data/app.sqlite
-    replicas:
-      - path: /backups/app.sqlite

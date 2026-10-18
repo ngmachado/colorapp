@@ -7,6 +7,14 @@
     ".": "./src/index.ts"
   },
   "scripts": {
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "asset": "tsx scripts/embed.ts && tsx scripts/measure.ts"
+  },
+  "dependencies": {
+    "@sca/colour-engine": "workspace:*"
+  },
+  "devDependencies": {
+    "@noble/hashes": "^2.4.0",
+    "@resvg/resvg-js": "^2.6.2"
   }
 }

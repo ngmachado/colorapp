@@ -1,0 +1,118 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'DM Sans', 'Noto Sans JP', 'Noto Sans SC', system-ui, sans-serif;
+  --font-mono: 'DM Mono', ui-monospace, Menlo, monospace;
+}
+
+:root {
+  color-scheme: light only;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+}
+
+p a,
+dd a,
+li p a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* The native colour picker shown as a plain swatch. */
+.swatch-input {
+  appearance: none;
+  -webkit-appearance: none;
+  padding: 0;
+  border: 0;
+  background: none;
+  border-radius: 6px;
+}
+.swatch-input::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+.swatch-input::-webkit-color-swatch {
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  border-radius: 6px;
+}
+.swatch-input::-moz-color-swatch {
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  border-radius: 6px;
+}
+
+/* Range inputs: the track is a gradient set inline; the thumb is a ring so it reads on any colour. */
+input[type='range'].strip {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  height: 28px;
+  margin: 0;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  background: var(--strip);
+}
+input[type='range'].strip::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 2px solid var(--fg);
+}
+input[type='range'].strip::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 2px solid var(--fg);
+}
+
+.btn {
+  height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--fg);
+  font: inherit;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.btn-primary {
+  background: var(--accent);
+  color: var(--accent-fg);
+  border-color: var(--accent);
+  font-weight: 500;
+}
+.field {
+  height: 36px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--fg);
+  padding: 0 10px;
+  font: inherit;
+  font-size: 14px;
+}

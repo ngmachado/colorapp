@@ -319,3 +319,71 @@
   transliteration: { system: Hepburn, value: shiro }
   confidence: { transcription: 1 }
   notes: No digital value is recorded; "white" here is a dyed or undyed silk, not a display white.
+
+# Display approximations for kasane names from the Japanese Wikipedia list 日本の色の一覧 (discovery route only).
+# Where the English and Japanese pages disagree, both values are recorded and the disagreement stays in notes.
+
+- type: representation
+  id: ja-ao-srgb-jawiki
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-ja-nihon-no-iro-ichiran, locator: 'entry 青 (あお), hex #0067C0' }
+  concept: ja-ao
+  space: srgb
+  coords: [0.00000, 0.40392, 0.75294]
+  white: D65
+  method: 'sRGB hex #0067C0 as listed on the cited page (which calls its values approximate examples and names no source), divided by 255.'
+  approximation_status: modern-approximation
+  notes: The kasane table uses 青 for both layers of 菖蒲; the term historically spans blue and green. This value is one modern reading.
+
+- type: representation
+  id: ja-shiro-srgb-jawiki
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-ja-nihon-no-iro-ichiran, locator: 'entry 白 (しろ), hex #FFFFFF' }
+  concept: ja-shiro
+  space: srgb
+  coords: [1.00000, 1.00000, 1.00000]
+  white: D65
+  method: 'sRGB hex #FFFFFF as listed on the cited page (which calls its values approximate examples and names no source), divided by 255.'
+  approximation_status: modern-approximation
+
+- type: representation
+  id: ja-beni-srgb-jawiki
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-ja-nihon-no-iro-ichiran, locator: 'entry 紅色 (べにいろ / くれないいろ), hex #C22047' }
+  concept: ja-beni
+  space: srgb
+  coords: [0.76078, 0.12549, 0.27843]
+  white: D65
+  method: 'sRGB hex #C22047 for the entry 紅色 as listed on the cited page (no standalone 紅 entry; the page names no source), divided by 255.'
+  approximation_status: modern-approximation
+  notes: The page has no entry for 紅 alone; 紅色 is used as the nearest entry. Other 紅 compounds on the page differ widely (紅赤 #E5004F, 紅緋 #F83929).
+
+- type: representation
+  id: ja-suo-srgb-jawiki
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-ja-nihon-no-iro-ichiran, locator: 'entry 蘇芳色 (すおういろ), hex #973C3F' }
+  concept: ja-suo
+  space: srgb
+  coords: [0.59216, 0.23529, 0.24706]
+  white: D65
+  method: 'sRGB hex #973C3F for the entry 蘇芳色 as listed on the cited page (no standalone 蘇芳 entry; the page names no source), divided by 255.'
+  approximation_status: modern-approximation
+  notes: The English page lists 蘇芳 as #7E2639 (see ja-suo-srgb-wikipedia). The two pages disagree; neither names a source.
+
+- type: representation
+  id: ja-suo-srgb-wikipedia
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-en-traditional-colors-of-japan, locator: 'table row 蘇芳 (Su''ō, "Sappanwood"), hex #7E2639' }
+  concept: ja-suo
+  space: srgb
+  coords: [0.49412, 0.14902, 0.22353]
+  white: D65
+  method: 'sRGB hex #7E2639 as listed on the cited page (which gives no per-value source), divided by 255.'
+  approximation_status: modern-approximation
+  notes: The Japanese list gives 蘇芳色 as #973C3F (see ja-suo-srgb-jawiki). The two pages disagree; neither names a source.
+

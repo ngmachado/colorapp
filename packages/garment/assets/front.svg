@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" data-garment="colour-block-jacket-v1" data-view="front">
+  <title>Colour-block jacket, front</title>
+  <g data-region="body" fill="{{body}}"><path d="M120 120 H280 L300 440 H100 Z"/></g>
+  <g data-region="panel-b" fill="{{panel-b}}"><path d="M104 360 H296 L298 420 H102 Z"/></g>
+  <g data-region="panel-a" fill="{{panel-a}}"><path d="M140 205 H186 V252 H140 Z"/></g>
+  <g data-region="sleeve-left" fill="{{sleeve-left}}"><path d="M120 120 L60 165 L38 330 L106 342 L122 210 Z"/></g>
+  <g data-region="sleeve-right" fill="{{sleeve-right}}"><path d="M280 120 L340 165 L362 330 L294 342 L278 210 Z"/></g>
+  <g data-region="cuffs" fill="{{cuffs}}"><path d="M38 330 L106 342 L102 372 L34 360 Z"/><path d="M362 330 L294 342 L298 372 L366 360 Z"/></g>
+  <g data-region="lining" fill="{{lining}}"><path d="M150 120 H250 L200 200 Z"/><path d="M34 360 L102 372 L100 386 L32 374 Z"/><path d="M366 360 L298 372 L300 386 L368 374 Z"/></g>
+  <g data-region="collar" fill="{{collar}}"><path d="M120 120 H150 L200 200 L250 120 H280 L270 98 H130 Z"/></g>
+  <g data-region="trim" fill="{{trim}}"><path d="M192 200 H208 V440 H192 Z"/><path d="M100 440 H300 L302 456 H98 Z"/></g>
+  <g data-region="buttons" fill="{{buttons}}"><circle cx="200" cy="240" r="7"/><circle cx="200" cy="290" r="7"/><circle cx="200" cy="340" r="7"/><circle cx="200" cy="390" r="7"/></g>
+</svg>

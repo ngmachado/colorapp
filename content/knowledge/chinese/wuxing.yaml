@@ -12,7 +12,7 @@
   description: >-
     "These five phases are wood (mu), fire (huo), earth (tu), metal (jin), and water (shui)" (IEP, introduction).
     A framework of interconnected processes and correspondences, not five chemical elements and not a colour standard.
-  tags: { tradition: chinese, language: zh }
+  tags: { tradition: chinese, language: zh, kind: system }
 
 - type: concept
   id: zh-wuxing-wood
