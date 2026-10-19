@@ -62,7 +62,9 @@ test('the Theory wheel shows the chosen rule, its HSL ghost, and documented poin
   await expect(page.getByTestId('wheel-dot')).toHaveCount(3);
   await page.getByTestId('theory-ghost-button').click();
   await expect(page.getByTestId('wheel-ghost')).toHaveCount(1);
-  await expect(page.getByTestId('ghost-note')).toContainText('Neither wheel is correct');
+  await expect(page.getByTestId('ghost-note')).toContainText(
+    'Equal angles do not guarantee equal visual differences',
+  );
   await page.getByTestId('theory-wheel-tradition').selectOption('japanese');
   await page.getByTestId('wheel-overlay-point').first().click();
   await expect(page).toHaveURL(/\/dictionary\/ja-/);

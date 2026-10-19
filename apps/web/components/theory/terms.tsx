@@ -11,10 +11,10 @@ export function Terms() {
   return (
     <section id="terms" className="flex flex-col gap-[18px]">
       <div className="flex flex-col gap-1.5">
-        <h2 className="text-[28px] font-bold tracking-tight">Terms</h2>
+        <h2 className="text-[28px] font-bold tracking-tight">Colour vocabulary reference</h2>
         <p className="max-w-[760px] text-base text-[var(--muted)]">
-          {terms.length} distinctions the app keeps. Each names the calculation a word belongs to;
-          none is a rule for what looks good.
+          {terms.length} terms used in the lessons. Perceptual attributes, physical measurements and
+          editing coordinates describe different things.
         </p>
       </div>
       <dl className="grid gap-x-8 gap-y-5 md:grid-cols-2" data-testid="terms">

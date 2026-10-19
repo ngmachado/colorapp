@@ -9,7 +9,7 @@ const pages = [
   '/dictionary/ja-sakura-iro',
   '/dictionary/zh-wuxing-wood',
   '/dictionary/source/seigensha-wada-vol1',
-  '/dictionary/source/goethe-1840-theory-of-colours-eastlake',
+  '/dictionary/source/chevreul-1890-principles-martel',
   '/dictionary/ja-ao',
   '/dictionary/combination/ja-kasane-ume-1',
   '/about',

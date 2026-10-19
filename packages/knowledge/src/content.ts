@@ -9,10 +9,29 @@ import { Id } from './schema';
 export const CurriculumTopic = z
   .strictObject({
     id: Id,
-    kind: z.enum(['term', 'structure', 'exercise', 'tradition']),
+    kind: z.enum(['term', 'structure', 'exercise', 'tradition', 'lesson']),
     title: z.string().min(1),
     /** One to three sentences. The first states the distinction the learner should leave with. */
     summary: z.string().min(1),
+    /** Structured lessons separate explanations from exercises and implementation limits. */
+    lesson: z
+      .strictObject({
+        objective: z.string().min(1),
+        paragraphs: z.array(z.string().min(1)).min(1),
+        example: z.string().min(1),
+        limits: z.string().min(1),
+        references: z
+          .array(
+            z.strictObject({
+              source: Id,
+              locator: z.string().min(1),
+              url: z.url(),
+            }),
+          )
+          .min(1),
+      })
+      .optional(),
+    availability: z.enum(['available', 'planned', 'removed']).optional(),
     /** Terms the UI must keep distinct; the distinction names which calculation each belongs to. */
     key_terms: z
       .array(z.strictObject({ term: z.string().min(1), distinction: z.string().min(1) }))
@@ -40,8 +59,16 @@ export const CurriculumTopic = z
     sources: z.array(Id),
   })
   .refine((t) => t.sources.length > 0 || t.kind === 'structure' || t.kind === 'exercise', {
-    message: 'term and tradition topics need at least one source',
+    message: 'term, tradition and lesson topics need at least one source',
     path: ['sources'],
+  })
+  .refine((t) => t.kind !== 'lesson' || !!t.lesson, {
+    message: 'lesson topics need lesson content',
+    path: ['lesson'],
+  })
+  .refine((t) => !t.lesson || t.lesson.references.every((r) => t.sources.includes(r.source)), {
+    message: 'lesson references must be included in sources',
+    path: ['lesson', 'references'],
   });
 
 export const ExperimentTemplate = z.strictObject({

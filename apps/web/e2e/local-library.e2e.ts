@@ -5,14 +5,14 @@ import { expect, test } from '@playwright/test';
 test('without accounts there is no sign-in, and the Library lives in the browser', async ({
   page,
 }) => {
-  await page.goto('/lab?from=goethe-yellow,goethe-blue-red');
+  await page.goto('/lab?from=ja-sakura-iro,ja-shiro');
   await expect(page).toHaveURL(/palette=/);
   await expect(page.getByRole('link', { name: 'Sign in' })).toHaveCount(0);
   await page.getByTestId('role-name').first().fill('Sun');
   await page.getByTestId('save').click();
   await expect(page.getByTestId('notice')).toContainText('Saved in this browser');
 
-  await page.goto('/dictionary/goethe-yellow');
+  await page.goto('/dictionary/ja-sakura-iro');
   await page.getByTestId('save-colour').click();
   await expect(page.getByTestId('save-colour-status')).toContainText('Saved to the');
   await page.getByTestId('save-colour').click();
@@ -29,15 +29,15 @@ test('without accounts there is no sign-in, and the Library lives in the browser
   await expect(page.getByTestId('column').first()).toHaveAttribute('data-locked', 'true');
   await expect(page.getByTestId('column').first()).toHaveAttribute(
     'data-source',
-    'goethe-yellow-display',
+    'ja-sakura-iro-srgb-wikipedia',
   );
 
   // Rename, search, delete.
   await page.goto('/library');
   const name = page.getByTestId('saved-palette').getByRole('textbox');
-  await name.fill('Goethe pair');
+  await name.fill('Saved pair');
   await name.press('Enter');
-  await page.getByTestId('library-search').fill('goethe pair');
+  await page.getByTestId('library-search').fill('saved pair');
   await expect(page.getByTestId('saved-palette')).toHaveCount(1);
   await page.getByTestId('library-search').fill('nothing');
   await expect(page.getByTestId('library-palettes')).toContainText('No saved palette matches');

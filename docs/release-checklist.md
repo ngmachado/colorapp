@@ -21,3 +21,12 @@ Each area lists the automated evidence, then manual checks. `pnpm check` and `pn
 ## What the interface says about a value
 
 A named colour on screen is a modern sRGB reading of a cited source; the entry states who read it and how. Restricted sources are cited and never reproduced. Review states and rights states are internal to the content pipeline (`content/knowledge`, `pnpm content:check`) and are not shown to users; `/about` explains the two things a reader needs.
+
+## Educational release
+
+- [ ] Six lessons appear in prerequisite order, with historical and cultural records after the modern foundations and design lessons.
+- [ ] The two-surroundings exercise reveals values only after a response, allows an equal-background comparison, and resets (`theory.e2e.ts`).
+- [ ] Working OKLCh values outside sRGB are identified as gamut-mapped in the dimension playground.
+- [ ] Palette recipes are labelled as app choices; tetradic examples show four colours.
+- [ ] Every lesson reference states its scope; lesson prose is not described as specialist-reviewed without an actual review.
+- [ ] README availability matches the shipped lessons, exercises and production tools.

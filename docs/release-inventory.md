@@ -1,37 +1,36 @@
-# Knowledge release 53550bdcdf027d22
+# Knowledge release bb2bf000569b446e
 
-Total records: 169
+Total records: 116
 
 ### Type
 
 | Type | Records |
 | --- | --- |
-| source | 18 |
-| concept | 36 |
+| source | 22 |
+| concept | 27 |
 | name | 26 |
-| representation | 23 |
+| representation | 17 |
 | material-sample | 0 |
 | combination | 3 |
-| cultural-assertion | 31 |
-| relationship | 32 |
+| cultural-assertion | 6 |
+| relationship | 15 |
 
 ### Review state
 
 | Review state | Records |
 | --- | --- |
 | discovered | 76 |
-| bibliographic | 30 |
+| bibliographic | 34 |
 | published | 4 |
-| extracted | 59 |
+| extracted | 2 |
 
 ### Rights status
 
 | Rights status | Records |
 | --- | --- |
-| unreviewed | 75 |
-| verified-restricted | 29 |
-| verified-reusable | 59 |
-| approximate | 6 |
+| unreviewed | 78 |
+| verified-restricted | 31 |
+| verified-reusable | 7 |
 
 ### Records
 
@@ -42,68 +41,13 @@ Total records: 169
 | chevreul-1890-principles-martel | source | bibliographic | verified-reusable |
 | chevreul-complementary-pairs | cultural-assertion | extracted | verified-reusable |
 | chevreul-law-of-simultaneous-contrast | cultural-assertion | extracted | verified-reusable |
+| cie-colorimetry-2018 | source | bibliographic | verified-restricted |
 | cie-ilv-2020 | source | bibliographic | verified-restricted |
+| cie-metamerism-1989 | source | bibliographic | verified-restricted |
 | css-rebeccapurple | concept | published | verified-reusable |
 | css-rebeccapurple-en | name | published | verified-reusable |
 | css-rebeccapurple-srgb | representation | published | verified-reusable |
-| goethe-1840-theory-of-colours-eastlake | source | bibliographic | verified-reusable |
-| goethe-blue | concept | extracted | verified-reusable |
-| goethe-blue-and-red | relationship | extracted | verified-reusable |
-| goethe-blue-cold | cultural-assertion | extracted | verified-reusable |
-| goethe-blue-contradiction | cultural-assertion | extracted | verified-reusable |
-| goethe-blue-darkness | cultural-assertion | extracted | verified-reusable |
-| goethe-blue-demands-red-yellow | relationship | extracted | verified-reusable |
-| goethe-blue-display | representation | extracted | approximate |
-| goethe-blue-red | concept | extracted | verified-reusable |
-| goethe-blue-red-display | representation | extracted | approximate |
-| goethe-blue-red-disturbs | cultural-assertion | extracted | verified-reusable |
-| goethe-blue-retires | cultural-assertion | extracted | verified-reusable |
-| goethe-characteristic-combinations | cultural-assertion | extracted | verified-reusable |
-| goethe-circle | concept | extracted | verified-reusable |
-| goethe-circle-has-blue | relationship | extracted | verified-reusable |
-| goethe-circle-has-blue-red | relationship | extracted | verified-reusable |
-| goethe-circle-has-green | relationship | extracted | verified-reusable |
-| goethe-circle-has-red | relationship | extracted | verified-reusable |
-| goethe-circle-has-red-yellow | relationship | extracted | verified-reusable |
-| goethe-circle-has-yellow | relationship | extracted | verified-reusable |
-| goethe-complements | cultural-assertion | extracted | verified-reusable |
-| goethe-completeness | cultural-assertion | extracted | verified-reusable |
-| goethe-green | concept | extracted | verified-reusable |
-| goethe-green-display | representation | extracted | approximate |
-| goethe-green-repose | cultural-assertion | extracted | verified-reusable |
-| goethe-green-union | cultural-assertion | extracted | verified-reusable |
-| goethe-harmony-law | cultural-assertion | extracted | verified-reusable |
-| goethe-lilac | cultural-assertion | extracted | verified-reusable |
-| goethe-minus | concept | extracted | verified-reusable |
-| goethe-minus-has-blue | relationship | extracted | verified-reusable |
-| goethe-minus-has-blue-red | relationship | extracted | verified-reusable |
-| goethe-minus-side | cultural-assertion | extracted | verified-reusable |
-| goethe-non-characteristic | cultural-assertion | extracted | verified-reusable |
-| goethe-plus | concept | extracted | verified-reusable |
-| goethe-plus-has-red-yellow | relationship | extracted | verified-reusable |
-| goethe-plus-has-yellow | relationship | extracted | verified-reusable |
-| goethe-plus-side | cultural-assertion | extracted | verified-reusable |
-| goethe-polarity | cultural-assertion | extracted | verified-reusable |
-| goethe-purpur-culmination | cultural-assertion | extracted | verified-reusable |
-| goethe-red | concept | extracted | verified-reusable |
-| goethe-red-carmine | cultural-assertion | extracted | verified-reusable |
-| goethe-red-demands-green | relationship | extracted | verified-reusable |
-| goethe-red-dignity | cultural-assertion | extracted | verified-reusable |
-| goethe-red-display | representation | extracted | approximate |
-| goethe-red-yellow | concept | extracted | verified-reusable |
-| goethe-red-yellow-and-blue-red | relationship | extracted | verified-reusable |
-| goethe-red-yellow-display | representation | extracted | approximate |
-| goethe-red-yellow-warmth | cultural-assertion | extracted | verified-reusable |
-| goethe-yellow | concept | extracted | verified-reusable |
-| goethe-yellow-and-blue | relationship | extracted | verified-reusable |
-| goethe-yellow-and-red | relationship | extracted | verified-reusable |
-| goethe-yellow-character | cultural-assertion | extracted | verified-reusable |
-| goethe-yellow-demands-blue-red | relationship | extracted | verified-reusable |
-| goethe-yellow-display | representation | extracted | approximate |
-| goethe-yellow-nearest-light | cultural-assertion | extracted | verified-reusable |
-| goethe-yellow-red-power | cultural-assertion | extracted | verified-reusable |
-| goethe-yellow-sullied | cultural-assertion | extracted | verified-reusable |
-| goethe-yellow-warm | cultural-assertion | extracted | verified-reusable |
+| icc-color-management | source | bibliographic | unreviewed |
 | iep-wuxing-littlejohn | source | bibliographic | verified-restricted |
 | itten-art-of-color-wiley | source | bibliographic | verified-restricted |
 | ja-ai | concept | discovered | unreviewed |
@@ -150,7 +94,9 @@ Total records: 169
 | seigensha-use-guidelines | source | bibliographic | verified-restricted |
 | seigensha-wada-vol1 | source | bibliographic | verified-restricted |
 | seigensha-wada-vol2 | source | bibliographic | verified-restricted |
+| w3c-contrast-minimum | source | bibliographic | unreviewed |
 | w3c-css-color-4 | source | published | verified-reusable |
+| w3c-use-of-color | source | bibliographic | unreviewed |
 | wikipedia-en-traditional-colors-of-japan | source | discovered | unreviewed |
 | wikipedia-en-wuxing | source | discovered | unreviewed |
 | wikipedia-ja-kasane-no-irome | source | discovered | unreviewed |

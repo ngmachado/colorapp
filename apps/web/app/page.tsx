@@ -25,7 +25,7 @@ const TOOLS = [
   {
     href: '/theory',
     title: 'Theory',
-    text: 'Learn by moving things: hue, lightness and chroma, the structures on the wheel, and the traditions behind the records.',
+    text: 'Learn how colour works: light and perception, colour spaces, design practice and production, with history and culture in context.',
     bar: ['#ef27a6', '#b89a17', '#1e88e5'],
   },
   {
@@ -166,8 +166,8 @@ export default function Home() {
             <span className="font-semibold text-[var(--fg)]">Theory</span>
             <Link href="/theory#dimensions">Hue, lightness, chroma</Link>
             <Link href="/theory#structures">Structures</Link>
-            <Link href="/theory#traditions">Five Phases</Link>
-            <Link href="/theory#traditions">Japanese colour</Link>
+            <Link href="/theory#foundations">Foundations</Link>
+            <Link href="/theory#history">History and culture</Link>
           </div>
           <div className="flex flex-col gap-1.5">
             <span className="font-semibold text-[var(--fg)]">About</span>

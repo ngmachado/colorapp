@@ -23,6 +23,10 @@ describe('repository content (chunk 3 acceptance)', () => {
     expect(cur.topics.filter((t) => t.kind === 'exercise')).toHaveLength(4);
   });
 
+  test('no Goethe record is in the release (removed by decision, 2026-10-19)', () => {
+    expect(records.some((r) => /goethe/i.test(r.id))).toBe(false);
+  });
+
   test('no representation carries a value without an approximation status and a method', () => {
     for (const r of records) {
       if (r.type !== 'representation') continue;
@@ -82,9 +86,9 @@ describe('repository content (chunk 3 acceptance)', () => {
 
   test('Western passages quote only public-domain sources, with a paragraph locator and the passage text', () => {
     const western = records.filter(
-      (r) => r.type === 'cultural-assertion' && /^(goethe|chevreul)-/.test(r.id),
+      (r) => r.type === 'cultural-assertion' && /^chevreul-/.test(r.id),
     );
-    expect(western.length).toBeGreaterThanOrEqual(9);
+    expect(western).toHaveLength(2);
     for (const a of western) {
       if (a.type !== 'cultural-assertion') continue;
       const src = byId.get(a.evidence.source);

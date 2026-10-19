@@ -12,14 +12,14 @@ describe('palette state in the address', () => {
       seed: 7,
       locked: [true, false],
       labels: ['red, warm', null],
-      sourceIds: ['goethe-red-display', null],
+      sourceIds: ['css-rebeccapurple-srgb', null],
     };
     const sp = Object.fromEntries(new URLSearchParams(stateParams(state)));
     expect(parsePalette(sp.palette)).toEqual(state.palette);
     expect(parseStateExtras(2, sp)).toEqual({
       locked: [true, false],
       labels: ['red, warm', null],
-      sourceIds: ['goethe-red-display', null],
+      sourceIds: ['css-rebeccapurple-srgb', null],
     });
   });
   it('ignores malformed extras', () => {

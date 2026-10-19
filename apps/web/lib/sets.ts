@@ -1,10 +1,10 @@
 import type { Concept, Relationship } from '@sca/knowledge';
 import { knowledge } from './knowledge';
 import { namePoints } from './palette-names';
-import { GOETHE_ORDER, WUXING_ORDER, type ColourSet } from './systems';
+import { WUXING_ORDER, type ColourSet } from './systems';
 
 /** Source order for the systems the app draws; members of other groups keep id order. */
-const KNOWN_ORDER = [...GOETHE_ORDER, ...WUXING_ORDER];
+const KNOWN_ORDER = WUXING_ORDER;
 const rank = (id: string) => {
   const i = KNOWN_ORDER.indexOf(id);
   return i < 0 ? KNOWN_ORDER.length : i;

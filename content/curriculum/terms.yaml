@@ -4,7 +4,7 @@
 - id: hue
   kind: term
   title: Hue
-  summary: Hue is the red, yellow, green or blue character of a colour. It is an angle, so controls for it should be circular, and it becomes unstable near neutral, where chroma is close to zero.
+  summary: Hue is the red, yellow, green or blue character of a colour. In cylindrical spaces such as OKLCh it is represented by an angle, and it becomes unstable near neutral, where chroma is close to zero.
   key_terms:
     - { term: OKLCh hue, distinction: "degrees on the OKLCh wheel; the app's working hue" }
     - { term: HSL hue, distinction: 'degrees on the HSL wheel; not the same angles as OKLCh' }
@@ -72,7 +72,7 @@
 - id: neutral
   kind: term
   title: Neutral and near-neutral
-  summary: Neutral is an operational category. This app calls a colour near-neutral when its OKLCh chroma is below a threshold that is always shown, because the right cutoff depends on the task.
+  summary: An achromatic colour has no perceived hue. Near-neutral is a practical tolerance around that condition; this app calls a colour near-neutral when its OKLCh chroma is below a threshold that is always shown, because the right cutoff depends on the task.
   explanation_limits: Show the threshold whenever the label is shown.
   sources: [cie-ilv-2020]
 
@@ -93,7 +93,7 @@
 - id: chromatic-adaptation
   kind: term
   title: Chromatic adaptation
-  summary: The eye adjusts to the light it is under, so the same object looks different under different illuminants and a white stays "white". The app records a Bradford adaptation whenever it converts between D65 and D50 references.
+  summary: Human vision adapts to illumination, helping surfaces retain a relatively stable appearance as the light changes. This adaptation is incomplete. The Bradford transform used here converts between reference whites; it is a mathematical approximation, not a simulation of the entire visual system.
   key_terms:
     - { term: D65, distinction: 'reference white for sRGB, OKLab and XYZ-D65 in this app' }
     - { term: D50, distinction: 'reference white for CIELAB as in CSS Color 4' }
@@ -114,6 +114,6 @@
 - id: pattern-scale
   kind: term
   title: Pattern scale
-  summary: The same two colours in a fine stripe read differently from the same colours in large blocks. Scale is a design variable the app records separately from colour.
+  summary: The same two colours in a fine stripe read differently from the same colours in large blocks. Compare scale separately from colour; the current Laboratory does not simulate textile patterns.
   explanation_limits: A comparison must state whether colour, placement or scale changed.
   sources: [cie-ilv-2020]

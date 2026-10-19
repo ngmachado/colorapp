@@ -34,3 +34,13 @@ Use one checklist per pull request that changes `content/`. Name yourself in the
 
 - [ ] `pnpm content:check` passes; the inventory counts changed as expected.
 - [ ] Nothing promoted to `published` without a named specialist reviewer.
+
+## Lessons and curriculum
+
+- [ ] Prerequisites are introduced before the tool or exercise that uses them.
+- [ ] Scientific explanation, design prompt, app algorithm and historical attribution are distinguishable.
+- [ ] Each lesson has an objective, worked or observational example, limitations and scoped references.
+- [ ] References support the specific claim; a vocabulary or CSS citation is not evidence for aesthetic success.
+- [ ] Historical statements use the author's name rather than the app's authoritative voice.
+- [ ] Exercise availability matches the rendered UI and README; unavailable garment workflows are not promised.
+- [ ] A specialist has checked scientific accuracy before any claim of specialist review or university-level completeness.

@@ -1,5 +1,7 @@
 # ADR-0001: MVP architecture and stack for the Super Colour App
 
+> Status note (2026-10-19): this ADR records the original, broader MVP design. It is not the current feature inventory. The garment, comparison and evaluation UI described below was removed; exercise definitions alone do not mean an activity is available. See README “Screens” and “Educational scope” for the current release. Theory now separates foundational colour science and design practice from history and culture.
+
 **Status:** Proposed (framework, hosting and database decided 2026-10-13; see Decision log)
 **Date:** 2026-10-12, revised 2026-10-13
 **Deciders:** Product owner, lead engineer, colour-science reviewer

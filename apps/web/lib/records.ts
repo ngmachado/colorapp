@@ -27,7 +27,7 @@ export function inQueue(r: KnowledgeRecord): boolean {
 
 export const notDocumented = 'not documented';
 
-/** A system and its parts (Goethe's circle and sides, the Five Phases) have entries but are not colours. */
+/** A system and its parts (such as the Five Phases) have entries but are not colours. */
 const NOT_COLOUR = new Set(['system', 'side', 'phase']);
 export function isColour(c: Concept): boolean {
   return !NOT_COLOUR.has(String(c.tags?.kind ?? ''));

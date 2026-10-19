@@ -1,22 +1,20 @@
 'use client';
 
-import { colour, convert, toHex, type SpaceId } from '@sca/colour-engine';
+import { colour, convert, inGamut, toHex, type SpaceId } from '@sca/colour-engine';
 import { run, type Structure } from '@sca/generator';
 import Link from 'next/link';
-import { useMemo, useState } from 'react';
+import { useMemo, useState, type ReactNode } from 'react';
 import { Wheel, type OverlayPoint } from '@/components/wheel';
 import { nearestPoint, type NamePoint } from '@/lib/nearest';
 import type { Oklch } from '@/lib/palette-param';
 
-/** Rule parameters in words: degrees for angles, a ceiling for chroma, a share as a percentage. */
+/** Rule parameters in words: degrees for angles, a ceiling for chroma. */
 function describeDefaults(d: Record<string, number>): string {
   return Object.entries(d)
     .map(([k, n]) =>
       k === 'neutral_chroma_max'
         ? `neutral C ≤ ${n}`
-        : k === 'accent_share'
-          ? `accent ${Math.round(n * 100)}%`
-          : `${k.replace('_deg', '').replace('hue_tolerance', 'tolerance').replace('_', ' ')} ${n}°`,
+        : `${k.replace('_deg', '').replace('hue_tolerance', 'tolerance').replace('_', ' ')} ${n}°`,
     )
     .join(' · ');
 }
@@ -31,7 +29,7 @@ export interface StructureTopic {
 }
 
 const SPACES: SpaceId[] = ['oklch', 'lch', 'hsl', 'srgb', 'lab'];
-const ROLES = ['dominant', 'secondary', 'accent'] as const;
+const ROLES = ['dominant', 'secondary', 'accent', 'support'] as const;
 const hexAt = (l: number, c: number, h: number) => toHex(colour('oklch', [l, c, h]));
 
 /** Three sliders with locks, a readout in any space, and the structure table drawn from the current hue. */
@@ -39,11 +37,13 @@ export function Playground({
   points,
   topics,
   initial,
+  between,
 }: {
   points: NamePoint[];
   topics: StructureTopic[];
   /** Starting colour, for a round trip from a Laboratory column. */
   initial?: Oklch;
+  between?: ReactNode;
 }) {
   const [v, setV] = useState<[number, number, number]>(initial ?? [0.64, 0.253, 349]);
   const [locks, setLocks] = useState([false, false, true]);
@@ -74,7 +74,7 @@ export function Playground({
           const common = {
             seed,
             count: 1,
-            roles: [...ROLES],
+            roles: [...ROLES.slice(0, t.structure === 'tetradic' ? 4 : 3)],
             baseHue: h,
             bounds: {
               lightness: { min: 0.45, max: 0.8 },
@@ -129,7 +129,9 @@ export function Playground({
     <>
       <section id="dimensions" className="flex flex-col gap-[18px]">
         <div className="flex flex-col gap-1.5">
-          <h1 className="text-[34px] font-bold tracking-[-0.8px]">Three dimensions</h1>
+          <h3 className="text-[28px] font-bold tracking-tight">
+            Explore hue, lightness and chroma
+          </h3>
           <p className="max-w-[720px] text-base text-[var(--muted)]">
             Lock two, move one. The strip under each slider shows what that control alone changes.
             Controls are OKLCh; the readout can be any space.
@@ -212,6 +214,12 @@ export function Playground({
                 hex {hex.slice(1).toUpperCase()} <span>derived</span>
               </span>
             </div>
+            {!inGamut(value, 'srgb') ? (
+              <p className="text-sm text-[var(--muted)]" role="status">
+                Outside sRGB: the displayed swatch is gamut-mapped. Its displayed colour differs
+                from the working coordinates.
+              </p>
+            ) : null}
             {near ? (
               <Link
                 href={`/dictionary/${near.conceptId}`}
@@ -227,13 +235,15 @@ export function Playground({
         </div>
       </section>
 
+      {between}
+
       <section id="structures" className="flex flex-col gap-[18px]">
         <div className="flex flex-col gap-1.5">
-          <h2 className="text-[28px] font-bold tracking-tight">Structures on the wheel</h2>
+          <h2 className="text-[28px] font-bold tracking-tight">Palette recipes on the wheel</h2>
           <p className="max-w-[760px] text-base text-[var(--muted)]">
             Each rule applied from the hue above, next to a plain random draw with the same seed and
             bounds. The wheel shows the chosen rule at the lightness above, with the sRGB edge drawn
-            as it is. A generator, not a guarantee. Nothing here is called harmonious.
+            as it is. These are app-defined generation recipes, not scientific laws of harmony.
           </p>
         </div>
         <div className="grid items-start gap-8 lg:grid-cols-[440px_minmax(0,1fr)]">
@@ -312,8 +322,9 @@ export function Playground({
             {ghost ? (
               <p className="m-0 max-w-[420px] text-[13px] leading-[1.5]" data-testid="ghost-note">
                 The dashed rings are the same rule measured on the HSL wheel, shown where OKLCh puts
-                those colours. Neither wheel is correct; an angle belongs to the wheel it was
-                measured on.
+                those colours. The spaces serve different purposes: HSL follows sRGB geometry; OKLCh
+                aims at more perceptually useful spacing. Equal angles do not guarantee equal visual
+                differences.
               </p>
             ) : null}
           </div>

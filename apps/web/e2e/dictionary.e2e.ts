@@ -11,9 +11,7 @@ test('the grid shows colours only, systems have their own list, and a record is 
   );
   await expect(page.getByTestId('card').filter({ hasText: 'Wood (' })).toHaveCount(0);
   await page.goto('/dictionary?kind=systems');
-  await expect(
-    page.getByTestId('system').filter({ hasText: "Goethe's colour circle" }),
-  ).toBeVisible();
+  await expect(page.getByTestId('system').filter({ hasText: /Goethe/i })).toHaveCount(0);
   await expect(page.getByTestId('system').filter({ hasText: 'Five Phases' })).toBeVisible();
   await page.goto('/dictionary?q=achi');
   await expect(page.getByTestId('card').filter({ hasText: '褐色' })).toBeVisible();

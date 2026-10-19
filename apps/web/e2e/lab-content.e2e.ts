@@ -7,34 +7,23 @@ const settled = async (page: Page) => {
 };
 
 test('documented records open in the Laboratory as locked, named columns', async ({ page }) => {
-  await page.goto('/lab?from=goethe-yellow,goethe-red-yellow,goethe-red');
+  await page.goto('/lab?from=ja-sakura-iro,ja-shiro,css-rebeccapurple');
   const columns = page.getByTestId('column');
   await expect(columns).toHaveCount(3);
-  await expect(page.getByTestId('notice')).toContainText('Loaded Yellow (Goethe)');
-  await expect(columns.nth(0)).toHaveAttribute('data-source', 'goethe-yellow-display');
+  await expect(page.getByTestId('notice')).toContainText('Loaded 桜色');
+  await expect(columns.nth(0)).toHaveAttribute('data-source', 'ja-sakura-iro-srgb-wikipedia');
   await expect(columns.nth(2)).toHaveAttribute('data-locked', 'true');
   await expect(page.getByTestId('from-record')).toHaveCount(3);
   await settled(page);
 
   // A record without a displayable value is named, not silently dropped.
-  await page.goto('/lab?from=goethe-yellow,goethe-circle');
+  await page.goto('/lab?from=ja-sakura-iro,zh-wuxing');
   await expect(page.getByTestId('notice')).toContainText('no displayable value');
 });
 
-test('an entry offers its documented pairs and sets, and a combination opens its layers', async ({
-  page,
-}) => {
-  await page.goto('/dictionary/goethe-yellow');
-  const pair = page.getByTestId('pair-to-lab').first();
-  await expect(pair).toHaveAttribute('href', /\/lab\?from=goethe-yellow,goethe-/);
-  await expect(page.getByTestId('set-to-lab').first()).toHaveAttribute(
-    'href',
-    '/lab?from=goethe-yellow,goethe-red-yellow',
-  );
+test('a colour offers its scale, and a combination opens its layers', async ({ page }) => {
+  await page.goto('/dictionary/ja-sakura-iro');
   await expect(page.getByTestId('entry-scale').locator('a')).toHaveCount(9);
-  await pair.click();
-  await expect(page.getByTestId('column')).toHaveCount(2);
-  await settled(page);
 
   await page.goto('/dictionary/combination/ja-kasane-ume-1');
   await page.getByTestId('combination-to-lab').click();
@@ -66,16 +55,13 @@ test('hex codes load from the address and from a paste, and a column can be rena
   await expect(columns.first()).toHaveAttribute('data-role', 'dominant');
 });
 
-test('the wheel panel loads a documented set, ? lists the keys, and a column opens in Theory', async ({
+test('the wheel panel has no set to load, ? lists the keys, and a column opens in Theory', async ({
   page,
 }) => {
   await page.goto('/lab');
   await settled(page);
   await page.getByTestId('wheel-button').click();
-  await page.getByTestId('load-set').selectOption('goethe-minus');
-  await expect(page.getByTestId('notice')).toContainText('Loaded Minus side (Goethe)');
-  await expect(page.getByTestId('column')).toHaveCount(2);
-  await expect(page.getByTestId('lock-badge')).toHaveCount(2);
+  await expect(page.getByTestId('load-set')).toHaveCount(0);
 
   await page.locator('body').click({ position: { x: 5, y: 300 } });
   await page.keyboard.press('?');
@@ -115,13 +101,13 @@ test('a saved palette keeps its locks, names and records, and the share link car
 }) => {
   await page.goto(`/api/test/login?email=state-${test.info().project.name}@example.com`);
   await page.waitForLoadState('load');
-  await page.goto('/lab?from=goethe-yellow,goethe-blue-red');
+  await page.goto('/lab?from=ja-sakura-iro,ja-shiro');
   // The first URL write means the page is hydrated; typing before that is lost.
   await settled(page);
   await page.getByTestId('role-name').first().fill('Sun');
   await expect(page).toHaveURL(/names=%5B%22Sun%22/);
   await expect(page).toHaveURL(/locks=11/);
-  await expect(page).toHaveURL(/records=goethe-yellow-display/);
+  await expect(page).toHaveURL(/records=ja-sakura-iro-srgb-wikipedia/);
   await page.getByTestId('save').click();
   await expect(page.getByTestId('notice')).toContainText('Saved as version 1');
   await settled(page);
@@ -131,6 +117,6 @@ test('a saved palette keeps its locks, names and records, and the share link car
   await expect(page.getByTestId('column').first()).toHaveAttribute('data-locked', 'true');
   await expect(page.getByTestId('column').first()).toHaveAttribute(
     'data-source',
-    'goethe-yellow-display',
+    'ja-sakura-iro-srgb-wikipedia',
   );
 });

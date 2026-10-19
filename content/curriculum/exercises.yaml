@@ -2,8 +2,9 @@
 
 - id: exercise-one-colour-two-surroundings
   kind: exercise
+  availability: available
   title: One colour, two surroundings
-  summary: Identical central samples sit on two different backgrounds. You judge whether they look the same before the numbers are shown.
+  summary: Two central squares sit on different backgrounds. Judge whether they look the same before revealing their values.
   exercise:
     steps:
       - Look at the two central squares and decide whether they are the same colour.
@@ -15,6 +16,7 @@
 
 - id: exercise-equal-hue-changing-structure
   kind: exercise
+  availability: planned
   title: Equal hue, changing structure
   summary: The hue family is locked while lightness and chroma change. You see what changes visually, not just which numbers move.
   exercise:
@@ -27,6 +29,7 @@
 
 - id: exercise-same-colours-changing-areas
   kind: exercise
+  availability: planned
   title: Same colours, changing areas
   summary: The palette is fixed and only the area allocation changes, for example 70/20/10 against 10/20/70. Then placement is fixed and chroma varies.
   exercise:
@@ -39,6 +42,7 @@
 
 - id: exercise-same-palette-different-context
   kind: exercise
+  availability: removed
   title: Same palette, different context
   summary: The same palette is shown as a swatch grid and on the garment. The numbers are identical; the impression often is not.
   exercise:

@@ -16,8 +16,12 @@
 
 - id: tradition-western
   kind: tradition
-  title: Western theories, Goethe to Albers
-  summary: Goethe's circle of felt oppositions (1810), Chevreul's law of simultaneous contrast (1839), Itten's twelve-part circle and seven contrasts (1961) and Albers's exercises in relativity (1963) are four different claims about colour, made for different reasons. Only the two public-domain texts are quoted, by the author's paragraph numbers; Itten and Albers are cited, not reproduced.
-  explanation_limits: Goethe's and Chevreul's complements are after-image and pigment complements, not OKLCh opposites; the app must not present its wheel rules as theirs. A structure named after a theory is a modern adaptation.
-  sources: [goethe-1840-theory-of-colours-eastlake, chevreul-1890-principles-martel, itten-art-of-color-wiley, albers-interaction-of-color-yale-2013]
-
+  title: Historical perspectives on perception
+  summary: Chevreul's account of simultaneous contrast (1839), Itten's teaching (1961) and Albers's exercises in relativity (1963) have different purposes. Chevreul is quoted with paragraph references; Itten and Albers have bibliographic entries only.
+  explanation_limits: Attribute historical claims to their authors. A historical pairing is not automatically an opposite in OKLCh or a modern law of perception.
+  sources:
+    [
+      chevreul-1890-principles-martel,
+      itten-art-of-color-wiley,
+      albers-interaction-of-color-yale-2013,
+    ]

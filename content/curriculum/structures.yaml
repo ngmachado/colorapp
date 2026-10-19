@@ -11,7 +11,8 @@
       description: 'all entries share the base hue; lightness and chroma vary within bounds',
       defaults: { hue_tolerance_deg: 0 },
     }
-  sources: [w3c-css-color-4]
+  explanation_limits: These are app-defined OKLCh generation recipes. The angles are implementation choices, not scientific laws of harmony or claims made by CSS Color 4.
+  sources: []
 
 - id: structure-analogous
   kind: structure
@@ -23,7 +24,8 @@
       description: 'hues within ±span of the base hue',
       defaults: { span_deg: 30 },
     }
-  sources: [w3c-css-color-4]
+  explanation_limits: These are app-defined OKLCh generation recipes. The angles are implementation choices, not scientific laws of harmony or claims made by CSS Color 4.
+  sources: []
 
 - id: structure-complementary
   kind: structure
@@ -31,7 +33,8 @@
   summary: Two hues near 180° apart. Compare a small accent against two equally large opposing areas.
   rule:
     { hue_space: oklch, description: 'base hue and base + 180°', defaults: { separation_deg: 180 } }
-  sources: [w3c-css-color-4]
+  explanation_limits: These are app-defined OKLCh generation recipes. The angles are implementation choices, not scientific laws of harmony or claims made by CSS Color 4.
+  sources: []
 
 - id: structure-split-complementary
   kind: structure
@@ -43,7 +46,8 @@
       description: 'base hue, base + 180° − split, base + 180° + split',
       defaults: { split_deg: 30 },
     }
-  sources: [w3c-css-color-4]
+  explanation_limits: These are app-defined OKLCh generation recipes. The angles are implementation choices, not scientific laws of harmony or claims made by CSS Color 4.
+  sources: []
 
 - id: structure-triadic
   kind: structure
@@ -55,7 +59,8 @@
       description: 'base hue, base + 120°, base + 240°',
       defaults: { separation_deg: 120 },
     }
-  sources: [w3c-css-color-4]
+  explanation_limits: These are app-defined OKLCh generation recipes. The angles are implementation choices, not scientific laws of harmony or claims made by CSS Color 4.
+  sources: []
 
 - id: structure-tetradic
   kind: structure
@@ -67,7 +72,8 @@
       description: 'base, base + angle, base + 180°, base + 180° + angle',
       defaults: { angle_deg: 60 },
     }
-  sources: [w3c-css-color-4]
+  explanation_limits: These are app-defined OKLCh generation recipes. The angles are implementation choices, not scientific laws of harmony or claims made by CSS Color 4.
+  sources: []
 
 - id: structure-neutral-accent
   kind: structure
@@ -77,9 +83,10 @@
     {
       hue_space: oklch,
       description: 'n − 1 entries under the near-neutral chroma threshold, one accent above it',
-      defaults: { neutral_chroma_max: 0.02, accent_share: 0.1 },
+      defaults: { neutral_chroma_max: 0.02 },
     }
-  sources: [w3c-css-color-4]
+  explanation_limits: These are app-defined OKLCh generation recipes. The angles are implementation choices, not scientific laws of harmony or claims made by CSS Color 4.
+  sources: []
 
 - id: structure-free-form
   kind: structure

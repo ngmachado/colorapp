@@ -1,87 +1,4 @@
-# yaml-language-server: $schema=../schema.json
-# Western colour theories. Only public-domain texts are quoted, by the author's own paragraph numbers.
-# Itten and Albers have bibliographic source records and nothing reproduced. Nothing is written from memory.
-# review_state "extracted": passages copied from the cited text on 2026-10-14; rights-check and specialist review pending.
-
-- type: cultural-assertion
-  id: goethe-plus-side
-  review_state: extracted
-  rights_status: verified-reusable
-  concept: goethe-plus
-  evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '764' }
-  claim: Goethe groups yellow, red-yellow (orange) and yellow-red on the "plus" side of his colour circle and ascribes a quick, lively, aspiring feeling to them.
-  passage: 'The colours on the plus side are yellow, red-yellow (orange), yellow-red (minium, cinnabar). The feelings they excite are quick, lively, aspiring.'
-  period: '1810 (German original); 1840 (this translation)'
-  context: Part VI, Effect of colour with reference to moral associations
-  notes: A statement about felt effect in Goethe's system, not a rule the generator applies.
-
-- type: cultural-assertion
-  id: goethe-yellow-nearest-light
-  review_state: extracted
-  rights_status: verified-reusable
-  concept: goethe-yellow
-  evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '765' }
-  claim: Goethe calls yellow the colour nearest the light.
-  passage: 'This is the colour nearest the light. It appears on the slightest mitigation of light, whether by semi-transparent mediums or faint reflection from white surfaces.'
-  period: '1810 (German original); 1840 (this translation)'
-  context: Part VI, under "Yellow"
-
-- type: cultural-assertion
-  id: goethe-minus-side
-  review_state: extracted
-  rights_status: verified-reusable
-  concept: goethe-minus
-  evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '777' }
-  claim: Goethe groups blue, red-blue and blue-red on the "minus" side and ascribes a restless, susceptible, anxious impression to them.
-  passage: 'The colours on the minus side are blue, red-blue, and blue-red. They produce a restless, susceptible, anxious impression.'
-  period: '1810 (German original); 1840 (this translation)'
-  context: Part VI, Effect of colour with reference to moral associations
-
-- type: cultural-assertion
-  id: goethe-blue-darkness
-  review_state: extracted
-  rights_status: verified-reusable
-  concept: goethe-blue
-  evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '778' }
-  claim: Goethe pairs yellow with light and blue with a principle of darkness.
-  passage: 'As yellow is always accompanied with light, so it may be said that blue still brings a principle of darkness with it.'
-  period: '1810 (German original); 1840 (this translation)'
-  context: Part VI, under "Blue"
-
-- type: cultural-assertion
-  id: goethe-completeness
-  review_state: extracted
-  rights_status: verified-reusable
-  concept: goethe-circle
-  evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '805–806' }
-  claim: Goethe's harmony rests on completeness; the eye, shown one colour, produces its complement and seeks a colourless space to do so.
-  passage: 'When the eye sees a colour it is immediately excited, and it is its nature, spontaneously and of necessity, at once to produce another, which with the original colour comprehends the whole chromatic scale. A single colour excites, by a specific sensation, the tendency to universality. To experience this completeness, to satisfy itself, the eye seeks for a colourless space next every hue in order to produce the complemental hue upon it.'
-  period: '1810 (German original); 1840 (this translation)'
-  context: Part VI, "Completeness and Harmony"
-  notes: Goethe's complement is a physiological after-image, not a wheel diameter. The app's complementary rule is a hue-angle rule and is not this.
-
-- type: cultural-assertion
-  id: goethe-harmony-law
-  review_state: extracted
-  rights_status: verified-reusable
-  concept: goethe-circle
-  evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '807' }
-  claim: Goethe names the eye's demand for the complement the fundamental law of all harmony of colours.
-  passage: 'In this resides the fundamental law of all harmony of colours, of which every one may convince himself by making himself accurately acquainted with the experiments which we have described in the chapter on the physiological colours.'
-  period: '1810 (German original); 1840 (this translation)'
-  context: Part VI, "Completeness and Harmony"
-
-- type: cultural-assertion
-  id: goethe-characteristic-combinations
-  review_state: extracted
-  rights_status: verified-reusable
-  concept: goethe-circle
-  evidence: { source: goethe-1840-theory-of-colours-eastlake, locator: '816–817' }
-  claim: Goethe distinguishes "characteristic" combinations, found on the circle by chords that skip one intermediate colour, from the harmonious ones found by diameters.
-  passage: 'Besides these pure, harmonious, self-developed combinations, which always carry the conditions of completeness with them, there are others which may be arbitrarily produced, and which may be most easily described by observing that they are to be found in the colorific circle, not by diameters, but by chords, in such a manner that an intermediate colour is passed over. We call these combinations characteristic because they have all a certain significancy and tend to excite a definite impression; an impression, however, which does not altogether satisfy, inasmuch as every characteristic quality of necessity presents itself only as a part of a whole, with which it has a relation, but into which it cannot be resolved.'
-  period: '1810 (German original); 1840 (this translation)'
-  context: Part VI, "Completeness and Harmony"
-  notes: Goethe's six-colour circle makes a chord that skips one colour a 120° step; the app's triadic rule on the OKLCh wheel is a different wheel and is not this.
+# Historical observations on simultaneous contrast.
 
 - type: cultural-assertion
   id: chevreul-law-of-simultaneous-contrast
@@ -98,7 +15,11 @@
   id: chevreul-complementary-pairs
   review_state: extracted
   rights_status: verified-reusable
-  evidence: { source: chevreul-1890-principles-martel, locator: "Translator's Introduction, 'Complementary Colours'" }
+  evidence:
+    {
+      source: chevreul-1890-principles-martel,
+      locator: "Translator's Introduction, 'Complementary Colours'",
+    }
   claim: The translator's introduction states the complementary pairs used throughout the book; blue with orange, red with green, yellow with violet.
   passage: 'Blue is the complementary of Orange (Red and Yellow). Red is the complementary of Green (Blue and Yellow). Yellow is the complementary of Violet (Blue and Red).'
   period: '1890 (this printing)'

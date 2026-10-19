@@ -175,23 +175,6 @@
     Only 雪藍 has a footnoted external reference. Treat every value as a modern approximation of unknown method. Discovery route only.
 
 - type: source
-  id: goethe-1840-theory-of-colours-eastlake
-  review_state: bibliographic
-  rights_status: verified-reusable
-  author: Johann Wolfgang von Goethe; translated with notes by Charles Lock Eastlake
-  title: "Goethe's Theory of Colours"
-  publisher: John Murray, London (1840); Project Gutenberg eBook 50572 (2015, updated 2024)
-  date: '1840'
-  url: https://www.gutenberg.org/ebooks/50572
-  access_date: '2026-10-14'
-  rights_notes: >-
-    Public domain text distributed under the Project Gutenberg License ("almost no restrictions whatsoever" in the United States
-    and most other countries; readers elsewhere check local law). Passages may be quoted with the paragraph number.
-  notes: >-
-    Goethe's own paragraph numbers are the locators (the text prints each as "NNN."). Part VI, "Effect of colour with reference
-    to moral associations", runs from 758; "Completeness and Harmony" begins at 803. Eastlake's notes are cited as "Note X".
-
-- type: source
   id: chevreul-1890-principles-martel
   review_state: bibliographic
   rights_status: verified-reusable
@@ -239,3 +222,54 @@
   rights_notes: In copyright. Bibliographic record only; nothing is reproduced from the book.
   notes: First published 1963 as a limited silkscreen edition; paperback 1971. Details from bookseller listings; confirm before promotion.
 
+- type: source
+  id: cie-colorimetry-2018
+  review_state: bibliographic
+  rights_status: verified-restricted
+  author: CIE
+  title: 'Colorimetry, 4th Edition (CIE 015:2018)'
+  date: '2018'
+  url: https://www.cie.co.at/publications/colorimetry-4th-edition
+  access_date: '2026-10-19'
+  notes: Public publication overview consulted for scope. Full report has not been reviewed; no tables or report text reproduced.
+
+- type: source
+  id: cie-metamerism-1989
+  review_state: bibliographic
+  rights_status: verified-restricted
+  author: CIE
+  title: 'Special metamerism index: Change in observer (CIE 080-1989)'
+  date: '1989'
+  url: https://www.cie.co.at/publications/special-metamerism-index-change-observer
+  access_date: '2026-10-19'
+  notes: Public overview consulted for the distinction between illuminant and observer metamerism; full report not reviewed.
+
+- type: source
+  id: icc-color-management
+  review_state: bibliographic
+  rights_status: unreviewed
+  author: International Color Consortium
+  title: 'Color Management: Current Practice and The Adoption of a New Standard'
+  url: https://preview.color.org/wpaper1/
+  access_date: '2026-10-19'
+  notes: Introductory white paper on device characterization and profile-based conversion; not a source for current profile-version requirements. No figures reproduced.
+
+- type: source
+  id: w3c-use-of-color
+  review_state: bibliographic
+  rights_status: unreviewed
+  author: W3C Web Accessibility Initiative
+  title: 'Understanding SC 1.4.1: Use of Color'
+  url: https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html
+  access_date: '2026-10-19'
+  notes: Supporting explanation for WCAG 2.2; cited for information conveyed by colour. Original lesson paraphrase only.
+
+- type: source
+  id: w3c-contrast-minimum
+  review_state: bibliographic
+  rights_status: unreviewed
+  author: W3C Web Accessibility Initiative
+  title: 'Understanding SC 1.4.3: Contrast (Minimum)'
+  url: https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html
+  access_date: '2026-10-19'
+  notes: Supporting explanation for WCAG 2.2 text contrast; not evidence for aesthetic harmony. Original lesson paraphrase only.

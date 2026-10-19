@@ -1,0 +1,157 @@
+# Original introductory lessons. References identify the scope supported by each source.
+# Scientific explanations, design prompts and historical interpretation remain distinct.
+- id: foundations
+  kind: lesson
+  title: Foundations
+  summary: Begin with light, surfaces and the observer, then learn the vocabulary used to describe an appearance.
+  sources: [cie-ilv-2020, cie-colorimetry-2018]
+  lesson:
+    objective: Explain why a colour needs a viewing context, not just a name or a hex code.
+    paragraphs:
+      - Light reaches a surface, some wavelengths are absorbed and others are reflected towards the eye. The illumination, material and observer all matter. A screen instead emits light; a screen swatch is a representation of a material colour. Additive mixing combines lights. Subtractive mixing involves selective absorption by filters or colorants; an RGB average is not a pigment recipe.
+      - Hue describes colour character. Lightness compares brightness with a similarly illuminated white; chroma relates colourfulness to that white, while saturation relates it to the colour's own brightness. These perceptual attributes are different from the coordinates used to approximate them.
+      - Luminance measures light in a specified direction. Brightness describes perception. An RGB channel value is neither a luminance measurement nor a promise about how bright a display will look.
+    example: Look at a white sheet beside a screen showing white. Consider the room light and the screen brightness before expecting them to match.
+    limits: These lessons introduce colour literacy. They do not provide a calibrated viewing environment or a complete university course.
+    references:
+      - {
+          source: cie-ilv-2020,
+          locator: 'e-ILV: hue, lightness, chroma, saturation, brightness and luminance entries',
+          url: 'https://cie.co.at/e-ilv',
+        }
+      - {
+          source: cie-colorimetry-2018,
+          locator: 'Publication overview: observers, illuminants and viewing conditions',
+          url: 'https://www.cie.co.at/publications/colorimetry-4th-edition',
+        }
+
+- id: representing-colour
+  kind: lesson
+  title: Representing colour
+  summary: Choose a coordinate system for the task and keep its reference conditions attached to the numbers.
+  sources: [cie-colorimetry-2018, w3c-css-color-4]
+  lesson:
+    objective: Distinguish colour measurement, display encoding and perceptual editing.
+    paragraphs:
+      - Colorimetry uses specified observers and illuminants to calculate tristimulus values. XYZ and chromaticity coordinates describe colour under defined conditions; a chromaticity diagram is not a map of equally spaced perceptual differences.
+      - sRGB and Display P3 specify different RGB spaces. Encoded sRGB channels are nonlinear; averaging them differs from averaging linear-light values. HSL rearranges sRGB coordinates for editing.
+      - Lab and OKLab aim at more perceptually useful distances; neither is perfectly uniform. LCh and OKLCh express their respective a and b coordinates as chroma and hue. CIELAB needs a reference white; this app uses D50 for Lab and D65 for OKLab.
+      - A gamut is the range a device or space can represent. Mapping into sRGB can change a colour. The sliders below edit OKLCh, while the swatch shows an sRGB approximation.
+    example: Change the readout from OKLCh to HSL below. The numbers change because the coordinate system changes, not because you chose a new colour.
+    limits: A colour difference needs a named metric and conditions. A small numeric distance does not establish cultural similarity or visual harmony.
+    references:
+      - {
+          source: cie-colorimetry-2018,
+          locator: 'Publication overview: tristimulus values, chromaticity, spaces and differences',
+          url: 'https://www.cie.co.at/publications/colorimetry-4th-edition',
+        }
+      - {
+          source: w3c-css-color-4,
+          locator: 'Sections 7, 9, 10.3 and 14: HSL, Lab/OKLab, linear-light sRGB and gamut mapping',
+          url: 'https://www.w3.org/TR/css-color-4/',
+        }
+
+- id: perception
+  kind: lesson
+  title: Perception and context
+  summary: Equal coordinates do not guarantee equal appearance in different surroundings.
+  sources: [cie-ilv-2020, chevreul-1890-principles-martel]
+  lesson:
+    objective: Separate the stimulus on the screen from the appearance you judge.
+    paragraphs:
+      - Surroundings can change the apparent lightness or colour of a sample. Simultaneous contrast is one contextual effect; it does not mean every pair becomes maximally different in every situation.
+      - Chromatic adaptation helps vision adjust to illumination. Colour constancy is approximate, and appearance also depends on the surround and viewing conditions. Converting coordinates between reference whites does not reproduce all of these effects.
+      - Chevreul's nineteenth-century account is a historical observation to examine, not a complete contemporary model of perception. Use the experiment below to compare your impression with the actual sample values.
+    example: Judge the two central squares before revealing their values. Then compare them on the same background.
+    limits: This informal demonstration measures no visual ability and predicts no individual observer's response. Display settings and viewing conditions affect the result.
+    references:
+      - {
+          source: cie-ilv-2020,
+          locator: 'e-ILV: simultaneous contrast, chromatic adaptation and colour constancy entries',
+          url: 'https://cie.co.at/e-ilv',
+        }
+      - {
+          source: chevreul-1890-principles-martel,
+          locator: 'Paragraph 16: historical statement of simultaneous contrast',
+          url: 'https://archive.org/details/b21285676',
+        }
+
+- id: designing
+  kind: lesson
+  title: Designing with colour
+  summary: Evaluate colour relationships in a composition, with a purpose and an audience.
+  sources: [w3c-use-of-color, w3c-contrast-minimum, w3c-css-color-4]
+  lesson:
+    objective: Use palette structures as starting points and evaluate hierarchy, proportion and accessibility separately.
+    paragraphs:
+      - Start with a brief. Decide what should attract attention, what should recede and what information must remain legible. Try changing area and placement while holding colours constant, then change one colour attribute at a time. These are design exercises, not universal numerical prescriptions.
+      - The wheel recipes below are this app's choices of OKLCh angles. Opposite hue angles are not automatically additive-light complements, pigment-mixing complements or afterimage matches. Compare the results with the free-form baseline rather than treating a scheme name as proof of quality.
+      - For interfaces, colour must not be the only way to communicate information. Add text, symbols or patterns. WCAG text contrast checks a specific foreground/background relationship; it does not certify the accessibility of a whole palette or describe harmony.
+    example: Create two palettes for the same brief. Compare a small accent with an equally sized swatch, and check the intended text/background pairs in the Laboratory.
+    limits: Equal-width palette columns do not simulate garment area or placement. Colour-vision simulations are approximations, not substitutes for accessibility checks and user evaluation.
+    references:
+      - {
+          source: w3c-use-of-color,
+          locator: 'Understanding SC 1.4.1: information must not rely on colour alone',
+          url: 'https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html',
+        }
+      - {
+          source: w3c-contrast-minimum,
+          locator: 'Understanding SC 1.4.3: text contrast and exceptions',
+          url: 'https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html',
+        }
+      - {
+          source: w3c-css-color-4,
+          locator: 'Section 9.2 supports the coordinate model, not the palette recipes',
+          url: 'https://www.w3.org/TR/css-color-4/#ok-lab',
+        }
+
+- id: production
+  kind: lesson
+  title: Colour in production
+  summary: Carry colour intent from a screen to a specified device, process and material.
+  sources: [icc-color-management, cie-metamerism-1989]
+  lesson:
+    objective: Explain why a hex code alone cannot specify a reliable printed or textile match.
+    paragraphs:
+      - Calibration establishes a device's operating condition; characterization describes its response. ICC profiles support colour conversion between characterized devices and reference spaces. A profile does not make every device reproduce every colour.
+      - CMYK values depend on the printing condition, including inks and substrate. Choose the intended output profile and inspect a proof. A generic RGB-to-CMYK conversion is not a production specification.
+      - Metameric samples can match under one illuminant and observer but differ under another because their spectra differ. A single RGB match cannot establish that two physical materials will keep matching when the light changes.
+      - For textiles, evaluate physical samples under the intended lighting and viewing geometry. Texture and gloss also need inspection; flat screen swatches do not model them.
+    example: Before approving a fabric pairing, compare physical samples under the intended use lighting as well as the supplier's evaluation conditions.
+    limits: This app does not currently implement ICC soft proofing, spectral measurement, dye formulation or material rendering. The lesson explains the workflow; it does not perform it.
+    references:
+      - {
+          source: icc-color-management,
+          locator: 'White paper: device characterization and profile-based colour management',
+          url: 'https://preview.color.org/wpaper1/',
+        }
+      - {
+          source: cie-metamerism-1989,
+          locator: 'Publication overview: matches broken by changes in illuminant or observer',
+          url: 'https://www.cie.co.at/publications/special-metamerism-index-change-observer',
+        }
+
+- id: history
+  kind: lesson
+  title: History and culture
+  summary: Read historical theories and cultural practices in their own context, separately from current scientific models.
+  sources:
+    [
+      chevreul-1890-principles-martel,
+      itten-art-of-color-wiley,
+      albers-interaction-of-color-yale-2013,
+    ]
+  lesson:
+    objective: Distinguish a historical author's claim, a cultural association and a modern colour calculation.
+    paragraphs:
+      - Chevreul, Itten and Albers approached colour through different observations and teaching practices. Chevreul's law of 1839 is quoted here by paragraph; Itten and Albers have bibliographic entries only. Their dates do not decide the usefulness of an exercise; attribution, evidence and scope matter.
+      - Japanese colour vocabularies, layering practices and Wuxing correspondences describe different kinds of cultural knowledge. A symbolic relationship or historical name does not uniquely determine a modern RGB value or a palette-generation rule.
+    example: Open a cultural record below. Identify the documented association, its source and any modern display approximation.
+    limits: This is a selected collection, not a comprehensive history or a single Western or Asian theory. Read each entry's evidence and representation limits before reusing its claims.
+    references:
+      - {
+          source: chevreul-1890-principles-martel,
+          locator: 'Paragraph 16; 1890 edition of the historical text',
+          url: 'https://archive.org/details/b21285676',
+        }
