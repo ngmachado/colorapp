@@ -15,6 +15,12 @@ const config: NextConfig = {
       '../../content/**',
     ],
   },
+  // Never ship the build cache or the local dev database. Traced into every route, they pushed
+  // each one past Vercel's per-function size budget, so no routes were merged and the deployment
+  // held more functions than the Hobby plan allows.
+  outputFileTracingExcludes: {
+    '*': ['./.next/cache/**', './data/**', './tsconfig.tsbuildinfo'],
+  },
   transpilePackages: [
     '@sca/colour-engine',
     '@sca/generator',

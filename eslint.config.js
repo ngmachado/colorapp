@@ -31,6 +31,7 @@ export default tseslint.config(
     ignores: [
       '**/node_modules/**',
       '**/.next/**',
+      '**/.vercel/**',
       '**/dist/**',
       '**/next-env.d.ts',
       'docs/**',
