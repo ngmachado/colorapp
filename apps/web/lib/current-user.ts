@@ -1,6 +1,7 @@
 import { appData, findOrCreateUser, type AppData } from '@sca/db';
 import { auth } from '@/auth';
 import { db } from '@/lib/db';
+import { ACCOUNTS } from '@/lib/accounts';
 
 const LOCAL_EMAIL = 'local@localhost';
 
@@ -20,6 +21,7 @@ export async function currentUser(): Promise<{
   email: string | null;
   data: AppData;
 } | null> {
+  if (!ACCOUNTS) return null;
   const d = await db();
   const local = await localUser();
   if (local) return { ...local, data: appData(d, local.id) };

@@ -44,3 +44,9 @@ Use one checklist per pull request that changes `content/`. Name yourself in the
 - [ ] Historical statements use the author's name rather than the app's authoritative voice.
 - [ ] Exercise availability matches the rendered UI and README; unavailable garment workflows are not promised.
 - [ ] A specialist has checked scientific accuracy before any claim of specialist review or university-level completeness.
+
+## External lesson review — pending
+
+A reviewer with colour-science training must read all six lessons in `content/curriculum/lessons.yaml` alongside `/theory` and the Laboratory. No reviewer has been assigned and no specialist sign-off is claimed.
+
+Record the reviewer's name, relevant qualifications, date and reviewed commit. For each lesson, log the exact statement, severity, proposed correction and supporting primary reference. Check especially the distinction between perception and coordinates, lightness and luminance, gamut mapping, complement terminology, colour-vision simulation limits, and what WCAG contrast does and does not establish. Try the surrounding-colour exercise and proportion strip. Close each material finding before marking the review complete; retain limitations even after review.

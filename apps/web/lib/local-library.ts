@@ -1,3 +1,4 @@
+import { LIBRARY_LIMIT, paletteKey, parseLibraryImport } from './library-import';
 import type { PaletteState } from './palette-param';
 
 /**
@@ -24,7 +25,7 @@ export interface Store {
 
 export const PALETTES_KEY = 'sca.library.palettes';
 export const COLOURS_KEY = 'sca.library.colours';
-const MAX = 200;
+const MAX = LIBRARY_LIMIT;
 
 function read<T>(store: Store, key: string): T[] {
   try {
@@ -84,9 +85,61 @@ export function removeColour(store: Store, conceptId: string) {
 /** Everything in the browser Library, for a download. */
 export function exportBundle(store: Store) {
   return {
+    version: 1,
     exportedAt: new Date().toISOString(),
     kept: 'in this browser',
     palettes: readPalettes(store),
     colours: readColours(store),
+  };
+}
+
+/** Merge without eviction. Restore both original keys if storage rejects either write. */
+export function importBundle(store: Store, raw: string) {
+  const incoming = parseLibraryImport(raw);
+  const palettes = readPalettes(store);
+  const colours = readColours(store);
+  const keys = new Set(palettes.map(paletteKey));
+  const ids = new Set(colours.map((c) => c.conceptId));
+  const savedAt = new Date().toISOString();
+  const addedPalettes = incoming.palettes
+    .filter((p) => {
+      const key = paletteKey(p);
+      if (keys.has(key)) return false;
+      keys.add(key);
+      return true;
+    })
+    .map((p) => ({ ...p, id: crypto.randomUUID(), savedAt }));
+  const addedColours = incoming.colours
+    .filter((c) => {
+      if (ids.has(c.conceptId)) return false;
+      ids.add(c.conceptId);
+      return true;
+    })
+    .map((c) => ({ ...c, savedAt }));
+  if (
+    palettes.length + addedPalettes.length > LIBRARY_LIMIT ||
+    colours.length + addedColours.length > LIBRARY_LIMIT
+  )
+    throw new Error(
+      'The Library holds 200 palettes and 200 colours. Remove some items before importing.',
+    );
+  const oldPalettes = store.getItem(PALETTES_KEY) ?? '[]';
+  const oldColours = store.getItem(COLOURS_KEY) ?? '[]';
+  try {
+    write(store, PALETTES_KEY, [...addedPalettes, ...palettes]);
+    write(store, COLOURS_KEY, [...addedColours, ...colours]);
+  } catch {
+    store.setItem(PALETTES_KEY, oldPalettes);
+    store.setItem(COLOURS_KEY, oldColours);
+    throw new Error('Import could not be saved. Check the browser storage allowance.');
+  }
+  return {
+    palettes: addedPalettes.length,
+    colours: addedColours.length,
+    skipped:
+      incoming.palettes.length +
+      incoming.colours.length -
+      addedPalettes.length -
+      addedColours.length,
   };
 }

@@ -105,6 +105,8 @@ test('a saved palette keeps its locks, names and records, and the share link car
   // The first URL write means the page is hydrated; typing before that is lost.
   await settled(page);
   await page.getByTestId('role-name').first().fill('Sun');
+  await page.getByTestId('proportions-button').click();
+  await page.getByRole('spinbutton', { name: 'dominant area weight', exact: true }).fill('7');
   await expect(page).toHaveURL(/names=%5B%22Sun%22/);
   await expect(page).toHaveURL(/locks=11/);
   await expect(page).toHaveURL(/records=ja-sakura-iro-srgb-wikipedia/);
@@ -114,6 +116,10 @@ test('a saved palette keeps its locks, names and records, and the share link car
   await page.goto('/library');
   await page.getByRole('link', { name: 'Open in the Laboratory' }).first().click();
   await expect(page.getByTestId('role-name').first()).toHaveValue('Sun');
+  await page.getByTestId('proportions-button').click();
+  await expect(
+    page.getByRole('spinbutton', { name: 'dominant area weight', exact: true }),
+  ).toHaveValue('7');
   await expect(page.getByTestId('column').first()).toHaveAttribute('data-locked', 'true');
   await expect(page.getByTestId('column').first()).toHaveAttribute(
     'data-source',

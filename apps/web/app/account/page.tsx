@@ -1,3 +1,4 @@
+export const metadata = { robots: { index: false, follow: false } };
 import Link from 'next/link';
 import { Toolbar } from '@/components/toolbar';
 import { redirect } from 'next/navigation';

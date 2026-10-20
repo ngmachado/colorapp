@@ -62,3 +62,49 @@ test('the view can simulate a colour-vision deficiency without changing the valu
   await expect(columns.nth(3)).toHaveAttribute('data-hex', hex!);
   await expect(columns.nth(3).getByTestId('hex')).toHaveText(hex!.slice(1).toUpperCase());
 });
+
+test('area weights change geometry without changing colours and survive edits and reload', async ({
+  page,
+}) => {
+  await page.goto('/lab?hex=663399,eeeeee,333333');
+  await expect(page).toHaveURL(/palette=/);
+  const columns = page.getByTestId('column');
+  const before = await columns.evaluateAll((els) => els.map((e) => e.getAttribute('data-hex')));
+  await page.getByTestId('proportions-button').click();
+  const weight = (role: string) =>
+    page.getByRole('spinbutton', { name: `${role} area weight`, exact: true });
+  await weight('dominant').fill('7');
+  await weight('secondary').fill('2');
+  const widths = await page
+    .getByTestId('area-swatch')
+    .evaluateAll((els) => els.map((el) => el.getBoundingClientRect().width));
+  expect(widths[0]! / widths[2]!).toBeCloseTo(7, 1);
+  expect(widths[1]! / widths[2]!).toBeCloseTo(2, 1);
+  await page.screenshot({ path: test.info().outputPath('proportions.png'), fullPage: true });
+  expect(await columns.evaluateAll((els) => els.map((e) => e.getAttribute('data-hex')))).toEqual(
+    before,
+  );
+  await page.getByRole('button', { name: 'Reverse areas', exact: true }).click();
+  await expect(weight('dominant')).toHaveValue('1');
+  await page.getByTestId('undo').click();
+  await expect(weight('dominant')).toHaveValue('7');
+  await columns.first().hover();
+  await columns.first().getByTestId('move-right').click();
+  await expect(weight('secondary')).toHaveValue('7');
+  await columns.nth(2).hover();
+  await columns.nth(2).getByTestId('remove').click();
+  await expect(page).toHaveURL(/weights=2,7/);
+  await page.reload();
+  await page.getByTestId('proportions-button').click();
+  await expect(weight('secondary')).toHaveValue('7');
+  await page.getByTestId('add-column').click();
+  await expect(weight('accent')).toHaveValue('1');
+  await page.getByRole('button', { name: 'Equal areas', exact: true }).click();
+  await expect(weight('secondary')).toHaveValue('1');
+  await page.setViewportSize({ width: 390, height: 844 });
+  await expect(weight('dominant')).toBeVisible();
+  const preview = await page.getByTestId('area-preview').boundingBox();
+  expect(preview!.x + preview!.width).toBeLessThanOrEqual(390);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390);
+  await page.screenshot({ path: test.info().outputPath('proportions-mobile.png'), fullPage: true });
+});

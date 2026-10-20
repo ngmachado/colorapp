@@ -1,14 +1,14 @@
-import { PGlite } from '@electric-sql/pglite';
+import { createRequire } from 'node:module';
 import { eq } from 'drizzle-orm';
 import { drizzle as drizzleNode } from 'drizzle-orm/node-postgres';
 import { migrate as migrateNode } from 'drizzle-orm/node-postgres/migrator';
 import type { PgDatabase, PgQueryResultHKT } from 'drizzle-orm/pg-core';
-import { drizzle as drizzlePglite } from 'drizzle-orm/pglite';
-import { migrate as migratePglite } from 'drizzle-orm/pglite/migrator';
 import { existsSync, mkdirSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { Pool } from 'pg';
 import * as schema from './schema';
+
+const require = createRequire(import.meta.url);
 
 export { schema };
 
@@ -65,6 +65,16 @@ export function connect(url: string, migrateUrl?: string): Connection {
   }
   const m = /^pglite:\/\/(.*)$/.exec(url);
   if (!m) throw new Error(`DATABASE_URL must start with postgres:// or pglite://, got ${url}`);
+  if (process.env.VERCEL && process.env.NODE_ENV === 'production')
+    throw new Error(
+      'Vercel requires a Postgres connection; embedded Postgres is development-only.',
+    );
+  // Load the embedded engine only when requested. Vercel traces exclude its runtime files.
+  const { PGlite } = require('@electric-sql/pglite') as typeof import('@electric-sql/pglite');
+  const { drizzle: drizzlePglite } =
+    require('drizzle-orm/pglite') as typeof import('drizzle-orm/pglite');
+  const { migrate: migratePglite } =
+    require('drizzle-orm/pglite/migrator') as typeof import('drizzle-orm/pglite/migrator');
   const target = m[1]!;
   if (target !== 'memory') mkdirSync(target, { recursive: true });
   const db = drizzlePglite(new PGlite(target === 'memory' ? undefined : target), { schema });

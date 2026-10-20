@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-test('the grid shows colours only, systems have their own list, and a record is found by transliteration', async ({
+test('the grid shows colours only, the sparse Systems filter is hidden, and a record is found by transliteration', async ({
   page,
 }) => {
   await page.goto('/dictionary');
@@ -10,9 +10,11 @@ test('the grid shows colours only, systems have their own list, and a record is 
     0,
   );
   await expect(page.getByTestId('card').filter({ hasText: 'Wood (' })).toHaveCount(0);
+  await expect(page.getByRole('radio', { name: 'Systems', exact: true })).toHaveCount(0);
   await page.goto('/dictionary?kind=systems');
   await expect(page.getByTestId('system').filter({ hasText: /Goethe/i })).toHaveCount(0);
-  await expect(page.getByTestId('system').filter({ hasText: 'Five Phases' })).toBeVisible();
+  await expect(page).toHaveURL(/\/dictionary\/zh-wuxing$/);
+  await expect(page.getByRole('heading', { level: 1 })).toContainText('Five Phases');
   await page.goto('/dictionary?q=achi');
   await expect(page.getByTestId('card').filter({ hasText: '褐色' })).toBeVisible();
   await expect(page.getByTestId('card').filter({ hasText: '褐色' })).toContainText(

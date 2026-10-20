@@ -85,6 +85,7 @@ interface Props {
     sourceIds?: (string | null)[];
     /** Column names given by the user, when reopening a saved palette. */
     labels?: (string | null)[];
+    weights?: number[];
   };
   seedNote?: string;
   /** Documented sets the wheel panel can load whole. */
@@ -188,6 +189,7 @@ interface Snapshot {
   sourceIds: (string | null)[];
   locked: boolean[];
   labels: (string | null)[];
+  weights: number[];
   seed: number;
 }
 const UNDO_DEPTH = 50;
@@ -255,6 +257,8 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
   const [labels, setLabels] = useState<(string | null)[]>(
     initial.labels ?? initial.palette.map(() => null),
   );
+  const [weights, setWeights] = useState(initial.weights ?? initial.palette.map(() => 1));
+  const [showAreas, setShowAreas] = useState(false);
   const [showKeys, setShowKeys] = useState(false);
   const [locked, setLocked] = useState<boolean[]>(initial.locked);
   const [structure, setStructure] = useState<Structure>(initial.structure);
@@ -267,6 +271,7 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
       locked: initial.locked,
       labels: initial.labels ?? initial.palette.map(() => null),
       seed: initial.seed,
+      weights: initial.weights ?? initial.palette.map(() => 1),
     },
   ]);
   const [candidates, setCandidates] = useState<Snapshot[]>([]);
@@ -284,8 +289,8 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
   const [past, setPast] = useState<Snapshot[]>([]);
   const [future, setFuture] = useState<Snapshot[]>([]);
   const exportRef = useRef<HTMLDetailsElement>(null);
-  const current = useRef<Snapshot>({ palette, sourceIds, locked, labels, seed });
-  current.current = { palette, sourceIds, locked, labels, seed };
+  const current = useRef<Snapshot>({ palette, sourceIds, locked, labels, weights, seed });
+  current.current = { palette, sourceIds, locked, labels, weights, seed };
   const lastEdit = useRef<{ key: string; at: number } | null>(null);
 
   /** Records the current state as an undo step. A key collapses repeated moves of one control. */
@@ -304,6 +309,7 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
     setSourceIds(s.sourceIds);
     setLocked(s.locked);
     setLabels(s.labels);
+    setWeights(s.weights);
     setSeed(s.seed);
     lastEdit.current = null;
   };
@@ -393,6 +399,7 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
     setSourceIds(s.sourceIds);
     setLocked(s.locked);
     setLabels(s.labels);
+    setWeights(s.weights);
     setAdjust(null);
     setScale(null);
     setHistory((h) => (h.some((x) => x.palette === s.palette) ? h : [s, ...h].slice(0, 12)));
@@ -420,7 +427,7 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
         setSeed(next);
         setDraws((n) => n + 1);
         setHistory((h) =>
-          [{ palette: p, sourceIds: ids, locked, labels, seed: next }, ...h].slice(0, 12),
+          [{ palette: p, sourceIds: ids, locked, labels, weights, seed: next }, ...h].slice(0, 12),
         );
         setNotice(
           label ??
@@ -432,7 +439,7 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
         setNotice((e as Error).message);
       }
     },
-    [seed, palette, locked, sourceIds, labels, options, paramsFor, remember],
+    [seed, palette, locked, sourceIds, labels, weights, options, paramsFor, remember],
   );
 
   const draw = useCallback(() => drawWith(structure, null), [drawWith, structure]);
@@ -453,6 +460,7 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
         sourceIds: c.colours.map((x, i) => x.sourceId ?? (locked[i] ? sourceIds[i]! : null)),
         locked,
         labels,
+        weights,
         seed: next,
       }));
       if (!subset.length)
@@ -491,6 +499,7 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
     setSourceIds((s) => [...s, null]);
     setLocked((l) => [...l, false]);
     setLabels((l) => [...l, null]);
+    setWeights((w) => [...w, 1]);
     setNotice(`Added ${nextRoles.at(-1)} under the ${structure} rule.`);
   }
 
@@ -501,6 +510,7 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
     setSourceIds((s) => s.filter((_, j) => j !== i));
     setLocked((l) => l.filter((_, j) => j !== i));
     setLabels((l) => l.filter((_, j) => j !== i));
+    setWeights((w) => w.filter((_, j) => j !== i));
     setAdjust(null);
     setScale(null);
   }
@@ -518,6 +528,7 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
     setSourceIds(swap);
     setLocked(swap);
     setLabels(swap);
+    setWeights(swap);
     setAdjust(null);
     setScale(null);
   }
@@ -558,7 +569,7 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
   const lastWritten = useRef('');
   useEffect(() => {
     const t = window.setTimeout(() => {
-      const search = `?${stateParams({ palette, structure, seed, locked, labels, sourceIds })}`;
+      const search = `?${stateParams({ palette, structure, seed, locked, labels, weights, sourceIds })}`;
       if (search === lastWritten.current) return;
       lastWritten.current = search;
       const url = new URL(window.location.href);
@@ -566,7 +577,7 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
       window.history.replaceState(null, '', url);
     }, 150);
     return () => window.clearTimeout(t);
-  }, [palette, structure, seed, locked, labels, sourceIds]);
+  }, [palette, structure, seed, locked, labels, weights, sourceIds]);
 
   // Pasted hex codes become the palette: two to five replace it, one sets the dominant.
   useEffect(() => {
@@ -588,6 +599,7 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
       setSourceIds(list.map(() => null));
       setLocked(list.map(() => false));
       setLabels(list.map(() => null));
+      setWeights(list.map(() => 1));
       setAdjust(null);
       setScale(null);
       setNotice(`Pasted ${list.length} colours. Press space to draw around the ones you lock.`);
@@ -609,6 +621,7 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
     setSourceIds(found.map((p) => p.id));
     setLocked(found.map(() => true));
     setLabels(found.map(() => null));
+    setWeights(found.map(() => 1));
     setAdjust(null);
     setScale(null);
     const what =
@@ -634,6 +647,8 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
     setPalette((p) => [...p, c]);
     setSourceIds((s) => [...s, sourceId]);
     setLocked((l) => [...l, false]);
+    setLabels((l) => [...l, null]);
+    setWeights((w) => [...w, 1]);
     setNotice(`Added ${ROLES[palette.length]} from the wheel: ${label}.`);
   };
   const overlayPoints: OverlayPoint[] =
@@ -663,6 +678,7 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
         seed,
         locked,
         labels,
+        weights,
         sourceIds,
       });
       return setNotice(
@@ -676,7 +692,7 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
     }
     const res = await fetch('/api/palettes', {
       method: 'POST',
-      body: JSON.stringify({ palette, structure, seed, locked, labels, sourceIds }),
+      body: JSON.stringify({ palette, structure, seed, locked, labels, weights, sourceIds }),
     });
     if (res.status === 401)
       return setNotice(
@@ -733,6 +749,8 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
         oklch: c.map((n) => Number(n.toFixed(4))),
         hex: hexOf(c),
         locked: locked[i],
+        areaWeight: weights[i],
+        areaShare: weights[i]! / weights.reduce((a, b) => a + b, 0),
         source: src ? { record: src.id, concept: src.conceptId, label: src.label } : null,
         nearest: near
           ? {
@@ -1074,6 +1092,87 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
         </p>
       ) : null}
 
+      {showAreas ? (
+        <section
+          aria-label="Palette proportions"
+          className="shrink-0 border-b border-[var(--line)] px-5 py-3"
+        >
+          <p className="mb-3 text-sm text-[var(--muted)]">
+            Keep the colours fixed and compare their areas. Weights are relative: 7, 2, 1 gives 70%,
+            20%, 10%. This strip models area, not placement or a finished composition.
+          </p>
+          <div
+            className="flex h-28 overflow-hidden rounded-md"
+            data-testid="area-preview"
+            role="img"
+            aria-label="Relative colour areas; percentages are listed below"
+          >
+            {palette.map((c, i) => (
+              <span
+                key={i}
+                data-testid="area-swatch"
+                style={{ background: shownHex(c), flex: `${weights[i]} 1 0%` }}
+              />
+            ))}
+          </div>
+          <div className="mt-3 flex flex-wrap items-end gap-4">
+            {palette.map((_, i) => (
+              <div key={i} className="flex flex-col gap-1 text-sm">
+                {nameOf(i)} ·{' '}
+                {((100 * weights[i]!) / weights.reduce((a, b) => a + b, 0)).toFixed(1)}%
+                <input
+                  type="range"
+                  min="1"
+                  max="100"
+                  step="1"
+                  value={weights[i]}
+                  aria-label={`${roles[i]} area slider`}
+                  onChange={(e) => {
+                    remember(`weight-${i}`);
+                    setWeights((w) => w.map((x, j) => (j === i ? Number(e.target.value) : x)));
+                  }}
+                />
+                <input
+                  type="number"
+                  min="1"
+                  max="100"
+                  step="1"
+                  value={weights[i]}
+                  aria-label={`${roles[i]} area weight`}
+                  className="field h-8 w-20"
+                  onChange={(e) => {
+                    const w = Number(e.target.value);
+                    if (Number.isInteger(w) && w >= 1 && w <= 100) {
+                      remember(`weight-${i}`);
+                      setWeights((list) => list.map((x, j) => (j === i ? w : x)));
+                    }
+                  }}
+                />
+              </div>
+            ))}
+            <button
+              type="button"
+              className="btn"
+              onClick={() => {
+                remember();
+                setWeights(palette.map(() => 1));
+              }}
+            >
+              Equal areas
+            </button>
+            <button
+              type="button"
+              className="btn"
+              onClick={() => {
+                remember();
+                setWeights((w) => [...w].reverse());
+              }}
+            >
+              Reverse areas
+            </button>
+          </div>
+        </section>
+      ) : null}
       <div className="flex min-h-0 flex-1 flex-col sm:flex-row">
         <div className="flex min-h-0 flex-1 flex-col sm:flex-row" data-testid="columns">
           {palette.map((c, i) => {
@@ -1525,7 +1624,11 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
                 }}
               >
                 {p.palette.map((x, i) => (
-                  <span key={i} className="flex-1" style={{ background: hexOf(x) }} />
+                  <span
+                    key={i}
+                    className="flex-1"
+                    style={{ background: hexOf(x), flexGrow: p.weights[i] }}
+                  />
                 ))}
               </button>
             ))}
@@ -1648,7 +1751,11 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
               }}
             >
               {p.palette.map((c, i) => (
-                <span key={i} className="flex-1" style={{ background: hexOf(c) }} />
+                <span
+                  key={i}
+                  className="flex-1"
+                  style={{ background: hexOf(c), flexGrow: p.weights[i] }}
+                />
               ))}
             </button>
           ))}
@@ -1660,7 +1767,7 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
             ? ` · h ${options.hue.from}° to ${options.hue.to}°`
             : ''}
         </span>
-        <span className="flex gap-1">
+        <span className="flex flex-wrap gap-1">
           <button
             type="button"
             onClick={undo}
@@ -1707,6 +1814,15 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
             data-testid="contrast-button"
           >
             Contrast
+          </button>
+          <button
+            type="button"
+            onClick={() => setShowAreas((s) => !s)}
+            className="btn h-8 text-[13px]"
+            aria-expanded={showAreas}
+            data-testid="proportions-button"
+          >
+            Proportions
           </button>
           <button
             type="button"

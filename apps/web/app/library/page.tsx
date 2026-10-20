@@ -1,7 +1,9 @@
+export const metadata = { robots: { index: false, follow: false } };
 import { colour, toHex } from '@sca/colour-engine';
 import { revalidatePath } from 'next/cache';
 import Link from 'next/link';
 import { AutoForm } from '@/components/auto-form';
+import { LibraryImport } from '@/components/library-import';
 import { LocalLibrary } from '@/components/local-library';
 import { ACCOUNTS } from '@/lib/accounts';
 import { Toolbar } from '@/components/toolbar';
@@ -16,6 +18,7 @@ interface PaletteSnapshot {
   structure: string;
   seed: number;
   locked?: boolean[];
+  weights?: number[];
   labels?: (string | null)[];
   sourceIds?: (string | null)[];
 }
@@ -131,6 +134,7 @@ export default async function Library({
               Your data
             </Link>
           ) : null}
+          {user ? <LibraryImport /> : null}
         </aside>
 
         <div className="flex min-w-0 flex-1 flex-col gap-8 px-6 pt-5 pb-10">
@@ -168,7 +172,10 @@ export default async function Library({
                         <span
                           key={i}
                           className="flex-1"
-                          style={{ background: toHex(colour('oklch', c)) }}
+                          style={{
+                            background: toHex(colour('oklch', c)),
+                            flexGrow: v.snap.weights?.[i] ?? 1,
+                          }}
                         />
                       ))}
                     </span>

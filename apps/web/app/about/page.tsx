@@ -47,6 +47,19 @@ export default function About() {
           <p className="font-mono text-xs text-[var(--muted)]">release {inv.content_version}</p>
         </section>
 
+        <section
+          id="coverage"
+          className="flex max-w-[760px] scroll-mt-6 flex-col gap-3 text-[15px] leading-normal"
+        >
+          <h2 className="text-[22px] font-bold">Collection coverage</h2>
+          <p>
+            This is a small collection of source records and display approximations. Chinese display
+            values remain unverified, and some categories have no value. The Japanese dictionary
+            source is bibliographic only. Individual entries identify their sources, review status
+            and limitations.
+          </p>
+        </section>
+
         <section className="grid gap-10 sm:grid-cols-3">{list('In this release', types)}</section>
 
         <section className="flex max-w-[760px] flex-col gap-3.5 text-[15px] leading-normal">

@@ -87,8 +87,8 @@
       - Start with a brief. Decide what should attract attention, what should recede and what information must remain legible. Try changing area and placement while holding colours constant, then change one colour attribute at a time. These are design exercises, not universal numerical prescriptions.
       - The wheel recipes below are this app's choices of OKLCh angles. Opposite hue angles are not automatically additive-light complements, pigment-mixing complements or afterimage matches. Compare the results with the free-form baseline rather than treating a scheme name as proof of quality.
       - For interfaces, colour must not be the only way to communicate information. Add text, symbols or patterns. WCAG text contrast checks a specific foreground/background relationship; it does not certify the accessibility of a whole palette or describe harmony.
-    example: Create two palettes for the same brief. Compare a small accent with an equally sized swatch, and check the intended text/background pairs in the Laboratory.
-    limits: Equal-width palette columns do not simulate garment area or placement. Colour-vision simulations are approximations, not substitutes for accessibility checks and user evaluation.
+    example: In the Laboratory, open Proportions. Keep three colours fixed, set their weights to 7, 2, 1, then reverse the areas. Compare both arrangements against the same brief and check intended text/background pairs with Contrast.
+    limits: The proportional strip models relative area only; it does not simulate garment placement or a finished composition. Colour-vision simulations are approximations, not substitutes for accessibility checks and user evaluation.
     references:
       - {
           source: w3c-use-of-color,
@@ -147,7 +147,7 @@
     paragraphs:
       - Chevreul, Itten and Albers approached colour through different observations and teaching practices. Chevreul's law of 1839 is quoted here by paragraph; Itten and Albers have bibliographic entries only. Their dates do not decide the usefulness of an exercise; attribution, evidence and scope matter.
       - Japanese colour vocabularies, layering practices and Wuxing correspondences describe different kinds of cultural knowledge. A symbolic relationship or historical name does not uniquely determine a modern RGB value or a palette-generation rule.
-    example: Open a cultural record below. Identify the documented association, its source and any modern display approximation.
+    example: Choose either the Five Phases or Japanese layering example below; these are selected examples, not a survey of colour history. Identify the documented association, its source and any modern display approximation.
     limits: This is a selected collection, not a comprehensive history or a single Western or Asian theory. Read each entry's evidence and representation limits before reusing its claims.
     references:
       - {

@@ -19,6 +19,7 @@ export interface PaletteState {
   structure: string;
   seed: number;
   locked?: boolean[];
+  weights?: number[];
   labels?: (string | null)[];
   sourceIds?: (string | null)[];
 }
@@ -28,6 +29,7 @@ export function stateParams(s: PaletteState): string {
   // Built by hand so commas and semicolons stay readable in the address bar.
   const parts = [`palette=${paletteParam(s.palette)}`, `structure=${s.structure}`, `n=${s.seed}`];
   if (s.locked?.some(Boolean)) parts.push(`locks=${s.locked.map((l) => (l ? '1' : '0')).join('')}`);
+  if (s.weights?.some((w) => w !== 1)) parts.push(`weights=${s.weights.join(',')}`);
   // Names may contain commas, so they travel as a JSON array.
   if (s.labels?.some(Boolean)) parts.push(`names=${encodeURIComponent(JSON.stringify(s.labels))}`);
   if (s.sourceIds?.some(Boolean))
@@ -38,8 +40,8 @@ export function stateParams(s: PaletteState): string {
 /** Locks, names and records from the address, each sized to the palette; absent or malformed values fall back to none. */
 export function parseStateExtras(
   n: number,
-  sp: { locks?: string; names?: string; records?: string },
-): Pick<PaletteState, 'locked' | 'labels' | 'sourceIds'> {
+  sp: { locks?: string; names?: string; records?: string; weights?: string },
+): Pick<PaletteState, 'locked' | 'labels' | 'sourceIds' | 'weights'> {
   const locks = sp.locks && /^[01]+$/.test(sp.locks) ? sp.locks : '';
   let names: unknown[] = [];
   try {
@@ -49,7 +51,9 @@ export function parseStateExtras(
     names = [];
   }
   const records = sp.records ? sp.records.split(',') : [];
+  const weights = sp.weights?.split(',').map(Number);
   return {
+    weights: validWeights(weights, n) ? weights : Array(n).fill(1),
     locked: Array.from({ length: n }, (_, i) => locks[i] === '1'),
     labels: Array.from({ length: n }, (_, i) => {
       const v = names[i];
@@ -59,4 +63,13 @@ export function parseStateExtras(
       records[i] && records[i] !== '-' ? records[i]! : null,
     ),
   };
+}
+
+/** Relative area weights; absent values in older palettes mean equal areas. */
+export function validWeights(value: unknown, n: number): value is number[] {
+  return (
+    Array.isArray(value) &&
+    value.length === n &&
+    value.every((w) => typeof w === 'number' && Number.isInteger(w) && w >= 1 && w <= 100)
+  );
 }

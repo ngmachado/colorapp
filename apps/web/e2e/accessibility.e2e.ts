@@ -60,3 +60,12 @@ test('background stays white when the OS prefers dark', async ({ browser }) => {
   expect(results.violations.map((v) => v.id)).toEqual([]);
   await ctx.close();
 });
+
+test('proportion controls have no axe violations', async ({ page }) => {
+  await page.goto('/lab');
+  await page.getByTestId('proportions-button').click();
+  const results = await new AxeBuilder({ page })
+    .withTags(['wcag2a', 'wcag2aa', 'wcag22aa'])
+    .analyze();
+  expect(results.violations).toEqual([]);
+});

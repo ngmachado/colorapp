@@ -13,6 +13,7 @@ import {
   type SavedColour,
   type SavedPalette,
 } from '@/lib/local-library';
+import { LibraryImport } from '@/components/library-import';
 import { stateParams } from '@/lib/palette-param';
 
 /** The Library when it lives in this browser: the same two sections as the server one, read from local storage. */
@@ -75,6 +76,7 @@ export function LocalLibrary() {
         >
           Download as JSON
         </button>
+        <LibraryImport local onImported={refresh} />
       </aside>
 
       <div className="flex min-w-0 flex-1 flex-col gap-8 px-6 pt-5 pb-10">
@@ -103,7 +105,10 @@ export function LocalLibrary() {
                       <span
                         key={i}
                         className="flex-1"
-                        style={{ background: toHex(colour('oklch', c)) }}
+                        style={{
+                          background: toHex(colour('oklch', c)),
+                          flexGrow: p.state.weights?.[i] ?? 1,
+                        }}
                       />
                     ))}
                   </span>

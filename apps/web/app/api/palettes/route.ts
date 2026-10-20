@@ -1,3 +1,4 @@
+import { validWeights } from '@/lib/palette-param';
 import { Structure } from '@sca/generator';
 import { currentUser } from '@/lib/current-user';
 
@@ -51,6 +52,11 @@ export async function POST(req: Request) {
     body.sourceIds,
     (x): x is string | null => x === null || (typeof x === 'string' && x.length <= 80),
   );
+  if (body.weights !== undefined && !validWeights(body.weights, n))
+    return Response.json(
+      { error: 'weights must match the palette and be integers from 1 to 100' },
+      { status: 400 },
+    );
   const project =
     (await user.data.projects.list()).find((p) => p.name === 'Saved palettes') ??
     (await user.data.projects.create({ name: 'Saved palettes' }));
@@ -62,6 +68,7 @@ export async function POST(req: Request) {
       palette,
       structure: structure.data,
       seed,
+      ...(body.weights ? { weights: body.weights } : {}),
       ...(locked ? { locked } : {}),
       ...(labels ? { labels } : {}),
       ...(sourceIds ? { sourceIds } : {}),

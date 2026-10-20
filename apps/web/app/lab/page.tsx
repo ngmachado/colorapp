@@ -34,6 +34,7 @@ export default async function Lab({ searchParams }: { searchParams: Promise<Para
     locks: one(sp.locks),
     names: one(sp.names),
     records: one(sp.records),
+    weights: one(sp.weights),
   });
   const locked = saved ? extras.locked! : palette.map(() => false);
   const labels = saved ? extras.labels : undefined;
@@ -110,7 +111,15 @@ export default async function Lab({ searchParams }: { searchParams: Promise<Para
       <main id="main">
         <Columns
           points={namePoints()}
-          initial={{ palette, locked, structure, seed, sourceIds, labels }}
+          initial={{
+            palette,
+            locked,
+            structure,
+            seed,
+            sourceIds,
+            labels,
+            weights: saved && !from.length && !hexes.length ? extras.weights : undefined,
+          }}
           seedNote={note ?? 'Generate a palette. Lock the colours you like. Generate again.'}
           sets={documentedSets()}
           localLibrary={!ACCOUNTS}

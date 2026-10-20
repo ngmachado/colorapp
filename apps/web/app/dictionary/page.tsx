@@ -1,6 +1,7 @@
 import { colour, convert } from '@sca/colour-engine';
 import type { Combination, Concept, Representation } from '@sca/knowledge';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 import { AutoForm } from '@/components/auto-form';
 import { Toolbar } from '@/components/toolbar';
 import { knowledge } from '@/lib/knowledge';
@@ -115,6 +116,8 @@ export default async function Dictionary({ searchParams }: { searchParams: Promi
   // Systems and their parts: entries with relations and passages, but no swatch of their own.
   const systems = k.byType('concept').filter((c) => !isColour(c));
   const roots = systems.filter((c) => c.tags?.kind === 'system');
+  if (kind === 'systems' && roots.length <= 1)
+    redirect(roots[0] ? `/dictionary/${roots[0].id}` : '/dictionary');
   const partsOf = (root: Concept) =>
     systems.filter(
       (c) =>
@@ -131,8 +134,8 @@ export default async function Dictionary({ searchParams }: { searchParams: Promi
         current="/dictionary"
         middle={
           <span>
-            {k.byType('concept').filter(isColour).length} colours · {roots.length} systems ·{' '}
-            {combos.length} combinations · {sources.length} sources
+            {k.byType('concept').filter(isColour).length} colours · {combos.length} combinations ·{' '}
+            {sources.length} sources
           </span>
         }
       />
@@ -152,16 +155,24 @@ export default async function Dictionary({ searchParams }: { searchParams: Promi
               className="field"
             />
           </label>
+          <Link
+            href="/about#coverage"
+            className="text-xs text-[var(--muted)] underline underline-offset-2"
+          >
+            Collection coverage and sources
+          </Link>
           <fieldset className="flex flex-col gap-2">
             <legend className="mb-1 text-xs tracking-[1px] text-[var(--muted)] uppercase">
               Show
             </legend>
-            {(['colours', 'systems', 'combinations', 'sources'] as const).map((v) => (
-              <label key={v} className="flex items-center gap-2">
-                <input type="radio" name="kind" value={v} defaultChecked={kind === v} />{' '}
-                {v[0]!.toUpperCase() + v.slice(1)}
-              </label>
-            ))}
+            {['colours', ...(roots.length > 1 ? ['systems'] : []), 'combinations', 'sources'].map(
+              (v) => (
+                <label key={v} className="flex items-center gap-2">
+                  <input type="radio" name="kind" value={v} defaultChecked={kind === v} />{' '}
+                  {v[0]!.toUpperCase() + v.slice(1)}
+                </label>
+              ),
+            )}
           </fieldset>
           <fieldset className="flex flex-col gap-2">
             <legend className="mb-1 text-xs tracking-[1px] text-[var(--muted)] uppercase">

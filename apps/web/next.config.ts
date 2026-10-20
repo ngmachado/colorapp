@@ -1,4 +1,5 @@
 import type { NextConfig } from 'next';
+import { PHASE_DEVELOPMENT_SERVER } from 'next/constants';
 import { join } from 'node:path';
 
 const config: NextConfig = {
@@ -19,7 +20,18 @@ const config: NextConfig = {
   // each one past Vercel's per-function size budget, so no routes were merged and the deployment
   // held more functions than the Hobby plan allows.
   outputFileTracingExcludes: {
-    '*': ['./.next/cache/**', './data/**', './tsconfig.tsbuildinfo'],
+    '*': [
+      './.next/cache/**',
+      './data/**',
+      './tsconfig.tsbuildinfo',
+      ...(process.env.VERCEL
+        ? [
+            '../../node_modules/.pnpm/@electric-sql+pglite*/**',
+            './node_modules/@electric-sql/pglite/**',
+            '../../node_modules/@electric-sql/pglite/**',
+          ]
+        : []),
+    ],
   },
   transpilePackages: [
     '@sca/colour-engine',
@@ -31,4 +43,17 @@ const config: NextConfig = {
   serverExternalPackages: ['better-sqlite3', '@electric-sql/pglite', 'pg'],
 };
 
-export default config;
+// The test route's extension is recognized only by an explicitly opted-in dev server.
+// Even AUTH_TEST_LOGIN=1 cannot include it in a production build.
+export default (phase: string): NextConfig => ({
+  ...config,
+  pageExtensions: [
+    'tsx',
+    'ts',
+    'jsx',
+    'js',
+    ...(phase === PHASE_DEVELOPMENT_SERVER && process.env.AUTH_TEST_LOGIN === '1'
+      ? ['e2e.ts']
+      : []),
+  ],
+});

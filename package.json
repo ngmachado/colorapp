@@ -17,7 +17,8 @@
     "content:check": "pnpm --filter @sca/db knowledge validate",
     "content:build": "pnpm --filter @sca/db knowledge build",
     "e2e": "pnpm --filter @sca/web e2e",
-    "env:pull": "neon env pull && cp .env.local apps/web/.env.local"
+    "env:pull": "neon env pull && cp .env.local apps/web/.env.local",
+    "check:vercel-output": "node scripts/check-vercel-output.mjs"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.0",
@@ -39,5 +40,6 @@
   "dependencies": {
     "@neon/config": "^1.9.2",
     "@neon/env": "^1.6.3"
-  }
+  },
+  "license": "MIT"
 }

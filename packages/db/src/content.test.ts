@@ -20,7 +20,9 @@ describe('repository content (chunk 3 acceptance)', () => {
     expect(cur.topics.filter((t) => t.kind === 'structure').map((t) => t.id)).toContain(
       'structure-free-form',
     );
-    expect(cur.topics.filter((t) => t.kind === 'exercise')).toHaveLength(4);
+    expect(
+      cur.topics.filter((t) => t.kind === 'exercise').map((t) => [t.id, t.availability]),
+    ).toEqual([['exercise-one-colour-two-surroundings', 'available']]);
   });
 
   test('no Goethe record is in the release (removed by decision, 2026-10-19)', () => {

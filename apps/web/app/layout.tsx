@@ -1,10 +1,28 @@
+import type { Metadata } from 'next';
+import { siteUrl, siteDescription } from '@/lib/site';
 import type { ReactNode } from 'react';
 import { cssVariables } from '@/lib/tokens';
 import './globals.css';
 
-export const metadata = {
-  title: 'Super Colour',
-  description: 'Colour theory as a tool, with sources',
+export const metadata: Metadata = {
+  metadataBase: siteUrl,
+  ...(process.env.VERCEL_ENV === 'preview' ? { robots: { index: false, follow: false } } : {}),
+  title: { default: 'Super Colour', template: '%s · Super Colour' },
+  description: siteDescription,
+  applicationName: 'Super Colour',
+  openGraph: {
+    type: 'website',
+    siteName: 'Super Colour',
+    title: 'Super Colour',
+    description: siteDescription,
+    locale: 'en_GB',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Super Colour',
+    description: siteDescription,
+    images: ['/opengraph-image'],
+  },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

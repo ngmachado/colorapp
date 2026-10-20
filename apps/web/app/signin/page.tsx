@@ -1,6 +1,8 @@
+export const metadata = { robots: { index: false, follow: false } };
 import { Toolbar } from '@/components/toolbar';
 import { redirect } from 'next/navigation';
 import { EMAIL_PROVIDER, GOOGLE, signIn } from '@/auth';
+import { ACCOUNTS } from '@/lib/accounts';
 import { currentUser } from '@/lib/current-user';
 
 export const dynamic = 'force-dynamic';
@@ -10,10 +12,10 @@ const safePath = (p: unknown) => (typeof p === 'string' && /^\/(?!\/)/.test(p) ?
 
 /** Sign in with Google, or with a link by email, whichever is configured. Both return to where the user was. */
 export default async function SignIn({ searchParams }: { searchParams: Promise<Params> }) {
+  if (!ACCOUNTS) redirect('/');
   const sp = await searchParams;
   const next = safePath(Array.isArray(sp.next) ? sp.next[0] : sp.next);
   if (await currentUser()) redirect(next);
-  const none = !GOOGLE && !EMAIL_PROVIDER;
   return (
     <>
       <Toolbar />
@@ -71,12 +73,6 @@ export default async function SignIn({ searchParams }: { searchParams: Promise<P
                 Send sign-in link
               </button>
             </form>
-          ) : null}
-
-          {none ? (
-            <p className="text-sm text-[var(--muted)]">
-              Sign-in is not configured on this server yet.
-            </p>
           ) : null}
         </section>
       </main>
