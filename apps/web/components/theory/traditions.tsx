@@ -1,5 +1,6 @@
 import type { Concept, Relationship } from '@sca/knowledge';
 import Link from 'next/link';
+import { ChevreulCircle } from '@/components/chevreul-circle';
 import { knowledge } from '@/lib/knowledge';
 import { namePoints } from '@/lib/palette-names';
 import { WUXING_ORDER as ORDER } from '@/lib/systems';
@@ -38,11 +39,25 @@ export function Traditions() {
       <div className="flex flex-col gap-1.5">
         <h2 className="text-[28px] font-bold tracking-tight">Historical and cultural records</h2>
         <p className="max-w-[760px] text-base text-[var(--muted)]">
-          Two documented systems, each drawn from its records and cited by passage. Their relations
-          are cultural claims, not wheel rules; display colours are modern readings.
+          Historical systems, colour vocabularies and layering practices, each with its own sources.
+          Read their relationships in context; screen swatches are modern interpretations.
         </p>
       </div>
-      <div className="grid gap-5 lg:grid-cols-2">
+      <div className="grid gap-5 lg:grid-cols-3">
+        <div
+          className="flex flex-col gap-3 rounded-[10px] border border-[var(--line)] p-[22px]"
+          data-testid="chevreul"
+        >
+          <ChevreulCircle compact />
+          <span className="text-[17px] font-semibold">Chevreul’s chromatic circle</span>
+          <span className="text-sm leading-[1.45] text-[var(--muted)]">
+            Six landmarks from 72 scales, with complementary pairs and simultaneous contrast cited
+            by paragraph. Swatches are editorial illustrations; open the entry to try each pair.
+          </span>
+          <Link href="/dictionary/chevreul-circle" className="text-sm underline underline-offset-2">
+            Open the entry
+          </Link>
+        </div>
         <Link
           href="/dictionary/zh-wuxing"
           className="flex flex-col gap-3 rounded-[10px] border border-[var(--line)] p-[22px] no-underline"

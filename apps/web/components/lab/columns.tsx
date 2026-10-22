@@ -1446,6 +1446,14 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
                   {hex.slice(1).toUpperCase()}
                 </button>
                 <div className="mt-1.5 font-mono text-xs">{fmt(c)}</div>
+                <Link
+                  href={`/colour/${hex.slice(1)}`}
+                  className="inline-flex min-h-11 items-center text-sm underline"
+                  style={{ color: ink }}
+                  data-testid="inspect-colour"
+                >
+                  Inspect colour
+                </Link>
                 {source ? (
                   <Link
                     href={`/dictionary/${source.conceptId}`}

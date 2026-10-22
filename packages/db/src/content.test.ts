@@ -78,6 +78,33 @@ describe('repository content (chunk 3 acceptance)', () => {
     }
   });
 
+  test('Chevreul pairs retain historical provenance while display values remain editorial', () => {
+    const system = byId.get('chevreul-circle');
+    expect(system?.type === 'concept' && system.tags?.kind).toBe('system');
+    const pairs = records.filter(
+      (r) =>
+        r.type === 'relationship' && r.id.startsWith('chevreul-') && r.edge === 'complement-of',
+    );
+    expect(pairs).toHaveLength(3);
+    for (const pair of pairs) {
+      if (pair.type !== 'relationship') continue;
+      expect(pair.evidence.source).toBe('chevreul-1890-principles-martel');
+      expect(pair.evidence.locator).toContain('170');
+      for (const id of [pair.from, pair.to]) {
+        const rep = byId.get(`${id}-srgb-editorial`);
+        expect(rep?.type).toBe('representation');
+        if (rep?.type !== 'representation') continue;
+        expect(rep.evidence.source).toBe('super-colour-chevreul-display');
+        expect(rep.approximation_status).toBe('modern-approximation');
+        expect(rep.rights_status).toBe('user-adaptation');
+      }
+    }
+    expect(byId.get('chevreul-law-of-simultaneous-contrast')).toMatchObject({
+      concept: 'chevreul-circle',
+      review_state: 'extracted',
+    });
+  });
+
   test('nothing above "discovered" cites a Wikipedia or Wiktionary page', () => {
     for (const r of records) {
       if (r.type === 'source') continue;

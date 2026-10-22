@@ -55,13 +55,19 @@ test('hex codes load from the address and from a paste, and a column can be rena
   await expect(columns.first()).toHaveAttribute('data-role', 'dominant');
 });
 
-test('the wheel panel has no set to load, ? lists the keys, and a column opens in Theory', async ({
+test('the wheel panel loads a documented Chevreul pair, ? lists the keys, and a column opens in Theory', async ({
   page,
 }) => {
   await page.goto('/lab');
   await settled(page);
   await page.getByTestId('wheel-button').click();
-  await expect(page.getByTestId('load-set')).toHaveCount(0);
+  await page.getByTestId('load-set').selectOption('chevreul-red-green-complements');
+  await expect(page.getByTestId('column')).toHaveCount(2);
+  await expect(page.getByTestId('column').first()).toHaveAttribute(
+    'data-source',
+    'chevreul-red-srgb-editorial',
+  );
+  await expect(page.getByTestId('column').first()).toHaveAttribute('data-locked', 'true');
 
   await page.locator('body').click({ position: { x: 5, y: 300 } });
   await page.keyboard.press('?');

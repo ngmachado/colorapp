@@ -1,0 +1,236 @@
+# Six named landmarks of a larger historical construction, not a reconstruction of its plates.
+- type: concept
+  id: chevreul-circle
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence:
+    {
+      source: chevreul-1890-principles-martel,
+      locator: 'Part II, Prolegomena, paragraphs 159–170, printed pp. 58–63',
+    }
+  label: Chevreul’s chromatic circle
+  description: Chevreul places red, yellow and blue at intervals of 120 degrees, then inserts orange, green and violet. Colours at opposite ends of a diameter are complementary in his construction. He subdivides the circle into 72 scales, each with 20 tones; the normal tone differs between scales. His further hemispherical construction adds gradations towards black.
+  scope: This entry models six named landmarks and three complementary pairs, alongside his law of simultaneous contrast. It does not reproduce all 72 scales, the tone steps or the hemisphere. Swatches are editorial sRGB illustrations, not measurements of the plates, historical pigment recipes or modern scientific primaries. The Laboratory plots these illustrations in OKLCh; its angles need not match the historical circle.
+  tags: { tradition: western, kind: system, period: '1839; Martel translation, 1890 printing' }
+
+- type: concept
+  id: chevreul-red
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: chevreul-1890-principles-martel, locator: 'Paragraphs 159–162 and 170' }
+  label: Red (Chevreul)
+  description: The red scale in Chevreul’s chromatic circle. Its name and historical relationships do not specify a unique RGB value.
+  tags: { tradition: western, kind: colour }
+
+- type: representation
+  id: chevreul-red-srgb-editorial
+  concept: chevreul-red
+  review_state: extracted
+  rights_status: user-adaptation
+  evidence: { source: super-colour-chevreul-display, locator: 'red: #c43d37' }
+  space: srgb
+  coords: [0.76862745, 0.23921569, 0.21568627]
+  white: D65
+  profile: sRGB
+  method: Super Colour editorial illustration, chosen directly as #c43d37 in sRGB to distinguish the six named landmarks. No scan sampling, measurement, pigment conversion or historical colour match was attempted.
+  approximation_status: modern-approximation
+  notes: The name and relationships come from Chevreul; these coordinates are an independent app choice. This swatch does not demonstrate a physical complementary match.
+
+- type: relationship
+  id: chevreul-red-member
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: chevreul-1890-principles-martel, locator: 'Paragraphs 159–162' }
+  from: chevreul-red
+  to: chevreul-circle
+  edge: member-of
+
+- type: concept
+  id: chevreul-orange
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: chevreul-1890-principles-martel, locator: 'Paragraphs 159–162 and 170' }
+  label: Orange (Chevreul)
+  description: The orange scale in Chevreul’s chromatic circle. Its name and historical relationships do not specify a unique RGB value.
+  tags: { tradition: western, kind: colour }
+
+- type: representation
+  id: chevreul-orange-srgb-editorial
+  concept: chevreul-orange
+  review_state: extracted
+  rights_status: user-adaptation
+  evidence: { source: super-colour-chevreul-display, locator: 'orange: #df832d' }
+  space: srgb
+  coords: [0.8745098, 0.51372549, 0.17647059]
+  white: D65
+  profile: sRGB
+  method: Super Colour editorial illustration, chosen directly as #df832d in sRGB to distinguish the six named landmarks. No scan sampling, measurement, pigment conversion or historical colour match was attempted.
+  approximation_status: modern-approximation
+  notes: The name and relationships come from Chevreul; these coordinates are an independent app choice. This swatch does not demonstrate a physical complementary match.
+
+- type: relationship
+  id: chevreul-orange-member
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: chevreul-1890-principles-martel, locator: 'Paragraphs 159–162' }
+  from: chevreul-orange
+  to: chevreul-circle
+  edge: member-of
+
+- type: concept
+  id: chevreul-yellow
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: chevreul-1890-principles-martel, locator: 'Paragraphs 159–162 and 170' }
+  label: Yellow (Chevreul)
+  description: The yellow scale in Chevreul’s chromatic circle. Its name and historical relationships do not specify a unique RGB value.
+  tags: { tradition: western, kind: colour }
+
+- type: representation
+  id: chevreul-yellow-srgb-editorial
+  concept: chevreul-yellow
+  review_state: extracted
+  rights_status: user-adaptation
+  evidence: { source: super-colour-chevreul-display, locator: 'yellow: #e6c84f' }
+  space: srgb
+  coords: [0.90196078, 0.78431373, 0.30980392]
+  white: D65
+  profile: sRGB
+  method: Super Colour editorial illustration, chosen directly as #e6c84f in sRGB to distinguish the six named landmarks. No scan sampling, measurement, pigment conversion or historical colour match was attempted.
+  approximation_status: modern-approximation
+  notes: The name and relationships come from Chevreul; these coordinates are an independent app choice. This swatch does not demonstrate a physical complementary match.
+
+- type: relationship
+  id: chevreul-yellow-member
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: chevreul-1890-principles-martel, locator: 'Paragraphs 159–162' }
+  from: chevreul-yellow
+  to: chevreul-circle
+  edge: member-of
+
+- type: concept
+  id: chevreul-green
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: chevreul-1890-principles-martel, locator: 'Paragraphs 159–162 and 170' }
+  label: Green (Chevreul)
+  description: The green scale in Chevreul’s chromatic circle. Its name and historical relationships do not specify a unique RGB value.
+  tags: { tradition: western, kind: colour }
+
+- type: representation
+  id: chevreul-green-srgb-editorial
+  concept: chevreul-green
+  review_state: extracted
+  rights_status: user-adaptation
+  evidence: { source: super-colour-chevreul-display, locator: 'green: #4b8655' }
+  space: srgb
+  coords: [0.29411765, 0.5254902, 0.33333333]
+  white: D65
+  profile: sRGB
+  method: Super Colour editorial illustration, chosen directly as #4b8655 in sRGB to distinguish the six named landmarks. No scan sampling, measurement, pigment conversion or historical colour match was attempted.
+  approximation_status: modern-approximation
+  notes: The name and relationships come from Chevreul; these coordinates are an independent app choice. This swatch does not demonstrate a physical complementary match.
+
+- type: relationship
+  id: chevreul-green-member
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: chevreul-1890-principles-martel, locator: 'Paragraphs 159–162' }
+  from: chevreul-green
+  to: chevreul-circle
+  edge: member-of
+
+- type: concept
+  id: chevreul-blue
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: chevreul-1890-principles-martel, locator: 'Paragraphs 159–162 and 170' }
+  label: Blue (Chevreul)
+  description: The blue scale in Chevreul’s chromatic circle. Its name and historical relationships do not specify a unique RGB value.
+  tags: { tradition: western, kind: colour }
+
+- type: representation
+  id: chevreul-blue-srgb-editorial
+  concept: chevreul-blue
+  review_state: extracted
+  rights_status: user-adaptation
+  evidence: { source: super-colour-chevreul-display, locator: 'blue: #3869a6' }
+  space: srgb
+  coords: [0.21960784, 0.41176471, 0.65098039]
+  white: D65
+  profile: sRGB
+  method: Super Colour editorial illustration, chosen directly as #3869a6 in sRGB to distinguish the six named landmarks. No scan sampling, measurement, pigment conversion or historical colour match was attempted.
+  approximation_status: modern-approximation
+  notes: The name and relationships come from Chevreul; these coordinates are an independent app choice. This swatch does not demonstrate a physical complementary match.
+
+- type: relationship
+  id: chevreul-blue-member
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: chevreul-1890-principles-martel, locator: 'Paragraphs 159–162' }
+  from: chevreul-blue
+  to: chevreul-circle
+  edge: member-of
+
+- type: concept
+  id: chevreul-violet
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: chevreul-1890-principles-martel, locator: 'Paragraphs 159–162 and 170' }
+  label: Violet (Chevreul)
+  description: The violet scale in Chevreul’s chromatic circle. Its name and historical relationships do not specify a unique RGB value.
+  tags: { tradition: western, kind: colour }
+
+- type: representation
+  id: chevreul-violet-srgb-editorial
+  concept: chevreul-violet
+  review_state: extracted
+  rights_status: user-adaptation
+  evidence: { source: super-colour-chevreul-display, locator: 'violet: #80569c' }
+  space: srgb
+  coords: [0.50196078, 0.3372549, 0.61176471]
+  white: D65
+  profile: sRGB
+  method: Super Colour editorial illustration, chosen directly as #80569c in sRGB to distinguish the six named landmarks. No scan sampling, measurement, pigment conversion or historical colour match was attempted.
+  approximation_status: modern-approximation
+  notes: The name and relationships come from Chevreul; these coordinates are an independent app choice. This swatch does not demonstrate a physical complementary match.
+
+- type: relationship
+  id: chevreul-violet-member
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: chevreul-1890-principles-martel, locator: 'Paragraphs 159–162' }
+  from: chevreul-violet
+  to: chevreul-circle
+  edge: member-of
+
+- type: relationship
+  id: chevreul-red-green-complements
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: chevreul-1890-principles-martel, locator: 'Paragraph 170, printed p. 63' }
+  from: chevreul-red
+  to: chevreul-green
+  edge: complement-of
+  notes: Opposite ends of a diameter in Chevreul’s construction. This relationship is not calculated from the editorial display swatches.
+
+- type: relationship
+  id: chevreul-yellow-violet-complements
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: chevreul-1890-principles-martel, locator: 'Paragraph 170, printed p. 63' }
+  from: chevreul-yellow
+  to: chevreul-violet
+  edge: complement-of
+  notes: Opposite ends of a diameter in Chevreul’s construction. This relationship is not calculated from the editorial display swatches.
+
+- type: relationship
+  id: chevreul-blue-orange-complements
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: chevreul-1890-principles-martel, locator: 'Paragraph 170, printed p. 63' }
+  from: chevreul-blue
+  to: chevreul-orange
+  edge: complement-of
+  notes: Opposite ends of a diameter in Chevreul’s construction. This relationship is not calculated from the editorial display swatches.

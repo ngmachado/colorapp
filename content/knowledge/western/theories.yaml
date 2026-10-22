@@ -2,17 +2,19 @@
 
 - type: cultural-assertion
   id: chevreul-law-of-simultaneous-contrast
+  concept: chevreul-circle
   review_state: extracted
   rights_status: verified-reusable
-  evidence: { source: chevreul-1890-principles-martel, locator: '(16.)' }
+  evidence: { source: chevreul-1890-principles-martel, locator: 'Paragraph 16, printed p. 11' }
   claim: Chevreul's law of simultaneous contrast; two contiguous colours seen together appear as different as possible in composition and tone.
   passage: 'In the case where the eye sees at the same time two contiguous colours, they will appear as dissimilar as possible, both in their optical composition and in the height of their tone.'
   period: '1839 (French original); 1890 (this printing of the 1854 Martel translation)'
-  context: Part I, Introduction
-  notes: OCR of the scan reads "ivJiere" and "dissi?nilar" for "where" and "dissimilar"; the passage is given corrected and must be checked against the page image before promotion.
+  context: Part I, Section I, Chapter II
+  notes: OCR of the scan reads "ivJiere" and "dissi?nilar" for "where" and "dissimilar"; the corrected transcription was checked against the printed p. 11 image on 2026-10-20. This is transcription verification, not specialist review.
 
 - type: cultural-assertion
   id: chevreul-complementary-pairs
+  concept: chevreul-circle
   review_state: extracted
   rights_status: verified-reusable
   evidence:
@@ -24,4 +26,4 @@
   passage: 'Blue is the complementary of Orange (Red and Yellow). Red is the complementary of Green (Blue and Yellow). Yellow is the complementary of Violet (Blue and Red).'
   period: '1890 (this printing)'
   context: Translator's introduction for the unscientific reader; unnumbered
-  notes: These are pigment-mixing complements of the nineteenth century, not opposites on the OKLCh wheel. Chevreul's own definition is at (161.) and (170.), by the diameter of his chromatic circle.
+  notes: These are historical complementary relationships, not computed OKLCh opposites or a modern pigment-mixing recipe. Chevreul's own definition is at (161.) and (170.), by the diameter of his chromatic circle.

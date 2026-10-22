@@ -185,7 +185,7 @@
   edition: Third edition, with a new introduction for the unscientific reader and a complete index
   url: https://archive.org/details/b21285676
   archive_id: b21285676
-  access_date: '2026-10-14'
+  access_date: '2026-10-20'
   rights_notes: >-
     Scan from the Wellcome Collection, whose record states the work can be used for any purpose without restriction under
     copyright law. The OCR text is used for locators; passages are checked against the page images before promotion.
@@ -273,3 +273,14 @@
   url: https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html
   access_date: '2026-10-19'
   notes: Supporting explanation for WCAG 2.2 text contrast; not evidence for aesthetic harmony. Original lesson paraphrase only.
+
+- type: source
+  id: super-colour-chevreul-display
+  review_state: extracted
+  rights_status: verified-reusable
+  author: Super Colour contributors
+  title: Editorial display illustrations for Chevreul’s six named landmarks
+  date: '2026-10-20'
+  access_date: '2026-10-20'
+  rights_notes: Original app choices, released under the project’s MIT license.
+  notes: 'Six manually selected sRGB hex values: red #c43d37, orange #df832d, yellow #e6c84f, green #4b8655, blue #3869a6, violet #80569c. These distinguish labels in diagrams and Laboratory pairs. They are not sampled from a historical plate and carry no historical or colorimetric matching claim.'

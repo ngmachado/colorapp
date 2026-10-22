@@ -19,6 +19,9 @@ test('moving the hue changes the swatch and every structure row; a lock holds it
   await expect(page.getByTestId('readout')).toContainText('hsl');
   await expect(page.getByTestId('wuxing').locator('line')).toHaveCount(10);
   await expect(page.getByTestId('wuxing')).toHaveAttribute('href', '/dictionary/zh-wuxing');
+  await expect(
+    page.getByTestId('chevreul').getByRole('link', { name: 'Open the entry' }),
+  ).toHaveAttribute('href', '/dictionary/chevreul-circle');
   await expect(page.getByTestId('structures')).toContainText('Triadic');
   await expect(page.getByTestId('term')).toHaveCount(13);
   await expect(page.getByTestId('terms')).toContainText('Simultaneous contrast');

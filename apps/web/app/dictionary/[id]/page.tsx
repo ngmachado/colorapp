@@ -1,13 +1,9 @@
-import {
-  colour,
-  contrastRatio,
-  convert,
-  simulateCvd,
-  toHex,
-  type CvdType,
-} from '@sca/colour-engine';
+import { colour, convert, toHex } from '@sca/colour-engine';
 import type { Combination, KnowledgeRecord, Name, Representation, Source } from '@sca/knowledge';
 import Link from 'next/link';
+import { ColourVariations } from '@/components/colour-variations';
+import { ColourAccessibility } from '@/components/colour-accessibility';
+import { ChevreulCircle } from '@/components/chevreul-circle';
 import { notFound } from 'next/navigation';
 import { Citation, Field, ShortCite } from '@/components/record';
 import { SaveColour } from '@/components/save-colour';
@@ -16,7 +12,7 @@ import { Wheel } from '@/components/wheel';
 import { recordHref, recordTitle } from '@/components/search';
 import { Toolbar } from '@/components/toolbar';
 import { knowledge } from '@/lib/knowledge';
-import { labFromConcepts, labFromHexes } from '@/lib/lab-links';
+import { labFromConcepts } from '@/lib/lab-links';
 import { namePoints, nearestPoint } from '@/lib/palette-names';
 import { isRestricted, notDocumented, representationValue } from '@/lib/records';
 
@@ -32,8 +28,6 @@ const TABS = [
   ['accessibility', 'Accessibility'],
 ] as const;
 const STRUCTURES = ['analogous', 'complementary', 'triadic', 'split-complementary'] as const;
-/** Lightness steps for tints and shades, same chroma and hue as the entry, lightest first. */
-const SCALE = [0.95, 0.85, 0.75, 0.65, 0.55, 0.45, 0.35, 0.25, 0.15];
 /** The most columns the Laboratory holds. */
 const MAX_COLUMNS = 5;
 const EDGE_WORDS: Record<string, [string, string]> = {
@@ -151,8 +145,6 @@ export default async function Entry({ params }: { params: Promise<{ id: string }
   };
   const sourceOf = (r?: KnowledgeRecord) =>
     r && r.type !== 'source' ? (k.record(r.evidence.source) as Source | undefined) : undefined;
-  const white = colour('srgb', [1, 1, 1]);
-  const black = colour('srgb', [0.1, 0.1, 0.1]);
 
   return (
     <>
@@ -169,6 +161,11 @@ export default async function Entry({ params }: { params: Promise<{ id: string }
         {value && lch ? (
           <Link href={`/lab?seed=${shown!.id}`} className="btn">
             Use as seed
+          </Link>
+        ) : null}
+        {hex ? (
+          <Link href={`/colour/${hex.slice(1)}`} className="btn">
+            Inspect display colour
           </Link>
         ) : null}
         <Link href="/theory" className="btn">
@@ -269,6 +266,7 @@ export default async function Entry({ params }: { params: Promise<{ id: string }
                 </Field>
               ) : null}
             </dl>
+            {id === 'chevreul-circle' ? <ChevreulCircle /> : null}
           </section>
 
           <section id="values" className="flex flex-col gap-3.5">
@@ -334,34 +332,7 @@ export default async function Entry({ params }: { params: Promise<{ id: string }
                 <span>{value.achromatic ? 'achromatic: hue undefined' : 'inside sRGB'}</span>
               </div>
             ) : null}
-            {hex && lch ? (
-              <div className="flex flex-col gap-1.5" data-testid="entry-scale">
-                <span className="text-[13px] text-[var(--muted)]">
-                  Tints and shades · same chroma and hue, lightness stepped. Each opens the
-                  Laboratory with that step locked.
-                </span>
-                <span className="flex h-10 max-w-[640px] overflow-hidden rounded-md border border-[var(--line)]">
-                  {SCALE.map((L) => {
-                    const step = toHex(colour('oklch', [L, lch[1], lch[2] || 0]));
-                    const current = Math.abs(L - lch[0]) < 0.05;
-                    return (
-                      <Link
-                        key={L}
-                        href={labFromHexes([step])}
-                        className="flex-1"
-                        style={{
-                          background: step,
-                          outline: current ? '2px solid var(--fg)' : undefined,
-                          outlineOffset: -3,
-                        }}
-                        title={`L ${L.toFixed(2)} · ${step.toUpperCase()}`}
-                        aria-label={`Lightness ${L.toFixed(2)}, ${step.toUpperCase()}`}
-                      />
-                    );
-                  })}
-                </span>
-              </div>
-            ) : null}
+            {value ? <ColourVariations value={value} chroma={false} /> : null}
             {value && lch ? (
               <div className="flex flex-wrap items-start gap-5 pt-2" data-testid="entry-wheel">
                 <Wheel
@@ -476,7 +447,7 @@ export default async function Entry({ params }: { params: Promise<{ id: string }
                                 />
                                 {a.passage ? (
                                   <details className="mt-0.5">
-                                    <summary className="cursor-pointer list-none text-[13px] text-[var(--muted)] underline underline-offset-2">
+                                    <summary className="flex min-h-11 items-center cursor-pointer list-none text-[13px] text-[var(--muted)] underline underline-offset-2">
                                       source text
                                     </summary>
                                     <q className="mt-1 block max-w-[640px] border-l border-[var(--line)] pl-3 text-sm text-[var(--muted)]">
@@ -649,64 +620,7 @@ export default async function Entry({ params }: { params: Promise<{ id: string }
 
           <section id="accessibility" className="flex flex-col gap-3.5">
             <h2 className="text-[22px] font-bold">Accessibility</h2>
-            {value ? (
-              <div className="flex flex-wrap gap-4">
-                {[
-                  ['on white', white, '#ffffff', '#555555'],
-                  ['on black', black, '#1a1a1a', '#cccccc'],
-                ].map(([label, bg, bgHex, muted]) => {
-                  const ratio = contrastRatio(value, bg as typeof white);
-                  return (
-                    <div
-                      key={label as string}
-                      className="flex h-20 w-[260px] items-center justify-center gap-3 rounded-lg border border-[var(--line)]"
-                      style={{ background: bgHex as string }}
-                    >
-                      <span
-                        aria-hidden="true"
-                        className="h-9 w-9 rounded-md"
-                        style={{ background: hex! }}
-                      />
-                      <span className="font-mono text-[13px]" style={{ color: muted as string }}>
-                        {label as string} {ratio.toFixed(1)} ·{' '}
-                        {ratio >= 4.5 ? 'AA' : ratio >= 3 ? 'large text only' : 'fails AA'}
-                      </span>
-                    </div>
-                  );
-                })}
-              </div>
-            ) : (
-              <p className="text-sm text-[var(--muted)]">No displayable value to check.</p>
-            )}
-            {value ? (
-              <div className="flex flex-col gap-2" data-testid="cvd">
-                <span className="text-sm text-[var(--muted)]">
-                  Colour-vision simulation · Machado, Oliveira and Fernandes 2009, severity 1 · an
-                  approximation, not a medical model
-                </span>
-                <div className="flex flex-wrap gap-3">
-                  {(['protan', 'deutan', 'tritan'] as CvdType[]).map((t) => {
-                    const sim = toHex(simulateCvd(value, t));
-                    return (
-                      <span
-                        key={t}
-                        className="flex items-center gap-2 rounded-lg border border-[var(--line)] p-2 pr-3"
-                      >
-                        <span
-                          aria-hidden="true"
-                          className="h-9 w-9 rounded-md"
-                          style={{ background: sim }}
-                        />
-                        <span className="flex flex-col font-mono text-[12px]">
-                          <span>{t}</span>
-                          <span className="text-[var(--muted)]">{sim.slice(1).toUpperCase()}</span>
-                        </span>
-                      </span>
-                    );
-                  })}
-                </div>
-              </div>
-            ) : null}
+            {value ? <ColourAccessibility value={value} /> : <p>No displayable value to check.</p>}
           </section>
         </div>
       </main>

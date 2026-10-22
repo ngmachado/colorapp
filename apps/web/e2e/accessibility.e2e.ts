@@ -8,6 +8,7 @@ const pages = [
   '/dictionary?kind=systems',
   '/dictionary/ja-sakura-iro',
   '/dictionary/zh-wuxing-wood',
+  '/dictionary/chevreul-circle',
   '/dictionary/source/seigensha-wada-vol1',
   '/dictionary/source/chevreul-1890-principles-martel',
   '/dictionary/ja-ao',
@@ -23,6 +24,8 @@ for (const path of pages) {
     await page.goto(path);
     await page.waitForLoadState('networkidle');
     const results = await new AxeBuilder({ page })
+      // Deliberately low-contrast demonstration text; surrounding controls/results are audited.
+      .exclude('[data-testid="contrast-preview"]')
       .withTags(['wcag2a', 'wcag2aa', 'wcag22aa'])
       .analyze();
     expect(
@@ -55,6 +58,8 @@ test('background stays white when the OS prefers dark', async ({ browser }) => {
     'rgb(255, 255, 255)',
   );
   const results = await new AxeBuilder({ page })
+    // Deliberately low-contrast demonstration text; surrounding controls/results are audited.
+    .exclude('[data-testid="contrast-preview"]')
     .withTags(['wcag2a', 'wcag2aa', 'wcag22aa'])
     .analyze();
   expect(results.violations.map((v) => v.id)).toEqual([]);
@@ -65,6 +70,8 @@ test('proportion controls have no axe violations', async ({ page }) => {
   await page.goto('/lab');
   await page.getByTestId('proportions-button').click();
   const results = await new AxeBuilder({ page })
+    // Deliberately low-contrast demonstration text; surrounding controls/results are audited.
+    .exclude('[data-testid="contrast-preview"]')
     .withTags(['wcag2a', 'wcag2aa', 'wcag22aa'])
     .analyze();
   expect(results.violations).toEqual([]);

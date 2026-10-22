@@ -235,6 +235,15 @@ export default async function Dictionary({ searchParams }: { searchParams: Promi
                   {nearLab ? ` · nearest to #${near.replace('#', '').toUpperCase()} first` : ''}
                   {q ? ` · matching “${q}”` : ''}
                 </span>
+                {nearLab ? (
+                  <Link href={`/colour/${near.replace('#', '').toLowerCase()}`} className="btn">
+                    Inspect this colour
+                  </Link>
+                ) : (
+                  <Link href="/colour" className="btn">
+                    Inspect a hex
+                  </Link>
+                )}
                 <span className="flex gap-1" role="group" aria-label="View">
                   {(['grid', 'list'] as const).map((v) => {
                     const qs = new URLSearchParams();

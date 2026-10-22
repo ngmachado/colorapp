@@ -147,11 +147,11 @@
     paragraphs:
       - Chevreul, Itten and Albers approached colour through different observations and teaching practices. Chevreul's law of 1839 is quoted here by paragraph; Itten and Albers have bibliographic entries only. Their dates do not decide the usefulness of an exercise; attribution, evidence and scope matter.
       - Japanese colour vocabularies, layering practices and Wuxing correspondences describe different kinds of cultural knowledge. A symbolic relationship or historical name does not uniquely determine a modern RGB value or a palette-generation rule.
-    example: Choose either the Five Phases or Japanese layering example below; these are selected examples, not a survey of colour history. Identify the documented association, its source and any modern display approximation.
+    example: Open Chevreul’s circle below and follow a complementary pair into the Laboratory. Compare the historical relationship with its editorial screen swatches. Alternatively, open the Five Phases or Japanese layering record; these are selected examples, not a survey of colour history. Identify the documented association, its source and any modern display approximation.
     limits: This is a selected collection, not a comprehensive history or a single Western or Asian theory. Read each entry's evidence and representation limits before reusing its claims.
     references:
       - {
           source: chevreul-1890-principles-martel,
-          locator: 'Paragraph 16; 1890 edition of the historical text',
+          locator: 'Paragraphs 16 and 159–170; simultaneous contrast and the chromatic circle, 1890 edition',
           url: 'https://archive.org/details/b21285676',
         }

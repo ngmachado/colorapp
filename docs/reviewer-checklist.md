@@ -50,3 +50,5 @@ Use one checklist per pull request that changes `content/`. Name yourself in the
 A reviewer with colour-science training must read all six lessons in `content/curriculum/lessons.yaml` alongside `/theory` and the Laboratory. No reviewer has been assigned and no specialist sign-off is claimed.
 
 Record the reviewer's name, relevant qualifications, date and reviewed commit. For each lesson, log the exact statement, severity, proposed correction and supporting primary reference. Check especially the distinction between perception and coordinates, lightness and luminance, gamut mapping, complement terminology, colour-vision simulation limits, and what WCAG contrast does and does not establish. Try the surrounding-colour exercise and proportion strip. Close each material finding before marking the review complete; retain limitations even after review.
+
+Use the [six-lesson review packet](lesson-review-packet.md) for the proposed one-hour review, claim locations, source gaps and findings form. Reviewer assignment and sign-off remain pending.

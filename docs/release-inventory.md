@@ -1,19 +1,19 @@
-# Knowledge release bb2bf000569b446e
+# Knowledge release 6d5f266b8327fee3
 
-Total records: 116
+Total records: 139
 
 ### Type
 
 | Type | Records |
 | --- | --- |
-| source | 22 |
-| concept | 27 |
+| source | 23 |
+| concept | 34 |
 | name | 26 |
-| representation | 17 |
+| representation | 23 |
 | material-sample | 0 |
 | combination | 3 |
 | cultural-assertion | 6 |
-| relationship | 15 |
+| relationship | 24 |
 
 ### Review state
 
@@ -22,7 +22,7 @@ Total records: 116
 | discovered | 76 |
 | bibliographic | 34 |
 | published | 4 |
-| extracted | 2 |
+| extracted | 25 |
 
 ### Rights status
 
@@ -30,7 +30,8 @@ Total records: 116
 | --- | --- |
 | unreviewed | 78 |
 | verified-restricted | 31 |
-| verified-reusable | 7 |
+| verified-reusable | 24 |
+| user-adaptation | 6 |
 
 ### Records
 
@@ -39,8 +40,30 @@ Total records: 116
 | albers-interaction-of-color-yale-2013 | source | bibliographic | verified-restricted |
 | bogushevskaya-2023-chinese-color-language | source | discovered | verified-restricted |
 | chevreul-1890-principles-martel | source | bibliographic | verified-reusable |
+| chevreul-blue | concept | extracted | verified-reusable |
+| chevreul-blue-member | relationship | extracted | verified-reusable |
+| chevreul-blue-orange-complements | relationship | extracted | verified-reusable |
+| chevreul-blue-srgb-editorial | representation | extracted | user-adaptation |
+| chevreul-circle | concept | extracted | verified-reusable |
 | chevreul-complementary-pairs | cultural-assertion | extracted | verified-reusable |
+| chevreul-green | concept | extracted | verified-reusable |
+| chevreul-green-member | relationship | extracted | verified-reusable |
+| chevreul-green-srgb-editorial | representation | extracted | user-adaptation |
 | chevreul-law-of-simultaneous-contrast | cultural-assertion | extracted | verified-reusable |
+| chevreul-orange | concept | extracted | verified-reusable |
+| chevreul-orange-member | relationship | extracted | verified-reusable |
+| chevreul-orange-srgb-editorial | representation | extracted | user-adaptation |
+| chevreul-red | concept | extracted | verified-reusable |
+| chevreul-red-green-complements | relationship | extracted | verified-reusable |
+| chevreul-red-member | relationship | extracted | verified-reusable |
+| chevreul-red-srgb-editorial | representation | extracted | user-adaptation |
+| chevreul-violet | concept | extracted | verified-reusable |
+| chevreul-violet-member | relationship | extracted | verified-reusable |
+| chevreul-violet-srgb-editorial | representation | extracted | user-adaptation |
+| chevreul-yellow | concept | extracted | verified-reusable |
+| chevreul-yellow-member | relationship | extracted | verified-reusable |
+| chevreul-yellow-srgb-editorial | representation | extracted | user-adaptation |
+| chevreul-yellow-violet-complements | relationship | extracted | verified-reusable |
 | cie-colorimetry-2018 | source | bibliographic | verified-restricted |
 | cie-ilv-2020 | source | bibliographic | verified-restricted |
 | cie-metamerism-1989 | source | bibliographic | verified-restricted |
@@ -94,6 +117,7 @@ Total records: 116
 | seigensha-use-guidelines | source | bibliographic | verified-restricted |
 | seigensha-wada-vol1 | source | bibliographic | verified-restricted |
 | seigensha-wada-vol2 | source | bibliographic | verified-restricted |
+| super-colour-chevreul-display | source | extracted | verified-reusable |
 | w3c-contrast-minimum | source | bibliographic | unreviewed |
 | w3c-css-color-4 | source | published | verified-reusable |
 | w3c-use-of-color | source | bibliographic | unreviewed |
