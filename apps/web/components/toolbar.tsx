@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { unstable_rethrow } from 'next/navigation';
 import type { ReactNode } from 'react';
+import { ThemeToggle } from '@/components/theme-toggle';
 import { ACCOUNTS } from '@/lib/accounts';
 import { currentUser } from '@/lib/current-user';
 
@@ -58,11 +59,12 @@ export async function Toolbar({
           </Link>
         ))}
       </nav>
-      <div className="hidden min-w-0 flex-1 text-center text-sm text-[var(--muted)] sm:block">
+      <div className="hidden min-w-0 flex-1 truncate text-center text-sm text-[var(--muted)] sm:block">
         {middle}
       </div>
       <div className="ml-auto flex flex-wrap items-center gap-2">
         {children}
+        <ThemeToggle />
         {user ? (
           <Link href="/account" className="text-sm text-[var(--muted)] hover:text-[var(--fg)]">
             {user.email ?? 'Account'}

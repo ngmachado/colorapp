@@ -5,10 +5,6 @@
   --font-mono: 'DM Mono', ui-monospace, Menlo, monospace;
 }
 
-:root {
-  color-scheme: light only;
-}
-
 body {
   background: var(--bg);
   color: var(--fg);
@@ -132,7 +128,7 @@ input[type='range'].strip::-moz-range-thumb {
   font-size: 11px;
   font-weight: 500;
   color: var(--muted);
-  background: rgba(255, 255, 255, 0.75);
+  background: color-mix(in srgb, var(--surface) 78%, transparent);
 }
 .space-pin {
   transform: translate(10px, -50%);
@@ -140,6 +136,6 @@ input[type='range'].strip::-moz-range-thumb {
   font-size: 12px;
   font-weight: 500;
   color: var(--fg);
-  background: rgba(255, 255, 255, 0.85);
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
   border: 1px solid var(--line);
 }

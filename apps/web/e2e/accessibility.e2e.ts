@@ -50,12 +50,18 @@ test('the toolbar is keyboard navigable with visible focus', async ({ page }) =>
   expect(await lab.evaluate((el) => getComputedStyle(el).outlineStyle)).not.toBe('none');
 });
 
-test('background stays white when the OS prefers dark', async ({ browser }) => {
+test('the background stays white under a dark OS, and the chosen dark theme passes the same audit', async ({
+  browser,
+}) => {
   const ctx = await browser.newContext({ colorScheme: 'dark' });
   const page = await ctx.newPage();
   await page.goto('/theory');
   expect(await page.evaluate(() => getComputedStyle(document.body).backgroundColor)).toBe(
     'rgb(255, 255, 255)',
+  );
+  await page.getByTestId('theme-toggle').click();
+  expect(await page.evaluate(() => getComputedStyle(document.body).backgroundColor)).toBe(
+    'rgb(17, 18, 19)',
   );
   const results = await new AxeBuilder({ page })
     // Deliberately low-contrast demonstration text; surrounding controls/results are audited.

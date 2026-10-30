@@ -5,6 +5,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import * as THREE from 'three';
 import type { NamePoint } from '@/lib/nearest';
 import { groupLabel } from '@/lib/records';
+import { useThemeVersion } from '@/lib/theme';
 import {
   BAND,
   distance,
@@ -61,6 +62,7 @@ export function SpaceMap({
   const [hover, setHover] = useState<{ p: NamePoint; x: number; y: number } | null>(null);
   const [webgl, setWebgl] = useState<'unknown' | 'yes' | 'no'>('unknown');
   const palette = useMemo(() => parseHexList(paletteText), [paletteText]);
+  const themeVersion = useThemeVersion();
   const groups = useMemo(() => [...new Set(points.map((p) => p.group))].sort(), [points]);
   const visible = useCallback(
     (p: NamePoint) =>
@@ -97,6 +99,7 @@ export function SpaceMap({
     orbit: { theta: number; phi: number; radius: number; auto: boolean };
     labels: HTMLDivElement[];
     pins: HTMLDivElement[];
+    lineMaterials: THREE.LineBasicMaterial[];
   } | null>(null);
   const stateRef = useRef({ visible, hover: -1, palette, points });
   stateRef.current = { visible, hover: hover ? points.indexOf(hover.p) : -1, palette, points };
@@ -124,10 +127,15 @@ export function SpaceMap({
     const key = new THREE.DirectionalLight(0xffffff, 0.35);
     key.position.set(80, 140, 120);
     sc.add(key);
-    const grey = new THREE.Color('#6b6f76');
+    const token = (n: string) =>
+      getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+    const grey = new THREE.Color(token('--muted') || '#6b6f76');
+    const ink = new THREE.Color(token('--fg') || '#1a1a1a');
+    const wireMat = new THREE.LineBasicMaterial({ color: grey, transparent: true, opacity: 0.35 });
+    const axesMat = new THREE.LineBasicMaterial({ color: grey, transparent: true, opacity: 0.5 });
     const wire = new THREE.LineSegments(
       new THREE.BufferGeometry().setFromPoints(gamutSegments().map(v3)),
-      new THREE.LineBasicMaterial({ color: grey, transparent: true, opacity: 0.35 }),
+      wireMat,
     );
     sc.add(wire);
     sc.add(
@@ -142,7 +150,7 @@ export function SpaceMap({
             [0.5, 0, 0.4],
           ].map((t) => v3(scenePosition(t as Triple))),
         ),
-        new THREE.LineBasicMaterial({ color: grey, transparent: true, opacity: 0.5 }),
+        axesMat,
       ),
     );
     const mesh = new THREE.InstancedMesh(
@@ -171,7 +179,7 @@ export function SpaceMap({
           v3(scenePosition(b.oklab)),
         ]),
         new THREE.LineDashedMaterial({
-          color: 0x1a1a1a,
+          color: ink,
           dashSize: 2,
           gapSize: 1.5,
           transparent: true,
@@ -202,6 +210,7 @@ export function SpaceMap({
       orbit,
       labels,
       pins: [],
+      lineMaterials: [wireMat, axesMat],
     };
 
     const project = (lab: Triple) => {
@@ -330,7 +339,9 @@ export function SpaceMap({
     const s = scene.current;
     if (!s) return;
     const dummy = new THREE.Object3D();
-    const bg = new THREE.Color('#ffffff');
+    const bg = new THREE.Color(
+      getComputedStyle(document.documentElement).getPropertyValue('--bg').trim() || '#ffffff',
+    );
     const hoverIndex = hover ? points.indexOf(hover.p) : -1;
     points.forEach((p, i) => {
       const vis = visible(p);
@@ -345,7 +356,7 @@ export function SpaceMap({
     });
     s.mesh.instanceMatrix.needsUpdate = true;
     if (s.mesh.instanceColor) s.mesh.instanceColor.needsUpdate = true;
-  }, [points, visible, hover, webgl]);
+  }, [points, visible, hover, webgl, themeVersion]);
 
   // Palette spheres and their pins.
   useEffect(() => {
@@ -358,7 +369,11 @@ export function SpaceMap({
       const at = v3(scenePosition(c.lab));
       const ring = new THREE.Mesh(
         new THREE.SphereGeometry(3.4, 20, 14),
-        new THREE.MeshBasicMaterial({ color: 0x1a1a1a, side: THREE.BackSide }),
+        new THREE.MeshBasicMaterial({
+          color:
+            getComputedStyle(document.documentElement).getPropertyValue('--fg').trim() || '#1a1a1a',
+          side: THREE.BackSide,
+        }),
       );
       const ball = new THREE.Mesh(
         new THREE.SphereGeometry(2.8, 20, 14),
@@ -378,6 +393,24 @@ export function SpaceMap({
   useEffect(() => {
     if (scene.current) scene.current.edgeGroup.visible = showEdges;
   }, [showEdges, webgl]);
+
+  // Lines and rings are drawn in the theme's ink and muted grey; both change with the theme.
+  useEffect(() => {
+    const s = scene.current;
+    if (!s) return;
+    const token = (n: string) =>
+      getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+    const ink = new THREE.Color(token('--fg') || '#1a1a1a');
+    const grey = new THREE.Color(token('--muted') || '#6b6f76');
+    s.edgeGroup.traverse((o) => {
+      if (o instanceof THREE.Line) (o.material as THREE.LineDashedMaterial).color.copy(ink);
+    });
+    s.paletteGroup.traverse((o) => {
+      if (o instanceof THREE.Mesh && (o.material as THREE.Material).side === THREE.BackSide)
+        (o.material as THREE.MeshBasicMaterial).color.copy(ink);
+    });
+    for (const m of s.lineMaterials) m.color.copy(grey);
+  }, [themeVersion, palette, webgl]);
 
   const lookAt = (p: NamePoint) => {
     const s = scene.current;
@@ -421,7 +454,7 @@ export function SpaceMap({
           >
             <span className="flex items-center gap-1.5 font-semibold">
               <span
-                className="inline-block h-3 w-3 rounded-sm border border-black/15"
+                className="inline-block h-3 w-3 rounded-sm border border-[var(--line)]"
                 style={{ background: hover.p.hex }}
               />
               {hover.p.label}
@@ -441,12 +474,12 @@ export function SpaceMap({
           </div>
         ) : null}
         {webgl !== 'no' ? (
-          <p className="pointer-events-none absolute bottom-2.5 left-3 m-0 rounded bg-white/80 px-2 py-1 text-xs text-[var(--muted)]">
+          <p className="pointer-events-none absolute bottom-2.5 left-3 m-0 rounded bg-[color-mix(in_srgb,var(--surface)_80%,transparent)] px-2 py-1 text-xs text-[var(--muted)]">
             Drag to turn · scroll to zoom · hover a point · click to select
           </p>
         ) : null}
       </div>
-      <aside className="flex min-w-0 flex-col gap-5 overflow-y-auto border-t border-[var(--line)] bg-[var(--panel,#fafafa)] px-5 py-4 md:border-t-0 md:border-l">
+      <aside className="flex min-w-0 flex-col gap-5 overflow-y-auto border-t border-[var(--line)] bg-[var(--panel)] px-5 py-4 md:border-t-0 md:border-l">
         <section>
           <h2 className="mb-2 font-mono text-[11px] tracking-[1px] text-[var(--muted)] uppercase">
             Collections
@@ -459,7 +492,7 @@ export function SpaceMap({
                 role="radio"
                 aria-checked={set === g}
                 onClick={() => setSet(g)}
-                className={`rounded-full border px-2.5 py-1 text-xs font-medium ${set === g ? 'border-[var(--fg)] bg-[var(--fg)] text-white' : 'border-[var(--line)] bg-[var(--surface)]'}`}
+                className={`rounded-full border px-2.5 py-1 text-xs font-medium ${set === g ? 'border-[var(--fg)] bg-[var(--fg)] text-[var(--bg)]' : 'border-[var(--line)] bg-[var(--surface)]'}`}
                 data-testid="space-set"
               >
                 {g === 'all' ? `all ${points.length}` : `${groupLabel(g)} ${count(g)}`}
@@ -552,7 +585,7 @@ export function SpaceMap({
             </h2>
             <div className="flex items-center gap-2.5">
               <span
-                className="h-10 w-10 rounded-lg border border-black/10"
+                className="h-10 w-10 rounded-lg border border-[var(--line)]"
                 style={{ background: selected.hex }}
               />
               <div>
@@ -573,7 +606,7 @@ export function SpaceMap({
               {near.map((n) => (
                 <li key={n.id} className="flex items-center gap-2 text-xs">
                   <span
-                    className="h-3.5 w-3.5 flex-none rounded-sm border border-black/10"
+                    className="h-3.5 w-3.5 flex-none rounded-sm border border-[var(--line)]"
                     style={{ background: n.hex }}
                   />
                   <Link href={`/dictionary/${n.conceptId}`}>{n.label}</Link>
@@ -615,7 +648,10 @@ export function SpaceMap({
 function PaletteRow({ c, near }: { c: PaletteColour; near?: NamePoint & { distance: number } }) {
   return (
     <div className="grid grid-cols-[28px_1fr] items-start gap-2.5" data-testid="space-palette-row">
-      <span className="h-7 w-7 rounded-md border border-black/10" style={{ background: c.hex }} />
+      <span
+        className="h-7 w-7 rounded-md border border-[var(--line)]"
+        style={{ background: c.hex }}
+      />
       <div className="min-w-0">
         <div className="font-mono text-xs font-medium">
           {c.hex.toUpperCase()} <span className="text-[var(--muted)]">L {c.lab[0].toFixed(2)}</span>

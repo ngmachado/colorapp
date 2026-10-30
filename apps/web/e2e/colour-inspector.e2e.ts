@@ -19,8 +19,13 @@ test('hex entry normalizes, validates and exposes copyable conversions', async (
       },
     }),
   );
-  await page.getByRole('button', { name: 'Copy OKLCh', exact: true }).click();
-  await expect(page.getByRole('status').filter({ hasText: 'OKLCh copied' })).toBeVisible();
+  // The page may not be hydrated yet when it first renders; a click before that is lost, so retry.
+  await expect(async () => {
+    await page.getByRole('button', { name: 'Copy OKLCh', exact: true }).click();
+    await expect(page.getByRole('status').filter({ hasText: 'OKLCh copied' })).toBeVisible({
+      timeout: 1500,
+    });
+  }).toPass({ timeout: 15000 });
   expect(await page.evaluate(() => (window as unknown as { copied: string }).copied)).toMatch(
     /^oklch\(/,
   );

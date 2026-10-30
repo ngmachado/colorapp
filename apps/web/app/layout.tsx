@@ -25,17 +25,29 @@ export const metadata: Metadata = {
   },
 };
 
+/**
+ * Light and dark are the same token set with two value sets. White is the default whatever the OS prefers; dark
+ * applies only when the reader chose it on the toolbar. The choice is kept in localStorage and applied here before
+ * the first paint so nothing flashes.
+ */
+export const THEME_STORAGE_KEY = 'sca.theme';
+const themeCss = [
+  `:root{${cssVariables('light')}color-scheme:light}`,
+  `:root[data-theme="dark"]{${cssVariables('dark')}color-scheme:dark}`,
+].join('');
+const themeScript = `try{if(localStorage.getItem('${THEME_STORAGE_KEY}')==='dark')document.documentElement.dataset.theme='dark'}catch(e){}`;
+
 export default function RootLayout({ children }: { children: ReactNode }) {
-  const vars = `:root{${cssVariables('light')}}`;
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500&family=Noto+Sans+SC:wght@400;500&display=swap"
           rel="stylesheet"
         />
-        <style dangerouslySetInnerHTML={{ __html: vars }} />
+        <style dangerouslySetInnerHTML={{ __html: themeCss }} />
       </head>
       <body className="min-h-screen">{children}</body>
     </html>

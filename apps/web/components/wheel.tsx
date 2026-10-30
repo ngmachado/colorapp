@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { useThemeVersion } from '@/lib/theme';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { nearestPoint, type NamePoint } from '@/lib/nearest';
 import type { Oklch } from '@/lib/palette-param';
@@ -67,7 +68,16 @@ interface Props {
   className?: string;
 }
 
-const BEYOND: [number, number, number] = [236, 236, 236];
+/** The grey painted where sRGB cannot show a colour; read from the theme so it sits right on either background. */
+function beyondGrey(el: Element): [number, number, number] {
+  const v = getComputedStyle(el)
+    .getPropertyValue('--wheel-beyond')
+    .split(',')
+    .map((n) => Number(n.trim()));
+  return v.length === 3 && v.every((n) => Number.isFinite(n))
+    ? (v as [number, number, number])
+    : [236, 236, 236];
+}
 
 /** Documented points further than this from the slice's lightness are not drawn: a dot on a slice means "at this lightness". */
 export const OVERLAY_BAND = 0.15;
@@ -123,6 +133,7 @@ export function Wheel({
     free: boolean;
     key: string;
   } | null>(null);
+  const themeVersion = useThemeVersion();
   const [pressOnDisc, setPressOnDisc] = useState<{ x: number; y: number } | null>(null);
 
   const offsets = structure ? ruleOffsets(structure, angles) : null;
@@ -136,6 +147,7 @@ export function Wheel({
     if (!ctx) return;
     const img = ctx.createImageData(size, size);
     const d = img.data;
+    const BEYOND = beyondGrey(canvas);
     for (let y = 0; y < size; y++) {
       for (let x = 0; x < size; x++) {
         const { c, h } = fromXY(x + 0.5, y + 0.5, scale, centre);
@@ -152,7 +164,7 @@ export function Wheel({
       }
     }
     ctx.putImageData(img, 0, 0);
-  }, [size, slice, scale, centre, maxChroma]);
+  }, [size, slice, scale, centre, maxChroma, themeVersion]);
 
   const outline = useMemo(() => {
     const pts = gamutOutline(slice, 3).map(({ c, h }) =>
