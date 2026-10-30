@@ -1,4 +1,4 @@
-import type { Concept, Relationship } from '@sca/knowledge';
+import type { Combination, Concept, Relationship } from '@sca/knowledge';
 import { knowledge } from './knowledge';
 import { namePoints } from './palette-names';
 import { WUXING_ORDER, type ColourSet } from './systems';
@@ -19,7 +19,8 @@ const PAIR_WORDS: Record<string, string> = {
 
 /**
  * Sets the Laboratory can load whole, read from the records: every group concept whose members fit in
- * the columns, and every documented complementary or characteristic pair. Nothing here is a wheel rule.
+ * the columns, every documented complementary or characteristic pair, and every layering whose layers
+ * fit. Nothing here is a wheel rule.
  */
 export function documentedSets(): ColourSet[] {
   const k = knowledge();
@@ -27,15 +28,22 @@ export function documentedSets(): ColourSet[] {
   const label = (id: string) => (k.record(id) as Concept | undefined)?.label ?? id;
   const rels = k.byType('relationship') as Relationship[];
   const out: ColourSet[] = [];
-  const groups = new Map<string, string[]>();
+  const groups = new Map<string, { members: string[]; source: string }>();
   for (const r of rels)
-    if (r.edge === 'member-of') groups.set(r.to, [...(groups.get(r.to) ?? []), r.from]);
-  for (const [group, members] of groups) {
-    if (members.length > MAX_COLUMNS || members.filter((m) => shown.has(m)).length < 2) continue;
+    if (r.edge === 'member-of') {
+      const g = groups.get(r.to) ?? { members: [], source: r.evidence.source };
+      g.members.push(r.from);
+      groups.set(r.to, g);
+    }
+  for (const [group, g] of groups) {
+    if (g.members.length > MAX_COLUMNS || g.members.filter((m) => shown.has(m)).length < 2)
+      continue;
     out.push({
       id: group,
       label: label(group),
-      conceptIds: [...members].sort((a, b) => rank(a) - rank(b)),
+      conceptIds: [...g.members].sort((a, b) => rank(a) - rank(b)),
+      kind: 'group',
+      source: g.source,
     });
   }
   for (const r of rels) {
@@ -45,6 +53,22 @@ export function documentedSets(): ColourSet[] {
       id: r.id,
       label: `${label(r.from)} · ${label(r.to)}, ${word}`,
       conceptIds: [r.from, r.to],
+      kind: 'pair',
+      source: r.evidence.source,
+    });
+  }
+  for (const c of k.byType('combination') as Combination[]) {
+    const items = c.order_documented
+      ? [...c.items].sort((a, b) => (a.layer_index ?? 0) - (b.layer_index ?? 0))
+      : c.items;
+    const ids = items.map((i) => i.concept);
+    if (ids.length > MAX_COLUMNS || ids.filter((m) => shown.has(m)).length < 2) continue;
+    out.push({
+      id: c.id,
+      label: `${c.label}, layering`,
+      conceptIds: ids,
+      kind: 'layering',
+      source: c.evidence.source,
     });
   }
   return out;

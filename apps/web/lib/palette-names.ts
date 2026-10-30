@@ -1,5 +1,5 @@
 import { colour, convert, toHex } from '@sca/colour-engine';
-import type { Representation } from '@sca/knowledge';
+import type { Representation, Source } from '@sca/knowledge';
 import { knowledge } from './knowledge';
 import type { NamePoint } from './nearest';
 
@@ -31,7 +31,46 @@ export function namePoints(): NamePoint[] {
       queue: inQueue(rep) || inQueue(concept),
       oklab: [p.l, p.a, p.b],
       hex: toHex(convert(colour('oklab', [p.l, p.a, p.b]), 'srgb')),
+      ...(rep.coords
+        ? {
+            provenance: {
+              space: rep.space,
+              coords: rep.coords,
+              approximation: rep.approximation_status,
+              method: rep.method,
+              source: rep.evidence.source,
+              ...(rep.evidence.locator ? { locator: rep.evidence.locator } : {}),
+            },
+          }
+        : {}),
     });
+  }
+  return out;
+}
+
+/** A citation for each source the points rely on, keyed by source id, for exports and comparisons. */
+export interface SourceCitation {
+  id: string;
+  title: string;
+  author: string;
+  date?: string;
+  url?: string;
+}
+export function sourceCitations(points: NamePoint[]): Record<string, SourceCitation> {
+  const k = knowledge();
+  const out: Record<string, SourceCitation> = {};
+  for (const p of points) {
+    const id = p.provenance?.source;
+    if (!id || out[id]) continue;
+    const s = k.record(id) as Source | undefined;
+    if (!s || s.type !== 'source') continue;
+    out[id] = {
+      id,
+      title: s.title,
+      author: s.author,
+      ...(s.date ? { date: s.date } : {}),
+      ...(s.url ? { url: s.url } : {}),
+    };
   }
   return out;
 }

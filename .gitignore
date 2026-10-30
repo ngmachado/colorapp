@@ -14,3 +14,6 @@ playwright-report/
 .neon
 .vercel
 *.tsbuildinfo
+
+# Munsell renotation table: RIT terms allow one personal copy only; fetch it locally with scripts/fetch-munsell.mjs
+content/reference/munsell/real.dat

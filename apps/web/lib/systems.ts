@@ -6,6 +6,10 @@ export interface ColourSet {
   id: string;
   label: string;
   conceptIds: string[];
+  /** What the records document: a group (such as a system's members), an attributed pair, or a layering. */
+  kind?: 'group' | 'pair' | 'layering';
+  /** The source record the relation is read from. */
+  source?: string;
 }
 
 export const WUXING_ORDER = [

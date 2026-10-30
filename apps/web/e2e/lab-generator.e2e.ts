@@ -84,7 +84,9 @@ test('the address bar holds the palette and reopening the URL restores it; JSON 
   ]);
   expect(download.suggestedFilename()).toBe('palette-triadic-4028.json');
   const body = JSON.parse(await readFile(await download.path(), 'utf8')) as {
-    colours: { role: string; hex: string; nearest: unknown }[];
+    colours: { role: string; hex: string; nearest: { record: string; collection: string } }[];
+    sources: Record<string, { title: string }>;
+    notes: string[];
   };
   expect(body.colours.map((c) => c.role)).toEqual([
     'dominant',
@@ -94,4 +96,72 @@ test('the address bar holds the palette and reopening the URL restores it; JSON 
     'highlight',
   ]);
   expect(body.colours.map((c) => c.hex)).toEqual(drawn);
+  expect(body.colours[0]!.nearest.collection).toBeTruthy();
+  expect(body.notes.join(' ')).toContain('not an identification');
+});
+
+test('exports from documented records carry the record, its source and whether the column was edited', async ({
+  page,
+}) => {
+  await page.goto('/lab?from=css-rebeccapurple,ja-sakura-iro');
+  await expect(page.getByTestId('column')).toHaveCount(2);
+  await page.getByTestId('export').click();
+  const [download] = await Promise.all([
+    page.waitForEvent('download'),
+    page.getByTestId('export-json').click(),
+  ]);
+  const body = JSON.parse(await readFile(await download.path(), 'utf8')) as {
+    colours: {
+      record: {
+        id: string;
+        approximation: string;
+        source: string;
+        edited: boolean;
+        value: { space: string };
+      };
+    }[];
+    sources: Record<string, { title: string; author: string }>;
+  };
+  expect(body.colours[0]!.record).toMatchObject({
+    id: 'css-rebeccapurple-srgb',
+    approximation: 'published-value',
+    source: 'w3c-css-color-4',
+    edited: false,
+    value: { space: 'srgb' },
+  });
+  expect(body.colours[1]!.record.id).toBe('ja-sakura-iro-srgb-jis');
+  expect(body.sources['w3c-css-color-4']!.title).toContain('CSS Color');
+  // The SVG names the record on each swatch.
+  await page.getByTestId('export').click();
+  const [svg] = await Promise.all([
+    page.waitForEvent('download'),
+    page.getByTestId('export-svg').click(),
+  ]);
+  const text = await readFile(await svg.path(), 'utf8');
+  expect(text).toContain('data-record="css-rebeccapurple-srgb"');
+  expect(text).toContain('data-edited="false"');
+  expect(text).toContain('<metadata><![CDATA[');
+  // Editing a column marks it as edited in the CSS comment.
+  await page.getByTestId('column').nth(0).hover();
+  await page.getByTestId('column').nth(0).getByTestId('scale').click();
+  await page.getByRole('button', { name: 'dominant lightness 0.95' }).click();
+  await page.evaluate(() =>
+    Object.defineProperty(navigator, 'clipboard', {
+      configurable: true,
+      value: {
+        writeText: async (text: string) => {
+          (window as unknown as { copied: string }).copied = text;
+        },
+      },
+    }),
+  );
+  await page.getByTestId('export').click();
+  await page.getByRole('button', { name: 'Copy CSS variables' }).click();
+  await expect(page.getByTestId('notice')).toContainText('CSS copied');
+  const css = await page.evaluate(() => (window as unknown as { copied: string }).copied);
+  expect(css).toMatch(/dominant: from record css-rebeccapurple-srgb .* edited in the Laboratory/);
+  expect(css).toMatch(/secondary: from record ja-sakura-iro-srgb-jis .* as recorded/);
+  await expect(page.getByTestId('column').nth(0).getByTestId('from-record')).toContainText(
+    'rebeccapurple · edited',
+  );
 });

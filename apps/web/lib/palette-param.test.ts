@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import { parsePalette, parseStateExtras, stateParams } from './palette-param';
+import { parsePairs, parsePalette, parseStateExtras, stateParams } from './palette-param';
 
 describe('palette state in the address', () => {
-  it('round-trips names with commas, locks and records', () => {
+  it('round-trips names with commas, locks, records and intended pairs', () => {
     const state = {
       palette: [
         [0.5, 0.1, 20],
@@ -14,14 +14,17 @@ describe('palette state in the address', () => {
       labels: ['red, warm', null],
       sourceIds: ['css-rebeccapurple-srgb', null],
       weights: [7, 3],
+      pairs: [[0, 1]] as [number, number][],
     };
     const sp = Object.fromEntries(new URLSearchParams(stateParams(state)));
+    expect(sp.pairs).toBe('0-1');
     expect(parsePalette(sp.palette)).toEqual(state.palette);
     expect(parseStateExtras(2, sp)).toEqual({
       locked: [true, false],
       labels: ['red, warm', null],
       sourceIds: ['css-rebeccapurple-srgb', null],
       weights: [7, 3],
+      pairs: [[0, 1]],
     });
   });
   it('ignores malformed extras', () => {
@@ -30,7 +33,17 @@ describe('palette state in the address', () => {
       labels: [null, null],
       sourceIds: ['a', null],
       weights: [1, 1],
+      pairs: [],
     });
+  });
+  it('drops pairs that name a missing column, the same column twice, or repeat', () => {
+    expect(parsePairs('0-1,1-0,2-0,1-1,0-1,x-y', 2)).toEqual([
+      [0, 1],
+      [1, 0],
+    ]);
+    expect(
+      stateParams({ palette: [[0.5, 0, 0]], structure: 'free-form', seed: 1, pairs: [] }),
+    ).not.toContain('pairs');
   });
 });
 

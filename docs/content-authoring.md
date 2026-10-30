@@ -26,6 +26,10 @@ Knowledge records live in `content/knowledge/**/*.yaml`, curriculum topics in `c
 
 A concept may carry `tags.standard` (for example `jis-z8102`) and `tags.munsell`; the app groups documented points by standard before tradition, and `primaryRepresentation` in `apps/web/lib/records.ts` decides which of several values an entry shows first.
 
+## Reference data outside the knowledge release
+
+`content/reference/` holds tables the app consults but does not turn into records: `munsell/real.dat` (RIT's transcription of the 1943 Munsell renotation) with a README stating its source, conditions, the Y scaling the app applies, and what is known about reuse terms. These files are not validated by `pnpm content:check`, are traced into the deployment with the rest of `content/`, and are read only on the server. A concept's `tags.munsell` links its entry to the tabulated value of that notation on `/munsell`.
+
 ## Review chain
 
 `discovered` → `bibliographic` → `extracted` → `rights-checked` → `specialist-reviewed` → `published`. Only the last two show as source-verified in the app. Promotion happens in a pull request with the reviewer named in the description.

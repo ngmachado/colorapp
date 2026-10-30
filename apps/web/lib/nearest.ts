@@ -1,5 +1,16 @@
 import type { StatusKind } from '@/components/badges';
 
+/** Where a point's value comes from, for exports and comparisons that must cite it. */
+export interface PointProvenance {
+  /** The representation's own space and coordinates, as recorded. */
+  space: string;
+  coords: [number, number, number];
+  approximation: 'measured' | 'published-value' | 'modern-approximation' | 'unknown';
+  method: string;
+  source: string;
+  locator?: string;
+}
+
 /** One displayable representation with the concept it belongs to: enough for a "nearest documented colour" lookup. */
 export interface NamePoint {
   id: string;
@@ -12,6 +23,7 @@ export interface NamePoint {
   queue: boolean;
   oklab: [number, number, number];
   hex: string;
+  provenance?: PointProvenance;
 }
 
 /** Nearest point by Euclidean distance in OKLab. Pure, so client components can call it. */

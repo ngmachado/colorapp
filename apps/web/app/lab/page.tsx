@@ -5,12 +5,13 @@ import { Columns, type Oklch } from '@/components/lab/columns';
 import { Toolbar } from '@/components/toolbar';
 import { ACCOUNTS } from '@/lib/accounts';
 import { knowledge } from '@/lib/knowledge';
-import { namePoints } from '@/lib/palette-names';
+import { namePoints, sourceCitations } from '@/lib/palette-names';
 import { oklchOfHex } from '@/lib/contrast';
 import { hexesIn } from '@/lib/lab-links';
 import { parsePalette, parseStateExtras } from '@/lib/palette-param';
 import { isRestricted, representationValue } from '@/lib/records';
 import { documentedSets } from '@/lib/sets';
+import { siteUrl } from '@/lib/site';
 
 export const dynamic = 'force-dynamic';
 
@@ -35,6 +36,7 @@ export default async function Lab({ searchParams }: { searchParams: Promise<Para
     names: one(sp.names),
     records: one(sp.records),
     weights: one(sp.weights),
+    pairs: one(sp.pairs),
   });
   const locked = saved ? extras.locked! : palette.map(() => false);
   const labels = saved ? extras.labels : undefined;
@@ -105,12 +107,15 @@ export default async function Lab({ searchParams }: { searchParams: Promise<Para
     note = `Dominant locked to ${hexes[0]!.toUpperCase()}. Press space to draw around it.`;
   }
 
+  const points = namePoints();
   return (
     <>
       <Toolbar current="/lab" />
       <main id="main">
         <Columns
-          points={namePoints()}
+          points={points}
+          sources={sourceCitations(points)}
+          site={siteUrl.origin}
           initial={{
             palette,
             locked,
@@ -119,6 +124,7 @@ export default async function Lab({ searchParams }: { searchParams: Promise<Para
             sourceIds,
             labels,
             weights: saved && !from.length && !hexes.length ? extras.weights : undefined,
+            pairs: saved ? extras.pairs : [],
           }}
           seedNote={note ?? 'Generate a palette. Lock the colours you like. Generate again.'}
           sets={documentedSets()}

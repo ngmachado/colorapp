@@ -59,3 +59,51 @@ test('the contrast table grades every pair of columns and the two inks by WCAG 2
   expect(grades).toContain('below 3');
   await expect(page.getByTestId('contrast')).toContainText('WCAG 2.1');
 });
+
+test('intended pairs lead the contrast panel with explicit thresholds, survive reload, and follow column moves', async ({
+  page,
+}) => {
+  await page.goto('/lab?palette=0.2,0,0;0.95,0,0;0.6,0.15,30&structure=free-form&n=1');
+  await expect(page.getByTestId('column')).toHaveCount(3);
+  await page.getByTestId('contrast-button').click();
+  await expect(page.getByTestId('pairs-empty')).toBeVisible();
+  // dominant (dark) text on secondary (light): a passing pair.
+  await page.getByTestId('pair-fg').selectOption('0');
+  await page.getByTestId('pair-bg').selectOption('1');
+  await page.getByTestId('pair-add').click();
+  const pair = page.getByTestId('pair');
+  await expect(pair).toHaveCount(1);
+  await expect(pair.getByTestId('pair-ratio')).toHaveText(/^1[0-9]\.[0-9]{2}:1$/);
+  const thresholds = pair.getByTestId('pair-threshold');
+  await expect(thresholds).toHaveCount(5);
+  await expect(thresholds.first()).toContainText('normal text, AA (SC 1.4.3) · at least 4.5:1');
+  await expect(thresholds.first()).toHaveAttribute('data-pass', 'true');
+  await expect(pair.getByTestId('pair-sample')).toHaveCSS('background-color', 'rgb(238, 238, 238)');
+  // accent on dominant: fails normal text.
+  await page.getByTestId('pair-fg').selectOption('2');
+  await page.getByTestId('pair-bg').selectOption('0');
+  await page.getByTestId('pair-add').click();
+  await expect(pair).toHaveCount(2);
+  await expect(pair.nth(1).getByTestId('pair-threshold').first()).toHaveAttribute(
+    'data-pass',
+    'false',
+  );
+  await expect(pair.nth(1)).toContainText('fails');
+  // The pairs travel in the address and come back after a reload.
+  await expect(page).toHaveURL(/pairs=0-1,2-0/);
+  await page.reload();
+  await page.getByTestId('contrast-button').click();
+  await expect(page.getByTestId('pair')).toHaveCount(2);
+  // Moving a column keeps each pair on the same colours.
+  const columns = page.getByTestId('column');
+  await columns.nth(0).hover();
+  await columns.nth(0).getByTestId('move-right').click();
+  await expect(page).toHaveURL(/pairs=1-0,2-1/);
+  await page.getByTestId('pair').first().getByTestId('pair-remove').click();
+  await expect(page.getByTestId('pair')).toHaveCount(1);
+  await expect(page).toHaveURL(/pairs=2-1/);
+  await expect(page.getByTestId('pair').getByTestId('pair-compare')).toHaveAttribute(
+    'href',
+    /^\/compare\?a=[0-9a-f]{6}&b=[0-9a-f]{6}$/,
+  );
+});

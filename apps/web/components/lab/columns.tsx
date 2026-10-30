@@ -20,12 +20,19 @@ import {
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
 import { Wheel, type OverlayPoint, inBand, OVERLAY_BAND } from '@/components/wheel';
-import { contrastGrade, oklchOfHex, parseHex } from '@/lib/contrast';
+import { ContrastPanel } from '@/components/lab/contrast-panel';
+import { GradientPanel } from '@/components/lab/gradient-panel';
+import { LightnessPanel } from '@/components/lab/lightness-panel';
+import { NeighbourPanel } from '@/components/lab/neighbour-panel';
+import { RelationsPanel } from '@/components/lab/relations-panel';
+import { oklchOfHex, parseHex } from '@/lib/contrast';
+import { cssExport, jsonExport, svgExport, type ExportColour } from '@/lib/exports';
 import { nearestPoint, type NamePoint } from '@/lib/nearest';
 import { groupLabel } from '@/lib/records';
 import { hexesIn } from '@/lib/lab-links';
 import { addPalette } from '@/lib/local-library';
-import { stateParams, type Oklch } from '@/lib/palette-param';
+import { stateParams, type Oklch, type Pair } from '@/lib/palette-param';
+import type { SourceCitation } from '@/lib/palette-names';
 import type { ColourSet } from '@/lib/systems';
 
 export type { Oklch };
@@ -87,7 +94,13 @@ interface Props {
     /** Column names given by the user, when reopening a saved palette. */
     labels?: (string | null)[];
     weights?: number[];
+    /** Intended text-on-background pairs, by column index. */
+    pairs?: Pair[];
   };
+  /** Citations for the sources the points rely on, for exports. */
+  sources?: Record<string, SourceCitation>;
+  /** Public origin, for record links in exports. */
+  site?: string;
   seedNote?: string;
   /** Documented sets the wheel panel can load whole. */
   sets?: ColourSet[];
@@ -192,16 +205,12 @@ interface Snapshot {
   labels: (string | null)[];
   weights: number[];
   seed: number;
+  /** Undo steps carry the intended pairs; drawn candidates and history do not. */
+  pairs?: Pair[];
 }
 const UNDO_DEPTH = 50;
 /** Slider moves on the same control within this window collapse into one undo step. */
 const COALESCE_MS = 800;
-/** Reference inks for the contrast table. */
-const INKS: { label: string; hex: string }[] = [
-  { label: 'white', hex: '#ffffff' },
-  { label: 'black', hex: '#000000' },
-];
-
 /** A hex field that commits as soon as six valid digits are present, or three on Enter or blur. */
 function HexField({
   value,
@@ -249,7 +258,15 @@ function HexField({
  * editable; the URL always holds the current palette; the view can simulate a colour-vision deficiency.
  * Any colour can be typed or picked; every edit can be undone; a contrast table grades each pair.
  */
-export function Columns({ points, initial, seedNote, sets = [], localLibrary = false }: Props) {
+export function Columns({
+  points,
+  initial,
+  seedNote,
+  sets = [],
+  localLibrary = false,
+  sources = {},
+  site = '',
+}: Props) {
   const [palette, setPalette] = useState<Oklch[]>(initial.palette);
   const [sourceIds, setSourceIds] = useState<(string | null)[]>(
     initial.sourceIds ?? initial.palette.map(() => null),
@@ -259,6 +276,7 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
     initial.labels ?? initial.palette.map(() => null),
   );
   const [weights, setWeights] = useState(initial.weights ?? initial.palette.map(() => 1));
+  const [pairs, setPairs] = useState<Pair[]>(initial.pairs ?? []);
   const [showAreas, setShowAreas] = useState(false);
   const [showKeys, setShowKeys] = useState(false);
   const [locked, setLocked] = useState<boolean[]>(initial.locked);
@@ -283,6 +301,10 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
   const [showOptions, setShowOptions] = useState(false);
   const [notice, setNotice] = useState<ReactNode>(null);
   const [showContrast, setShowContrast] = useState(false);
+  /** One of the inspection views at a time, below the columns. */
+  const [view2, setView2] = useState<'lightness' | 'neighbours' | 'gradients' | 'relations' | null>(
+    null,
+  );
   const [showWheel, setShowWheel] = useState(false);
   const [slice, setSlice] = useState<number | null>(null);
   // Documented points shown on the wheel come from the same set (options.source) that the nearest readout uses.
@@ -291,8 +313,8 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
   const [past, setPast] = useState<Snapshot[]>([]);
   const [future, setFuture] = useState<Snapshot[]>([]);
   const exportRef = useRef<HTMLDetailsElement>(null);
-  const current = useRef<Snapshot>({ palette, sourceIds, locked, labels, weights, seed });
-  current.current = { palette, sourceIds, locked, labels, weights, seed };
+  const current = useRef<Snapshot>({ palette, sourceIds, locked, labels, weights, seed, pairs });
+  current.current = { palette, sourceIds, locked, labels, weights, seed, pairs };
   const lastEdit = useRef<{ key: string; at: number } | null>(null);
 
   /** Records the current state as an undo step. A key collapses repeated moves of one control. */
@@ -313,6 +335,7 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
     setLabels(s.labels);
     setWeights(s.weights);
     setSeed(s.seed);
+    if (s.pairs) setPairs(s.pairs);
     lastEdit.current = null;
   };
   const undo = () => {
@@ -513,6 +536,12 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
     setLocked((l) => l.filter((_, j) => j !== i));
     setLabels((l) => l.filter((_, j) => j !== i));
     setWeights((w) => w.filter((_, j) => j !== i));
+    // Pairs that used the column go; the rest keep pointing at the same colours.
+    setPairs((ps) =>
+      ps
+        .filter((p) => p[0] !== i && p[1] !== i)
+        .map((p) => [p[0] > i ? p[0] - 1 : p[0], p[1] > i ? p[1] - 1 : p[1]] as Pair),
+    );
     setAdjust(null);
     setScale(null);
   }
@@ -531,6 +560,8 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
     setLocked(swap);
     setLabels(swap);
     setWeights(swap);
+    const at = (x: number) => (x === i ? j : x === j ? i : x);
+    setPairs((ps) => ps.map((p) => [at(p[0]), at(p[1])] as Pair));
     setAdjust(null);
     setScale(null);
   }
@@ -571,7 +602,7 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
   const lastWritten = useRef('');
   useEffect(() => {
     const t = window.setTimeout(() => {
-      const search = `?${stateParams({ palette, structure, seed, locked, labels, weights, sourceIds })}`;
+      const search = `?${stateParams({ palette, structure, seed, locked, labels, weights, sourceIds, pairs })}`;
       if (search === lastWritten.current) return;
       lastWritten.current = search;
       const url = new URL(window.location.href);
@@ -579,7 +610,7 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
       window.history.replaceState(null, '', url);
     }, 150);
     return () => window.clearTimeout(t);
-  }, [palette, structure, seed, locked, labels, weights, sourceIds]);
+  }, [palette, structure, seed, locked, labels, weights, sourceIds, pairs]);
 
   // Pasted hex codes become the palette: two to five replace it, one sets the dominant.
   useEffect(() => {
@@ -602,6 +633,7 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
       setLocked(list.map(() => false));
       setLabels(list.map(() => null));
       setWeights(list.map(() => 1));
+      setPairs([]);
       setAdjust(null);
       setScale(null);
       setNotice(`Pasted ${list.length} colours. Press space to draw around the ones you lock.`);
@@ -624,6 +656,7 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
     setLocked(found.map(() => true));
     setLabels(found.map(() => null));
     setWeights(found.map(() => 1));
+    setPairs([]);
     setAdjust(null);
     setScale(null);
     const what =
@@ -639,7 +672,6 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
   const rotate = (delta: number, key: string) => {
     remember(key);
     setPalette((p) => p.map((x, j) => (locked[j] ? x : [x[0], x[1], (x[2] + delta + 360) % 360])));
-    setSourceIds((s) => s.map((x, j) => (locked[j] ? x : null)));
   };
   /** Adds a column with a given colour, from the wheel or a documented point. */
   const addColour = (c: Oklch, sourceId: string | null, label: string) => {
@@ -668,10 +700,10 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
   const overlayPoints = setPoints.filter((p) => inBand(p, sliceL));
   const nearestIn = options.source === 'all' ? undefined : options.source;
 
+  /** Edits keep the column's record so exports can say what it came from and that it was edited. */
   const setColour = (i: number, c: Oklch, key: string) => {
     remember(key);
     setPalette((p) => p.map((x, j) => (j === i ? c : x)));
-    setSourceIds((s) => s.map((x, j) => (j === i ? null : x)));
   };
 
   async function save() {
@@ -727,24 +759,9 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
 
   const closeExport = () => exportRef.current?.removeAttribute('open');
 
-  async function exportCss() {
-    const css = palette
-      .map(
-        (c, i) =>
-          `  --${nameOf(i)
-            .toLowerCase()
-            .replace(
-              /[^a-z0-9]+/g,
-              '-',
-            )}: oklch(${c[0].toFixed(4)} ${c[1].toFixed(4)} ${c[2].toFixed(1)}); /* ${hexOf(c)} */`,
-      )
-      .join('\n');
-    await navigator.clipboard.writeText(`:root {\n${css}\n}\n`);
-    setNotice('CSS copied to the clipboard.');
-    closeExport();
-  }
-  function exportJson() {
-    const colours = palette.map((c, i) => {
+  /** Every column with its record, how that record's value was obtained, and whether the column still shows it. */
+  const exportColours = (): ExportColour[] =>
+    palette.map((c, i) => {
       const near = nearestPoint(
         points,
         convert(colour('oklch', c), 'oklab').coords as Oklch,
@@ -753,65 +770,70 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
       );
       const src = sourceIds[i] ? byId.get(sourceIds[i]!) : undefined;
       return {
-        role: roles[i],
+        role: roles[i]!,
         name: nameOf(i),
-        oklch: c.map((n) => Number(n.toFixed(4))),
+        oklch: c,
         hex: hexOf(c),
-        locked: locked[i],
-        areaWeight: weights[i],
+        locked: locked[i]!,
+        areaWeight: weights[i]!,
         areaShare: weights[i]! / weights.reduce((a, b) => a + b, 0),
-        source: src ? { record: src.id, concept: src.conceptId, label: src.label } : null,
+        record:
+          src && src.provenance
+            ? {
+                id: src.id,
+                concept: src.conceptId,
+                label: src.label,
+                collection: groupLabel(src.group),
+                value: { space: src.provenance.space, coords: src.provenance.coords, hex: src.hex },
+                approximation: src.provenance.approximation,
+                method: src.provenance.method,
+                source: sources[src.provenance.source] ?? null,
+                ...(src.provenance.locator ? { locator: src.provenance.locator } : {}),
+                edited: hexOf(c) !== src.hex,
+              }
+            : null,
         nearest: near
           ? {
               record: near.id,
               concept: near.conceptId,
               label: near.label,
-              distance: Number(near.distance.toFixed(4)),
-              status: near.status,
+              collection: groupLabel(near.group),
+              distance: near.distance,
+              ...(near.provenance ? { approximation: near.provenance.approximation } : {}),
             }
           : null,
       };
     });
-    download(
-      `palette-${structure}-${seed}.json`,
-      'application/json',
-      JSON.stringify(
-        {
-          app: 'Super Colour',
-          space: 'oklch',
-          structure,
-          seed,
-          bounds: { lightness: options.lightness, chroma: options.chroma, hue: options.hue },
-          colours,
-          note: 'Hex values are sRGB display approximations. OKLCh is the working value.',
-        },
-        null,
-        2,
-      ),
-    );
-    setNotice('JSON downloaded.');
+  const exportPalette = () => ({
+    structure,
+    seed,
+    bounds: { lightness: options.lightness, chroma: options.chroma, hue: options.hue },
+    colours: exportColours(),
+    site,
+    pairs,
+  });
+  async function exportCss() {
+    await navigator.clipboard.writeText(cssExport(exportPalette()));
+    setNotice('CSS copied to the clipboard, with a provenance comment above each variable.');
+    closeExport();
+  }
+  function exportJson() {
+    download(`palette-${structure}-${seed}.json`, 'application/json', jsonExport(exportPalette()));
+    setNotice('JSON downloaded, with each record, its source and whether the column was edited.');
     closeExport();
   }
   function exportSvg() {
-    const w = 160;
-    const rects = palette
-      .map((c, i) => {
-        const hex = hexOf(c);
-        const v = colour('oklch', c);
-        const ink =
-          contrastRatio(colour('srgb', [0.1, 0.1, 0.1]), v) >=
-          contrastRatio(colour('srgb', [1, 1, 1]), v)
-            ? '#1a1a1a'
-            : '#ffffff';
-        return `<rect x="${i * w}" y="0" width="${w}" height="200" fill="${hex}"/><text x="${i * w + 12}" y="176" font-family="DM Mono, monospace" font-size="14" fill="${ink}">${hex.slice(1).toUpperCase()}</text><text x="${i * w + 12}" y="192" font-family="DM Sans, sans-serif" font-size="10" fill="${ink}">${nameOf(i)}</text>`;
-      })
-      .join('');
     download(
       `palette-${structure}-${seed}.svg`,
       'image/svg+xml',
-      `<svg xmlns="http://www.w3.org/2000/svg" width="${w * palette.length}" height="200" viewBox="0 0 ${w * palette.length} 200"><title>Super Colour palette, ${structure}, seed ${seed}</title>${rects}</svg>`,
+      svgExport(exportPalette(), (hex) =>
+        contrastRatio(colour('srgb', [0.1, 0.1, 0.1]), srgbOf(hex)) >=
+        contrastRatio(colour('srgb', [1, 1, 1]), srgbOf(hex))
+          ? '#1a1a1a'
+          : '#ffffff',
+      ),
     );
-    setNotice('SVG downloaded.');
+    setNotice('SVG downloaded, with record ids and provenance on each swatch.');
     closeExport();
   }
   async function copyLink() {
@@ -1202,6 +1224,7 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
               nearestIn,
             );
             const source = sourceIds[i] ? byId.get(sourceIds[i]!) : undefined;
+            const edited = !!source && source.hex !== hex;
             const outside = !inGamut(v, 'srgb');
             const role = roles[i]!;
             const entry = source ?? (near && near.distance < 0.25 ? near : null);
@@ -1215,6 +1238,7 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
                 data-oklch={c.map((n) => n.toFixed(3)).join(',')}
                 data-role={role}
                 data-source={source?.id}
+                data-edited={edited || undefined}
                 data-locked={locked[i] || undefined}
                 aria-label={`${role} ${hex}`}
               >
@@ -1478,6 +1502,7 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
                       style={{ background: ink }}
                     />
                     from {source.label}
+                    {edited ? ' · edited' : ''}
                   </Link>
                 ) : near && near.distance < 0.25 ? (
                   <Link
@@ -1671,96 +1696,35 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
         </div>
       ) : null}
 
+      {view2 === 'lightness' ? (
+        <LightnessPanel palette={palette} names={palette.map((_, i) => nameOf(i))} />
+      ) : view2 === 'neighbours' ? (
+        <NeighbourPanel palette={palette} names={palette.map((_, i) => nameOf(i))} />
+      ) : view2 === 'gradients' ? (
+        <GradientPanel
+          palette={palette}
+          names={palette.map((_, i) => nameOf(i))}
+          onNotice={setNotice}
+        />
+      ) : view2 === 'relations' ? (
+        <RelationsPanel
+          sets={sets}
+          points={points}
+          palette={palette}
+          names={palette.map((_, i) => nameOf(i))}
+          onLoad={loadSet}
+        />
+      ) : null}
       {showContrast ? (
-        <div
-          className="flex flex-col gap-2 overflow-x-auto border-t border-[var(--line)] px-5 py-3 text-[13px]"
-          data-testid="contrast"
-        >
-          <table className="border-separate border-spacing-1 text-xs">
-            <thead>
-              <tr>
-                <th scope="col" className="pr-2 text-left font-normal text-[var(--muted)]">
-                  text on →
-                </th>
-                {palette.map((bg, j) => (
-                  <th key={j} scope="col" className="font-mono font-normal">
-                    {hexOf(bg).slice(1).toUpperCase()}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {[
-                // Measured on the sRGB values as displayed, after gamut mapping, not on the OKLCh intent.
-                ...palette.map((c, i) => ({
-                  label: nameOf(i),
-                  hex: hexOf(c),
-                  v: srgbOf(hexOf(c)),
-                })),
-                ...INKS.map((k) => ({
-                  label: k.label,
-                  hex: k.hex,
-                  v: colour(
-                    'srgb',
-                    [0, 2, 4].map((n) => parseInt(k.hex.slice(1 + n, 3 + n), 16) / 255) as [
-                      number,
-                      number,
-                      number,
-                    ],
-                  ),
-                })),
-              ].map((row, i) => (
-                <tr key={row.label}>
-                  <th scope="row" className="pr-2 text-left font-normal">
-                    <span
-                      aria-hidden="true"
-                      className="mr-1.5 inline-block h-2.5 w-2.5 rounded-full border border-[var(--line)] align-middle"
-                      style={{ background: row.hex }}
-                    />
-                    {row.label}
-                  </th>
-                  {palette.map((bg, j) => {
-                    if (i === j)
-                      return (
-                        <td key={j} className="text-center text-[var(--muted)]">
-                          —
-                        </td>
-                      );
-                    const bgValue = srgbOf(hexOf(bg));
-                    const ratio = contrastRatio(row.v, bgValue);
-                    const grade = contrastGrade(ratio);
-                    const cellInk =
-                      contrastRatio(colour('srgb', [0.1, 0.1, 0.1]), bgValue) >=
-                      contrastRatio(colour('srgb', [1, 1, 1]), bgValue)
-                        ? '#1a1a1a'
-                        : '#ffffff';
-                    return (
-                      <td
-                        key={j}
-                        className="rounded-sm px-2 py-1 text-center"
-                        style={{ background: hexOf(bg), color: cellInk }}
-                        data-testid="contrast-cell"
-                        data-grade={grade}
-                      >
-                        <span className="text-base font-semibold" style={{ color: row.hex }}>
-                          Aa
-                        </span>{' '}
-                        {ratio.toFixed(2)}
-                        <span className="block text-[10px] tracking-[0.5px] uppercase">
-                          {grade}
-                        </span>
-                      </td>
-                    );
-                  })}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <span className="text-xs text-[var(--muted)]">
-            WCAG 2.1 contrast ratio between the sRGB values as displayed. AA needs 4.5, AAA 7; large
-            text and interface parts need 3. A ratio says nothing about harmony.
-          </span>
-        </div>
+        <ContrastPanel
+          palette={palette}
+          names={palette.map((_, i) => nameOf(i))}
+          pairs={pairs}
+          onPairs={(next) => {
+            remember();
+            setPairs(next);
+          }}
+        />
       ) : null}
 
       <div className="flex min-h-[72px] shrink-0 flex-wrap items-center gap-3 border-t border-[var(--line)] px-5 py-2">
@@ -1870,6 +1834,25 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
           >
             Proportions
           </button>
+          <label className="flex items-center gap-2">
+            <span className="sr-only">Panel</span>
+            <select
+              value={view2 ?? 'none'}
+              onChange={(e) =>
+                setView2(e.target.value === 'none' ? null : (e.target.value as typeof view2))
+              }
+              aria-label="Inspection panel"
+              title="Lightness, neighbours, gradients or documented relations below the columns"
+              className="field h-8 text-[13px]"
+              data-testid="panel"
+            >
+              <option value="none">panel: none</option>
+              <option value="lightness">Lightness</option>
+              <option value="neighbours">Neighbours</option>
+              <option value="gradients">Gradients</option>
+              <option value="relations">Relations</option>
+            </select>
+          </label>
           <button
             type="button"
             onClick={() => setShowWheel((s) => !s)}

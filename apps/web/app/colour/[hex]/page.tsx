@@ -56,6 +56,9 @@ export default async function Inspector({ params }: Props) {
         <Link href={`/space?hex=${hex.slice(1)}`} className="btn">
           On the map
         </Link>
+        <Link href={`/munsell?hex=${hex.slice(1)}`} className="btn" data-testid="munsell-link">
+          Munsell reference
+        </Link>
       </Toolbar>
       <main id="main">
         <header
@@ -153,12 +156,21 @@ export default async function Inspector({ params }: Props) {
                           locator={rep && rep.type !== 'source' ? rep.evidence.locator : undefined}
                         />
                       </div>
-                      <Link
-                        href={labFromHexes([hex, p.hex])}
-                        className="inline-flex min-h-11 items-center text-sm underline"
-                      >
-                        Compare display values in Laboratory
-                      </Link>
+                      <span className="flex flex-wrap gap-4">
+                        <Link
+                          href={`/compare?a=${hex.slice(1)}&b=${p.hex.slice(1)}&rb=${p.id}`}
+                          className="inline-flex min-h-11 items-center text-sm underline"
+                          data-testid="compare-record"
+                        >
+                          Compare the two values
+                        </Link>
+                        <Link
+                          href={labFromHexes([hex, p.hex])}
+                          className="inline-flex min-h-11 items-center text-sm underline"
+                        >
+                          Compare display values in Laboratory
+                        </Link>
+                      </span>
                     </div>
                   </article>
                 );

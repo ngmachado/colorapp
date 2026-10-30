@@ -169,6 +169,16 @@ export default async function Entry({ params }: { params: Promise<{ id: string }
             Use as seed
           </Link>
         ) : null}
+        {concept.tags?.munsell ? (
+          <Link
+            href={`/munsell?notation=${encodeURIComponent(concept.tags.munsell)}`}
+            className="btn"
+            title="The tabulated renotation value of the notation this record's source assigns"
+            data-testid="munsell-notation"
+          >
+            Munsell {concept.tags.munsell}
+          </Link>
+        ) : null}
         {hex ? (
           <Link href={`/colour/${hex.slice(1)}`} className="btn">
             Inspect display colour

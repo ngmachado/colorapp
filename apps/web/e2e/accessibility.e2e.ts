@@ -17,6 +17,9 @@ const pages = [
   '/signin',
   '/signin/sent',
   '/library',
+  '/compare?a=663399&b=ffffff&rb=css-rebeccapurple-srgb',
+  '/munsell?hex=663399&notation=5R%204%2F14',
+  '/extract',
 ];
 
 for (const path of pages) {

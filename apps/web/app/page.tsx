@@ -161,6 +161,9 @@ export default function Home() {
             <Link href="/dictionary">Dictionary</Link>
             <Link href="/theory">Theory</Link>
             <Link href="/library">Library</Link>
+            <Link href="/compare">Compare two colours</Link>
+            <Link href="/munsell">Munsell reference</Link>
+            <Link href="/extract">Image colours</Link>
           </div>
           <div className="flex flex-col gap-1.5">
             <span className="font-semibold text-[var(--fg)]">Theory</span>

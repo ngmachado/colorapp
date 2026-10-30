@@ -35,3 +35,24 @@ export function contrastGrade(ratio: number): ContrastGrade {
   if (ratio >= 3) return 'AA large';
   return 'below 3';
 }
+
+/**
+ * The WCAG 2.1 thresholds an intended text/background pair is checked against, each named with its
+ * success criterion so the number on screen is never a bare grade.
+ */
+export const THRESHOLDS: {
+  use: string;
+  level: 'AA' | 'AAA';
+  minimum: number;
+  criterion: string;
+}[] = [
+  { use: 'normal text', level: 'AA', minimum: 4.5, criterion: '1.4.3' },
+  { use: 'normal text', level: 'AAA', minimum: 7, criterion: '1.4.6' },
+  { use: 'large text', level: 'AA', minimum: 3, criterion: '1.4.3' },
+  { use: 'large text', level: 'AAA', minimum: 4.5, criterion: '1.4.6' },
+  { use: 'interface parts and graphics', level: 'AA', minimum: 3, criterion: '1.4.11' },
+];
+
+export function thresholdReport(ratio: number) {
+  return THRESHOLDS.map((t) => ({ ...t, passes: ratio >= t.minimum }));
+}
