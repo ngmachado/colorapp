@@ -11,9 +11,9 @@ test('the map plots a palette, names each colour’s nearest record, and filters
   await expect(rows.first()).toContainText('rebeccapurple');
   await expect(rows.first()).toContainText('distance 0.000');
   // Shown count and the collection filter.
-  await expect(page.getByTestId('space-shown')).toContainText('455 shown');
+  await expect(page.getByTestId('space-shown')).toContainText('580 shown');
   await page.getByTestId('space-set').filter({ hasText: 'JIS Z 8102' }).click();
-  await expect(page.getByTestId('space-shown')).toContainText('257 shown');
+  await expect(page.getByTestId('space-shown')).toContainText('360 shown');
   await expect(rows.first()).not.toContainText('rebeccapurple');
   await expect(page).toHaveURL(/set=jis-z8102/);
   // The lightness band narrows what is shown and travels in the URL.

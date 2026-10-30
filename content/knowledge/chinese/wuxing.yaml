@@ -107,6 +107,7 @@
   label: 青 (qīng)
   description: A colour category covering blue and green; "In fact, 青 covered both green and blue" (Wiktionary). Do not force it into one hue.
   tags: { tradition: chinese, kind: colour-category }
+  scope: 'No source in this release gives 青 one display value, and the term covers both blue and green, so none is asserted. The editorial marker shown is an app choice for diagrams; the Chinese Wikipedia page 中国传统色彩 has no 青 row.'
 - type: name
   id: zh-qing-name
   review_state: discovered
@@ -145,6 +146,7 @@
   label: 黄 (huáng)
   description: Yellow colour category; the IEP article's "yellow" in the five colours.
   tags: { tradition: chinese, kind: colour-category }
+  scope: 'No source in this release gives 黄 one display value; the category is a word with many named yellows under it. The editorial marker shown is an app choice for diagrams.'
 - type: name
   id: zh-huang-name
   review_state: discovered
@@ -165,6 +167,7 @@
   label: 白 (bái)
   description: White colour category; the IEP article's "white" in the five colours.
   tags: { tradition: chinese, kind: colour-category }
+  scope: 'No source in this release gives 白 one display value; the category is a word with several named whites under it. The editorial marker shown is an app choice for diagrams.'
 - type: name
   id: zh-bai-name
   review_state: discovered
@@ -184,6 +187,7 @@
   label: 黑 (hēi)
   description: Black colour category; the IEP article's "black" in the five colours.
   tags: { tradition: chinese, kind: colour-category }
+  scope: 'No source in this release gives 黑 one display value; the category is a word with several named blacks under it. The editorial marker shown is an app choice for diagrams.'
 - type: name
   id: zh-hei-name
   review_state: discovered

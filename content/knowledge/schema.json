@@ -263,7 +263,9 @@
                   "minLength": 1
                 }
               },
-              "required": ["source"],
+              "required": [
+                "source"
+              ],
               "additionalProperties": false
             },
             "label": {
@@ -286,7 +288,14 @@
               }
             }
           },
-          "required": ["type", "id", "review_state", "rights_status", "evidence", "label"],
+          "required": [
+            "type",
+            "id",
+            "review_state",
+            "rights_status",
+            "evidence",
+            "label"
+          ],
           "additionalProperties": false
         },
         {
@@ -402,7 +411,9 @@
                   "minLength": 1
                 }
               },
-              "required": ["source"],
+              "required": [
+                "source"
+              ],
               "additionalProperties": false
             },
             "concept": {
@@ -429,7 +440,10 @@
                   "minLength": 1
                 }
               },
-              "required": ["system", "value"],
+              "required": [
+                "system",
+                "value"
+              ],
               "additionalProperties": false
             },
             "aliases": {
@@ -571,7 +585,9 @@
                   "minLength": 1
                 }
               },
-              "required": ["source"],
+              "required": [
+                "source"
+              ],
               "additionalProperties": false
             },
             "concept": {
@@ -640,15 +656,26 @@
                 },
                 "quantity": {
                   "type": "string",
-                  "enum": ["reflectance", "transmittance", "spd"]
+                  "enum": [
+                    "reflectance",
+                    "transmittance",
+                    "spd"
+                  ]
                 }
               },
-              "required": ["wavelengths_nm", "values", "quantity"],
+              "required": [
+                "wavelengths_nm",
+                "values",
+                "quantity"
+              ],
               "additionalProperties": false
             },
             "white": {
               "type": "string",
-              "enum": ["D65", "D50"]
+              "enum": [
+                "D65",
+                "D50"
+              ]
             },
             "profile": {
               "type": "string"
@@ -662,7 +689,12 @@
             },
             "approximation_status": {
               "type": "string",
-              "enum": ["measured", "published-value", "modern-approximation", "unknown"]
+              "enum": [
+                "measured",
+                "published-value",
+                "modern-approximation",
+                "unknown"
+              ]
             }
           },
           "required": [
@@ -791,7 +823,9 @@
                   "minLength": 1
                 }
               },
-              "required": ["source"],
+              "required": [
+                "source"
+              ],
               "additionalProperties": false
             },
             "concept": {
@@ -833,7 +867,14 @@
               "additionalProperties": false
             }
           },
-          "required": ["type", "id", "review_state", "rights_status", "evidence", "substrate"],
+          "required": [
+            "type",
+            "id",
+            "review_state",
+            "rights_status",
+            "evidence",
+            "substrate"
+          ],
           "additionalProperties": false
         },
         {
@@ -949,7 +990,9 @@
                   "minLength": 1
                 }
               },
-              "required": ["source"],
+              "required": [
+                "source"
+              ],
               "additionalProperties": false
             },
             "label": {
@@ -976,7 +1019,11 @@
                   },
                   "position": {
                     "type": "string",
-                    "enum": ["inner", "outer", "lining"]
+                    "enum": [
+                      "inner",
+                      "outer",
+                      "lining"
+                    ]
                   },
                   "visibility": {
                     "type": "string"
@@ -987,7 +1034,9 @@
                     "maximum": 1
                   }
                 },
-                "required": ["concept"],
+                "required": [
+                  "concept"
+                ],
                 "additionalProperties": false
               }
             },
@@ -1138,7 +1187,9 @@
                   "minLength": 1
                 }
               },
-              "required": ["source"],
+              "required": [
+                "source"
+              ],
               "additionalProperties": false
             },
             "concept": {
@@ -1165,7 +1216,14 @@
               "type": "string"
             }
           },
-          "required": ["type", "id", "review_state", "rights_status", "evidence", "claim"],
+          "required": [
+            "type",
+            "id",
+            "review_state",
+            "rights_status",
+            "evidence",
+            "claim"
+          ],
           "additionalProperties": false
         },
         {
@@ -1281,7 +1339,9 @@
                   "minLength": 1
                 }
               },
-              "required": ["source"],
+              "required": [
+                "source"
+              ],
               "additionalProperties": false
             },
             "from": {
@@ -1302,7 +1362,12 @@
                 "adaptation-of",
                 "associated-with",
                 "member-of",
-                "derived-from"
+                "derived-from",
+                "generates",
+                "controls",
+                "complement-of",
+                "characteristic-with",
+                "antithesis-of"
               ]
             }
           },
@@ -1584,7 +1649,9 @@
                     "minLength": 1
                   }
                 },
-                "required": ["source"],
+                "required": [
+                  "source"
+                ],
                 "additionalProperties": false
               },
               "label": {
@@ -1607,7 +1674,14 @@
                 }
               }
             },
-            "required": ["type", "id", "review_state", "rights_status", "evidence", "label"],
+            "required": [
+              "type",
+              "id",
+              "review_state",
+              "rights_status",
+              "evidence",
+              "label"
+            ],
             "additionalProperties": false
           },
           {
@@ -1723,7 +1797,9 @@
                     "minLength": 1
                   }
                 },
-                "required": ["source"],
+                "required": [
+                  "source"
+                ],
                 "additionalProperties": false
               },
               "concept": {
@@ -1750,7 +1826,10 @@
                     "minLength": 1
                   }
                 },
-                "required": ["system", "value"],
+                "required": [
+                  "system",
+                  "value"
+                ],
                 "additionalProperties": false
               },
               "aliases": {
@@ -1892,7 +1971,9 @@
                     "minLength": 1
                   }
                 },
-                "required": ["source"],
+                "required": [
+                  "source"
+                ],
                 "additionalProperties": false
               },
               "concept": {
@@ -1961,15 +2042,26 @@
                   },
                   "quantity": {
                     "type": "string",
-                    "enum": ["reflectance", "transmittance", "spd"]
+                    "enum": [
+                      "reflectance",
+                      "transmittance",
+                      "spd"
+                    ]
                   }
                 },
-                "required": ["wavelengths_nm", "values", "quantity"],
+                "required": [
+                  "wavelengths_nm",
+                  "values",
+                  "quantity"
+                ],
                 "additionalProperties": false
               },
               "white": {
                 "type": "string",
-                "enum": ["D65", "D50"]
+                "enum": [
+                  "D65",
+                  "D50"
+                ]
               },
               "profile": {
                 "type": "string"
@@ -1983,7 +2075,12 @@
               },
               "approximation_status": {
                 "type": "string",
-                "enum": ["measured", "published-value", "modern-approximation", "unknown"]
+                "enum": [
+                  "measured",
+                  "published-value",
+                  "modern-approximation",
+                  "unknown"
+                ]
               }
             },
             "required": [
@@ -2112,7 +2209,9 @@
                     "minLength": 1
                   }
                 },
-                "required": ["source"],
+                "required": [
+                  "source"
+                ],
                 "additionalProperties": false
               },
               "concept": {
@@ -2154,7 +2253,14 @@
                 "additionalProperties": false
               }
             },
-            "required": ["type", "id", "review_state", "rights_status", "evidence", "substrate"],
+            "required": [
+              "type",
+              "id",
+              "review_state",
+              "rights_status",
+              "evidence",
+              "substrate"
+            ],
             "additionalProperties": false
           },
           {
@@ -2270,7 +2376,9 @@
                     "minLength": 1
                   }
                 },
-                "required": ["source"],
+                "required": [
+                  "source"
+                ],
                 "additionalProperties": false
               },
               "label": {
@@ -2297,7 +2405,11 @@
                     },
                     "position": {
                       "type": "string",
-                      "enum": ["inner", "outer", "lining"]
+                      "enum": [
+                        "inner",
+                        "outer",
+                        "lining"
+                      ]
                     },
                     "visibility": {
                       "type": "string"
@@ -2308,7 +2420,9 @@
                       "maximum": 1
                     }
                   },
-                  "required": ["concept"],
+                  "required": [
+                    "concept"
+                  ],
                   "additionalProperties": false
                 }
               },
@@ -2459,7 +2573,9 @@
                     "minLength": 1
                   }
                 },
-                "required": ["source"],
+                "required": [
+                  "source"
+                ],
                 "additionalProperties": false
               },
               "concept": {
@@ -2486,7 +2602,14 @@
                 "type": "string"
               }
             },
-            "required": ["type", "id", "review_state", "rights_status", "evidence", "claim"],
+            "required": [
+              "type",
+              "id",
+              "review_state",
+              "rights_status",
+              "evidence",
+              "claim"
+            ],
             "additionalProperties": false
           },
           {
@@ -2602,7 +2725,9 @@
                     "minLength": 1
                   }
                 },
-                "required": ["source"],
+                "required": [
+                  "source"
+                ],
                 "additionalProperties": false
               },
               "from": {
@@ -2623,7 +2748,12 @@
                   "adaptation-of",
                   "associated-with",
                   "member-of",
-                  "derived-from"
+                  "derived-from",
+                  "generates",
+                  "controls",
+                  "complement-of",
+                  "characteristic-with",
+                  "antithesis-of"
                 ]
               }
             },

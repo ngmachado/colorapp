@@ -6,9 +6,11 @@ import {
   lab,
   munsellAvailable,
   munsellForNotation,
+  munsellInterpolate,
   munsellNearest,
   munsellTable,
   parseNotation,
+  valueToY,
 } from './munsell';
 
 describe('Munsell conversions and notations', () => {
@@ -63,5 +65,55 @@ describe.skipIf(!munsellAvailable())('Munsell renotation table', () => {
     expect(near.exact).toBe(false);
     expect(near.asked).toBe('7RP 7.5/8');
     expect(['7.5RP 7/8', '7.5RP 8/8']).toContain(near.hit.notation);
+  });
+});
+
+describe('Munsell interpolation', () => {
+  test('the value polynomial reproduces the renotation anchors', () => {
+    expect(valueToY(10)).toBeCloseTo(102.57, 2);
+    expect(valueToY(5)).toBeCloseTo(19.77, 1);
+    expect(valueToY(0)).toBe(0);
+  });
+  test('a chromatic notation needs the table', () => {
+    if (!munsellAvailable()) expect(munsellInterpolate('5R 4/3')).toBeNull();
+    else expect(munsellInterpolate('5R 4/3')!.exact).toBe(false);
+  });
+  test('neutrals need no table and sit on the illuminant; impossible values are refused', () => {
+    const grey = munsellInterpolate('N 5/')!;
+    expect(grey.asked).toBe('N 5');
+    expect(grey.exact).toBe(true);
+    expect(grey.xyzC[1]).toBeCloseTo((valueToY(5) * 0.975) / 100, 6);
+    // Illuminant C white adapted to D65 is the sRGB white: a neutral is a grey on screen.
+    const [r, g, b] = [1, 3, 5].map((i) => parseInt(grey.hex.slice(i, i + 2), 16));
+    expect(Math.max(r!, g!, b!) - Math.min(r!, g!, b!)).toBeLessThanOrEqual(2);
+    expect(munsellInterpolate('N9.5')!.hex > '#e0e0e0').toBe(true);
+    expect(munsellInterpolate('N 11')).toBeNull();
+    expect(munsellInterpolate('5R 12/2')).toBeNull();
+    expect(munsellInterpolate('nonsense')).toBeNull();
+  });
+});
+
+describe.skipIf(!munsellAvailable())('Munsell interpolation against the table', () => {
+  test('a tabulated sample interpolates to itself; a point between pages lands between them', () => {
+    const tab = munsellForNotation('5R 4/14')!.hit;
+    const same = munsellInterpolate('5R 4/14')!;
+    expect(same.exact).toBe(true);
+    expect(same.hex).toBe(tab.hex);
+    const a = munsellInterpolate('5R 4/14')!;
+    const b = munsellInterpolate('7.5R 4/14')!;
+    const mid = munsellInterpolate('6.25R 4/14')!;
+    expect(mid.exact).toBe(false);
+    expect(mid.xyzC[0]).toBeGreaterThan(Math.min(a.xyzC[0], b.xyzC[0]) - 1e-9);
+    expect(mid.xyzC[0]).toBeLessThan(Math.max(a.xyzC[0], b.xyzC[0]) + 1e-9);
+    // Half values: between the two whole-value planes.
+    const half = munsellInterpolate('7RP 7.5/8')!;
+    expect(half.xyzC[1]).toBeGreaterThan(munsellInterpolate('7RP 7/8')!.xyzC[1]);
+    expect(half.xyzC[1]).toBeLessThan(munsellInterpolate('7RP 8/8')!.xyzC[1]);
+    // Beyond the tabulated chroma or value: clamped and flagged.
+    expect(munsellInterpolate('5R 4/40')!.beyond).toBe(true);
+    expect(munsellInterpolate('2.5Y 9.2/0.5')!.beyond).toBe(true);
+    expect(munsellInterpolate('5R 9/2')!.beyond).toBe(false);
+    // The hue circle closes: 10RP neighbours 2.5R.
+    expect(munsellInterpolate('1R 5/6')!.beyond).toBe(false);
   });
 });

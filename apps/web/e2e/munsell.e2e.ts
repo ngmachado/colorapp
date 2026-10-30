@@ -45,9 +45,35 @@ test('the Munsell reference lists nearest tabulated samples with conditions, and
   await expect(notation.getByTestId('munsell-cited')).toContainText(
     'Assigned this notation by their source',
   );
-  // A notation off the table says so and gives the nearest tabulated sample.
+  // A notation off the table says so, gives the nearest tabulated sample and a linear interpolation.
   await page.goto('/munsell?notation=7RP%207.5%2F8');
   await expect(page.getByTestId('munsell-notation')).toContainText('7RP 7.5/8 is not tabulated');
+  await expect(page.getByTestId('munsell-interpolated')).toContainText('Interpolated at 7RP 7.5/8');
+  await expect(page.getByTestId('munsell-interpolated')).toHaveAttribute(
+    'data-hex',
+    /^#[0-9a-f]{6}$/,
+  );
+  // A neutral is not in the table; it is placed on the illuminant at the value's luminance.
   await page.goto('/munsell?notation=N%205');
+  await expect(page.getByTestId('munsell-notation')).toContainText('N 5 is a neutral');
+  const grey = await page.getByTestId('munsell-interpolated').getAttribute('data-hex');
+  expect(grey).toMatch(/^#7[a-f0-9]7[a-f0-9]7[a-f0-9]$/);
+  await page.goto('/munsell?notation=nonsense');
   await expect(page.getByRole('alert')).toContainText('Could not read');
+});
+
+test('a JIS record shows both pages’ values and the check against the standard’s notation', async ({
+  page,
+}) => {
+  await page.goto('/dictionary/ja-toki-iro');
+  const values = page.getByTestId('values');
+  await expect(values.locator('[data-record]')).toHaveCount(2);
+  await expect(values.getByTestId('value-notes').first()).toContainText(
+    'Checked on 2026-10-30 against the 1943 Munsell renotation',
+  );
+  await expect(values.getByTestId('value-notes').first()).toContainText('CIEDE2000 difference');
+  await expect(values.getByTestId('value-notes').nth(1)).toContainText(
+    "between the two pages' values",
+  );
+  await expect(values.locator('[data-record="ja-toki-iro-srgb-ichiran"]')).toHaveCount(1);
 });

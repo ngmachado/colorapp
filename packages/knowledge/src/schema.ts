@@ -39,6 +39,8 @@ export const EdgeType = z.enum([
   'complement-of',
   /** A characteristic pairing attributed to a source. */
   'characteristic-with',
+  /** Two colours a source sets against each other as a pair of opposites (Kandinsky's antitheses). */
+  'antithesis-of',
 ]);
 export const SpaceId = z.enum([
   'srgb',

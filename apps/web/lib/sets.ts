@@ -15,6 +15,7 @@ export const MAX_COLUMNS = 5;
 const PAIR_WORDS: Record<string, string> = {
   'complement-of': 'complements',
   'characteristic-with': 'characteristic pair',
+  'antithesis-of': 'antithesis',
 };
 
 /**

@@ -3,7 +3,13 @@
 // reference sRGB hex of its own. Readings come from the furigana on that page, then from a saved copy of 日本の色の一覧,
 // then from the editor table below (flagged in the record).
 //
-//   node scripts/import-jis-z8102.mjs <jis.html> <ichiran.html> > content/knowledge/japanese/jis-z8102.yaml
+//   node scripts/import-jis-z8102.mjs <jis.html> <ichiran.html> [check.json] > content/knowledge/japanese/jis-z8102.yaml
+//
+// 日本の色の一覧 also supplies a second sRGB value for the names it shares with the standard; it becomes a second
+// representation so the two pages' disagreement stays visible. The optional check file is written by
+// apps/web/scripts/check-jis-munsell.ts (two passes: generate, check, generate again) and adds, per record, the
+// CIEDE2000 difference between each page value and the colour the standard's Munsell notation interpolates to in
+// the 1943 renotation table, and between the two page values.
 //
 // The output is review state `discovered`, rights `unreviewed`: a Wikipedia discovery route, never more.
 
@@ -11,7 +17,9 @@ import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 
 const SOURCE = 'wikipedia-ja-jis-kanyo-shikimei';
-const [jisPath, ichiranPath] = process.argv.slice(2);
+const ICHIRAN = 'wikipedia-ja-nihon-no-iro-ichiran';
+const [jisPath, ichiranPath, checkPath] = process.argv.slice(2);
+const check = checkPath ? JSON.parse(readFileSync(checkPath, 'utf8')) : null;
 if (!jisPath || !ichiranPath) {
   console.error('usage: import-jis-z8102.mjs <jis.html> <ichiran.html>');
   process.exit(2);
@@ -101,8 +109,14 @@ for (const r of rows(body(ichiranPath))) {
   if (parts.length < 2) continue;
   const name = strip(parts.at(-1));
   const reading = strip(parts[0]).split('/')[0];
-  if (name && reading && !ichiran.has(name)) ichiran.set(name, reading);
+  const hex = cells[0].match(/#([0-9A-Fa-f]{6})/)?.[1]?.toUpperCase() ?? null;
+  if (name && reading && !ichiran.has(name)) ichiran.set(name, { name, reading, hex });
 }
+
+/** The same page by reading, for names the standard spells differently (とき色 for the page's 鴇色). */
+const ichiranByReading = new Map();
+for (const e of ichiran.values())
+  if (!ichiranByReading.has(e.reading)) ichiranByReading.set(e.reading, e);
 
 // ---------- readings ----------
 const hasKanji = (s) => /[一-鿿]/.test(s);
@@ -119,7 +133,7 @@ function readName(raw) {
   let origin = 'page';
   if (hasKanji(reading)) {
     if (ichiran.has(base)) {
-      reading = ichiran.get(base);
+      reading = ichiran.get(base).reading;
       origin = 'ichiran';
     } else if (EDITOR_READINGS[base]) {
       reading = EDITOR_READINGS[base];
@@ -344,6 +358,34 @@ const walk = (dir) => {
 };
 walk('content/knowledge');
 
+// ---------- check results ----------
+const DE = (n) => n.toFixed(1);
+/** What the renotation check found for a record's JIS value, as a sentence, or nothing without a check file. */
+function munsellNote(id) {
+  const c = check?.concepts?.[id]?.munsell;
+  if (!c) return '';
+  stats.checked++;
+  const parts = [
+    `Checked on ${check.date} against the 1943 Munsell renotation (RIT transcription, interpolated at the notation, Bradford-adapted to D65): CIEDE2000 difference ${DE(c.deltaE2000)} between this value and the notation's colour`,
+  ];
+  if (c.beyond)
+    parts.push(
+      'the notation lies beyond the tabulated chroma, so the check used the highest tabulated chroma',
+    );
+  if (c.mapped) parts.push("the notation's colour lies outside sRGB");
+  return ' ' + parts.join('; ') + '.';
+}
+/** The two pages' values compared, for the second representation. */
+function pagesNote(id, ichiranHex, jisHex) {
+  const base = `The page JIS慣用色名 lists #${jisHex} for the same name (see the representation that cites it).`;
+  const c = check?.concepts?.[id];
+  if (!c?.pages) return base;
+  const munsell = c.ichiranMunsell
+    ? ` CIEDE2000 difference ${DE(c.ichiranMunsell.deltaE2000)} between this value and the colour of the standard's notation (same check as the other representation).`
+    : '';
+  return `${base} CIEDE2000 difference ${DE(c.pages.deltaE2000)} between the two pages' values.${munsell}`;
+}
+
 // ---------- records ----------
 const q = (s) => `'${String(s).replace(/'/g, "''")}'`;
 const coords = (hex) =>
@@ -362,6 +404,8 @@ const stats = {
   attached: 0,
   created: 0,
   noValue: 0,
+  ichiran: 0,
+  checked: 0,
   readings: { page: 0, ichiran: 0, editor: 0, none: 0 },
 };
 const used = new Set(ids);
@@ -462,9 +506,31 @@ for (const row of jis) {
         `sRGB hex #${row.hex} as listed on the cited page, divided by 255. The page says its RGB values were chosen with the standard's Munsell notation (${munsell}) in mind, by an unstated method, and are for reference only ("あくまで参考"). The notation itself is a Munsell Book of Color specification under the standard's viewing conditions; this value is not a conversion of it.`,
       )}`,
       '  approximation_status: modern-approximation',
-      `  notes: ${q(`Munsell notation in JIS Z 8102:2001 Appendix 1 as listed: ${munsell}.`)}`,
+      `  notes: ${q(`Munsell notation in JIS Z 8102:2001 Appendix 1 as listed: ${munsell}.` + munsellNote(id))}`,
       '',
     );
+    const match = existing ? null : (ichiran.get(base) ?? ichiranByReading.get(reading) ?? null);
+    const second = match?.hex;
+    if (second) {
+      stats.ichiran++;
+      out.push(
+        '- type: representation',
+        `  id: ${id}-srgb-ichiran`,
+        '  review_state: discovered',
+        '  rights_status: unreviewed',
+        `  evidence: { source: ${ICHIRAN}, locator: ${q(`entry ${match.name} (${match.reading}), hex #${second}${match.name === base ? '' : `; matched to ${base} by its reading`}`)} }`,
+        `  concept: ${id}`,
+        '  space: srgb',
+        `  coords: [${coords(second)}]`,
+        '  white: D65',
+        `  method: ${q(
+          `sRGB hex #${second} as listed on the cited page (which calls its values approximate examples and names no source), divided by 255.`,
+        )}`,
+        '  approximation_status: modern-approximation',
+        `  notes: ${q(pagesNote(id, second, row.hex))}`,
+        '',
+      );
+    }
   } else stats.noValue++;
 }
 if (missing.length) throw new Error(`no reading for: ${missing.join(' ')}`);

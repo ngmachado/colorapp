@@ -1,0 +1,447 @@
+# yaml-language-server: $schema=../schema.json
+# Kandinsky's four pairs of antitheses (Concerning the Spiritual in Art, chapter VI, figures I–III) in the 1914
+# Sadleir translation: yellow and blue, white and black, red and green, orange and violet, with his sentence on
+# each colour. He says himself that these statements have no scientific basis; the records keep that framing.
+
+- type: concept
+  id: kandinsky-antitheses
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence:
+    {
+      source: kandinsky-1914-spiritual-in-art-sadleir,
+      locator: 'Chapter VI, The Language of Form and Colour, figures I–III',
+    }
+  label: Kandinsky’s antitheses
+  description: Kandinsky arranges six colours in a circle between two poles, white and black, as four pairs of antitheses. Yellow against blue is the first (warm against cold), white against black the second (light against dark), red against green the third and orange against violet the fourth, the last two as complementary colours. Each colour then receives a sentence on its “inner appeal”.
+  scope: This entry models the four pairs and the circle of figure III, with Kandinsky’s own sentences on each colour. His footnote states that these claims “have no scientific basis, but are founded purely on spiritual experience”; the app records them as his, not as findings. Swatches are editorial sRGB illustrations; he gives no pigments or measurements.
+  tags: { tradition: western, kind: system, period: '1911; Sadleir translation, 1914' }
+
+# ---- the eight colours of the figures ----
+
+- type: concept
+  id: kandinsky-yellow
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: kandinsky-1914-spiritual-in-art-sadleir, locator: 'Chapter VI, figure I and the paragraphs on yellow' }
+  label: Yellow (Kandinsky)
+  description: The warm pole of Kandinsky’s first antithesis, which he describes as moving towards the spectator and spreading out from its centre. Its name and relationships do not specify a unique RGB value.
+  tags: { tradition: western, kind: colour }
+
+- type: representation
+  id: kandinsky-yellow-srgb-editorial
+  concept: kandinsky-yellow
+  review_state: extracted
+  rights_status: user-adaptation
+  evidence: { source: super-colour-kandinsky-display, locator: 'yellow: #f0c419' }
+  space: srgb
+  coords: [0.94117647, 0.76862745, 0.09803922]
+  white: D65
+  profile: sRGB
+  method: Super Colour editorial illustration, chosen directly as #f0c419 in sRGB to distinguish the colours of the figures. No historical colour match was attempted.
+  approximation_status: modern-approximation
+  notes: The name and relationships come from Kandinsky; these coordinates are an independent app choice.
+
+- type: relationship
+  id: kandinsky-yellow-member
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: kandinsky-1914-spiritual-in-art-sadleir, locator: 'Chapter VI, figure III' }
+  from: kandinsky-yellow
+  to: kandinsky-antitheses
+  edge: member-of
+
+- type: concept
+  id: kandinsky-blue
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: kandinsky-1914-spiritual-in-art-sadleir, locator: 'Chapter VI, figure I and the paragraphs on blue' }
+  label: Blue (Kandinsky)
+  description: The cold pole of Kandinsky’s first antithesis, which he describes as retreating from the spectator and turning in upon its centre. Its name and relationships do not specify a unique RGB value.
+  tags: { tradition: western, kind: colour }
+
+- type: representation
+  id: kandinsky-blue-srgb-editorial
+  concept: kandinsky-blue
+  review_state: extracted
+  rights_status: user-adaptation
+  evidence: { source: super-colour-kandinsky-display, locator: 'blue: #2c5aa0' }
+  space: srgb
+  coords: [0.17254902, 0.35294118, 0.62745098]
+  white: D65
+  profile: sRGB
+  method: Super Colour editorial illustration, chosen directly as #2c5aa0 in sRGB to distinguish the colours of the figures. No historical colour match was attempted.
+  approximation_status: modern-approximation
+  notes: The name and relationships come from Kandinsky; these coordinates are an independent app choice.
+
+- type: relationship
+  id: kandinsky-blue-member
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: kandinsky-1914-spiritual-in-art-sadleir, locator: 'Chapter VI, figure III' }
+  from: kandinsky-blue
+  to: kandinsky-antitheses
+  edge: member-of
+
+- type: concept
+  id: kandinsky-white
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: kandinsky-1914-spiritual-in-art-sadleir, locator: 'Chapter VI, figure I and the paragraphs on white' }
+  label: White (Kandinsky)
+  description: The light pole of Kandinsky’s second antithesis and one of the two poles of his circle. Its name and relationships do not specify a unique RGB value.
+  tags: { tradition: western, kind: colour }
+
+- type: representation
+  id: kandinsky-white-srgb-editorial
+  concept: kandinsky-white
+  review_state: extracted
+  rights_status: user-adaptation
+  evidence: { source: super-colour-kandinsky-display, locator: 'white: #f7f7f5' }
+  space: srgb
+  coords: [0.96862745, 0.96862745, 0.96078431]
+  white: D65
+  profile: sRGB
+  method: Super Colour editorial illustration, chosen directly as #f7f7f5 in sRGB to distinguish the colours of the figures. No historical colour match was attempted.
+  approximation_status: modern-approximation
+  notes: The name and relationships come from Kandinsky; these coordinates are an independent app choice.
+
+- type: relationship
+  id: kandinsky-white-member
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: kandinsky-1914-spiritual-in-art-sadleir, locator: 'Chapter VI, figure III' }
+  from: kandinsky-white
+  to: kandinsky-antitheses
+  edge: member-of
+
+- type: concept
+  id: kandinsky-black
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: kandinsky-1914-spiritual-in-art-sadleir, locator: 'Chapter VI, figure I and the paragraphs on black' }
+  label: Black (Kandinsky)
+  description: The dark pole of Kandinsky’s second antithesis and the other pole of his circle. Its name and relationships do not specify a unique RGB value.
+  tags: { tradition: western, kind: colour }
+
+- type: representation
+  id: kandinsky-black-srgb-editorial
+  concept: kandinsky-black
+  review_state: extracted
+  rights_status: user-adaptation
+  evidence: { source: super-colour-kandinsky-display, locator: 'black: #161616' }
+  space: srgb
+  coords: [0.08627451, 0.08627451, 0.08627451]
+  white: D65
+  profile: sRGB
+  method: Super Colour editorial illustration, chosen directly as #161616 in sRGB to distinguish the colours of the figures. No historical colour match was attempted.
+  approximation_status: modern-approximation
+  notes: The name and relationships come from Kandinsky; these coordinates are an independent app choice.
+
+- type: relationship
+  id: kandinsky-black-member
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: kandinsky-1914-spiritual-in-art-sadleir, locator: 'Chapter VI, figure III' }
+  from: kandinsky-black
+  to: kandinsky-antitheses
+  edge: member-of
+
+- type: concept
+  id: kandinsky-red
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: kandinsky-1914-spiritual-in-art-sadleir, locator: 'Chapter VI, figure II and the paragraphs on red' }
+  label: Red (Kandinsky)
+  description: One side of Kandinsky’s third antithesis, a colour he describes as glowing within itself. Its name and relationships do not specify a unique RGB value.
+  tags: { tradition: western, kind: colour }
+
+- type: representation
+  id: kandinsky-red-srgb-editorial
+  concept: kandinsky-red
+  review_state: extracted
+  rights_status: user-adaptation
+  evidence: { source: super-colour-kandinsky-display, locator: 'red: #c8323a' }
+  space: srgb
+  coords: [0.78431373, 0.19607843, 0.22745098]
+  white: D65
+  profile: sRGB
+  method: Super Colour editorial illustration, chosen directly as #c8323a in sRGB to distinguish the colours of the figures. No historical colour match was attempted.
+  approximation_status: modern-approximation
+  notes: The name and relationships come from Kandinsky; these coordinates are an independent app choice.
+
+- type: relationship
+  id: kandinsky-red-member
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: kandinsky-1914-spiritual-in-art-sadleir, locator: 'Chapter VI, figure III' }
+  from: kandinsky-red
+  to: kandinsky-antitheses
+  edge: member-of
+
+- type: concept
+  id: kandinsky-green
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: kandinsky-1914-spiritual-in-art-sadleir, locator: 'Chapter VI, figure II and the paragraphs on green' }
+  label: Green (Kandinsky)
+  description: The other side of Kandinsky’s third antithesis, the balanced mixture of yellow and blue in which, he says, both movements cease. Its name and relationships do not specify a unique RGB value.
+  tags: { tradition: western, kind: colour }
+
+- type: representation
+  id: kandinsky-green-srgb-editorial
+  concept: kandinsky-green
+  review_state: extracted
+  rights_status: user-adaptation
+  evidence: { source: super-colour-kandinsky-display, locator: 'green: #4f8f3f' }
+  space: srgb
+  coords: [0.30980392, 0.56078431, 0.24705882]
+  white: D65
+  profile: sRGB
+  method: Super Colour editorial illustration, chosen directly as #4f8f3f in sRGB to distinguish the colours of the figures. No historical colour match was attempted.
+  approximation_status: modern-approximation
+  notes: The name and relationships come from Kandinsky; these coordinates are an independent app choice.
+
+- type: relationship
+  id: kandinsky-green-member
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: kandinsky-1914-spiritual-in-art-sadleir, locator: 'Chapter VI, figure III' }
+  from: kandinsky-green
+  to: kandinsky-antitheses
+  edge: member-of
+
+- type: concept
+  id: kandinsky-orange
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: kandinsky-1914-spiritual-in-art-sadleir, locator: 'Chapter VI, figure II and the paragraphs on orange' }
+  label: Orange (Kandinsky)
+  description: One side of Kandinsky’s fourth antithesis, “red brought nearer to humanity by yellow”. Its name and relationships do not specify a unique RGB value.
+  tags: { tradition: western, kind: colour }
+
+- type: representation
+  id: kandinsky-orange-srgb-editorial
+  concept: kandinsky-orange
+  review_state: extracted
+  rights_status: user-adaptation
+  evidence: { source: super-colour-kandinsky-display, locator: 'orange: #e8832a' }
+  space: srgb
+  coords: [0.90980392, 0.51372549, 0.16470588]
+  white: D65
+  profile: sRGB
+  method: Super Colour editorial illustration, chosen directly as #e8832a in sRGB to distinguish the colours of the figures. No historical colour match was attempted.
+  approximation_status: modern-approximation
+  notes: The name and relationships come from Kandinsky; these coordinates are an independent app choice.
+
+- type: relationship
+  id: kandinsky-orange-member
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: kandinsky-1914-spiritual-in-art-sadleir, locator: 'Chapter VI, figure III' }
+  from: kandinsky-orange
+  to: kandinsky-antitheses
+  edge: member-of
+
+- type: concept
+  id: kandinsky-violet
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: kandinsky-1914-spiritual-in-art-sadleir, locator: 'Chapter VI, figure II and the paragraphs on violet' }
+  label: Violet (Kandinsky)
+  description: The other side of Kandinsky’s fourth antithesis, “red withdrawn from humanity by blue”. Its name and relationships do not specify a unique RGB value.
+  tags: { tradition: western, kind: colour }
+
+- type: representation
+  id: kandinsky-violet-srgb-editorial
+  concept: kandinsky-violet
+  review_state: extracted
+  rights_status: user-adaptation
+  evidence: { source: super-colour-kandinsky-display, locator: 'violet: #7b4fa0' }
+  space: srgb
+  coords: [0.48235294, 0.30980392, 0.62745098]
+  white: D65
+  profile: sRGB
+  method: Super Colour editorial illustration, chosen directly as #7b4fa0 in sRGB to distinguish the colours of the figures. No historical colour match was attempted.
+  approximation_status: modern-approximation
+  notes: The name and relationships come from Kandinsky; these coordinates are an independent app choice.
+
+- type: relationship
+  id: kandinsky-violet-member
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: kandinsky-1914-spiritual-in-art-sadleir, locator: 'Chapter VI, figure III' }
+  from: kandinsky-violet
+  to: kandinsky-antitheses
+  edge: member-of
+
+# ---- the four antitheses ----
+
+- type: relationship
+  id: kandinsky-yellow-blue-antithesis
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: kandinsky-1914-spiritual-in-art-sadleir, locator: 'Chapter VI, figure I (A)' }
+  from: kandinsky-yellow
+  to: kandinsky-blue
+  edge: antithesis-of
+  notes: 'The first antithesis: warm against cold, “inner appeal acting on the spirit”. Not a hue-angle opposite computed from the editorial swatches.'
+
+- type: relationship
+  id: kandinsky-white-black-antithesis
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: kandinsky-1914-spiritual-in-art-sadleir, locator: 'Chapter VI, figure I (B)' }
+  from: kandinsky-white
+  to: kandinsky-black
+  edge: antithesis-of
+  notes: 'The second antithesis: light against dark, which Kandinsky calls the two great possibilities of silence, birth and death.'
+
+- type: relationship
+  id: kandinsky-red-green-antithesis
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: kandinsky-1914-spiritual-in-art-sadleir, locator: 'Chapter VI, figure II (C)' }
+  from: kandinsky-red
+  to: kandinsky-green
+  edge: antithesis-of
+  notes: 'The third antithesis, which Kandinsky calls complementary colours: “physical appeal of complementary colours”.'
+
+- type: relationship
+  id: kandinsky-orange-violet-antithesis
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: kandinsky-1914-spiritual-in-art-sadleir, locator: 'Chapter VI, figure II (D)' }
+  from: kandinsky-orange
+  to: kandinsky-violet
+  edge: antithesis-of
+  notes: 'The fourth antithesis, which “stand to each other in the same relation as the third antitheses … i.e., as complementary colours”.'
+
+# ---- Kandinsky's sentences ----
+
+- type: cultural-assertion
+  id: kandinsky-no-scientific-basis
+  concept: kandinsky-antitheses
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: kandinsky-1914-spiritual-in-art-sadleir, locator: 'Chapter VI, footnote to the paragraph “Yellow and blue have another movement”' }
+  claim: Kandinsky states that his claims about colour movement have no scientific basis.
+  passage: 'These statements have no scientific basis, but are founded purely on spiritual experience.'
+  period: '1911 (German original); 1914 (this translation)'
+  context: Chapter VI, The Language of Form and Colour
+  notes: Recorded first so that every other assertion from this chapter is read in that light.
+
+- type: cultural-assertion
+  id: kandinsky-warm-cold
+  concept: kandinsky-antitheses
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: kandinsky-1914-spiritual-in-art-sadleir, locator: 'Chapter VI, paragraph “Generally speaking, warmth or cold in a colour”' }
+  claim: Warmth or cold in a colour means, for Kandinsky, an approach to yellow or to blue.
+  passage: 'Generally speaking, warmth or cold in a colour means an approach respectively to yellow or to blue.'
+  period: '1911 (German original); 1914 (this translation)'
+  context: Chapter VI, The Language of Form and Colour
+
+- type: cultural-assertion
+  id: kandinsky-circle-of-antitheses
+  concept: kandinsky-antitheses
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: kandinsky-1914-spiritual-in-art-sadleir, locator: 'Chapter VI, figure III and its caption' }
+  claim: Kandinsky draws the six colours as a circle between white and black.
+  passage: 'The antitheses as a circle between two poles, i.e., the life of colours between birth and death.'
+  period: '1911 (German original); 1914 (this translation)'
+  context: Chapter VI, The Language of Form and Colour, figure III
+  notes: In the figure yellow is at the top and blue at the bottom; orange and green sit above red and violet; white stands at the left, black at the right.
+
+- type: cultural-assertion
+  id: kandinsky-yellow-earthly
+  concept: kandinsky-yellow
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: kandinsky-1914-spiritual-in-art-sadleir, locator: 'Chapter VI, paragraph “Yellow is the typically earthly colour”' }
+  claim: Yellow is, for Kandinsky, the typically earthly colour, and, gazed at steadily, disturbing and aggressive.
+  passage: 'Yellow is the typically earthly colour. It can never have profound meaning.'
+  period: '1911 (German original); 1914 (this translation)'
+  context: Chapter VI, The Language of Form and Colour
+  notes: 'The preceding paragraph: “Yellow, if steadily gazed at in any geometrical form, has a disturbing influence, and reveals in the colour an insistent, aggressive character.”'
+
+- type: cultural-assertion
+  id: kandinsky-blue-heavenly
+  concept: kandinsky-blue
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: kandinsky-1914-spiritual-in-art-sadleir, locator: 'Chapter VI, paragraphs “Blue is the typical heavenly colour” and “The ultimate feeling it creates”' }
+  claim: Blue is, for Kandinsky, the typical heavenly colour, and its ultimate feeling is rest.
+  passage: 'Blue is the typical heavenly colour. The ultimate feeling it creates is one of rest.'
+  period: '1911 (German original); 1914 (this translation)'
+  context: Chapter VI, The Language of Form and Colour
+  notes: Two consecutive one-sentence paragraphs, separated in the text by a footnote on Byzantine halos.
+
+- type: cultural-assertion
+  id: kandinsky-green-restful
+  concept: kandinsky-green
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: kandinsky-1914-spiritual-in-art-sadleir, locator: 'Chapter VI, paragraph “A well-balanced mixture of blue and yellow produces green”' }
+  claim: Green is, for Kandinsky, the most restful colour, and in time wearisome.
+  passage: 'Green is the most restful colour that exists. On exhausted men this restfulness has a beneficial effect, but after a time it becomes wearisome.'
+  period: '1911 (German original); 1914 (this translation)'
+  context: Chapter VI, The Language of Form and Colour
+
+- type: cultural-assertion
+  id: kandinsky-white-silence
+  concept: kandinsky-white
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: kandinsky-1914-spiritual-in-art-sadleir, locator: 'Chapter VI, paragraph “This world is too far above us”' }
+  claim: White has, for Kandinsky, a harmony of silence that is not dead but full of possibilities.
+  passage: 'It is not a dead silence, but one pregnant with possibilities.'
+  period: '1911 (German original); 1914 (this translation)'
+  context: Chapter VI, The Language of Form and Colour
+
+- type: cultural-assertion
+  id: kandinsky-black-background
+  concept: kandinsky-black
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: kandinsky-1914-spiritual-in-art-sadleir, locator: 'Chapter VI, paragraph “A totally dead silence”' }
+  claim: Black is, for Kandinsky, a silence with no possibilities, and outwardly a neutral background against which other colours stand forward.
+  passage: 'Outwardly black is the colour with least harmony of all, a kind of neutral background against which the minutest shades of other colours stand clearly forward.'
+  period: '1911 (German original); 1914 (this translation)'
+  context: Chapter VI, The Language of Form and Colour
+  notes: 'His footnote gives the practical contrast: “vermilion rings dull and muddy against white, but against black with clear strength. Light yellow against white is weak, against black pure and brilliant.”'
+
+- type: cultural-assertion
+  id: kandinsky-red-warmth
+  concept: kandinsky-red
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: kandinsky-1914-spiritual-in-art-sadleir, locator: 'Chapter VI, paragraph “The unbounded warmth of red”' }
+  claim: Red has, for Kandinsky, an unbounded warmth that glows in itself with determined intensity.
+  passage: 'The unbounded warmth of red has not the irresponsible appeal of yellow, but rings inwardly with a determined and powerful intensity.'
+  period: '1911 (German original); 1914 (this translation)'
+  context: Chapter VI, The Language of Form and Colour
+
+- type: cultural-assertion
+  id: kandinsky-orange-conviction
+  concept: kandinsky-orange
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: kandinsky-1914-spiritual-in-art-sadleir, locator: 'Chapter VI, paragraph “Warm red, intensified by a suitable yellow, is orange”' }
+  claim: Orange is, for Kandinsky, red brought towards the spectator by yellow, like a man convinced of his own powers.
+  passage: 'Orange is like a man, convinced of his own powers.'
+  period: '1911 (German original); 1914 (this translation)'
+  context: Chapter VI, The Language of Form and Colour
+
+- type: cultural-assertion
+  id: kandinsky-violet-cooled-red
+  concept: kandinsky-violet
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: kandinsky-1914-spiritual-in-art-sadleir, locator: 'Chapter VI, paragraph “Violet is therefore both in the physical and spiritual sense a cooled red”' }
+  claim: Violet is, for Kandinsky, a cooled red, sad and ailing.
+  passage: 'Violet is therefore both in the physical and spiritual sense a cooled red. It is consequently rather sad and ailing.'
+  period: '1911 (German original); 1914 (this translation)'
+  context: Chapter VI, The Language of Form and Colour
+  notes: The paragraph goes on to cite its use in mourning in China; that claim is his, uncited, and not recorded as a fact about China.

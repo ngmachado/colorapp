@@ -20,6 +20,8 @@ const pages = [
   '/compare?a=663399&b=ffffff&rb=css-rebeccapurple-srgb',
   '/munsell?hex=663399&notation=5R%204%2F14',
   '/extract',
+  '/palettes',
+  '/preview?hex=1a1a1a,f4f4f4,663399,dddddd',
 ];
 
 for (const path of pages) {

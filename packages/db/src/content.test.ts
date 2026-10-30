@@ -189,9 +189,10 @@ describe('repository content (chunk 3 acceptance)', () => {
 
   test('Western passages quote only public-domain sources, with a paragraph locator and the passage text', () => {
     const western = records.filter(
-      (r) => r.type === 'cultural-assertion' && /^chevreul-/.test(r.id),
+      (r) => r.type === 'cultural-assertion' && /^(chevreul|munsell|kandinsky)-/.test(r.id),
     );
-    expect(western).toHaveLength(2);
+    const count = (prefix: string) => western.filter((r) => r.id.startsWith(prefix)).length;
+    expect([count('chevreul-'), count('munsell-'), count('kandinsky-')]).toEqual([2, 8, 11]);
     for (const a of western) {
       if (a.type !== 'cultural-assertion') continue;
       const src = byId.get(a.evidence.source);
@@ -199,6 +200,21 @@ describe('repository content (chunk 3 acceptance)', () => {
       expect(src?.rights_status, a.id).toBe('verified-reusable');
       expect(a.evidence.locator, a.id).toBeTruthy();
       expect(a.passage?.length ?? 0, a.id).toBeGreaterThan(40);
+    }
+    // Every Western system draws its members and pairs from records, with editorial swatches kept apart.
+    for (const system of ['chevreul-circle', 'munsell-system', 'kandinsky-antitheses']) {
+      const members = records.filter(
+        (r) => r.type === 'relationship' && r.edge === 'member-of' && r.to === system,
+      );
+      expect(members.length, system).toBeGreaterThanOrEqual(6);
+      for (const m of members) {
+        if (m.type !== 'relationship') continue;
+        const reps = records.filter((r) => r.type === 'representation' && r.concept === m.from);
+        expect(reps.length, m.from).toBe(1);
+        expect(reps[0]?.type === 'representation' && reps[0].rights_status, m.from).toBe(
+          'user-adaptation',
+        );
+      }
     }
     const restricted = records.filter((r) => r.type === 'source' && /^(itten|albers)-/.test(r.id));
     expect(restricted).toHaveLength(2);

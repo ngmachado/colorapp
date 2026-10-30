@@ -341,3 +341,88 @@
     palette via HTML and most of the rest from one version of the X11 colour system; rebeccapurple was added in
     Level 4. scripts/import-css-named-colours.mjs generates content/knowledge/web/css-named-colours.yaml from a
     saved copy.
+
+- type: source
+  id: kandinsky-1914-spiritual-in-art-sadleir
+  review_state: bibliographic
+  rights_status: verified-reusable
+  author: Wassily Kandinsky; translated by Michael Sadleir (M. T. H. Sadler)
+  title: Concerning the Spiritual in Art (published in 1914 as The Art of Spiritual Harmony)
+  publisher: Constable, London (1914); Project Gutenberg eBook 5321 (2004, updated 2011)
+  date: '1914'
+  url: https://www.gutenberg.org/ebooks/5321
+  access_date: '2026-10-30'
+  rights_notes: >-
+    Project Gutenberg distributes the 1914 English translation as public domain in the United States. The
+    German original (Über das Geistige in der Kunst, 1911; Kandinsky died 1944) is public domain everywhere;
+    the translator died in 1957, so the translation stays in copyright until the end of 2027 where the term is
+    life plus seventy years. Passages are kept to one or two sentences, with citation, for that reason.
+  notes: >-
+    The Gutenberg text carries no page numbers; locators name the chapter (VI, The Language of Form and
+    Colour), a figure, or the opening words of the paragraph. Kandinsky's own footnote says these statements
+    "have no scientific basis, but are founded purely on spiritual experience"; the records keep that
+    framing. Quoted from the plain-text file pg5321.txt downloaded on 2026-10-30.
+
+- type: source
+  id: super-colour-kandinsky-display
+  review_state: extracted
+  rights_status: verified-reusable
+  author: Super Colour contributors
+  title: Editorial display illustrations for the colours of Kandinsky's antitheses
+  date: '2026-10-30'
+  access_date: '2026-10-30'
+  rights_notes: Original app choices, released under the project's MIT license.
+  notes: >-
+    Eight manually selected sRGB hex values: yellow #f0c419, blue #2c5aa0, white #f7f7f5, black #161616,
+    red #c8323a, green #4f8f3f, orange #e8832a, violet #7b4fa0. They distinguish labels in diagrams and
+    Laboratory pairs; Kandinsky gives no pigments or measurements, and these carry no historical claim.
+
+- type: source
+  id: super-colour-wuxing-display
+  review_state: extracted
+  rights_status: verified-reusable
+  author: Super Colour contributors
+  title: Editorial display markers for the Five Phases diagram
+  date: '2026-10-30'
+  access_date: '2026-10-30'
+  rights_notes: Original app choices, released under the project's MIT license.
+  notes: >-
+    Four manually selected sRGB hex values for the colour categories that have no documented value: 青 #2f7f78
+    (a blue-green, because the category covers both), 黄 #c9a227, 白 #f2f0eb, 黑 #1a1a1a. They let the Five
+    Phases diagram and Laboratory sets show the categories; a category is a word, not one appearance, and
+    these are not historical pigments or measurements.
+
+- type: source
+  id: munsell-1907-a-color-notation
+  review_state: bibliographic
+  rights_status: verified-reusable
+  author: Albert H. Munsell
+  title: 'A Color Notation: a measured color system, based on the three qualities Hue, Value, and Chroma'
+  publisher: Geo. H. Ellis Co., Boston; Project Gutenberg eBook 26054 (2008)
+  date: '1907'
+  edition: Second edition, revised and enlarged (first edition 1905)
+  url: https://www.gutenberg.org/ebooks/26054
+  access_date: '2026-10-30'
+  rights_notes: >-
+    Public domain (Munsell died in 1918; copyright 1905 and 1907), distributed by Project Gutenberg under its
+    licence. Passages are quoted from the plain-text file pg26054.txt downloaded on 2026-10-30; the file's
+    emphasis markers (_value_) are dropped.
+  notes: >-
+    Munsell's numbered paragraphs, printed "(20)", are the locators. This 1907 text predates the 1915 Atlas and
+    the 1943 renotation: its hue scale has ten steps written by initials (R 5/9), its value scale runs 0 to 10,
+    and its chroma scale is open-ended. The notations on /munsell and in the JIS records are the later form
+    (5R 4/14) and are not this book's values.
+
+- type: source
+  id: super-colour-munsell-display
+  review_state: extracted
+  rights_status: verified-reusable
+  author: Super Colour contributors
+  title: Editorial display illustrations for the ten middle hues of Munsell's 1907 circle
+  date: '2026-10-30'
+  access_date: '2026-10-30'
+  rights_notes: Original app choices, released under the project's MIT license.
+  notes: >-
+    Ten manually selected sRGB hex values: R #b8373f, YR #c8712a, Y #c9b022, GY #8aa629, G #2f8f5b, BG #238a8c,
+    B #2f6fa8, PB #4c56a8, P #8a4a9c, RP #b03d7a. They distinguish labels in diagrams and Laboratory pairs; they
+    are not read from the book's plates or from the renotation table and carry no colorimetric claim.

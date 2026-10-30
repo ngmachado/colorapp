@@ -9,6 +9,7 @@ import {
   CONDITIONS,
   munsellAvailable,
   munsellForNotation,
+  munsellInterpolate,
   munsellNearest,
   type MunsellHit,
 } from '@/lib/munsell';
@@ -89,6 +90,9 @@ export default async function Munsell({ searchParams }: { searchParams: Promise<
   const available = munsellAvailable();
   const nearest = hex && available ? munsellNearest(hex, 5) : null;
   const byNotation = notationText && available ? munsellForNotation(notationText) : null;
+  // A notation that is not a tabulated sample (a half step, or a neutral, which the table omits) is interpolated.
+  const interpolated =
+    notationText && available && !byNotation?.exact ? munsellInterpolate(notationText) : null;
   return (
     <>
       <Toolbar middle="Munsell reference" />
@@ -101,9 +105,10 @@ export default async function Munsell({ searchParams }: { searchParams: Promise<
           <p className="m-0 max-w-[75ch] text-sm text-[var(--muted)]">
             A lookup in the 1943 Munsell renotation table, as transcribed by RIT’s Munsell Color
             Science Laboratory. For a colour it lists the nearest tabulated samples and the distance
-            to each; for a notation it gives the tabulated value. Nothing is interpolated, and a
-            distance carries no claim about how visible the difference is. These are renotation
-            values, not measurements of a Munsell Book of Color.
+            to each; for a notation it gives the tabulated value, or the nearest tabulated sample
+            and a linear interpolation between neighbouring samples when the notation is not
+            tabulated. A distance carries no claim about how visible the difference is. These are
+            renotation values, not measurements of a Munsell Book of Color.
           </p>
         </div>
         {available ? null : (
@@ -168,21 +173,56 @@ export default async function Munsell({ searchParams }: { searchParams: Promise<
         ) : null}
         {notationText && available ? (
           <section className="flex flex-col gap-3" data-testid="munsell-notation">
-            {byNotation ? (
+            {byNotation || interpolated ? (
               <>
                 <h2 className="m-0 text-base font-semibold">
-                  {byNotation.exact
+                  {byNotation?.exact
                     ? `Tabulated value of ${byNotation.asked}`
-                    : `${byNotation.asked} is not tabulated; nearest tabulated sample`}
+                    : byNotation
+                      ? `${byNotation.asked} is not tabulated; nearest tabulated sample`
+                      : `${interpolated!.asked} is a neutral; the table holds chromatic samples only`}
                 </h2>
-                {!byNotation.exact ? (
+                {byNotation && !byNotation.exact ? (
                   <p className="m-0 text-xs text-[var(--muted)]">
                     Chosen by nearest value, then nearest hue page on the 100-step circle, then
                     nearest chroma. Hue pages are tabulated at 2.5-step intervals, values at whole
                     steps, chromas at even steps.
                   </p>
                 ) : null}
-                <Sample h={byNotation.hit} />
+                {byNotation ? <Sample h={byNotation.hit} /> : null}
+                {interpolated ? (
+                  <div
+                    className="flex flex-wrap items-start gap-4 rounded-lg border border-[var(--line)] p-4 text-sm"
+                    data-testid="munsell-interpolated"
+                    data-hex={interpolated.hex}
+                  >
+                    <span
+                      className="h-16 w-16 shrink-0 rounded-md border border-[var(--line)]"
+                      style={{ background: interpolated.hex }}
+                      aria-hidden="true"
+                    />
+                    <div className="flex min-w-0 flex-1 flex-col gap-1">
+                      <span className="font-semibold">
+                        {interpolated.asked.startsWith('N ')
+                          ? `Neutral ${interpolated.asked}: illuminant C chromaticity at the value's luminance`
+                          : `Interpolated at ${interpolated.asked}`}
+                      </span>
+                      <span className="font-mono text-xs text-[var(--muted)]">
+                        sRGB approximation {interpolated.hex.toUpperCase()}
+                        {interpolated.mapped ? ' · outside sRGB, gamut-mapped' : ''}
+                        {interpolated.beyond ? ' · chroma beyond the table, clamped' : ''}
+                      </span>
+                      <span className="text-xs text-[var(--muted)]">
+                        Linear between tabulated chromas on each neighbouring hue page, then between
+                        the pages, then between whole values; Y from the value polynomial. Common
+                        renotation practice, not a published conversion.
+                      </span>
+                      <Link href={labFromHexes([interpolated.hex])} className="text-xs underline">
+                        Open the approximation in the Laboratory
+                      </Link>
+                    </div>
+                  </div>
+                ) : null}
               </>
             ) : (
               <p className="m-0 text-sm text-[var(--danger)]" role="alert">

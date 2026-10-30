@@ -197,3 +197,110 @@ export function munsellForNotation(
   )[0]!;
   return { exact: false, hit: hit(best, NaN), asked };
 }
+
+/** Chromaticity of illuminant C, for the neutral axis the table omits. */
+const NEUTRAL_C = { x: 0.3101, y: 0.3163 };
+
+/**
+ * Luminance factor Y (renotation scale, value 10 = 102.57) of a Munsell value: the quintic of the
+ * 1943 renotation as given in ASTM D1535.
+ */
+export function valueToY(v: number): number {
+  return 1.2219 * v - 0.23111 * v ** 2 + 0.23951 * v ** 3 - 0.021009 * v ** 4 + 0.0008404 * v ** 5;
+}
+
+export interface MunsellInterpolation {
+  asked: string;
+  /** XYZ under illuminant C, Y relative to the perfect diffuser (0–1). */
+  xyzC: Triple;
+  /** sRGB display approximation after Bradford adaptation to D65; mapped when outside sRGB. */
+  hex: string;
+  mapped: boolean;
+  /** True when the notation is itself a tabulated sample and nothing was interpolated. */
+  exact: boolean;
+  /** True when the chroma or value asked for lies outside the tabulated samples and the nearest tabulated one was used. */
+  beyond: boolean;
+}
+
+const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+
+/**
+ * Chromaticity for a notation by linear interpolation in the renotation table: between tabulated
+ * chromas on each neighbouring hue page (towards the illuminant C neutral below chroma 2), between
+ * the two hue pages, then between the two whole-value planes. Y comes from the value polynomial.
+ * Neutrals (N 5) take the illuminant's chromaticity. Chromatic values outside the tabulated 1–9 use
+ * the nearest plane and are flagged. This is the common renotation practice, not a published
+ * conversion, and it is an approximation of samples that were never sRGB.
+ */
+export function munsellInterpolate(text: string): MunsellInterpolation | null {
+  const neutral = /^\s*N\s*(\d+(?:\.\d+)?)\s*(?:\/\s*0?)?\s*$/i.exec(text);
+  if (neutral) {
+    // A neutral is the illuminant's chromaticity at the value's luminance factor: no table needed.
+    const value = Number(neutral[1]);
+    if (value < 0 || value > 10) return null;
+    return finish(`N ${value}`, NEUTRAL_C, value, true, false);
+  }
+  const q = parseNotation(text);
+  if (!q || q.value < 0 || q.value > 10 || q.chroma < 0) return null;
+  const rows = munsellTable();
+  if (!rows.length) return null;
+  const asked = `${q.hue} ${q.value}/${q.chroma}`;
+  const h = hueNumber(q.hue)!;
+  const pageOf = new Map<number, string>();
+  for (const r of rows) pageOf.set(hueNumber(r.hue)!, r.hue);
+  let beyond = false;
+  const onPage = (hue: string, value: number): { x: number; y: number } => {
+    const line = rows
+      .filter((r) => r.hue === hue && r.value === value)
+      .sort((a, b) => a.chroma - b.chroma);
+    if (!line.length) throw new Error(`no samples on ${hue} ${value}/`);
+    if (q.chroma >= line.at(-1)!.chroma) {
+      if (q.chroma > line.at(-1)!.chroma) beyond = true;
+      return line.at(-1)!;
+    }
+    const upper = line.find((r) => r.chroma >= q.chroma)!;
+    const lower = line[line.indexOf(upper) - 1] ?? { ...NEUTRAL_C, chroma: 0 };
+    const t = (q.chroma - lower.chroma) / (upper.chroma - lower.chroma);
+    return { x: lerp(lower.x, upper.x, t), y: lerp(lower.y, upper.y, t) };
+  };
+  const onPlane = (value: number): { x: number; y: number } => {
+    const lo = Math.floor(h / 2.5) * 2.5;
+    const hi = lo + 2.5;
+    const name = (n: number) => pageOf.get(n === 0 ? 100 : n > 100 ? n - 100 : n)!;
+    if (lo === h) return onPage(name(h), value);
+    const a = onPage(name(lo), value);
+    const b = onPage(name(hi), value);
+    const t = (h - lo) / 2.5;
+    return { x: lerp(a.x, b.x, t), y: lerp(a.y, b.y, t) };
+  };
+  // Chromatic samples are tabulated at values 1 to 9; outside that, the nearest plane's chromaticity is used and flagged.
+  const clamped = Math.min(9, Math.max(1, q.value));
+  if (clamped !== q.value) beyond = true;
+  const v0 = Math.floor(clamped);
+  const v1 = Math.ceil(clamped);
+  let xy: { x: number; y: number };
+  if (v0 === v1) xy = onPlane(v0);
+  else {
+    const a = onPlane(v0);
+    const b = onPlane(v1);
+    xy = { x: lerp(a.x, b.x, clamped - v0), y: lerp(a.y, b.y, clamped - v0) };
+  }
+  const exact = rows.some((r) => r.hue === q.hue && r.value === q.value && r.chroma === q.chroma);
+  return finish(asked, xy, q.value, exact, beyond);
+}
+
+function finish(
+  asked: string,
+  xy: { x: number; y: number },
+  value: number,
+  exact: boolean,
+  beyond: boolean,
+): MunsellInterpolation {
+  const Y = (valueToY(value) * 0.975) / 100;
+  const xyzC: Triple = [(xy.x * Y) / xy.y, Y, ((1 - xy.x - xy.y) * Y) / xy.y];
+  const v = colour('xyz-d65', adapt(xyzC, WHITE_C, WHITE_D65), {
+    kind: 'derived',
+    note: 'Munsell renotation, interpolated at the notation, adapted to D65',
+  });
+  return { asked, xyzC, hex: toHex(v), mapped: !inGamut(v, 'srgb'), exact, beyond };
+}

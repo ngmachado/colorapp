@@ -6,18 +6,34 @@ test('the grid shows colours only, Systems includes both documented systems, and
   await page.goto('/dictionary');
   await expect(page.getByTestId('card').filter({ hasText: 'rebeccapurple' })).toBeVisible();
   await expect(page.getByTestId('card').filter({ hasText: '桜色' })).toBeVisible();
+  // Systems are entries, not colour cards; their colours are.
   await expect(page.getByTestId('card').filter({ hasText: "Goethe's colour circle" })).toHaveCount(
     0,
   );
+  await expect(page.getByTestId('card').filter({ hasText: 'Blue (Kandinsky)' })).toBeVisible();
   await expect(page.getByTestId('card').filter({ hasText: 'Wood (' })).toHaveCount(0);
   await expect(page.getByRole('radio', { name: 'Systems', exact: true })).toBeVisible();
   await page.goto('/dictionary?kind=systems');
   await expect(page.getByTestId('system').filter({ hasText: /Goethe/i })).toHaveCount(0);
-  await expect(page.getByTestId('system')).toHaveCount(2);
+  await expect(page.getByTestId('system')).toHaveCount(4);
+  // Munsell: ten hues, five opposites drawn from the records, red opposite blue-green with the footnote kept.
+  await page.goto('/dictionary/munsell-system');
+  await expect(page.getByTestId('munsell-system').locator('line')).toHaveCount(5);
+  await expect(page.locator('#meaning')).toContainText('purely personal affair');
+  await page.goto('/dictionary/munsell-r');
+  await expect(page.locator('#meaning')).toContainText('finds its opposite, blue-green');
+  await expect(page.locator('#meaning')).toContainText('Blue-green, BG (Munsell)');
   await page.goto('/dictionary/chevreul-circle');
   await expect(page.getByTestId('chevreul-circle')).toBeVisible();
   await expect(page.locator('#meaning')).toContainText('simultaneous contrast');
   await expect(page.locator('#source')).toContainText('72 scales');
+  // Kandinsky: four antitheses, the disclaimer first, eight members.
+  await page.goto('/dictionary/kandinsky-antitheses');
+  await expect(page.getByTestId('kandinsky-antitheses').locator('line')).toHaveCount(4);
+  await expect(page.locator('#meaning')).toContainText('no scientific basis');
+  await page.goto('/dictionary/kandinsky-blue');
+  await expect(page.locator('#meaning')).toContainText('typical heavenly colour');
+  await expect(page.locator('#meaning')).toContainText('Antithesis');
   await page.goto('/dictionary?q=achi');
   await expect(page.getByTestId('card').filter({ hasText: '褐色' })).toBeVisible();
   await expect(page.getByTestId('card').filter({ hasText: '褐色' })).toContainText(

@@ -26,6 +26,12 @@ test('moving the hue changes the swatch and every structure row; a lock holds it
   await expect(page.getByTestId('term')).toHaveCount(13);
   await expect(page.getByTestId('terms')).toContainText('Simultaneous contrast');
   await expect(page.locator('main')).not.toContainText(/Goethe/i);
+  await expect(page.getByTestId('munsell').locator('line')).toHaveCount(5);
+  await expect(
+    page.getByTestId('munsell').getByRole('link', { name: 'Open the entry' }),
+  ).toHaveAttribute('href', '/dictionary/munsell-system');
+  await expect(page.getByTestId('kandinsky').locator('line')).toHaveCount(4);
+  await expect(page.getByTestId('kandinsky')).toContainText('no scientific basis');
 });
 
 test('lessons precede historical records and the context experiment reveals identical samples', async ({

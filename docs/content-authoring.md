@@ -22,9 +22,15 @@ Knowledge records live in `content/knowledge/**/*.yaml`, curriculum topics in `c
 
 `content/knowledge/japanese/jis-z8102.yaml` is written by `scripts/import-jis-z8102.mjs` from saved copies of the Japanese Wikipedia pages JIS慣用色名 and 日本の色の一覧 (download them with a descriptive User-Agent, keep them out of the repo). Edit the script's tables (existing-concept map, editor readings, notes), rerun it, then `pnpm content:build`. Do not hand-edit the generated file.
 
+The JIS import runs in two passes when the renotation table is installed: generate, then `cd apps/web && node_modules/.bin/tsx scripts/check-jis-munsell.ts` writes `content/reference/munsell/jis-z8102-check.json` (CIEDE2000 between each page value and the standard's notation interpolated in the table, and between the two Wikipedia pages' values), then generate again with that file as the third argument so the differences land in each record's notes. The check file is committed; the derived colours are not recorded anywhere. 日本の色の一覧 values become a second representation per name (matched by name, else by reading, which the locator states).
+
 `content/knowledge/web/css-named-colours.yaml` is written by `scripts/import-css-named-colours.mjs` from a saved copy of the CSS Color Module Level 4 specification; the same rule applies.
 
 A concept may carry `tags.standard` (for example `jis-z8102`) and `tags.munsell`; the app groups documented points by standard before tradition, and `primaryRepresentation` in `apps/web/lib/records.ts` decides which of several values an entry shows first.
+
+## Systems
+
+A Western system is a `concept` with `tags.kind: system`, member colours joined to it by `member-of`, pairs as `complement-of`, `characteristic-with` or `antithesis-of` relationships, and the theorist's sentences as `cultural-assertion` records with a paragraph locator and the passage. Only public-domain texts are quoted (Chevreul 1890 printing, Munsell 1907, Kandinsky 1914 translation; the content test checks the source's rights); Itten and Albers stay bibliographic. Goethe was removed by decision on 2026-10-19 and a test asserts his absence. Swatches are editorial illustrations with their own `super-colour-*-display` source and `rights_status: user-adaptation`; a colour concept carries exactly one. `apps/web/components/system-circle.tsx` lists which concepts sit on the ring and which edges are drawn; everything else is read from the records. A category or term that has no documented value says why in `scope`, and may carry an editorial marker labelled as an app choice.
 
 ## Reference data outside the knowledge release
 

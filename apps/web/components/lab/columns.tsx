@@ -21,12 +21,23 @@ import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
 import { Wheel, type OverlayPoint, inBand, OVERLAY_BAND } from '@/components/wheel';
 import { ContrastPanel } from '@/components/lab/contrast-panel';
+import { DistinctPanel } from '@/components/lab/distinct-panel';
+import { ScalesPanel } from '@/components/lab/scales-panel';
 import { GradientPanel } from '@/components/lab/gradient-panel';
 import { LightnessPanel } from '@/components/lab/lightness-panel';
 import { NeighbourPanel } from '@/components/lab/neighbour-panel';
 import { RelationsPanel } from '@/components/lab/relations-panel';
 import { oklchOfHex, parseHex } from '@/lib/contrast';
-import { cssExport, jsonExport, svgExport, type ExportColour } from '@/lib/exports';
+import {
+  aseExport,
+  cssExport,
+  jsonExport,
+  scssExport,
+  svgExport,
+  tailwindExport,
+  tokensExport,
+  type ExportColour,
+} from '@/lib/exports';
 import { nearestPoint, type NamePoint } from '@/lib/nearest';
 import { groupLabel } from '@/lib/records';
 import { hexesIn } from '@/lib/lab-links';
@@ -36,7 +47,8 @@ import type { SourceCitation } from '@/lib/palette-names';
 import type { ColourSet } from '@/lib/systems';
 
 export type { Oklch };
-export const ROLES: Role[] = ['dominant', 'secondary', 'accent', 'support', 'highlight'];
+import { ROLES } from '@/lib/roles';
+export { ROLES };
 /** Rules the Laboratory offers. Mutation is reached through Vary, not the rule list. */
 const STRUCTURES = Structure.options.filter((s) => s !== 'mutation');
 const MIN_COLUMNS = 2;
@@ -152,8 +164,10 @@ function Icon({ d, children }: { d?: string; children?: React.ReactNode }) {
   );
 }
 
-function download(name: string, type: string, body: string) {
-  const url = URL.createObjectURL(new Blob([body], { type }));
+function download(name: string, type: string, body: string | Uint8Array | Blob) {
+  const url = URL.createObjectURL(
+    body instanceof Blob ? body : new Blob([body as BlobPart], { type }),
+  );
   const a = document.createElement('a');
   a.href = url;
   a.download = name;
@@ -302,9 +316,9 @@ export function Columns({
   const [notice, setNotice] = useState<ReactNode>(null);
   const [showContrast, setShowContrast] = useState(false);
   /** One of the inspection views at a time, below the columns. */
-  const [view2, setView2] = useState<'lightness' | 'neighbours' | 'gradients' | 'relations' | null>(
-    null,
-  );
+  const [view2, setView2] = useState<
+    'lightness' | 'neighbours' | 'gradients' | 'relations' | 'scales' | 'distinct' | null
+  >(null);
   const [showWheel, setShowWheel] = useState(false);
   const [slice, setSlice] = useState<number | null>(null);
   // Documented points shown on the wheel come from the same set (options.source) that the nearest readout uses.
@@ -822,6 +836,45 @@ export function Columns({
     setNotice('JSON downloaded, with each record, its source and whether the column was edited.');
     closeExport();
   }
+  function exportText(ext: string, type: string, body: string, what: string) {
+    download(`palette-${structure}-${seed}.${ext}`, type, body);
+    setNotice(`${what} downloaded.`);
+    closeExport();
+  }
+  function exportPng() {
+    // Drawn here from the same values the columns show: swatches, names, hex, and the record ids.
+    const w = 240;
+    const h = 320;
+    const canvas = document.createElement('canvas');
+    canvas.width = w * palette.length;
+    canvas.height = h;
+    const ctx = canvas.getContext('2d')!;
+    exportColours().forEach((c, i) => {
+      ctx.fillStyle = c.hex;
+      ctx.fillRect(i * w, 0, w, h);
+      ctx.fillStyle =
+        contrastRatio(colour('srgb', [0.1, 0.1, 0.1]), srgbOf(c.hex)) >=
+        contrastRatio(colour('srgb', [1, 1, 1]), srgbOf(c.hex))
+          ? '#1a1a1a'
+          : '#ffffff';
+      ctx.font = '600 22px ui-monospace, monospace';
+      ctx.fillText(c.hex.toUpperCase(), i * w + 16, h - 64);
+      ctx.font = '15px system-ui, sans-serif';
+      ctx.fillText(c.name, i * w + 16, h - 40);
+      ctx.font = '11px ui-monospace, monospace';
+      ctx.fillText(
+        c.record ? `${c.record.id}${c.record.edited ? ' · edited' : ''}` : 'no record',
+        i * w + 16,
+        h - 20,
+      );
+    });
+    canvas.toBlob((blob) => {
+      if (!blob) return setNotice('PNG export failed.');
+      download(`palette-${structure}-${seed}.png`, 'image/png', blob);
+      setNotice('PNG downloaded.');
+      closeExport();
+    }, 'image/png');
+  }
   function exportSvg() {
     download(
       `palette-${structure}-${seed}.svg`,
@@ -942,7 +995,7 @@ export function Columns({
           <summary className="btn cursor-pointer list-none" data-testid="export">
             Export
           </summary>
-          <div className="absolute right-0 z-10 mt-1 flex w-48 flex-col rounded-md border border-[var(--line)] bg-[var(--surface)] py-1 text-sm shadow-sm">
+          <div className="absolute right-0 z-10 mt-1 flex w-64 flex-col rounded-md border border-[var(--line)] bg-[var(--surface)] py-1 text-sm shadow-sm">
             <button type="button" onClick={exportCss} className={menuItem}>
               Copy CSS variables
             </button>
@@ -956,6 +1009,63 @@ export function Columns({
             </button>
             <button type="button" onClick={exportSvg} className={menuItem} data-testid="export-svg">
               Download SVG
+            </button>
+            <button type="button" onClick={exportPng} className={menuItem} data-testid="export-png">
+              Download PNG
+            </button>
+            <button
+              type="button"
+              onClick={() =>
+                exportText(
+                  'tailwind.js',
+                  'text/javascript',
+                  tailwindExport(exportPalette()),
+                  'Tailwind config',
+                )
+              }
+              className={menuItem}
+              data-testid="export-tailwind"
+            >
+              Download Tailwind config
+            </button>
+            <button
+              type="button"
+              onClick={() => exportText('scss', 'text/x-scss', scssExport(exportPalette()), 'SCSS')}
+              className={menuItem}
+              data-testid="export-scss"
+            >
+              Download SCSS
+            </button>
+            <button
+              type="button"
+              onClick={() =>
+                exportText(
+                  'tokens.json',
+                  'application/json',
+                  tokensExport(exportPalette()),
+                  'Design tokens',
+                )
+              }
+              className={menuItem}
+              data-testid="export-tokens"
+            >
+              Download design tokens (Figma, Style Dictionary)
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                download(
+                  `palette-${structure}-${seed}.ase`,
+                  'application/octet-stream',
+                  aseExport(exportPalette()),
+                );
+                setNotice('Adobe swatch file downloaded.');
+                closeExport();
+              }}
+              className={menuItem}
+              data-testid="export-ase"
+            >
+              Download Adobe swatches (.ase)
             </button>
             <button type="button" onClick={copyLink} className={menuItem} data-testid="copy-link">
               Copy link
@@ -1706,6 +1816,10 @@ export function Columns({
           names={palette.map((_, i) => nameOf(i))}
           onNotice={setNotice}
         />
+      ) : view2 === 'scales' ? (
+        <ScalesPanel palette={palette} names={palette.map((_, i) => nameOf(i))} />
+      ) : view2 === 'distinct' ? (
+        <DistinctPanel palette={palette} names={palette.map((_, i) => nameOf(i))} />
       ) : view2 === 'relations' ? (
         <RelationsPanel
           sets={sets}
@@ -1851,6 +1965,8 @@ export function Columns({
               <option value="neighbours">Neighbours</option>
               <option value="gradients">Gradients</option>
               <option value="relations">Relations</option>
+              <option value="scales">Scales</option>
+              <option value="distinct">Distinctness</option>
             </select>
           </label>
           <button
@@ -1868,6 +1984,14 @@ export function Columns({
             data-testid="map-link"
           >
             Map
+          </Link>
+          <Link
+            href={`/preview?${stateParams({ palette, structure, seed, locked, labels, weights, sourceIds, pairs })}`}
+            className="btn h-8 text-[13px]"
+            title="See this palette applied to an interface"
+            data-testid="preview-link"
+          >
+            Preview
           </Link>
         </span>
       </div>

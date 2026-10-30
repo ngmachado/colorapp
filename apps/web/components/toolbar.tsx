@@ -10,6 +10,7 @@ const NAV = [
   { href: '/theory', label: 'Theory' },
   { href: '/dictionary', label: 'Dictionary' },
   { href: '/space', label: 'Map' },
+  { href: '/palettes', label: 'Palettes' },
   { href: '/library', label: 'Library' },
 ] as const;
 
@@ -45,7 +46,7 @@ export async function Toolbar({
       <Link href="/" className="text-[17px] font-bold tracking-tight whitespace-nowrap">
         Super Colour
       </Link>
-      <nav aria-label="Sections" className="flex items-center gap-4 text-sm">
+      <nav aria-label="Sections" className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm">
         {NAV.map((n) => (
           <Link
             key={n.href}

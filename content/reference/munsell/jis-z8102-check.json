@@ -1,0 +1,3096 @@
+{
+  "date": "2026-10-30",
+  "table": "Munsell renotation (1943), RIT real.dat transcription, 2734 chromatic samples",
+  "method": "The standard's notation interpolated linearly in the table (chroma on each neighbouring hue page, then hue, then value; Y from the ASTM D1535 value polynomial), Bradford-adapted from illuminant C to D65, compared with the page's sRGB value by CIEDE2000 in CIELAB. Differences only; derived colours are not recorded.",
+  "summary": {
+    "records": 267,
+    "median": 2.62,
+    "max": 16.56,
+    "beyond": 1,
+    "mapped": 29
+  },
+  "concepts": {
+    "ja-toki-iro": {
+      "notation": "7RP 7.5/8",
+      "munsell": {
+        "deltaE2000": 6.95,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 19.49
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 12.69
+      }
+    },
+    "ja-tsutsuji-iro": {
+      "notation": "7RP 5/13",
+      "munsell": {
+        "deltaE2000": 6.21,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 8.04
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 9.67
+      }
+    },
+    "ja-sakura-iro": {
+      "notation": "10RP 9/2.5",
+      "munsell": {
+        "deltaE2000": 7.08,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-bara-iro": {
+      "notation": "1R 5/13",
+      "munsell": {
+        "deltaE2000": 5.13,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 3.62
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 5.27
+      }
+    },
+    "ja-karakurenai": {
+      "notation": "1.5R 5.5/13",
+      "munsell": {
+        "deltaE2000": 4.71,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 12.69
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 8.89
+      }
+    },
+    "ja-sango-iro": {
+      "notation": "2.5R 7/11",
+      "munsell": {
+        "deltaE2000": 5.38,
+        "beyond": false,
+        "mapped": true
+      },
+      "pages": {
+        "deltaE2000": 21.15
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 15.84
+      }
+    },
+    "ja-kobai-iro": {
+      "notation": "2.5R 6.5/7.5",
+      "munsell": {
+        "deltaE2000": 4.44,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 8.17
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 7.6
+      }
+    },
+    "ja-momo-iro": {
+      "notation": "2.5R 6.5/8",
+      "munsell": {
+        "deltaE2000": 4.5,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 4.92
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 4.31
+      }
+    },
+    "ja-kurenai-iro": {
+      "notation": "3R 4/14",
+      "munsell": {
+        "deltaE2000": 1.22,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 1.51
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 1.97
+      }
+    },
+    "ja-beniaka": {
+      "notation": "3.5R 4/13",
+      "munsell": {
+        "deltaE2000": 1.24,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 8.07
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 8.93
+      }
+    },
+    "ja-enji": {
+      "notation": "4R 4/11",
+      "munsell": {
+        "deltaE2000": 1.02,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-suo": {
+      "notation": "4R 4/7",
+      "munsell": {
+        "deltaE2000": 1.68,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-akane-iro": {
+      "notation": "4R 3.5/11",
+      "munsell": {
+        "deltaE2000": 1.13,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 4.59
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 5.5
+      }
+    },
+    "ja-aka": {
+      "notation": "5R 4/14",
+      "munsell": {
+        "deltaE2000": 1.18,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 9.72
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 10.7
+      }
+    },
+    "ja-shu-iro": {
+      "notation": "6R 5.5/14",
+      "munsell": {
+        "deltaE2000": 0.68,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 1.83
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 1.77
+      }
+    },
+    "ja-benikaba-iro": {
+      "notation": "6R 4/8.5",
+      "munsell": {
+        "deltaE2000": 1.23,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 10.34
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 11.19
+      }
+    },
+    "ja-benihi": {
+      "notation": "6.8R 5.5/14",
+      "munsell": {
+        "deltaE2000": 1.01,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 4.61
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 5.26
+      }
+    },
+    "ja-entan-iro": {
+      "notation": "7.5R 5/12",
+      "munsell": {
+        "deltaE2000": 1.75,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 8.69
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 9.8
+      }
+    },
+    "ja-beniebicha": {
+      "notation": "7.5R 3/5",
+      "munsell": {
+        "deltaE2000": 2.04,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-tobi-iro": {
+      "notation": "7.5R 3.5/5",
+      "munsell": {
+        "deltaE2000": 2.19,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 3.65
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 2.76
+      }
+    },
+    "ja-azuki-iro": {
+      "notation": "8R 4.5/4.5",
+      "munsell": {
+        "deltaE2000": 0.94,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 5.92
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 5.18
+      }
+    },
+    "ja-bengara-iro": {
+      "notation": "8R 3.5/7",
+      "munsell": {
+        "deltaE2000": 2.59,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 6.25
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 7.84
+      }
+    },
+    "ja-ebicha": {
+      "notation": "8R 3/4.5",
+      "munsell": {
+        "deltaE2000": 2.17,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 6.52
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 4.55
+      }
+    },
+    "ja-kinaka": {
+      "notation": "9R 5.5/14",
+      "munsell": {
+        "deltaE2000": 1.38,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-akacha": {
+      "notation": "9R 3.5/8.5",
+      "munsell": {
+        "deltaE2000": 10.48,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-akasabi-iro": {
+      "notation": "9R 3.5/8.5",
+      "munsell": {
+        "deltaE2000": 3.57,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-oni": {
+      "notation": "10R 6/12",
+      "munsell": {
+        "deltaE2000": 1.09,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 3.97
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 3.86
+      }
+    },
+    "ja-akadaidai": {
+      "notation": "10R 5.5/14",
+      "munsell": {
+        "deltaE2000": 1.51,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 1.38
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 2.36
+      }
+    },
+    "ja-kaki-iro": {
+      "notation": "10R 5.5/12",
+      "munsell": {
+        "deltaE2000": 1.14,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 4.01
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 4.57
+      }
+    },
+    "ja-nikkei-iro": {
+      "notation": "10R 5.5/6",
+      "munsell": {
+        "deltaE2000": 0.75,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-kaba-iro": {
+      "notation": "10R 4.5/11",
+      "munsell": {
+        "deltaE2000": 2.44,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 5.52
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 7.61
+      }
+    },
+    "ja-renga-iro": {
+      "notation": "10R 4/7",
+      "munsell": {
+        "deltaE2000": 2.79,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 5.8
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 7.25
+      }
+    },
+    "ja-sabi-iro": {
+      "notation": "10R 3/3.5",
+      "munsell": {
+        "deltaE2000": 2.74,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 5.73
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 5.84
+      }
+    },
+    "ja-hiwada-iro": {
+      "notation": "1YR 4.3/4",
+      "munsell": {
+        "deltaE2000": 1.77,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 9.57
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 8.45
+      }
+    },
+    "ja-kuri-iro": {
+      "notation": "2YR 3.5/4",
+      "munsell": {
+        "deltaE2000": 2.38,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 15.97
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 15.12
+      }
+    },
+    "ja-kiaka": {
+      "notation": "2.5YR 5.5/13",
+      "munsell": {
+        "deltaE2000": 2.8,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-taisha": {
+      "notation": "2.5YR 5/8.5",
+      "munsell": {
+        "deltaE2000": 1.81,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-rakuda-iro": {
+      "notation": "4YR 5.5/6",
+      "munsell": {
+        "deltaE2000": 1.25,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 2.24
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 2.94
+      }
+    },
+    "ja-kicha": {
+      "notation": "4YR 5/9",
+      "munsell": {
+        "deltaE2000": 2.11,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-hada-iro": {
+      "notation": "5YR 8/5",
+      "munsell": {
+        "deltaE2000": 1.2,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 1.74
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 1.18
+      }
+    },
+    "ja-daidai-iro": {
+      "notation": "5YR 6.5/13",
+      "munsell": {
+        "deltaE2000": 4.14,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 15.29
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 12.65
+      }
+    },
+    "ja-haicha": {
+      "notation": "5YR 4.5/3",
+      "munsell": {
+        "deltaE2000": 1.52,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-cha-iro": {
+      "notation": "5YR 3.5/4",
+      "munsell": {
+        "deltaE2000": 2.95,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 11.54
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 13.1
+      }
+    },
+    "ja-kogecha": {
+      "notation": "5YR 3/2",
+      "munsell": {
+        "deltaE2000": 1.86,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 6.71
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 7.72
+      }
+    },
+    "ja-koji-iro": {
+      "notation": "5.5YR 7.5/9",
+      "munsell": {
+        "deltaE2000": 1.46,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 20.62
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 21.39
+      }
+    },
+    "ja-anzu-iro": {
+      "notation": "6YR 7/6",
+      "munsell": {
+        "deltaE2000": 0.88,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 4.99
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 5.75
+      }
+    },
+    "ja-mikan-iro": {
+      "notation": "6YR 6.5/13",
+      "munsell": {
+        "deltaE2000": 5.36,
+        "beyond": false,
+        "mapped": true
+      },
+      "pages": {
+        "deltaE2000": 2.5
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 2.95
+      }
+    },
+    "ja-kasshoku": {
+      "notation": "6YR 3/7",
+      "munsell": {
+        "deltaE2000": 2.34,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-tsuchi-iro": {
+      "notation": "7.5YR 5/7",
+      "munsell": {
+        "deltaE2000": 1.57,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-komugi-iro": {
+      "notation": "8YR 7/6",
+      "munsell": {
+        "deltaE2000": 0.85,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 7.19
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 7.41
+      }
+    },
+    "ja-kohaku-iro": {
+      "notation": "8YR 5.5/6.5",
+      "munsell": {
+        "deltaE2000": 8.1,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 10.34
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 14.41
+      }
+    },
+    "ja-kincha": {
+      "notation": "9YR 5.5/10",
+      "munsell": {
+        "deltaE2000": 3.71,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 6.69
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 9
+      }
+    },
+    "ja-tamago-iro": {
+      "notation": "10YR 8/7.5",
+      "munsell": {
+        "deltaE2000": 2.37,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-yamabuki-iro": {
+      "notation": "10YR 7.5/13",
+      "munsell": {
+        "deltaE2000": 4.65,
+        "beyond": false,
+        "mapped": true
+      },
+      "pages": {
+        "deltaE2000": 6.28
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 2
+      }
+    },
+    "ja-odo-iro": {
+      "notation": "10YR 6/7.5",
+      "munsell": {
+        "deltaE2000": 1.43,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 2.23
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 2.11
+      }
+    },
+    "ja-kuchiba-iro": {
+      "notation": "10YR 5/2",
+      "munsell": {
+        "deltaE2000": 1.46,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 9.15
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 8.36
+      }
+    },
+    "ja-himawari-iro": {
+      "notation": "2Y 8/14",
+      "munsell": {
+        "deltaE2000": 4.8,
+        "beyond": false,
+        "mapped": true
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-ukon-iro": {
+      "notation": "2Y 7.5/12",
+      "munsell": {
+        "deltaE2000": 5.68,
+        "beyond": false,
+        "mapped": true
+      },
+      "pages": {
+        "deltaE2000": 6.57
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 3.35
+      }
+    },
+    "ja-suna-iro": {
+      "notation": "2.5Y 7.5/2",
+      "munsell": {
+        "deltaE2000": 4.43,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-karashi-iro": {
+      "notation": "3Y 7/6",
+      "munsell": {
+        "deltaE2000": 2.07,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 5.81
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 4.37
+      }
+    },
+    "ja-ki-iro": {
+      "notation": "5Y 8/14",
+      "munsell": {
+        "deltaE2000": 8.18,
+        "beyond": false,
+        "mapped": true
+      },
+      "pages": {
+        "deltaE2000": 7.28
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 4.43
+      }
+    },
+    "ja-tanpopo-iro": {
+      "notation": "5Y 8/14",
+      "munsell": {
+        "deltaE2000": 8.18,
+        "beyond": false,
+        "mapped": true
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-uguisucha": {
+      "notation": "5Y 4/3.5",
+      "munsell": {
+        "deltaE2000": 0.98,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 5.44
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 5.12
+      }
+    },
+    "ja-chuki": {
+      "notation": "5Y 8.5/11",
+      "munsell": {
+        "deltaE2000": 1.44,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-kariyasu-iro": {
+      "notation": "7Y 8.5/7",
+      "munsell": {
+        "deltaE2000": 3.18,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 4.97
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 6.58
+      }
+    },
+    "ja-kihada-iro": {
+      "notation": "9Y 8/8",
+      "munsell": {
+        "deltaE2000": 2.26,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 8.94
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 8.56
+      }
+    },
+    "ja-miru-iro": {
+      "notation": "9.5Y 4.5/2.5",
+      "munsell": {
+        "deltaE2000": 2,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 5.26
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 3.46
+      }
+    },
+    "ja-hiwa-iro": {
+      "notation": "1GY 7.5/8",
+      "munsell": {
+        "deltaE2000": 2.12,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-uguisu-iro": {
+      "notation": "1GY 4.5/3.5",
+      "munsell": {
+        "deltaE2000": 1.54,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-matcha-iro": {
+      "notation": "2GY 7.5/4",
+      "munsell": {
+        "deltaE2000": 2.93,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-kimidori": {
+      "notation": "2.5GY 7.5/11",
+      "munsell": {
+        "deltaE2000": 2.05,
+        "beyond": false,
+        "mapped": true
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-koke-iro": {
+      "notation": "2.5GY 5/5",
+      "munsell": {
+        "deltaE2000": 1.54,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 6.38
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 5.27
+      }
+    },
+    "ja-wakakusa-iro": {
+      "notation": "3GY 7/10",
+      "munsell": {
+        "deltaE2000": 2.05,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 5.8
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 4.9
+      }
+    },
+    "ja-moegi": {
+      "notation": "4GY 6.5/9",
+      "munsell": {
+        "deltaE2000": 2.04,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-kusa-iro": {
+      "notation": "5GY 5/5",
+      "munsell": {
+        "deltaE2000": 1.37,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 5.71
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 5.35
+      }
+    },
+    "ja-wakaba-iro": {
+      "notation": "7GY 7.5/4.5",
+      "munsell": {
+        "deltaE2000": 3.37,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 10.47
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 7.47
+      }
+    },
+    "ja-matsuba-iro": {
+      "notation": "7.5GY 5/4",
+      "munsell": {
+        "deltaE2000": 1.83,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 11.26
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 9.68
+      }
+    },
+    "ja-byakuroku": {
+      "notation": "2.5G 8.5/2.5",
+      "munsell": {
+        "deltaE2000": 6.45,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 5.94
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 6.38
+      }
+    },
+    "ja-midori": {
+      "notation": "2.5G 6.5/10",
+      "munsell": {
+        "deltaE2000": 2.63,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 19.86
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 20.46
+      }
+    },
+    "ja-tokiwa-iro": {
+      "notation": "3G 4.5/7",
+      "munsell": {
+        "deltaE2000": 2.89,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 3.69
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 3.13
+      }
+    },
+    "ja-rokusho-iro": {
+      "notation": "4G 5/4",
+      "munsell": {
+        "deltaE2000": 2.23,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-chitosemidori": {
+      "notation": "4G 4/3.5",
+      "munsell": {
+        "deltaE2000": 2,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-fukamidori": {
+      "notation": "5G 3/7",
+      "munsell": {
+        "deltaE2000": 4.22,
+        "beyond": false,
+        "mapped": true
+      },
+      "pages": {
+        "deltaE2000": 7.42
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 7.21
+      }
+    },
+    "ja-moegi-iro": {
+      "notation": "5.5G 3/5",
+      "munsell": {
+        "deltaE2000": 1.46,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 49.18
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 50.73
+      }
+    },
+    "ja-wakatake-iro": {
+      "notation": "6G 6/7.5",
+      "munsell": {
+        "deltaE2000": 1.59,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 10.67
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 11.28
+      }
+    },
+    "ja-seiji-iro": {
+      "notation": "7.5G 6.5/4",
+      "munsell": {
+        "deltaE2000": 4.55,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 7.52
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 4.87
+      }
+    },
+    "ja-aotake-iro": {
+      "notation": "2.5BG 6.5/4",
+      "munsell": {
+        "deltaE2000": 6.71,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 9.64
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 4.38
+      }
+    },
+    "ja-tetsu-iro": {
+      "notation": "2.5BG 2.5/2.5",
+      "munsell": {
+        "deltaE2000": 2.92,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-aomidori": {
+      "notation": "7.5BG 5/12",
+      "munsell": {
+        "deltaE2000": 14.55,
+        "beyond": false,
+        "mapped": true
+      },
+      "pages": {
+        "deltaE2000": 0
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 14.55
+      }
+    },
+    "ja-sabiasagi": {
+      "notation": "10BG 5.5/3",
+      "munsell": {
+        "deltaE2000": 5.83,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 9.18
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 3.75
+      }
+    },
+    "ja-mizuasagi": {
+      "notation": "1.5B 6/3",
+      "munsell": {
+        "deltaE2000": 6.6,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 22.61
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 18.19
+      }
+    },
+    "ja-shinbashi-iro": {
+      "notation": "2.5B 6.5/5.5",
+      "munsell": {
+        "deltaE2000": 6.73,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 8.06
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 3.6
+      }
+    },
+    "ja-asagi": {
+      "notation": "2.5B 5/8",
+      "munsell": {
+        "deltaE2000": 6.68,
+        "beyond": false,
+        "mapped": true
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-byakugun": {
+      "notation": "3B 7/4.5",
+      "munsell": {
+        "deltaE2000": 7.11,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 10.59
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 5.63
+      }
+    },
+    "ja-nando-iro": {
+      "notation": "4B 4/6",
+      "munsell": {
+        "deltaE2000": 4.49,
+        "beyond": false,
+        "mapped": true
+      },
+      "pages": {
+        "deltaE2000": 12.17
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 10.95
+      }
+    },
+    "ja-kamenozoki": {
+      "notation": "4.5B 7/4",
+      "munsell": {
+        "deltaE2000": 6.73,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 13.6
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 13.37
+      }
+    },
+    "ja-mizu-iro": {
+      "notation": "6B 8/4",
+      "munsell": {
+        "deltaE2000": 7.34,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 10.79
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 4.85
+      }
+    },
+    "ja-ainezu": {
+      "notation": "7.5B 4.5/2.5",
+      "munsell": {
+        "deltaE2000": 4.7,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 7.58
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 4.79
+      }
+    },
+    "ja-sora-iro": {
+      "notation": "9B 7.5/5.5",
+      "munsell": {
+        "deltaE2000": 6.72,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 10.83
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 5.73
+      }
+    },
+    "ja-ao": {
+      "notation": "10B 4/14",
+      "munsell": {
+        "deltaE2000": 16.56,
+        "beyond": false,
+        "mapped": true
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-ai": {
+      "notation": "2PB 3/5",
+      "munsell": {
+        "deltaE2000": 3.75,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-koiai": {
+      "notation": "2PB 2/3.5",
+      "munsell": {
+        "deltaE2000": 4.25,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 5.17
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 4.65
+      }
+    },
+    "ja-wasurenagusa-iro": {
+      "notation": "3PB 7/6",
+      "munsell": {
+        "deltaE2000": 4.7,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 7.89
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 5.3
+      }
+    },
+    "ja-tsuyukusa-iro": {
+      "notation": "3PB 5/11",
+      "munsell": {
+        "deltaE2000": 5.89,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 14.22
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 11.54
+      }
+    },
+    "ja-hanada-iro": {
+      "notation": "3PB 4/7.5",
+      "munsell": {
+        "deltaE2000": 3.98,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 11.59
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 9.36
+      }
+    },
+    "ja-konjo": {
+      "notation": "5PB 3/4",
+      "munsell": {
+        "deltaE2000": 3.02,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-ruri-iro": {
+      "notation": "6PB 3.5/11",
+      "munsell": {
+        "deltaE2000": 3.48,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 4.81
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 3.68
+      }
+    },
+    "ja-rurikon": {
+      "notation": "6PB 3/8",
+      "munsell": {
+        "deltaE2000": 2.15,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 3.97
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 2.86
+      }
+    },
+    "ja-kon-iro": {
+      "notation": "6PB 2.5/4",
+      "munsell": {
+        "deltaE2000": 2.07,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 5.48
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 5.71
+      }
+    },
+    "ja-kakitsubata-iro": {
+      "notation": "7PB 4/10",
+      "munsell": {
+        "deltaE2000": 1.52,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 23.02
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 23.22
+      }
+    },
+    "ja-kachi-iro": {
+      "notation": "7PB 2.5/3",
+      "munsell": {
+        "deltaE2000": 1.82,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-gunjo-iro": {
+      "notation": "7.5PB 3.5/11",
+      "munsell": {
+        "deltaE2000": 1.22,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 4.67
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 5.7
+      }
+    },
+    "ja-tetsukon": {
+      "notation": "7.5PB 1.5/2",
+      "munsell": {
+        "deltaE2000": 1.4,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 13.65
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 13.92
+      }
+    },
+    "ja-fujinando": {
+      "notation": "9PB 4.5/7.5",
+      "munsell": {
+        "deltaE2000": 2.43,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 3.08
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 4.51
+      }
+    },
+    "ja-kikyo-iro": {
+      "notation": "9PB 3.5/13",
+      "munsell": {
+        "deltaE2000": 2.91,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 9.48
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 7.26
+      }
+    },
+    "ja-konai": {
+      "notation": "9PB 2.5/9.5",
+      "munsell": {
+        "deltaE2000": 3.11,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-fuji-iro": {
+      "notation": "10PB 6.5/6.5",
+      "munsell": {
+        "deltaE2000": 3.14,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 7.62
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 7.24
+      }
+    },
+    "ja-fujimurasaki": {
+      "notation": "0.5P 6/9",
+      "munsell": {
+        "deltaE2000": 3.48,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 6
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 3.7
+      }
+    },
+    "ja-aomurasaki": {
+      "notation": "2.5P 4/14",
+      "munsell": {
+        "deltaE2000": 5.24,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 5.24
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 4.63
+      }
+    },
+    "ja-sumire-iro": {
+      "notation": "2.5P 4/11",
+      "munsell": {
+        "deltaE2000": 4.62,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 3.69
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 6.01
+      }
+    },
+    "ja-hatoba-iro": {
+      "notation": "2.5P 4/3.5",
+      "munsell": {
+        "deltaE2000": 2.4,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 16.87
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 17.17
+      }
+    },
+    "ja-shobu-iro": {
+      "notation": "2.5P 4/3.5",
+      "munsell": {
+        "deltaE2000": 14.31,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-edomurasaki": {
+      "notation": "3P 3.5/7",
+      "munsell": {
+        "deltaE2000": 3.62,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 5.34
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 6.44
+      }
+    },
+    "ja-murasaki": {
+      "notation": "7.5P 5/12",
+      "munsell": {
+        "deltaE2000": 5,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-kodaimurasaki": {
+      "notation": "7.5P 4/6",
+      "munsell": {
+        "deltaE2000": 3.47,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 7.64
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 6.96
+      }
+    },
+    "ja-nasukon": {
+      "notation": "7.5P 2.5/2.5",
+      "munsell": {
+        "deltaE2000": 2.28,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 15.73
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 16.56
+      }
+    },
+    "ja-shikon": {
+      "notation": "8P 2/4",
+      "munsell": {
+        "deltaE2000": 2.59,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 9.13
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 8.65
+      }
+    },
+    "ja-ayame-iro": {
+      "notation": "10P 6/10",
+      "munsell": {
+        "deltaE2000": 5.16,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 7.43
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 6.48
+      }
+    },
+    "ja-botan-iro": {
+      "notation": "3RP 5/14",
+      "munsell": {
+        "deltaE2000": 5.57,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 11.7
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 9.28
+      }
+    },
+    "ja-akamurasaki": {
+      "notation": "5RP 5.5/13",
+      "munsell": {
+        "deltaE2000": 7.87,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 12.31
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 6.26
+      }
+    },
+    "ja-shiro": {
+      "notation": "N9.5",
+      "munsell": {
+        "deltaE2000": 0.11,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-gofun-iro": {
+      "notation": "2.5Y 9.2/0.5",
+      "munsell": {
+        "deltaE2000": 6.96,
+        "beyond": true,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-kinari-iro": {
+      "notation": "10YR 9/1",
+      "munsell": {
+        "deltaE2000": 6.09,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 21.27
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 16.58
+      }
+    },
+    "ja-zoge-iro": {
+      "notation": "2.5Y 8.5/1.5",
+      "munsell": {
+        "deltaE2000": 5.97,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-ginnezu": {
+      "notation": "N6.5",
+      "munsell": {
+        "deltaE2000": 0.12,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 8.08
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 8
+      }
+    },
+    "ja-chanezumi": {
+      "notation": "5YR 6/1",
+      "munsell": {
+        "deltaE2000": 3.32,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-nezumi-iro": {
+      "notation": "N5.5",
+      "munsell": {
+        "deltaE2000": 0.14,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 4.89
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 4.78
+      }
+    },
+    "ja-rikyunezu": {
+      "notation": "2.5G 5/1",
+      "munsell": {
+        "deltaE2000": 4.38,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 9.03
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 7.98
+      }
+    },
+    "ja-namari-iro": {
+      "notation": "2.5PB 5/1",
+      "munsell": {
+        "deltaE2000": 5.16,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 6.51
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 3.22
+      }
+    },
+    "ja-hai-iro": {
+      "notation": "N5",
+      "munsell": {
+        "deltaE2000": 0.19,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 2.72
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 2.54
+      }
+    },
+    "ja-susutake-iro": {
+      "notation": "9.5YR 3.5/1.5",
+      "munsell": {
+        "deltaE2000": 1.03,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 9.54
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 9.18
+      }
+    },
+    "ja-kurocha": {
+      "notation": "2.5YR 2/1.5",
+      "munsell": {
+        "deltaE2000": 1.39,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-sumi": {
+      "notation": "N2",
+      "munsell": {
+        "deltaE2000": 0.07,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-kuro": {
+      "notation": "N1.5",
+      "munsell": {
+        "deltaE2000": 0.12,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": {
+        "deltaE2000": 9.28
+      },
+      "ichiranMunsell": {
+        "deltaE2000": 9.4
+      }
+    },
+    "ja-tetsuguro": {
+      "notation": "N1.5",
+      "munsell": {
+        "deltaE2000": 0.12,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-rozupinku": {
+      "notation": "10RP 7/8",
+      "munsell": {
+        "deltaE2000": 7.01,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-kochinirureddo": {
+      "notation": "10RP 4/12",
+      "munsell": {
+        "deltaE2000": 5.07,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-rubireddo": {
+      "notation": "10RP 4/14",
+      "munsell": {
+        "deltaE2000": 4.95,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-wainreddo": {
+      "notation": "10RP 3/9",
+      "munsell": {
+        "deltaE2000": 3.74,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-bagandi": {
+      "notation": "10RP 2/2.5",
+      "munsell": {
+        "deltaE2000": 1.49,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-orudorozu": {
+      "notation": "1R 6/6.5",
+      "munsell": {
+        "deltaE2000": 5.4,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-rozu": {
+      "notation": "1R 5/14",
+      "munsell": {
+        "deltaE2000": 4.88,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-sutoroberi": {
+      "notation": "1R 4/14",
+      "munsell": {
+        "deltaE2000": 3.76,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-korarureddo": {
+      "notation": "2.5R 7/11",
+      "munsell": {
+        "deltaE2000": 5.38,
+        "beyond": false,
+        "mapped": true
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-pinku": {
+      "notation": "2.5R 7/7",
+      "munsell": {
+        "deltaE2000": 4.84,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-borudo": {
+      "notation": "2.5R 2.5/3",
+      "munsell": {
+        "deltaE2000": 0.93,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-bebipinku": {
+      "notation": "4R 8.5/4",
+      "munsell": {
+        "deltaE2000": 4.68,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-popireddo": {
+      "notation": "4R 5/14",
+      "munsell": {
+        "deltaE2000": 1.54,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-shigunarureddo": {
+      "notation": "4R 4.5/14",
+      "munsell": {
+        "deltaE2000": 1.09,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-kamain": {
+      "notation": "4R 4/14",
+      "munsell": {
+        "deltaE2000": 0.92,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-reddo": {
+      "notation": "5R 5/14",
+      "munsell": {
+        "deltaE2000": 0.96,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-tomatoreddo": {
+      "notation": "5R 5/14",
+      "munsell": {
+        "deltaE2000": 0.96,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-marun": {
+      "notation": "5R 2.5/6",
+      "munsell": {
+        "deltaE2000": 2.66,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-bamirion": {
+      "notation": "6R 5.5/14",
+      "munsell": {
+        "deltaE2000": 0.68,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-sukaretto": {
+      "notation": "7R 5/14",
+      "munsell": {
+        "deltaE2000": 1.7,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-terakotta": {
+      "notation": "7.5R 4.5/8",
+      "munsell": {
+        "deltaE2000": 1.72,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-samonpinku": {
+      "notation": "8R 7.5/7.5",
+      "munsell": {
+        "deltaE2000": 1.04,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-sherupinku": {
+      "notation": "10R 8.5/3.5",
+      "munsell": {
+        "deltaE2000": 2.58,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-nerupinku": {
+      "notation": "10R 8/4",
+      "munsell": {
+        "deltaE2000": 1.61,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-chainizureddo": {
+      "notation": "10R 6/15",
+      "munsell": {
+        "deltaE2000": 1.55,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-kyarottoorenji": {
+      "notation": "10R 5/11",
+      "munsell": {
+        "deltaE2000": 1.43,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-bantoshenna": {
+      "notation": "10R 4.5/7.5",
+      "munsell": {
+        "deltaE2000": 2.25,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-chokoreto": {
+      "notation": "10R 2.5/2.5",
+      "munsell": {
+        "deltaE2000": 2.13,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-kaki": {
+      "notation": "1Y 5/5.5",
+      "munsell": {
+        "deltaE2000": 0.94,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-burondo": {
+      "notation": "2Y 7.5/7",
+      "munsell": {
+        "deltaE2000": 2.38,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-kokoaburaun": {
+      "notation": "2YR 3.5/4",
+      "munsell": {
+        "deltaE2000": 2.38,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-pichi": {
+      "notation": "3YR 8/3.5",
+      "munsell": {
+        "deltaE2000": 2.11,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-roshenna": {
+      "notation": "4YR 5/9",
+      "munsell": {
+        "deltaE2000": 2.11,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-orenji": {
+      "notation": "5YR 6.5/13",
+      "munsell": {
+        "deltaE2000": 4.14,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-buraun": {
+      "notation": "5YR 3.5/4",
+      "munsell": {
+        "deltaE2000": 2.62,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-apurikotto": {
+      "notation": "6YR 7/6",
+      "munsell": {
+        "deltaE2000": 0.88,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-tan": {
+      "notation": "6YR 5/6",
+      "munsell": {
+        "deltaE2000": 1.38,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-mandarinorenji": {
+      "notation": "7YR 7/11.5",
+      "munsell": {
+        "deltaE2000": 3.38,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-koruku": {
+      "notation": "7YR 5.5/4",
+      "munsell": {
+        "deltaE2000": 0.84,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-ekurubeiju": {
+      "notation": "7.5YR 8.5/4",
+      "munsell": {
+        "deltaE2000": 2.26,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-gorudeniero": {
+      "notation": "7.5YR 7/10",
+      "munsell": {
+        "deltaE2000": 2.72,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-marigorudo": {
+      "notation": "8YR 7.5/13",
+      "munsell": {
+        "deltaE2000": 2.28,
+        "beyond": false,
+        "mapped": true
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-bafu": {
+      "notation": "8YR 6.5/5",
+      "munsell": {
+        "deltaE2000": 0.44,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-anba": {
+      "notation": "8YR 5.5/6.5",
+      "munsell": {
+        "deltaE2000": 1.22,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-buronzu": {
+      "notation": "8.5YR 4/5",
+      "munsell": {
+        "deltaE2000": 1.74,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-beju": {
+      "notation": "10YR 7/2.5",
+      "munsell": {
+        "deltaE2000": 2.46,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-ierooka": {
+      "notation": "10YR 6/7.5",
+      "munsell": {
+        "deltaE2000": 1.43,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-bantoanba": {
+      "notation": "10YR 3/3",
+      "munsell": {
+        "deltaE2000": 1.84,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-sepia": {
+      "notation": "10YR 2.5/2",
+      "munsell": {
+        "deltaE2000": 1.14,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-nepurusuiero": {
+      "notation": "2.5Y 8/7.5",
+      "munsell": {
+        "deltaE2000": 2.63,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-reguhon": {
+      "notation": "2.5Y 8/4",
+      "munsell": {
+        "deltaE2000": 3.02,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-roanba": {
+      "notation": "2.5Y 4/6",
+      "munsell": {
+        "deltaE2000": 2,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-kuromuiero": {
+      "notation": "3Y 8/12",
+      "munsell": {
+        "deltaE2000": 3.86,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-iero": {
+      "notation": "5Y 8.5/14",
+      "munsell": {
+        "deltaE2000": 4.71,
+        "beyond": false,
+        "mapped": true
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-kurimuiero": {
+      "notation": "5Y 8.5/3.5",
+      "munsell": {
+        "deltaE2000": 4.35,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-jonburian": {
+      "notation": "5Y 8.5/14",
+      "munsell": {
+        "deltaE2000": 4.71,
+        "beyond": false,
+        "mapped": true
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-kanariya": {
+      "notation": "7Y 8.5/10",
+      "munsell": {
+        "deltaE2000": 3.8,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-oribudorabu": {
+      "notation": "7.5Y 4/2",
+      "munsell": {
+        "deltaE2000": 1.86,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-oribu": {
+      "notation": "7.5Y 3.5/4",
+      "munsell": {
+        "deltaE2000": 0.95,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-remoniero": {
+      "notation": "8Y 8/12",
+      "munsell": {
+        "deltaE2000": 3.74,
+        "beyond": false,
+        "mapped": true
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-oribugurin": {
+      "notation": "2.5GY 3.5/3",
+      "munsell": {
+        "deltaE2000": 1.49,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-shatoruzugurin": {
+      "notation": "4GY 8/10",
+      "munsell": {
+        "deltaE2000": 2.53,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-rifugurin": {
+      "notation": "5GY 6/7",
+      "munsell": {
+        "deltaE2000": 1.94,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-gurasugurin": {
+      "notation": "5GY 5/5",
+      "munsell": {
+        "deltaE2000": 5.44,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-shigurin": {
+      "notation": "6GY 7/8",
+      "munsell": {
+        "deltaE2000": 1.92,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-aibigurin": {
+      "notation": "7.5GY 4/5",
+      "munsell": {
+        "deltaE2000": 1.85,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-appurugurin": {
+      "notation": "10GY 8/5",
+      "munsell": {
+        "deltaE2000": 3.22,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-mintogurin": {
+      "notation": "2.5G 7.5/8",
+      "munsell": {
+        "deltaE2000": 2.54,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-gurin": {
+      "notation": "2.5G 5.5/10",
+      "munsell": {
+        "deltaE2000": 3.25,
+        "beyond": false,
+        "mapped": true
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-kobarutogurin": {
+      "notation": "4G 7/9",
+      "munsell": {
+        "deltaE2000": 1.99,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-emerarudogurin": {
+      "notation": "4G 6/8",
+      "munsell": {
+        "deltaE2000": 1.98,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-marakaitogurin": {
+      "notation": "4G 4.5/9",
+      "munsell": {
+        "deltaE2000": 3.88,
+        "beyond": false,
+        "mapped": true
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-botorugurin": {
+      "notation": "5G 2.5/3",
+      "munsell": {
+        "deltaE2000": 1.35,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-foresutogurin": {
+      "notation": "7.5G 4.5/5",
+      "munsell": {
+        "deltaE2000": 2.97,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-birijian": {
+      "notation": "8G 4/6",
+      "munsell": {
+        "deltaE2000": 1.81,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-biriyadogurin": {
+      "notation": "10G 2.5/5",
+      "munsell": {
+        "deltaE2000": 2.25,
+        "beyond": false,
+        "mapped": true
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-pikokkugurin": {
+      "notation": "7.5BG 4.5/9",
+      "munsell": {
+        "deltaE2000": 9.88,
+        "beyond": false,
+        "mapped": true
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-nairuburu": {
+      "notation": "10BG 5.5/5",
+      "munsell": {
+        "deltaE2000": 6.19,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-pikokkuburu": {
+      "notation": "10BG 4/8.5",
+      "munsell": {
+        "deltaE2000": 9.97,
+        "beyond": false,
+        "mapped": true
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-takoizuburu": {
+      "notation": "5B 6/8",
+      "munsell": {
+        "deltaE2000": 6.36,
+        "beyond": false,
+        "mapped": true
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-marinburu": {
+      "notation": "5B 3/7",
+      "munsell": {
+        "deltaE2000": 7.53,
+        "beyond": false,
+        "mapped": true
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-horizonburu": {
+      "notation": "7.5B 7/4",
+      "munsell": {
+        "deltaE2000": 7.13,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-shian": {
+      "notation": "7.5B 6/10",
+      "munsell": {
+        "deltaE2000": 6.51,
+        "beyond": false,
+        "mapped": true
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-sukaiburu": {
+      "notation": "9B 7.5/5.5",
+      "munsell": {
+        "deltaE2000": 6.72,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-serurianburu": {
+      "notation": "9B 4.5/9",
+      "munsell": {
+        "deltaE2000": 5.82,
+        "beyond": false,
+        "mapped": true
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-bebiburu": {
+      "notation": "10B 7.5/3",
+      "munsell": {
+        "deltaE2000": 6.83,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-sakkusuburu": {
+      "notation": "1PB 5/4.5",
+      "munsell": {
+        "deltaE2000": 5.06,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-buru": {
+      "notation": "2.5PB 4.5/10",
+      "munsell": {
+        "deltaE2000": 5.48,
+        "beyond": false,
+        "mapped": true
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-kobarutoburu": {
+      "notation": "3PB 4/10",
+      "munsell": {
+        "deltaE2000": 5.45,
+        "beyond": false,
+        "mapped": true
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-aianburu": {
+      "notation": "5PB 3/4",
+      "munsell": {
+        "deltaE2000": 3.02,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-purushanburu": {
+      "notation": "5PB 3/4",
+      "munsell": {
+        "deltaE2000": 3.02,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-middonaitoburu": {
+      "notation": "5PB 1.5/2",
+      "munsell": {
+        "deltaE2000": 7.65,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-hiyashinsu": {
+      "notation": "5.5PB 5.5/6",
+      "munsell": {
+        "deltaE2000": 2.69,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-nebiburu": {
+      "notation": "6PB 2.5/4",
+      "munsell": {
+        "deltaE2000": 2.07,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-urutoramarinburu": {
+      "notation": "7.5PB 3.5/11",
+      "munsell": {
+        "deltaE2000": 1.22,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-orientaruburu": {
+      "notation": "7.5PB 3/10",
+      "munsell": {
+        "deltaE2000": 1.05,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-wisutaria": {
+      "notation": "10PB 5/12",
+      "munsell": {
+        "deltaE2000": 3.12,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-panji": {
+      "notation": "1P 2.5/10",
+      "munsell": {
+        "deltaE2000": 4.56,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-heriotoropu": {
+      "notation": "2P 5/10.5",
+      "munsell": {
+        "deltaE2000": 4.04,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-baioretto": {
+      "notation": "2.5P 4/11",
+      "munsell": {
+        "deltaE2000": 4.62,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-rabenda": {
+      "notation": "5P 6/3",
+      "munsell": {
+        "deltaE2000": 4.48,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-mobu": {
+      "notation": "5P 4.5/9",
+      "munsell": {
+        "deltaE2000": 3.8,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-rairakku": {
+      "notation": "6P 7/6",
+      "munsell": {
+        "deltaE2000": 4.58,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-okiddo": {
+      "notation": "7.5P 7/6",
+      "munsell": {
+        "deltaE2000": 5.01,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-papuru": {
+      "notation": "7.5P 5/12",
+      "munsell": {
+        "deltaE2000": 5,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-mazenta": {
+      "notation": "5RP 5/14",
+      "munsell": {
+        "deltaE2000": 6.5,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-cheripinku": {
+      "notation": "6RP 5.5/11.5",
+      "munsell": {
+        "deltaE2000": 6.65,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-rozureddo": {
+      "notation": "7.5RP 5/12",
+      "munsell": {
+        "deltaE2000": 6.27,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-howaito": {
+      "notation": "N9.5",
+      "munsell": {
+        "deltaE2000": 0.11,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-sunohowaito": {
+      "notation": "N9.5",
+      "munsell": {
+        "deltaE2000": 0.11,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-aibori": {
+      "notation": "2.5Y 8.5/1.5",
+      "munsell": {
+        "deltaE2000": 5.97,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-sukaigurei": {
+      "notation": "7.5B 7.5/0.5",
+      "munsell": {
+        "deltaE2000": 5.82,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-parugurei": {
+      "notation": "N7",
+      "munsell": {
+        "deltaE2000": 0.13,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-shirubagurei": {
+      "notation": "N6.5",
+      "munsell": {
+        "deltaE2000": 0.12,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-asshugurei": {
+      "notation": "N6",
+      "munsell": {
+        "deltaE2000": 0.12,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-rozugurei": {
+      "notation": "2.5R 5.5/1",
+      "munsell": {
+        "deltaE2000": 3.9,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-gurei": {
+      "notation": "N5",
+      "munsell": {
+        "deltaE2000": 0.19,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-suchirugurei": {
+      "notation": "5P 4.5/1",
+      "munsell": {
+        "deltaE2000": 3.18,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-suretogurei": {
+      "notation": "2.5PB 3.5/0.5",
+      "munsell": {
+        "deltaE2000": 4.26,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-chakorugurei": {
+      "notation": "5P 3/1",
+      "munsell": {
+        "deltaE2000": 2.16,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-ranpuburakku": {
+      "notation": "N1",
+      "munsell": {
+        "deltaE2000": 0.09,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    },
+    "ja-burakku": {
+      "notation": "N1",
+      "munsell": {
+        "deltaE2000": 0.09,
+        "beyond": false,
+        "mapped": false
+      },
+      "pages": null,
+      "ichiranMunsell": null
+    }
+  }
+}

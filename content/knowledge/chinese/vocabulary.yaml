@@ -50,6 +50,7 @@
   label: 墨 (mò), ink
   description: Chinese ink and, by extension, "black; ink-coloured; dark". A material and a colour sense in one term.
   tags: { tradition: chinese, kind: material-term }
+  scope: 'A material term: the colour of ink depends on the stick, the grinding and the dilution, so no single display value is asserted; the cited entry gives none.'
 - type: name
   id: zh-mo-name
   review_state: discovered

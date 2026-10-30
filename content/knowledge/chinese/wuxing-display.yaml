@@ -1,0 +1,60 @@
+# yaml-language-server: $schema=../schema.json
+# Editorial display markers for the four Wuxing colour categories without a documented value (赤 has one from the
+# Chinese Wikipedia page). Each is an app choice, labelled as such; the category entries say that a category is a
+# word, not one appearance.
+
+- type: representation
+  id: zh-qing-srgb-editorial
+  concept: zh-qing
+  review_state: extracted
+  rights_status: user-adaptation
+  evidence: { source: super-colour-wuxing-display, locator: '青: #2f7f78' }
+  space: srgb
+  coords: [0.18431373, 0.49803922, 0.47058824]
+  white: D65
+  profile: sRGB
+  method: Super Colour editorial marker, chosen directly as #2f7f78 in sRGB so the Five Phases diagram and Laboratory sets can show the category. A blue-green was chosen because the sources say 青 covers both blue and green; no historical, pigment or measurement basis.
+  approximation_status: modern-approximation
+  notes: 青 is a colour category spanning blue and green. This marker stands for the word in diagrams; it is not a value of 青.
+
+- type: representation
+  id: zh-huang-srgb-editorial
+  concept: zh-huang
+  review_state: extracted
+  rights_status: user-adaptation
+  evidence: { source: super-colour-wuxing-display, locator: '黄: #c9a227' }
+  space: srgb
+  coords: [0.78823529, 0.63529412, 0.15294118]
+  white: D65
+  profile: sRGB
+  method: Super Colour editorial marker, chosen directly as #c9a227 in sRGB so the Five Phases diagram and Laboratory sets can show the category. No historical, pigment or measurement basis.
+  approximation_status: modern-approximation
+  notes: 黄 is a colour category. This marker stands for the word in diagrams; it is not a documented value of 黄.
+
+- type: representation
+  id: zh-bai-srgb-editorial
+  concept: zh-bai
+  review_state: extracted
+  rights_status: user-adaptation
+  evidence: { source: super-colour-wuxing-display, locator: '白: #f2f0eb' }
+  space: srgb
+  coords: [0.94901961, 0.94117647, 0.92156863]
+  white: D65
+  profile: sRGB
+  method: Super Colour editorial marker, chosen directly as #f2f0eb in sRGB so the Five Phases diagram and Laboratory sets can show the category. No historical, pigment or measurement basis.
+  approximation_status: modern-approximation
+  notes: 白 is a colour category. This marker stands for the word in diagrams; it is not a documented value of 白.
+
+- type: representation
+  id: zh-hei-srgb-editorial
+  concept: zh-hei
+  review_state: extracted
+  rights_status: user-adaptation
+  evidence: { source: super-colour-wuxing-display, locator: '黑: #1a1a1a' }
+  space: srgb
+  coords: [0.10196078, 0.10196078, 0.10196078]
+  white: D65
+  profile: sRGB
+  method: Super Colour editorial marker, chosen directly as #1a1a1a in sRGB so the Five Phases diagram and Laboratory sets can show the category. No historical, pigment or measurement basis.
+  approximation_status: modern-approximation
+  notes: 黑 is a colour category. This marker stands for the word in diagrams; it is not a documented value of 黑.

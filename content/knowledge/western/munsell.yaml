@@ -1,0 +1,483 @@
+# yaml-language-server: $schema=../schema.json
+# Munsell's colour notation as his 1907 book states it: three measured qualities (hue, value, chroma), a sphere with
+# white and black at the poles and neutral grey on the axis, ten middle hues round the equator written by initials, and
+# five pairs of opposites that unite in neutral grey. Swatches are editorial illustrations; every claim has its paragraph.
+
+- type: concept
+  id: munsell-system
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: munsell-1907-a-color-notation, locator: 'Paragraphs 20–25, 31, 40–41, 61–62 and 75–76' }
+  label: Munsell’s colour notation (1907)
+  description: Munsell names every colour by three measured qualities, hue, value and chroma, placed on a sphere whose poles are white and black, whose axis is neutral grey and whose equator carries ten middle hues written by initials, R, YR, Y, GY, G, BG, B, PB, P and RP. A notation such as R 5/9 fixes a colour so that “it cannot be mistaken for any other”; opposites across the centre balance each other and unite in neutral grey.
+  scope: This entry models the ten middle hues, the five pairs of opposites and Munsell’s definitions, from the 1907 second edition. The later Atlas hue steps (5R, 7.5R) and the 1943 renotation that /munsell looks up are not this book; the JIS records carry those later notations. Swatches are editorial sRGB illustrations, not readings of the book’s plates.
+  tags: { tradition: western, kind: system, period: '1905; second edition, 1907' }
+
+- type: concept
+  id: munsell-r
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: munsell-1907-a-color-notation, locator: 'Paragraphs 31 and 40–41' }
+  label: Red, R (Munsell)
+  description: One of Munsell’s five principal hues, written R, at middle value on the equator of his sphere (“a middle red will be written R 5/”). Its name and relationships do not specify a unique RGB value.
+  tags: { tradition: western, kind: colour }
+
+- type: representation
+  id: munsell-r-srgb-editorial
+  concept: munsell-r
+  review_state: extracted
+  rights_status: user-adaptation
+  evidence: { source: super-colour-munsell-display, locator: 'R: #b8373f' }
+  space: srgb
+  coords: [0.72156863, 0.21568627, 0.24705882]
+  white: D65
+  profile: sRGB
+  method: Super Colour editorial illustration, chosen directly as #b8373f in sRGB to distinguish the ten middle hues. Not read from the book’s plates or the renotation table; no measurement or historical match was attempted.
+  approximation_status: modern-approximation
+  notes: The name and relationships come from Munsell; these coordinates are an independent app choice.
+
+- type: relationship
+  id: munsell-r-member
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: munsell-1907-a-color-notation, locator: 'Paragraph 31' }
+  from: munsell-r
+  to: munsell-system
+  edge: member-of
+
+- type: concept
+  id: munsell-yr
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: munsell-1907-a-color-notation, locator: 'Paragraphs 31 and 40–41' }
+  label: Yellow-red, YR (Munsell)
+  description: One of Munsell’s five intermediate hues, “formed by uniting successive pairs” of principals and written YR, at middle value on the equator of his sphere. Its name and relationships do not specify a unique RGB value.
+  tags: { tradition: western, kind: colour }
+
+- type: representation
+  id: munsell-yr-srgb-editorial
+  concept: munsell-yr
+  review_state: extracted
+  rights_status: user-adaptation
+  evidence: { source: super-colour-munsell-display, locator: 'YR: #c8712a' }
+  space: srgb
+  coords: [0.78431373, 0.44313725, 0.16470588]
+  white: D65
+  profile: sRGB
+  method: Super Colour editorial illustration, chosen directly as #c8712a in sRGB to distinguish the ten middle hues. Not read from the book’s plates or the renotation table; no measurement or historical match was attempted.
+  approximation_status: modern-approximation
+  notes: The name and relationships come from Munsell; these coordinates are an independent app choice.
+
+- type: relationship
+  id: munsell-yr-member
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: munsell-1907-a-color-notation, locator: 'Paragraph 31' }
+  from: munsell-yr
+  to: munsell-system
+  edge: member-of
+
+- type: concept
+  id: munsell-y
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: munsell-1907-a-color-notation, locator: 'Paragraphs 31 and 40–41' }
+  label: Yellow, Y (Munsell)
+  description: One of Munsell’s five principal hues, written Y, at middle value on the equator of his sphere (“a middle red will be written R 5/”). Its name and relationships do not specify a unique RGB value.
+  tags: { tradition: western, kind: colour }
+
+- type: representation
+  id: munsell-y-srgb-editorial
+  concept: munsell-y
+  review_state: extracted
+  rights_status: user-adaptation
+  evidence: { source: super-colour-munsell-display, locator: 'Y: #c9b022' }
+  space: srgb
+  coords: [0.78823529, 0.69019608, 0.13333333]
+  white: D65
+  profile: sRGB
+  method: Super Colour editorial illustration, chosen directly as #c9b022 in sRGB to distinguish the ten middle hues. Not read from the book’s plates or the renotation table; no measurement or historical match was attempted.
+  approximation_status: modern-approximation
+  notes: The name and relationships come from Munsell; these coordinates are an independent app choice.
+
+- type: relationship
+  id: munsell-y-member
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: munsell-1907-a-color-notation, locator: 'Paragraph 31' }
+  from: munsell-y
+  to: munsell-system
+  edge: member-of
+
+- type: concept
+  id: munsell-gy
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: munsell-1907-a-color-notation, locator: 'Paragraphs 31 and 40–41' }
+  label: Green-yellow, GY (Munsell)
+  description: One of Munsell’s five intermediate hues, “formed by uniting successive pairs” of principals and written GY, at middle value on the equator of his sphere. Its name and relationships do not specify a unique RGB value.
+  tags: { tradition: western, kind: colour }
+
+- type: representation
+  id: munsell-gy-srgb-editorial
+  concept: munsell-gy
+  review_state: extracted
+  rights_status: user-adaptation
+  evidence: { source: super-colour-munsell-display, locator: 'GY: #8aa629' }
+  space: srgb
+  coords: [0.54117647, 0.65098039, 0.16078431]
+  white: D65
+  profile: sRGB
+  method: Super Colour editorial illustration, chosen directly as #8aa629 in sRGB to distinguish the ten middle hues. Not read from the book’s plates or the renotation table; no measurement or historical match was attempted.
+  approximation_status: modern-approximation
+  notes: The name and relationships come from Munsell; these coordinates are an independent app choice.
+
+- type: relationship
+  id: munsell-gy-member
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: munsell-1907-a-color-notation, locator: 'Paragraph 31' }
+  from: munsell-gy
+  to: munsell-system
+  edge: member-of
+
+- type: concept
+  id: munsell-g
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: munsell-1907-a-color-notation, locator: 'Paragraphs 31 and 40–41' }
+  label: Green, G (Munsell)
+  description: One of Munsell’s five principal hues, written G, at middle value on the equator of his sphere (“a middle red will be written R 5/”). Its name and relationships do not specify a unique RGB value.
+  tags: { tradition: western, kind: colour }
+
+- type: representation
+  id: munsell-g-srgb-editorial
+  concept: munsell-g
+  review_state: extracted
+  rights_status: user-adaptation
+  evidence: { source: super-colour-munsell-display, locator: 'G: #2f8f5b' }
+  space: srgb
+  coords: [0.18431373, 0.56078431, 0.35686275]
+  white: D65
+  profile: sRGB
+  method: Super Colour editorial illustration, chosen directly as #2f8f5b in sRGB to distinguish the ten middle hues. Not read from the book’s plates or the renotation table; no measurement or historical match was attempted.
+  approximation_status: modern-approximation
+  notes: The name and relationships come from Munsell; these coordinates are an independent app choice.
+
+- type: relationship
+  id: munsell-g-member
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: munsell-1907-a-color-notation, locator: 'Paragraph 31' }
+  from: munsell-g
+  to: munsell-system
+  edge: member-of
+
+- type: concept
+  id: munsell-bg
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: munsell-1907-a-color-notation, locator: 'Paragraphs 31 and 40–41' }
+  label: Blue-green, BG (Munsell)
+  description: One of Munsell’s five intermediate hues, “formed by uniting successive pairs” of principals and written BG, at middle value on the equator of his sphere. Its name and relationships do not specify a unique RGB value.
+  tags: { tradition: western, kind: colour }
+
+- type: representation
+  id: munsell-bg-srgb-editorial
+  concept: munsell-bg
+  review_state: extracted
+  rights_status: user-adaptation
+  evidence: { source: super-colour-munsell-display, locator: 'BG: #238a8c' }
+  space: srgb
+  coords: [0.13725490, 0.54117647, 0.54901961]
+  white: D65
+  profile: sRGB
+  method: Super Colour editorial illustration, chosen directly as #238a8c in sRGB to distinguish the ten middle hues. Not read from the book’s plates or the renotation table; no measurement or historical match was attempted.
+  approximation_status: modern-approximation
+  notes: The name and relationships come from Munsell; these coordinates are an independent app choice.
+
+- type: relationship
+  id: munsell-bg-member
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: munsell-1907-a-color-notation, locator: 'Paragraph 31' }
+  from: munsell-bg
+  to: munsell-system
+  edge: member-of
+
+- type: concept
+  id: munsell-b
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: munsell-1907-a-color-notation, locator: 'Paragraphs 31 and 40–41' }
+  label: Blue, B (Munsell)
+  description: One of Munsell’s five principal hues, written B, at middle value on the equator of his sphere (“a middle red will be written R 5/”). Its name and relationships do not specify a unique RGB value.
+  tags: { tradition: western, kind: colour }
+
+- type: representation
+  id: munsell-b-srgb-editorial
+  concept: munsell-b
+  review_state: extracted
+  rights_status: user-adaptation
+  evidence: { source: super-colour-munsell-display, locator: 'B: #2f6fa8' }
+  space: srgb
+  coords: [0.18431373, 0.43529412, 0.65882353]
+  white: D65
+  profile: sRGB
+  method: Super Colour editorial illustration, chosen directly as #2f6fa8 in sRGB to distinguish the ten middle hues. Not read from the book’s plates or the renotation table; no measurement or historical match was attempted.
+  approximation_status: modern-approximation
+  notes: The name and relationships come from Munsell; these coordinates are an independent app choice.
+
+- type: relationship
+  id: munsell-b-member
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: munsell-1907-a-color-notation, locator: 'Paragraph 31' }
+  from: munsell-b
+  to: munsell-system
+  edge: member-of
+
+- type: concept
+  id: munsell-pb
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: munsell-1907-a-color-notation, locator: 'Paragraphs 31 and 40–41' }
+  label: Purple-blue, PB (Munsell)
+  description: One of Munsell’s five intermediate hues, “formed by uniting successive pairs” of principals and written PB, at middle value on the equator of his sphere. Its name and relationships do not specify a unique RGB value.
+  tags: { tradition: western, kind: colour }
+
+- type: representation
+  id: munsell-pb-srgb-editorial
+  concept: munsell-pb
+  review_state: extracted
+  rights_status: user-adaptation
+  evidence: { source: super-colour-munsell-display, locator: 'PB: #4c56a8' }
+  space: srgb
+  coords: [0.29803922, 0.33725490, 0.65882353]
+  white: D65
+  profile: sRGB
+  method: Super Colour editorial illustration, chosen directly as #4c56a8 in sRGB to distinguish the ten middle hues. Not read from the book’s plates or the renotation table; no measurement or historical match was attempted.
+  approximation_status: modern-approximation
+  notes: The name and relationships come from Munsell; these coordinates are an independent app choice.
+
+- type: relationship
+  id: munsell-pb-member
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: munsell-1907-a-color-notation, locator: 'Paragraph 31' }
+  from: munsell-pb
+  to: munsell-system
+  edge: member-of
+
+- type: concept
+  id: munsell-p
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: munsell-1907-a-color-notation, locator: 'Paragraphs 31 and 40–41' }
+  label: Purple, P (Munsell)
+  description: One of Munsell’s five principal hues, written P, at middle value on the equator of his sphere (“a middle red will be written R 5/”). Its name and relationships do not specify a unique RGB value.
+  tags: { tradition: western, kind: colour }
+
+- type: representation
+  id: munsell-p-srgb-editorial
+  concept: munsell-p
+  review_state: extracted
+  rights_status: user-adaptation
+  evidence: { source: super-colour-munsell-display, locator: 'P: #8a4a9c' }
+  space: srgb
+  coords: [0.54117647, 0.29019608, 0.61176471]
+  white: D65
+  profile: sRGB
+  method: Super Colour editorial illustration, chosen directly as #8a4a9c in sRGB to distinguish the ten middle hues. Not read from the book’s plates or the renotation table; no measurement or historical match was attempted.
+  approximation_status: modern-approximation
+  notes: The name and relationships come from Munsell; these coordinates are an independent app choice.
+
+- type: relationship
+  id: munsell-p-member
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: munsell-1907-a-color-notation, locator: 'Paragraph 31' }
+  from: munsell-p
+  to: munsell-system
+  edge: member-of
+
+- type: concept
+  id: munsell-rp
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: munsell-1907-a-color-notation, locator: 'Paragraphs 31 and 40–41' }
+  label: Red-purple, RP (Munsell)
+  description: One of Munsell’s five intermediate hues, “formed by uniting successive pairs” of principals and written RP, at middle value on the equator of his sphere. Its name and relationships do not specify a unique RGB value.
+  tags: { tradition: western, kind: colour }
+
+- type: representation
+  id: munsell-rp-srgb-editorial
+  concept: munsell-rp
+  review_state: extracted
+  rights_status: user-adaptation
+  evidence: { source: super-colour-munsell-display, locator: 'RP: #b03d7a' }
+  space: srgb
+  coords: [0.69019608, 0.23921569, 0.47843137]
+  white: D65
+  profile: sRGB
+  method: Super Colour editorial illustration, chosen directly as #b03d7a in sRGB to distinguish the ten middle hues. Not read from the book’s plates or the renotation table; no measurement or historical match was attempted.
+  approximation_status: modern-approximation
+  notes: The name and relationships come from Munsell; these coordinates are an independent app choice.
+
+- type: relationship
+  id: munsell-rp-member
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: munsell-1907-a-color-notation, locator: 'Paragraph 31' }
+  from: munsell-rp
+  to: munsell-system
+  edge: member-of
+
+# ---- the five pairs of opposites (paragraph 62) ----
+
+- type: relationship
+  id: munsell-r-bg-opposites
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: munsell-1907-a-color-notation, locator: 'Paragraphs 61–62' }
+  from: munsell-r
+  to: munsell-bg
+  edge: complement-of
+  notes: 'Row “Red & Blue-green” of Munsell’s table of five mixtures which make neutral gray: a line from one hue through the centre of his circle finds the other. Not calculated from the editorial swatches.'
+
+- type: relationship
+  id: munsell-y-pb-opposites
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: munsell-1907-a-color-notation, locator: 'Paragraphs 61–62' }
+  from: munsell-y
+  to: munsell-pb
+  edge: complement-of
+  notes: 'Row “Yellow & Purple-blue” of Munsell’s table of five mixtures which make neutral gray: a line from one hue through the centre of his circle finds the other. Not calculated from the editorial swatches.'
+
+- type: relationship
+  id: munsell-g-rp-opposites
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: munsell-1907-a-color-notation, locator: 'Paragraphs 61–62' }
+  from: munsell-g
+  to: munsell-rp
+  edge: complement-of
+  notes: 'Row “Green & Red-purple” of Munsell’s table of five mixtures which make neutral gray: a line from one hue through the centre of his circle finds the other. Not calculated from the editorial swatches.'
+
+- type: relationship
+  id: munsell-b-yr-opposites
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: munsell-1907-a-color-notation, locator: 'Paragraphs 61–62' }
+  from: munsell-b
+  to: munsell-yr
+  edge: complement-of
+  notes: 'Row “Blue & Yellow-red” of Munsell’s table of five mixtures which make neutral gray: a line from one hue through the centre of his circle finds the other. Not calculated from the editorial swatches.'
+
+- type: relationship
+  id: munsell-p-gy-opposites
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: munsell-1907-a-color-notation, locator: 'Paragraphs 61–62' }
+  from: munsell-p
+  to: munsell-gy
+  edge: complement-of
+  notes: 'Row “Purple & Green-yellow” of Munsell’s table of five mixtures which make neutral gray: a line from one hue through the centre of his circle finds the other. Not calculated from the editorial swatches.'
+
+# ---- Munsell’s sentences ----
+
+- type: cultural-assertion
+  id: munsell-three-qualities
+  concept: munsell-system
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: munsell-1907-a-color-notation, locator: 'Paragraphs 20–23' }
+  claim: Munsell defines colour by three qualities, hue, value and chroma, each with its own scale.
+  passage: 'The three color qualities are hue, value, and chroma. Hue is the quality by which we distinguish one color from another, as a red from a yellow, a green, a blue, or a purple. Value is the quality by which we distinguish a light color from a dark one. Chroma is the quality by which we distinguish a strong color from a weak one.'
+  period: '1905; second edition, 1907'
+  context: Chapter I, Color Names
+  notes: Four sentences from four consecutive paragraphs (20, 21, 22, 23), each paragraph's opening sentence.
+
+- type: cultural-assertion
+  id: munsell-sphere
+  concept: munsell-system
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: munsell-1907-a-color-notation, locator: 'Paragraph 25' }
+  claim: Munsell’s sphere has white and black at the poles, value on the vertical axis, hue round the equator and chroma outward from the neutral grey axis.
+  passage: 'The north pole of the color sphere is white, and the south pole black. Value or luminosity of colors ranges between these two extremes.'
+  period: '1905; second edition, 1907'
+  context: Chapter I, Color Names
+  notes: 'The paragraph goes on: hues are spread around the equator; a line inward from the strong surface hues to the neutral grey axis traces loss of chroma.'
+
+- type: cultural-assertion
+  id: munsell-ten-hues
+  concept: munsell-system
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: munsell-1907-a-color-notation, locator: 'Paragraph 31' }
+  claim: The equator of Munsell’s sphere is divided into ten hues written by initials, with value from 0 to 10 on the axis and chroma numbered outward.
+  passage: 'The equator of the sphere may be divided into ten parts, and serve as the scale of hue, marked R, YR, Y, GY, G, BG, B, PB, P, and RP. Its vertical axis may be divided into ten parts to serve as the scale of value, numbered from black (0) to white (10). Any perpendicular to the neutral axis is a scale of chroma.'
+  period: '1905; second edition, 1907'
+  context: Chapter II, Color Qualities
+  notes: Footnote 11 credits Runge (1810) with the sphere and Lambert with a pyramid, and objects that both assume red, yellow and blue as primary sensations.
+
+- type: cultural-assertion
+  id: munsell-notation
+  concept: munsell-system
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: munsell-1907-a-color-notation, locator: 'Paragraph 40' }
+  claim: The notation writes hue as an initial, value above the line and chroma below it; R 5/9 is Munsell’s example, the pigment vermilion.
+  passage: 'Thus R 5/9 means HUE (red), VALUE (5)/CHROMA (9), and will be found to represent the qualities of the pigment vermilion.'
+  period: '1905; second edition, 1907'
+  context: Chapter II, Color Qualities
+  notes: 'The five principal hues are “R (red), Y (yellow), G (green), B (blue), and P (purple)”; the intermediates “YR (yellow-red), GY (green-yellow), BG (blue-green), PB (purple-blue), and RP (red-purple)”.'
+
+- type: cultural-assertion
+  id: munsell-harmony-personal
+  concept: munsell-system
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: munsell-1907-a-color-notation, locator: 'Paragraphs 46–47' }
+  claim: Munsell holds colour harmony to be personal and resists musical analogies; what his system supplies is measured scales from which each person chooses.
+  passage: 'Color harmony, as now treated, is a purely personal affair, difficult to refer to any clear principles or definite laws. The very terms by which it seeks expression are borrowed from music, and suggest vague analogies that fail when put to the test.'
+  period: '1905; second edition, 1907'
+  context: Chapter II, Color Qualities
+  notes: 'Paragraph 47 ends: “From these color scales each individual is free to choose combinations in accord with his feeling for color harmony.” The app’s wheel recipes are app choices, not his.'
+
+- type: cultural-assertion
+  id: munsell-balance
+  concept: munsell-system
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: munsell-1907-a-color-notation, locator: 'Paragraphs 75–76' }
+  claim: For Munsell the centre of the sphere, middle grey, is the balancing point; colours equally removed from it on a line through the centre balance and are called complementary.
+  passage: 'In short, every straight line through this centre indicates opposite qualities that balance one another. The color points so found are said to be “complementary,” for each supplies what is needed to complement or balance the other in hue, value, and chroma.'
+  period: '1905; second edition, 1907'
+  context: Chapter III, Color Mixture, a tri-dimensional balance
+  notes: Paragraph 77 adds area as a compensation when one colour cannot match the other’s chroma.
+
+- type: cultural-assertion
+  id: munsell-red-opposite
+  concept: munsell-r
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: munsell-1907-a-color-notation, locator: 'Paragraph 61 and footnote 18' }
+  claim: Munsell places blue-green, not green, opposite red, and says so against the common assignment.
+  passage: 'A line drawn from red, through the centre, finds its opposite, blue-green. If these colors are mixed, they unite to form gray.'
+  period: '1905; second edition, 1907'
+  context: Chapter III, Color Mixture, a tri-dimensional balance
+  notes: 'Footnote 18: “Green is often wrongly assigned as the opposite of red. See Appendix, on False Color Balance.” Chevreul’s circle and Kandinsky’s antitheses in this release pair red with green; the sources disagree and both are kept.'
+
+- type: cultural-assertion
+  id: munsell-opposites-side-by-side
+  concept: munsell-system
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: munsell-1907-a-color-notation, locator: 'Paragraph 63' }
+  claim: Opposite hues enhance each other when placed side by side and destroy each other when mixed.
+  passage: 'But if, instead of mixing these opposite hues, we place them side by side, the eye is so stimulated by their difference that each seems to gain in strength; i.e., each enhances the other when separate, but destroys the other when mixed.'
+  period: '1905; second edition, 1907'
+  context: Chapter III, Color Mixture, a tri-dimensional balance

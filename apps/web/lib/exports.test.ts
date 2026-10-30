@@ -104,3 +104,51 @@ describe('source-aware exports', () => {
     expect(j.pairs).toEqual([[1, 0]]);
   });
 });
+
+import { aseExport, parseAse, scssExport, tailwindExport, tokensExport } from './exports';
+
+describe('design-tool exports', () => {
+  test('Tailwind gets a DEFAULT and a 50–950 scale per colour with provenance comments', () => {
+    const tw = tailwindExport(palette);
+    expect(tw).toContain("'sakura-pink': {");
+    expect(tw).toContain("DEFAULT: '#ffdbed'");
+    expect(tw).toMatch(/50: '#[0-9a-f]{6}'/);
+    expect(tw).toMatch(/950: '#[0-9a-f]{6}'/);
+    expect(tw).toContain('from ja-sakura-iro-srgb-jis (桜色), modern approximation');
+  });
+  test('SCSS carries the provenance line and both value forms', () => {
+    const scss = scssExport(palette);
+    expect(scss).toContain('$sakura-pink: #ffdbed;');
+    expect(scss).toContain('$sakura-pink-oklch: oklch(0.9000 0.0500 350.0);');
+    expect(scss).toContain('// Sakura <pink>: from record ja-sakura-iro-srgb-jis');
+  });
+  test('design tokens JSON is DTCG-shaped with provenance in $extensions', () => {
+    const t = JSON.parse(tokensExport(palette)) as Record<
+      string,
+      {
+        $type: string;
+        DEFAULT: {
+          $value: string;
+          $extensions: { 'super-colour': { record: { id: string; edited: boolean } } };
+        };
+        '500': { $value: string };
+      }
+    >;
+    expect(t['sakura-pink']!.$type).toBe('color');
+    expect(t['sakura-pink']!.DEFAULT.$value).toBe('#ffdbed');
+    expect(t['sakura-pink']!.DEFAULT.$extensions['super-colour'].record.id).toBe(
+      'ja-sakura-iro-srgb-jis',
+    );
+    expect(t['sakura-pink']!['500'].$value).toMatch(/^#[0-9a-f]{6}$/);
+  });
+  test('ASE writes a valid swatch file that reads back with names and sRGB values', () => {
+    const bytes = aseExport(palette);
+    expect(String.fromCharCode(...bytes.slice(0, 4))).toBe('ASEF');
+    const back = parseAse(bytes);
+    expect(back).toHaveLength(2);
+    expect(back[0]!.name).toBe('Sakura <pink> #FFDBED · ja-sakura-iro-srgb-jis');
+    expect(back[0]!.rgb[0]).toBeCloseTo(1, 5);
+    expect(back[0]!.rgb[1]).toBeCloseTo(0xdb / 255, 5);
+    expect(back[1]!.name).toBe('secondary #8A4B3C');
+  });
+});

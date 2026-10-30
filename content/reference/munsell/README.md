@@ -39,3 +39,12 @@ Colors", JOSA 33, 1943).
 - The server never sends the table to browsers; a lookup returns a handful of nearest rows.
 - Before deploying the lookup publicly, obtain RIT's permission (Munsell Color Science Laboratory,
   via the resources page) and record it here.
+- `munsellInterpolate` (apps/web/lib/munsell.ts) interpolates a notation linearly in the table:
+  between tabulated chromas on each neighbouring hue page (towards the illuminant C neutral below
+  chroma 2), between the two pages, then between whole-value planes; Y comes from the ASTM D1535
+  value polynomial; neutrals need no table. Common renotation practice, not a published conversion.
+- `jis-z8102-check.json` (committed) holds, per JIS Z 8102 record, the CIEDE2000 difference between
+  the Wikipedia page's sRGB value and the standard's notation so interpolated, plus flags for
+  notations beyond the tabulated range or outside sRGB, and the difference between the two Wikipedia
+  pages' values. Written by `apps/web/scripts/check-jis-munsell.ts`; only differences are stored, no
+  derived colours, so the table itself is not redistributed in any form.

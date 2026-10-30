@@ -1,17 +1,10 @@
 import type { Concept, Relationship } from '@sca/knowledge';
 import Link from 'next/link';
 import { ChevreulCircle } from '@/components/chevreul-circle';
+import { SystemCircle } from '@/components/system-circle';
 import { knowledge } from '@/lib/knowledge';
 import { namePoints } from '@/lib/palette-names';
 import { WUXING_ORDER as ORDER } from '@/lib/systems';
-
-const FALLBACK: Record<string, string> = {
-  'zh-wuxing-wood': '#4a5e2b',
-  'zh-wuxing-fire': '#b7282e',
-  'zh-wuxing-earth': '#c9a227',
-  'zh-wuxing-metal': '#e9e9e9',
-  'zh-wuxing-water': '#1a1a1a',
-};
 
 /** Documented systems drawn from their records. Relations are historical claims, cited; not wheel rules. */
 export function Traditions() {
@@ -29,8 +22,11 @@ export function Traditions() {
   }));
   const at = (id: string) => ring.find((p) => p.id === id);
   const cycle = rels.filter((r) => at(r.from) && at(r.to));
+  // A phase has no colour of its own; it is drawn in the value of the colour category its record associates it with.
+  const categoryOf = (phase: string) =>
+    rels.find((r) => r.from === phase && r.edge === 'associated-with')?.to;
   const fill = (id: string) =>
-    points.find((p) => p.conceptId === id)?.hex ?? FALLBACK[id] ?? '#888';
+    points.find((p) => p.conceptId === (categoryOf(id) ?? id))?.hex ?? 'var(--accent-soft)';
   const combos = k.byType('combination');
   const names = k.byType('name').filter((n) => n.language === 'ja');
 
@@ -43,7 +39,7 @@ export function Traditions() {
           Read their relationships in context; screen swatches are modern interpretations.
         </p>
       </div>
-      <div className="grid gap-5 lg:grid-cols-3">
+      <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         <div
           className="flex flex-col gap-3 rounded-[10px] border border-[var(--line)] p-[22px]"
           data-testid="chevreul"
@@ -55,6 +51,38 @@ export function Traditions() {
             by paragraph. Swatches are editorial illustrations; open the entry to try each pair.
           </span>
           <Link href="/dictionary/chevreul-circle" className="text-sm underline underline-offset-2">
+            Open the entry
+          </Link>
+        </div>
+        <div
+          className="flex flex-col gap-3 rounded-[10px] border border-[var(--line)] p-[22px]"
+          data-testid="munsell"
+        >
+          <SystemCircle system="munsell-system" compact />
+          <span className="text-[17px] font-semibold">Munsell’s colour notation</span>
+          <span className="text-sm leading-[1.45] text-[var(--muted)]">
+            Hue, value and chroma on a sphere, ten middle hues by initial, five pairs of opposites
+            that balance in grey, and harmony left to the person, cited by paragraph of the 1907
+            edition.
+          </span>
+          <Link href="/dictionary/munsell-system" className="text-sm underline underline-offset-2">
+            Open the entry
+          </Link>
+        </div>
+        <div
+          className="flex flex-col gap-3 rounded-[10px] border border-[var(--line)] p-[22px]"
+          data-testid="kandinsky"
+        >
+          <SystemCircle system="kandinsky-antitheses" compact />
+          <span className="text-[17px] font-semibold">Kandinsky’s antitheses</span>
+          <span className="text-sm leading-[1.45] text-[var(--muted)]">
+            Four pairs of opposites between white and black, with his sentence on each colour. He
+            says himself these claims have no scientific basis; the records keep that framing.
+          </span>
+          <Link
+            href="/dictionary/kandinsky-antitheses"
+            className="text-sm underline underline-offset-2"
+          >
             Open the entry
           </Link>
         </div>
