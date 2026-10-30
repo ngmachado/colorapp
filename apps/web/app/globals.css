@@ -116,3 +116,30 @@ input[type='range'].strip::-moz-range-thumb {
   font: inherit;
   font-size: 14px;
 }
+
+/* Colour space map: labels projected from the scene onto the canvas. */
+.space-axis,
+.space-pin {
+  position: absolute;
+  pointer-events: none;
+  white-space: nowrap;
+  border-radius: 4px;
+}
+.space-axis {
+  transform: translate(-50%, -50%);
+  padding: 2px 5px;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.75);
+}
+.space-pin {
+  transform: translate(10px, -50%);
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--fg);
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid var(--line);
+}

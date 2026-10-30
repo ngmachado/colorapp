@@ -68,6 +68,11 @@ interface Props {
 }
 
 const BEYOND: [number, number, number] = [236, 236, 236];
+
+/** Documented points further than this from the slice's lightness are not drawn: a dot on a slice means "at this lightness". */
+export const OVERLAY_BAND = 0.15;
+export const inBand = (p: OverlayPoint, slice: number) =>
+  Math.abs(p.oklch[0] - slice) <= OVERLAY_BAND;
 const DRAG_PX = 3;
 
 /** Wheel coordinates rounded to 1/100 px, so server and browser trig agree and hydration stays clean. */

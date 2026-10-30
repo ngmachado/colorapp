@@ -6,7 +6,14 @@ import { AutoForm } from '@/components/auto-form';
 import { Toolbar } from '@/components/toolbar';
 import { knowledge } from '@/lib/knowledge';
 import { namePoints } from '@/lib/palette-names';
-import { isColour, isRestricted, KIND_WORDS, primaryRepresentation } from '@/lib/records';
+import {
+  groupLabel,
+  isColour,
+  isRestricted,
+  KIND_WORDS,
+  pointGroup,
+  primaryRepresentation,
+} from '@/lib/records';
 
 export const dynamic = 'force-dynamic';
 
@@ -19,7 +26,8 @@ interface Card {
   restricted: boolean;
   oklab: [number, number, number] | null;
   distance: number | null;
-  tradition: string;
+  /** Collection: a naming standard such as jis-z8102 when the concept belongs to one, else its tradition. */
+  group: string;
   matched?: string;
 }
 
@@ -60,9 +68,8 @@ export default async function Dictionary({ searchParams }: { searchParams: Promi
       )
     : null;
 
-  const allTraditions = [
-    ...new Set(k.byType('concept').map((c) => c.tags?.tradition ?? 'other')),
-  ].sort();
+  const colourConcepts = k.byType('concept').filter(isColour);
+  const allGroups = [...new Set(colourConcepts.map(pointGroup))].sort();
   const cards: Card[] = k
     .byType('concept')
     .filter(isColour)
@@ -83,7 +90,7 @@ export default async function Dictionary({ searchParams }: { searchParams: Promi
           oklab && nearLab
             ? Math.hypot(oklab[0] - nearLab[0], oklab[1] - nearLab[1], oklab[2] - nearLab[2])
             : null,
-        tradition: concept.tags?.tradition ?? 'other',
+        group: pointGroup(concept),
         matched:
           hits?.get(concept.id) ??
           (hitConcepts?.has(concept.id)
@@ -94,7 +101,7 @@ export default async function Dictionary({ searchParams }: { searchParams: Promi
             : undefined),
       };
     })
-    .filter((c) => !traditions.length || traditions.includes(c.tradition))
+    .filter((c) => !traditions.length || traditions.includes(c.group))
     .filter((c) => !hitConcepts || hitConcepts.has(c.concept.id))
     .sort((a, b) => {
       if (sort === 'distance') return (a.distance ?? 9) - (b.distance ?? 9);
@@ -105,9 +112,9 @@ export default async function Dictionary({ searchParams }: { searchParams: Promi
           (b.oklab ? Math.atan2(b.oklab[2], b.oklab[1]) : 9)
         );
       if (sort === 'name') return a.concept.label.localeCompare(b.concept.label);
-      // Within a tradition, colours with a value come before those without one.
+      // Within a collection, colours with a value come before those without one.
       return (
-        a.tradition.localeCompare(b.tradition) ||
+        a.group.localeCompare(b.group) ||
         Number(!a.hex) - Number(!b.hex) ||
         a.concept.label.localeCompare(b.concept.label)
       );
@@ -176,9 +183,9 @@ export default async function Dictionary({ searchParams }: { searchParams: Promi
           </fieldset>
           <fieldset className="flex flex-col gap-2">
             <legend className="mb-1 text-xs tracking-[1px] text-[var(--muted)] uppercase">
-              Tradition
+              Collection
             </legend>
-            {allTraditions.map((t) => (
+            {allGroups.map((t) => (
               <label key={t} className="flex items-center gap-2">
                 <input
                   type="checkbox"
@@ -186,13 +193,9 @@ export default async function Dictionary({ searchParams }: { searchParams: Promi
                   value={t}
                   defaultChecked={traditions.includes(t)}
                 />{' '}
-                <span className="capitalize">{t}</span>
+                <span>{groupLabel(t)}</span>
                 <span className="ml-auto font-mono text-xs text-[var(--muted)]">
-                  {
-                    k
-                      .byType('concept')
-                      .filter((c) => isColour(c) && (c.tags?.tradition ?? 'other') === t).length
-                  }
+                  {colourConcepts.filter((c) => pointGroup(c) === t).length}
                 </span>
               </label>
             ))}
@@ -309,8 +312,8 @@ export default async function Dictionary({ searchParams }: { searchParams: Promi
                           <span className="h-9 w-14 shrink-0 rounded-md bg-[var(--accent-soft)]" />
                         )}
                         <span className="w-64 text-[15px]">{c.concept.label}</span>
-                        <span className="w-40 text-xs text-[var(--muted)] capitalize">
-                          {c.tradition}
+                        <span className="w-40 text-xs text-[var(--muted)]">
+                          {groupLabel(c.group)}
                         </span>
                         <span className="font-mono text-[11px] text-[var(--muted)]">
                           {c.distance != null ? `distance ${c.distance.toFixed(3)} · ` : ''}
@@ -349,9 +352,7 @@ export default async function Dictionary({ searchParams }: { searchParams: Promi
                       )}
                       <span className="flex flex-col gap-[3px] px-3 py-2.5">
                         <span className="text-[15px]">{c.concept.label}</span>
-                        <span className="text-xs text-[var(--muted)] capitalize">
-                          {c.tradition}
-                        </span>
+                        <span className="text-xs text-[var(--muted)]">{groupLabel(c.group)}</span>
                         <span className="font-mono text-[11px] text-[var(--muted)]">
                           {c.distance != null ? `distance ${c.distance.toFixed(3)} · ` : ''}
                           {c.hex

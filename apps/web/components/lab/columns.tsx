@@ -19,9 +19,10 @@ import {
 } from '@sca/generator';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
-import { Wheel, type OverlayPoint } from '@/components/wheel';
+import { Wheel, type OverlayPoint, inBand, OVERLAY_BAND } from '@/components/wheel';
 import { contrastGrade, oklchOfHex, parseHex } from '@/lib/contrast';
 import { nearestPoint, type NamePoint } from '@/lib/nearest';
+import { groupLabel } from '@/lib/records';
 import { hexesIn } from '@/lib/lab-links';
 import { addPalette } from '@/lib/local-library';
 import { stateParams, type Oklch } from '@/lib/palette-param';
@@ -284,7 +285,8 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
   const [showContrast, setShowContrast] = useState(false);
   const [showWheel, setShowWheel] = useState(false);
   const [slice, setSlice] = useState<number | null>(null);
-  const [wheelTradition, setWheelTradition] = useState('none');
+  // Documented points shown on the wheel come from the same set (options.source) that the nearest readout uses.
+  const [showOverlay, setShowOverlay] = useState(false);
   const [ghost, setGhost] = useState(false);
   const [past, setPast] = useState<Snapshot[]>([]);
   const [future, setFuture] = useState<Snapshot[]>([]);
@@ -651,18 +653,20 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
     setWeights((w) => [...w, 1]);
     setNotice(`Added ${ROLES[palette.length]} from the wheel: ${label}.`);
   };
-  const overlayPoints: OverlayPoint[] =
-    wheelTradition === 'none'
-      ? []
-      : points
-          .filter((pt) => wheelTradition === 'all' || pt.group === wheelTradition)
-          .map((pt) => ({
-            id: pt.id,
-            oklch: oklchOf(pt),
-            hex: pt.hex,
-            label: pt.label,
-            href: `/dictionary/${pt.conceptId}`,
-          }));
+  const sliceL = slice ?? palette[0]![0];
+  const setPoints: OverlayPoint[] = !showOverlay
+    ? []
+    : points
+        .filter((pt) => options.source === 'all' || pt.group === options.source)
+        .map((pt) => ({
+          id: pt.id,
+          oklch: oklchOf(pt),
+          hex: pt.hex,
+          label: pt.label,
+          href: `/dictionary/${pt.conceptId}`,
+        }));
+  const overlayPoints = setPoints.filter((p) => inBand(p, sliceL));
+  const nearestIn = options.source === 'all' ? undefined : options.source;
 
   const setColour = (i: number, c: Oklch, key: string) => {
     remember(key);
@@ -741,7 +745,12 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
   }
   function exportJson() {
     const colours = palette.map((c, i) => {
-      const near = nearestPoint(points, convert(colour('oklch', c), 'oklab').coords as Oklch);
+      const near = nearestPoint(
+        points,
+        convert(colour('oklch', c), 'oklab').coords as Oklch,
+        undefined,
+        nearestIn,
+      );
       const src = sourceIds[i] ? byId.get(sourceIds[i]!) : undefined;
       return {
         role: roles[i],
@@ -854,7 +863,7 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
               <option value="all">all ({points.length})</option>
               {traditions.map((t) => (
                 <option key={t} value={t}>
-                  {t} ({points.filter((p) => p.group === t).length})
+                  {groupLabel(t)} ({points.filter((p) => p.group === t).length})
                 </option>
               ))}
             </select>
@@ -1189,6 +1198,8 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
             const near = nearestPoint(
               points,
               convert(v, 'oklab').coords as [number, number, number],
+              undefined,
+              nearestIn,
             );
             const source = sourceIds[i] ? byId.get(sourceIds[i]!) : undefined;
             const outside = !inGamut(v, 'srgb');
@@ -1561,8 +1572,15 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
               <label className="flex items-center gap-1.5">
                 Documented
                 <select
-                  value={wheelTradition}
-                  onChange={(e) => setWheelTradition(e.target.value)}
+                  value={showOverlay ? options.source : 'none'}
+                  onChange={(e) => {
+                    const v = e.target.value;
+                    if (v === 'none') setShowOverlay(false);
+                    else {
+                      setShowOverlay(true);
+                      setOptions((o) => ({ ...o, source: v }));
+                    }
+                  }}
                   className="field h-7 text-xs"
                   data-testid="wheel-tradition"
                 >
@@ -1570,7 +1588,7 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
                   <option value="all">all ({points.length})</option>
                   {traditions.map((t) => (
                     <option key={t} value={t}>
-                      {t} ({points.filter((p) => p.group === t).length})
+                      {groupLabel(t)} ({points.filter((p) => p.group === t).length})
                     </option>
                   ))}
                 </select>
@@ -1606,9 +1624,11 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
                 HSL ghost
               </button>
             </div>
-            {wheelTradition !== 'none' ? (
-              <p className="m-0 text-[11px] text-[var(--muted)]">
-                Click a documented point to add it as a column, with its record.
+            {showOverlay ? (
+              <p className="m-0 text-[11px] text-[var(--muted)]" data-testid="wheel-overlay-note">
+                {overlayPoints.length} of {setPoints.length} within L ±{OVERLAY_BAND} of this slice;
+                move the lightness slider to see the others. Click a point to add it as a column,
+                with its record.
               </p>
             ) : null}
           </aside>
@@ -1814,6 +1834,24 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
               ))}
             </select>
           </label>
+          <label className="flex items-center gap-2">
+            <span className="sr-only">Documented colours</span>
+            <select
+              value={options.source}
+              onChange={(e) => setOptions((o) => ({ ...o, source: e.target.value }))}
+              aria-label="Documented colours"
+              title="Which documented colours the nearest readout, source draws and the wheel use"
+              className="field h-8 text-[13px]"
+              data-testid="documented"
+            >
+              <option value="all">near: all ({points.length})</option>
+              {traditions.map((t) => (
+                <option key={t} value={t}>
+                  near: {groupLabel(t)} ({points.filter((p) => p.group === t).length})
+                </option>
+              ))}
+            </select>
+          </label>
           <button
             type="button"
             onClick={() => setShowContrast((s) => !s)}
@@ -1841,6 +1879,13 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
           >
             Wheel
           </button>
+          <Link
+            href={`/space?hex=${palette.map((c) => hexOf(c).slice(1)).join(',')}${options.source !== 'all' ? `&set=${options.source}` : ''}`}
+            className="btn h-8 text-[13px]"
+            data-testid="map-link"
+          >
+            Map
+          </Link>
         </span>
       </div>
     </div>

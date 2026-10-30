@@ -35,8 +35,9 @@ test('the Laboratory wheel turns the whole triad, adds a documented colour, and 
   await expect(page.getByTestId('column')).toHaveCount(4);
   await page.getByTestId('wheel-tradition').selectOption('japanese');
   const points = page.getByTestId('wheel-overlay-point');
-  // 13 vocabulary points plus the 10 JIS values attached to existing concepts.
-  await expect(points).toHaveCount(23);
+  // Of the 23 Japanese points (13 vocabulary + 10 JIS values on existing records), 5 lie within L ±0.15 of 0.72.
+  await expect(page.getByTestId('wheel-overlay-note')).toContainText('5 of 23');
+  await expect(points).toHaveCount(5);
   await points.first().click();
   await expect(page.getByTestId('column')).toHaveCount(5);
   await expect(page.getByTestId('column').nth(4)).toHaveAttribute('data-source', /^ja-/);
@@ -67,7 +68,8 @@ test('the Theory wheel shows the chosen rule, its HSL ghost, and documented poin
     'Equal angles do not guarantee equal visual differences',
   );
   await page.getByTestId('theory-wheel-tradition').selectOption('japanese');
-  await page.getByTestId('wheel-overlay-point').first().click();
+  // Points are drawn under the rule dots; a point may sit beneath one, so the click is forced.
+  await page.getByTestId('wheel-overlay-point').first().click({ force: true });
   await expect(page).toHaveURL(/\/dictionary\/ja-/);
 });
 

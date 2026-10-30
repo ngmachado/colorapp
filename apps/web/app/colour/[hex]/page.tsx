@@ -53,6 +53,9 @@ export default async function Inspector({ params }: Props) {
         <Link href={labFromHexes([hex])} className="btn">
           Open in Laboratory
         </Link>
+        <Link href={`/space?hex=${hex.slice(1)}`} className="btn">
+          On the map
+        </Link>
       </Toolbar>
       <main id="main">
         <header

@@ -33,6 +33,14 @@ export { orderRepresentations, primaryRepresentation } from './representations';
 export function pointGroup(c: Concept): string {
   return c.tags?.standard ?? c.tags?.tradition ?? 'other';
 }
+/** How a group is named on screen. Standards keep their published names; traditions are capitalised. */
+const GROUP_LABELS: Record<string, string> = {
+  'jis-z8102': 'JIS Z 8102',
+  'css-color-4': 'CSS named colours',
+};
+export function groupLabel(group: string): string {
+  return GROUP_LABELS[group] ?? group.charAt(0).toUpperCase() + group.slice(1);
+}
 
 /** A system and its parts (such as the Five Phases) have entries but are not colours. */
 const NOT_COLOUR = new Set(['system', 'side', 'phase']);

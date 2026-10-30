@@ -15,9 +15,11 @@ import { knowledge } from '@/lib/knowledge';
 import { labFromConcepts } from '@/lib/lab-links';
 import { namePoints, nearestPoint } from '@/lib/palette-names';
 import {
+  groupLabel,
   isRestricted,
   notDocumented,
   orderRepresentations,
+  pointGroup,
   primaryRepresentation,
   representationValue,
 } from '@/lib/records';
@@ -158,9 +160,7 @@ export default async function Entry({ params }: { params: Promise<{ id: string }
         current="/dictionary"
         middle={
           <span>
-            {concept.tags?.tradition ? (
-              <span className="capitalize">{concept.tags.tradition}</span>
-            ) : null}
+            {concept.tags?.tradition ? <span>{groupLabel(pointGroup(concept))}</span> : null}
           </span>
         }
       >
@@ -177,6 +177,15 @@ export default async function Entry({ params }: { params: Promise<{ id: string }
         <Link href="/theory" className="btn">
           In theory
         </Link>
+        {hex ? (
+          <Link
+            href={`/space?focus=${id}&hex=${hex.slice(1)}`}
+            className="btn"
+            data-testid="on-the-map"
+          >
+            On the map
+          </Link>
+        ) : null}
         <SaveColour conceptId={id} label={concept.label} hex={hex} local={!ACCOUNTS} />
       </Toolbar>
       <main id="main" className="flex flex-col">
@@ -615,6 +624,7 @@ export default async function Entry({ params }: { params: Promise<{ id: string }
                   >
                     <span className="h-16 rounded-lg" style={{ background: p.hex }} />
                     <span className="text-sm">{p.label}</span>
+                    <span className="text-xs text-[var(--muted)]">{groupLabel(p.group)}</span>
                     <span className="font-mono text-xs text-[var(--muted)]">
                       distance {p.distance.toFixed(3)}
                     </span>

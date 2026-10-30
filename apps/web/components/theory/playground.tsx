@@ -4,8 +4,9 @@ import { colour, convert, inGamut, toHex, type SpaceId } from '@sca/colour-engin
 import { run, type Structure } from '@sca/generator';
 import Link from 'next/link';
 import { useMemo, useState, type ReactNode } from 'react';
-import { Wheel, type OverlayPoint } from '@/components/wheel';
+import { Wheel, type OverlayPoint, inBand, OVERLAY_BAND } from '@/components/wheel';
 import { nearestPoint, type NamePoint } from '@/lib/nearest';
+import { groupLabel } from '@/lib/records';
 import type { Oklch } from '@/lib/palette-param';
 
 /** Rule parameters in words: degrees for angles, a ceiling for chroma. */
@@ -96,7 +97,7 @@ export function Playground({
       }),
     [topics, seed, h],
   );
-  const overlayPoints: OverlayPoint[] = useMemo(
+  const setPoints: OverlayPoint[] = useMemo(
     () =>
       tradition === 'none'
         ? []
@@ -114,6 +115,7 @@ export function Playground({
             }),
     [points, tradition],
   );
+  const overlayPoints = setPoints.filter((p) => inBand(p, l));
   const set = (i: number, n: number) => {
     if (locks[i]) return;
     setV((p) => p.map((x, j) => (j === i ? n : x)) as [number, number, number]);
@@ -298,7 +300,7 @@ export function Playground({
                   <option value="all">all ({points.length})</option>
                   {traditions.map((tr) => (
                     <option key={tr} value={tr}>
-                      {tr} ({points.filter((p) => p.group === tr).length})
+                      {groupLabel(tr)} ({points.filter((p) => p.group === tr).length})
                     </option>
                   ))}
                 </select>
@@ -316,7 +318,9 @@ export function Playground({
                 {locks[2]
                   ? 'Unlock hue above to turn the set by dragging.'
                   : 'Drag a dot to turn the set.'}
-                {tradition !== 'none' ? ' Click a documented point to open its entry.' : ''}
+                {tradition !== 'none'
+                  ? ` ${overlayPoints.length} of ${setPoints.length} documented points lie within L ±${OVERLAY_BAND} of this slice; click one to open its entry.`
+                  : ''}
               </span>
             </div>
             {ghost ? (
