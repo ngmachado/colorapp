@@ -14,7 +14,13 @@ import { Toolbar } from '@/components/toolbar';
 import { knowledge } from '@/lib/knowledge';
 import { labFromConcepts } from '@/lib/lab-links';
 import { namePoints, nearestPoint } from '@/lib/palette-names';
-import { isRestricted, notDocumented, representationValue } from '@/lib/records';
+import {
+  isRestricted,
+  notDocumented,
+  orderRepresentations,
+  primaryRepresentation,
+  representationValue,
+} from '@/lib/records';
 
 export const dynamic = 'force-dynamic';
 
@@ -57,7 +63,7 @@ export default async function Entry({ params }: { params: Promise<{ id: string }
   const assertions = attached.filter((r) => r.type === 'cultural-assertion');
   const combos = k.combinationsFor(id) as Combination[];
   const source = k.record(concept.evidence.source) as Source | undefined;
-  const shown = reps.find((r) => !isRestricted(r) && r.coords);
+  const shown = primaryRepresentation(reps);
   const value = shown ? representationValue(shown) : null;
   const hex = value ? toHex(value) : null;
   const lch = value ? convert(value, 'oklch').coords : null;
@@ -283,7 +289,7 @@ export default async function Entry({ params }: { params: Promise<{ id: string }
                 className="grid items-center gap-x-5 gap-y-3 text-sm sm:grid-cols-[56px_120px_220px_minmax(0,1fr)]"
                 data-testid="values"
               >
-                {reps.map((r) => {
+                {orderRepresentations(reps).map((r) => {
                   const v = !isRestricted(r) ? representationValue(r) : null;
                   return (
                     <div key={r.id} className="contents" data-record={r.id}>

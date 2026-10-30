@@ -6,7 +6,7 @@ import { AutoForm } from '@/components/auto-form';
 import { Toolbar } from '@/components/toolbar';
 import { knowledge } from '@/lib/knowledge';
 import { namePoints } from '@/lib/palette-names';
-import { isColour, isRestricted, KIND_WORDS } from '@/lib/records';
+import { isColour, isRestricted, KIND_WORDS, primaryRepresentation } from '@/lib/records';
 
 export const dynamic = 'force-dynamic';
 
@@ -70,7 +70,7 @@ export default async function Dictionary({ searchParams }: { searchParams: Promi
       const reps = k
         .forConcept(concept.id)
         .filter((r): r is Representation => r.type === 'representation');
-      const rep = reps.find((r) => !isRestricted(r) && r.coords) ?? null;
+      const rep = primaryRepresentation(reps) ?? null;
       const point = rep ? points.find((p) => p.id === rep.id) : undefined;
       const restricted = isRestricted(concept) || (!rep && reps.some(isRestricted));
       const oklab = point?.oklab ?? null;

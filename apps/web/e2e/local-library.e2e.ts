@@ -36,7 +36,7 @@ test('without accounts there is no sign-in, and the Library lives in the browser
   await expect(page.getByTestId('column').first()).toHaveAttribute('data-locked', 'true');
   await expect(page.getByTestId('column').first()).toHaveAttribute(
     'data-source',
-    'ja-sakura-iro-srgb-wikipedia',
+    'ja-sakura-iro-srgb-jis',
   );
 
   // Rename, search, delete.

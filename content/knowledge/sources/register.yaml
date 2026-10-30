@@ -168,11 +168,13 @@
   author: Wikipedia contributors (Chinese)
   title: 中国传统色彩
   url: https://zh.wikipedia.org/wiki/中国传统色彩
-  access_date: '2026-10-14'
-  rights_notes: Text CC BY-SA 4.0. The page names no source for its hex values and carries a banner (2025-05-23) asking for sources.
+  access_date: '2026-10-30'
+  rights_notes: Text CC BY-SA 4.0. The page names no source for its hex values and carries banners asking for sources. Revision 92873730 (2026-06-01) was used on 2026-10-30.
   notes: >-
-    Entries are grouped by hue family (红色系, 黄色系, 白色系, 黑色系). Several families are headings without rows.
-    Only 雪藍 has a footnoted external reference. Treat every value as a modern approximation of unknown method. Discovery route only.
+    Entries are grouped by hue family (红色系 … 黑色系); 30 rows, 28 with a hex value (绀 and 赪 have none), and 绿色系,
+    紫色系 and 黑色系 are headings without rows. Descriptions quote classical texts (说文, 释名, 尚書·洪範); those quotations
+    are recorded as discovered assertions in content/knowledge/chinese/traditional-colours.yaml. The 寓意 section is
+    unsourced symbolism and is not recorded. Treat every value as a modern approximation of unknown method. Discovery route only.
 
 - type: source
   id: chevreul-1890-principles-martel
@@ -284,3 +286,58 @@
   access_date: '2026-10-20'
   rights_notes: Original app choices, released under the project’s MIT license.
   notes: 'Six manually selected sRGB hex values: red #c43d37, orange #df832d, yellow #e6c84f, green #4b8655, blue #3869a6, violet #80569c. These distinguish labels in diagrams and Laboratory pairs. They are not sampled from a historical plate and carry no historical or colorimetric matching claim.'
+
+- type: source
+  id: jis-z8102-2001
+  review_state: bibliographic
+  rights_status: verified-restricted
+  author: Japanese Industrial Standards Committee (日本産業標準調査会)
+  title: 'JIS Z 8102:2001 物体色の色名 (Names of non-luminous object colours)'
+  publisher: Japanese Standards Association (日本規格協会)
+  date: '2001'
+  url: https://webdesk.jsa.or.jp/books/W11M0090/index/?bunsyo_id=JIS+Z+8102%3A2001
+  access_date: '2026-10-30'
+  rights_notes: >-
+    The standard is sold by the Japanese Standards Association and its text is copyrighted. Nothing is reproduced from
+    the standard itself. Appendix 1 lists 269 conventional colour names (慣用色名), each with a Munsell notation; the
+    names and notations in this content were read from the Japanese Wikipedia page cited by each record, not from the
+    standard.
+  notes: >-
+    Munsell notations in the standard specify Munsell Book of Color samples under the standard's viewing conditions.
+    They are not sRGB values; any screen value attached to a JIS name is a separate modern approximation.
+
+- type: source
+  id: wikipedia-ja-jis-kanyo-shikimei
+  review_state: discovered
+  rights_status: unreviewed
+  author: Wikipedia contributors (Japanese)
+  title: JIS慣用色名
+  url: https://ja.wikipedia.org/wiki/JIS慣用色名
+  access_date: '2026-10-30'
+  rights_notes: >-
+    Text CC BY-SA 4.0. Revision 109848306 (2026-06-07) was used. The page reproduces the 269 names and Munsell
+    notations of JIS Z 8102:2001 Appendix 1 (see jis-z8102-2001) and adds sRGB hex values of its own.
+  notes: >-
+    The page states that its colours and RGB values were chosen with the appendix's Munsell notations in mind but do
+    not correspond one to one and are "for reference only" (あくまで参考として利用されたい), and that they do not
+    necessarily agree with other colour-name lists on Wikipedia. Furigana on the page supply readings for most names;
+    scripts/import-jis-z8102.mjs generates content/knowledge/japanese/jis-z8102.yaml from a saved copy. Discovery
+    route only.
+
+- type: source
+  id: w3c-css-color-4
+  review_state: published
+  rights_status: verified-reusable
+  author: W3C CSS Working Group
+  title: CSS Color Module Level 4
+  publisher: W3C
+  date: '2026-10-29'
+  edition: Candidate Recommendation Draft, https://www.w3.org/TR/2026/CRD-css-color-4-20261029/
+  url: https://www.w3.org/TR/css-color-4/
+  access_date: '2026-10-30'
+  rights_notes: W3C document licence; the named-colour table (§ 6.1) is normative and freely reusable.
+  notes: >-
+    148 keywords, seven of them grey spellings of gray keywords with of the same value. The specification says 16 came from the VGA
+    palette via HTML and most of the rest from one version of the X11 colour system; rebeccapurple was added in
+    Level 4. scripts/import-css-named-colours.mjs generates content/knowledge/web/css-named-colours.yaml from a
+    saved copy.

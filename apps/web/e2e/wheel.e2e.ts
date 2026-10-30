@@ -35,7 +35,8 @@ test('the Laboratory wheel turns the whole triad, adds a documented colour, and 
   await expect(page.getByTestId('column')).toHaveCount(4);
   await page.getByTestId('wheel-tradition').selectOption('japanese');
   const points = page.getByTestId('wheel-overlay-point');
-  await expect(points).toHaveCount(13);
+  // 13 vocabulary points plus the 10 JIS values attached to existing concepts.
+  await expect(points).toHaveCount(23);
   await points.first().click();
   await expect(page.getByTestId('column')).toHaveCount(5);
   await expect(page.getByTestId('column').nth(4)).toHaveAttribute('data-source', /^ja-/);
@@ -74,7 +75,7 @@ test('an entry shows a small read-only wheel at the record lightness', async ({ 
   await page.goto('/dictionary/ja-sakura-iro');
   const w = page.getByTestId('entry-wheel');
   await expect(w).toBeVisible();
-  await expect(w).toContainText('h 38°');
+  await expect(w).toContainText('h 346°');
   await expect(w.getByTestId('wheel-dot')).toHaveCount(1);
   await expect(w.getByTestId('wheel-slice')).toHaveCount(0);
 });

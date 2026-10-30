@@ -6,6 +6,8 @@ export interface NamePoint {
   conceptId: string;
   label: string;
   tradition: string | null;
+  /** Grouping shown in selectors: a naming standard such as jis-z8102, or the tradition. */
+  group: string;
   status: StatusKind;
   queue: boolean;
   oklab: [number, number, number];

@@ -27,6 +27,13 @@ export function inQueue(r: KnowledgeRecord): boolean {
 
 export const notDocumented = 'not documented';
 
+export { orderRepresentations, primaryRepresentation } from './representations';
+
+/** Points are grouped by a naming standard when the concept belongs to one, otherwise by tradition. */
+export function pointGroup(c: Concept): string {
+  return c.tags?.standard ?? c.tags?.tradition ?? 'other';
+}
+
 /** A system and its parts (such as the Five Phases) have entries but are not colours. */
 const NOT_COLOUR = new Set(['system', 'side', 'phase']);
 export function isColour(c: Concept): boolean {

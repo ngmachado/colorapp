@@ -105,6 +105,80 @@ describe('repository content (chunk 3 acceptance)', () => {
     });
   });
 
+  test('JIS Z 8102 names: 269 rows, each with the Munsell notation except gold and silver, all discovered', () => {
+    const page = 'wikipedia-ja-jis-kanyo-shikimei';
+    const concepts = records.filter(
+      (r) => r.type === 'concept' && r.tags?.standard === 'jis-z8102',
+    );
+    const attached = records.filter(
+      (r) => r.type === 'representation' && r.evidence.source === page,
+    );
+    // 259 new concepts + 10 values attached to concepts that already existed = 269 rows of the appendix.
+    expect(concepts.length).toBe(259);
+    expect(attached.length).toBe(267);
+    for (const c of concepts) {
+      expect(c.review_state, c.id).toBe('discovered');
+      if (c.type !== 'concept') continue;
+      if (c.id === 'ja-kin-iro' || c.id === 'ja-gin-iro') expect(c.tags?.munsell).toBeUndefined();
+      else
+        expect(c.tags?.munsell, c.id).toMatch(
+          /^(\d+(\.\d+)?[A-Z]{1,2} \d+(\.\d+)?\/\d+(\.\d+)?|N\d+(\.\d+)?)$/,
+        );
+    }
+    for (const r of attached) {
+      if (r.type !== 'representation') continue;
+      expect(r.approximation_status).toBe('modern-approximation');
+      expect(r.method).toContain('for reference only');
+    }
+  });
+
+  test('Chinese traditional colours: 24 page entries with a value, classical quotations kept as discovered assertions', () => {
+    const page = 'wikipedia-zh-chinese-traditional-colours';
+    const concepts = records.filter(
+      (r) =>
+        r.type === 'concept' && r.tags?.kind === 'colour-term' && r.tags?.tradition === 'chinese',
+    );
+    expect(concepts.length).toBe(24);
+    for (const c of concepts) {
+      expect(c.review_state, c.id).toBe('discovered');
+      if (c.type === 'concept') expect(c.evidence.source).toBe(page);
+      expect(
+        records.some((r) => r.type === 'representation' && r.concept === c.id),
+        c.id,
+      ).toBe(true);
+    }
+    const quoted = records.filter(
+      (r) => r.type === 'cultural-assertion' && r.evidence.source === page,
+    );
+    expect(quoted.length).toBe(9);
+    for (const a of quoted) {
+      expect(a.review_state, a.id).toBe('discovered');
+      if (a.type === 'cultural-assertion') expect(a.passage, a.id).toBeTruthy();
+    }
+  });
+
+  test('CSS named colours: 148 keywords as 141 concepts, every value published, not approximated', () => {
+    const concepts = records.filter(
+      (r) => r.type === 'concept' && r.tags?.standard === 'css-color-4',
+    );
+    const names = records.filter(
+      (r) => r.type === 'name' && r.evidence.source === 'w3c-css-color-4',
+    );
+    const values = records.filter(
+      (r) => r.type === 'representation' && r.evidence.source === 'w3c-css-color-4',
+    );
+    expect(concepts.length).toBe(141);
+    expect(names.length).toBe(148);
+    expect(values.length).toBe(141);
+    for (const v of values) {
+      if (v.type !== 'representation') continue;
+      expect(v.approximation_status, v.id).toBe('published-value');
+      expect(v.rights_status, v.id).toBe('verified-reusable');
+    }
+    expect(byId.get('css-gray-grey')).toMatchObject({ concept: 'css-gray', script: 'grey' });
+    expect(byId.get('css-rebeccapurple-srgb')).toMatchObject({ coords: [0.4, 0.2, 0.6] });
+  });
+
   test('nothing above "discovered" cites a Wikipedia or Wiktionary page', () => {
     for (const r of records) {
       if (r.type === 'source') continue;

@@ -1,0 +1,950 @@
+# yaml-language-server: $schema=../schema.json
+# Chinese traditional colour names from the Chinese Wikipedia page 中国传统色彩 (discovery route only). The page names no
+# source for its hex values; its descriptions quote classical texts (说文, 释名, 尚書), recorded here as assertions in the
+# page's wording, unchecked against an edition. Pinyin is the editor's. The page's 寓意 (symbolism) section is unsourced
+# prose and is not recorded. Entries already covered elsewhere: 赤 (zh-chi), 赭 (zh-zhe), 丹 (zh-zhusha).
+
+- type: concept
+  id: zh-jiang
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 绛 (红色系)' }
+  label: '绛 (jiàng)'
+  description: 'Chinese traditional colour name listed under 红色系 on the cited page; the page describes it as: 比赤更深的紅色，《说文》曰：“绛，大赤也”。'
+  tags: { tradition: chinese, kind: colour-term }
+
+- type: name
+  id: zh-jiang-name
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 绛' }
+  concept: zh-jiang
+  script: '绛'
+  language: zh
+  transliteration: { system: Hanyu Pinyin, value: 'jiàng' }
+  meaning: 'deep red, darker than 赤'
+  confidence: { transcription: 0.9 }
+  notes: 'Pinyin supplied by the editor; the page gives none. The script is the form the page uses (it mixes simplified and traditional characters). The meaning is the editor''s summary of the page''s description.'
+
+- type: representation
+  id: zh-jiang-srgb-zhwiki
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 绛, hex #5E0312' }
+  concept: zh-jiang
+  space: srgb
+  coords: [0.36863, 0.01176, 0.07059]
+  white: D65
+  method: 'sRGB hex #5E0312 as listed on the cited page (which names no source for its values), divided by 255.'
+  approximation_status: modern-approximation
+
+- type: concept
+  id: zh-zhu
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 朱 (红色系)' }
+  label: '朱 (zhū)'
+  description: 'Chinese traditional colour name listed under 红色系 on the cited page; the page describes it as: 傳統上的正红色，最纯正的红色。'
+  tags: { tradition: chinese, kind: colour-term }
+
+- type: name
+  id: zh-zhu-name
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 朱' }
+  concept: zh-zhu
+  script: '朱'
+  language: zh
+  transliteration: { system: Hanyu Pinyin, value: 'zhū' }
+  aliases: ['正红']
+  meaning: 'the traditional "true red" (正红), the purest red'
+  confidence: { transcription: 0.9 }
+  notes: 'Pinyin supplied by the editor; the page gives none. The script is the form the page uses (it mixes simplified and traditional characters). The meaning is the editor''s summary of the page''s description.'
+
+- type: representation
+  id: zh-zhu-srgb-zhwiki
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 朱, hex #FF0000' }
+  concept: zh-zhu
+  space: srgb
+  coords: [1.00000, 0.00000, 0.00000]
+  white: D65
+  method: 'sRGB hex #FF0000 as listed on the cited page (which names no source for its values), divided by 255.'
+  approximation_status: modern-approximation
+
+- type: concept
+  id: zh-hong
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 红 (红色系)' }
+  label: '红 (hóng)'
+  description: 'Chinese traditional colour name listed under 红色系 on the cited page; the page describes it as: 浅红，《说文》曾释曰：“红，帛赤白色也”。东汉刘熙著《释名》亦言红为：“白色之似绛者”。 又据清人段玉裁对《说文》中“紅”一字的加注：“此今人所謂粉紅、桃紅也”。可知传统的红色，即近世的粉红色。'
+  tags: { tradition: chinese, kind: colour-term }
+
+- type: name
+  id: zh-hong-name
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 红' }
+  concept: zh-hong
+  script: '红'
+  language: zh
+  transliteration: { system: Hanyu Pinyin, value: 'hóng' }
+  aliases: ['粉紅', '浅红']
+  meaning: 'light red; the page argues the traditional 红 is the modern pink'
+  confidence: { transcription: 0.9 }
+  notes: 'Pinyin supplied by the editor; the page gives none. The script is the form the page uses (it mixes simplified and traditional characters). The meaning is the editor''s summary of the page''s description.'
+
+- type: representation
+  id: zh-hong-srgb-zhwiki
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 红, hex #FFB3A7' }
+  concept: zh-hong
+  space: srgb
+  coords: [1.00000, 0.70196, 0.65490]
+  white: D65
+  method: 'sRGB hex #FFB3A7 as listed on the cited page (which names no source for its values), divided by 255.'
+  approximation_status: modern-approximation
+
+- type: concept
+  id: zh-feihong
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 妃红 (红色系)' }
+  label: '妃红 (fēihóng)'
+  description: 'Chinese traditional colour name listed under 红色系 on the cited page; the page describes it as: 淺红的一種，用以描述上流女眷塗抹的脂粉與汗水混合而形成的顏色，一說是緋匹之色。'
+  tags: { tradition: chinese, kind: colour-term }
+
+- type: name
+  id: zh-feihong-name
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 妃红' }
+  concept: zh-feihong
+  script: '妃红'
+  language: zh
+  transliteration: { system: Hanyu Pinyin, value: 'fēihóng' }
+  aliases: ['杨妃色', '湘妃色']
+  meaning: 'a light red; the page describes it as the colour of face powder mixed with sweat'
+  confidence: { transcription: 0.9 }
+  notes: 'Pinyin supplied by the editor; the page gives none. The script is the form the page uses (it mixes simplified and traditional characters). The meaning is the editor''s summary of the page''s description.'
+
+- type: representation
+  id: zh-feihong-srgb-zhwiki
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 妃红, hex #ED5736' }
+  concept: zh-feihong
+  space: srgb
+  coords: [0.92941, 0.34118, 0.21176]
+  white: D65
+  method: 'sRGB hex #ED5736 as listed on the cited page (which names no source for its values), divided by 255.'
+  approximation_status: modern-approximation
+
+- type: concept
+  id: zh-pinhong
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 品紅 (红色系)' }
+  label: '品紅 (pǐnhóng)'
+  description: 'Chinese traditional colour name listed under 红色系 on the cited page; the page describes it as: 略浅于大红的颜色，用以形容观赏性植物一品红的叶子的颜色。'
+  tags: { tradition: chinese, kind: colour-term }
+
+- type: name
+  id: zh-pinhong-name
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 品紅' }
+  concept: zh-pinhong
+  script: '品紅'
+  language: zh
+  transliteration: { system: Hanyu Pinyin, value: 'pǐnhóng' }
+  aliases: ['洋紅']
+  meaning: 'a red slightly lighter than 大红, after the leaves of the poinsettia (一品红)'
+  confidence: { transcription: 0.9 }
+  notes: 'Pinyin supplied by the editor; the page gives none. The script is the form the page uses (it mixes simplified and traditional characters). The meaning is the editor''s summary of the page''s description.'
+
+- type: representation
+  id: zh-pinhong-srgb-zhwiki
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 品紅, hex #F00056' }
+  concept: zh-pinhong
+  space: srgb
+  coords: [0.94118, 0.00000, 0.33725]
+  white: D65
+  method: 'sRGB hex #F00056 as listed on the cited page (which names no source for its values), divided by 255.'
+  approximation_status: modern-approximation
+
+- type: concept
+  id: zh-haitang
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 海棠 (红色系)' }
+  label: '海棠 (hǎitáng)'
+  description: 'Chinese traditional colour name listed under 红色系 on the cited page; the page describes it as: 傳統上對海棠花顏色的形容，指蘋果屬梨花海棠的色澤，呈较桃红色深一些的淡紫红色，是非常妩媚娇艳的颜色。'
+  tags: { tradition: chinese, kind: colour-term }
+
+- type: name
+  id: zh-haitang-name
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 海棠' }
+  concept: zh-haitang
+  script: '海棠'
+  language: zh
+  transliteration: { system: Hanyu Pinyin, value: 'hǎitáng' }
+  meaning: 'crabapple-blossom colour: a light purplish red a little deeper than peach'
+  confidence: { transcription: 0.9 }
+  notes: 'Pinyin supplied by the editor; the page gives none. The script is the form the page uses (it mixes simplified and traditional characters). The meaning is the editor''s summary of the page''s description.'
+
+- type: representation
+  id: zh-haitang-srgb-zhwiki
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 海棠, hex #DB5A6B' }
+  concept: zh-haitang
+  space: srgb
+  coords: [0.85882, 0.35294, 0.41961]
+  white: D65
+  method: 'sRGB hex #DB5A6B as listed on the cited page (which names no source for its values), divided by 255.'
+  approximation_status: modern-approximation
+
+- type: concept
+  id: zh-yanzhi
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 胭脂 (红色系)' }
+  label: '胭脂 (yānzhi)'
+  description: 'Chinese traditional colour name listed under 红色系 on the cited page; the page describes it as: 女子装扮时所用胭脂的颜色，亦作国画暗红色颜料的颜色。'
+  tags: { tradition: chinese, kind: colour-term }
+
+- type: name
+  id: zh-yanzhi-name
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 胭脂' }
+  concept: zh-yanzhi
+  script: '胭脂'
+  language: zh
+  transliteration: { system: Hanyu Pinyin, value: 'yānzhi' }
+  meaning: 'rouge colour; also the dark red pigment of Chinese painting'
+  confidence: { transcription: 0.9 }
+  notes: 'Pinyin supplied by the editor; the page gives none. The script is the form the page uses (it mixes simplified and traditional characters). The meaning is the editor''s summary of the page''s description.'
+
+- type: representation
+  id: zh-yanzhi-srgb-zhwiki
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 胭脂, hex #960018' }
+  concept: zh-yanzhi
+  space: srgb
+  coords: [0.58824, 0.00000, 0.09412]
+  white: D65
+  method: 'sRGB hex #960018 as listed on the cited page (which names no source for its values), divided by 255.'
+  approximation_status: modern-approximation
+
+- type: concept
+  id: zh-fei
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 绯 (红色系)' }
+  label: '绯 (fēi)'
+  description: 'Chinese traditional colour name listed under 红色系 on the cited page; the page describes it as: 深紅的一種，徐鉉校補《說文》曰：“緋，帛赤色也”。'
+  tags: { tradition: chinese, kind: colour-term }
+
+- type: name
+  id: zh-fei-name
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 绯' }
+  concept: zh-fei
+  script: '绯'
+  language: zh
+  transliteration: { system: Hanyu Pinyin, value: 'fēi' }
+  meaning: 'a deep red'
+  confidence: { transcription: 0.9 }
+  notes: 'Pinyin supplied by the editor; the page gives none. The script is the form the page uses (it mixes simplified and traditional characters). The meaning is the editor''s summary of the page''s description.'
+
+- type: representation
+  id: zh-fei-srgb-zhwiki
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 绯, hex #C83C23' }
+  concept: zh-fei
+  space: srgb
+  coords: [0.78431, 0.23529, 0.13725]
+  white: D65
+  method: 'sRGB hex #C83C23 as listed on the cited page (which names no source for its values), divided by 255.'
+  approximation_status: modern-approximation
+
+- type: concept
+  id: zh-qian
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 茜 (红色系)' }
+  label: '茜 (qiàn)'
+  description: 'Chinese traditional colour name listed under 红色系 on the cited page; the page describes it as: 從茜草中提取的大紅色。'
+  tags: { tradition: chinese, kind: colour-term }
+
+- type: name
+  id: zh-qian-name
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 茜' }
+  concept: zh-qian
+  script: '茜'
+  language: zh
+  transliteration: { system: Hanyu Pinyin, value: 'qiàn' }
+  aliases: ['綪']
+  meaning: 'the deep red extracted from madder (茜草)'
+  confidence: { transcription: 0.9 }
+  notes: 'Pinyin supplied by the editor; the page gives none. The script is the form the page uses (it mixes simplified and traditional characters). The meaning is the editor''s summary of the page''s description.'
+
+- type: representation
+  id: zh-qian-srgb-zhwiki
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 茜, hex #B13546' }
+  concept: zh-qian
+  space: srgb
+  coords: [0.69412, 0.20784, 0.27451]
+  white: D65
+  method: 'sRGB hex #B13546 as listed on the cited page (which names no source for its values), divided by 255.'
+  approximation_status: modern-approximation
+
+- type: concept
+  id: zh-yanhong
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 殷紅 (红色系)' }
+  label: '殷紅 (yānhóng)'
+  description: 'Chinese traditional colour name listed under 红色系 on the cited page; the page describes it as: 類似荔枝皮的色澤，[4]用以描述发黑的红色。'
+  tags: { tradition: chinese, kind: colour-term }
+
+- type: name
+  id: zh-yanhong-name
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 殷紅' }
+  concept: zh-yanhong
+  script: '殷紅'
+  language: zh
+  transliteration: { system: Hanyu Pinyin, value: 'yānhóng' }
+  meaning: 'a red tending to black, likened to lychee skin'
+  confidence: { transcription: 0.9 }
+  notes: 'Pinyin supplied by the editor; the page gives none. The script is the form the page uses (it mixes simplified and traditional characters). The meaning is the editor''s summary of the page''s description.'
+
+- type: representation
+  id: zh-yanhong-srgb-zhwiki
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 殷紅, hex #BE002E' }
+  concept: zh-yanhong
+  space: srgb
+  coords: [0.74510, 0.00000, 0.18039]
+  white: D65
+  method: 'sRGB hex #BE002E as listed on the cited page (which names no source for its values), divided by 255.'
+  approximation_status: modern-approximation
+
+- type: concept
+  id: zh-taohong
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 桃红 (红色系)' }
+  label: '桃红 (táohóng)'
+  description: 'Chinese traditional colour name listed under 红色系 on the cited page; the page describes it as: 桃花呈现的淡红，比粉红略鲜润的颜色。'
+  tags: { tradition: chinese, kind: colour-term }
+
+- type: name
+  id: zh-taohong-name
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 桃红' }
+  concept: zh-taohong
+  script: '桃红'
+  language: zh
+  transliteration: { system: Hanyu Pinyin, value: 'táohóng' }
+  meaning: 'peach-blossom light red, a little fresher than pink'
+  confidence: { transcription: 0.9 }
+  notes: 'Pinyin supplied by the editor; the page gives none. The script is the form the page uses (it mixes simplified and traditional characters). The meaning is the editor''s summary of the page''s description.'
+
+- type: representation
+  id: zh-taohong-srgb-zhwiki
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 桃红, hex #F47983' }
+  concept: zh-taohong
+  space: srgb
+  coords: [0.95686, 0.47451, 0.51373]
+  white: D65
+  method: 'sRGB hex #F47983 as listed on the cited page (which names no source for its values), divided by 255.'
+  approximation_status: modern-approximation
+
+- type: concept
+  id: zh-xun
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 纁 (红色系)' }
+  label: '纁 (xūn)'
+  description: 'Chinese traditional colour name listed under 红色系 on the cited page; the page describes it as: 《说文》：“縓，帛赤黄色。一染谓之縓，再染谓之䞓，三染谓之纁”。又同曛，形容黄昏的颜色。'
+  tags: { tradition: chinese, kind: colour-term }
+
+- type: name
+  id: zh-xun-name
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 纁' }
+  concept: zh-xun
+  script: '纁'
+  language: zh
+  transliteration: { system: Hanyu Pinyin, value: 'xūn' }
+  aliases: ['曛黄']
+  meaning: 'the red-yellow of silk dyed three times (说文); also the colour of dusk (曛)'
+  confidence: { transcription: 0.9 }
+  notes: 'Pinyin supplied by the editor; the page gives none. The script is the form the page uses (it mixes simplified and traditional characters). The meaning is the editor''s summary of the page''s description.'
+
+- type: representation
+  id: zh-xun-srgb-zhwiki
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 纁, hex #E42D01' }
+  concept: zh-xun
+  space: srgb
+  coords: [0.89412, 0.17647, 0.00392]
+  white: D65
+  method: 'sRGB hex #E42D01 as listed on the cited page (which names no source for its values), divided by 255.'
+  approximation_status: modern-approximation
+
+- type: concept
+  id: zh-quan
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 縓 (红色系)' }
+  label: '縓 (quàn)'
+  description: 'Chinese traditional colour name listed under 红色系 on the cited page; the page describes it as: 《说文》：“縓，帛赤黄色。一染谓之縓，再染谓之䞓，三染谓之纁”。较浅的赤黄色。'
+  tags: { tradition: chinese, kind: colour-term }
+
+- type: name
+  id: zh-quan-name
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 縓' }
+  concept: zh-quan
+  script: '縓'
+  language: zh
+  transliteration: { system: Hanyu Pinyin, value: 'quàn' }
+  meaning: 'the red-yellow of silk dyed once (说文); a lighter red-yellow'
+  confidence: { transcription: 0.9 }
+  notes: 'Pinyin supplied by the editor; the page gives none. The script is the form the page uses (it mixes simplified and traditional characters). The meaning is the editor''s summary of the page''s description.'
+
+- type: representation
+  id: zh-quan-srgb-zhwiki
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 縓, hex #E48B63' }
+  concept: zh-quan
+  space: srgb
+  coords: [0.89412, 0.54510, 0.38824]
+  white: D65
+  method: 'sRGB hex #E48B63 as listed on the cited page (which names no source for its values), divided by 255.'
+  approximation_status: modern-approximation
+
+- type: concept
+  id: zh-cheng
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 䞓 (红色系)' }
+  label: '䞓 (chēng)'
+  description: 'Chinese traditional colour name listed under 红色系 on the cited page; the page describes it as: 《说文》：“縓，帛赤黄色。一染谓之縓，再染谓之䞓，三染谓之纁”。介于纁与縓之间的颜色。'
+  tags: { tradition: chinese, kind: colour-term }
+
+- type: name
+  id: zh-cheng-name
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 䞓' }
+  concept: zh-cheng
+  script: '䞓'
+  language: zh
+  transliteration: { system: Hanyu Pinyin, value: 'chēng' }
+  meaning: 'the red-yellow of silk dyed twice (说文); between 纁 and 縓'
+  confidence: { transcription: 0.9 }
+  notes: 'Pinyin supplied by the editor; the page gives none. The script is the form the page uses (it mixes simplified and traditional characters). The meaning is the editor''s summary of the page''s description.'
+
+- type: representation
+  id: zh-cheng-srgb-zhwiki
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 䞓, hex #E78587' }
+  concept: zh-cheng
+  space: srgb
+  coords: [0.90588, 0.52157, 0.52941]
+  white: D65
+  method: 'sRGB hex #E78587 as listed on the cited page (which names no source for its values), divided by 255.'
+  approximation_status: modern-approximation
+
+- type: concept
+  id: zh-hese
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 褐色 (橙色系)' }
+  label: '褐色 (hèsè)'
+  description: 'Chinese traditional colour name listed under 橙色系 on the cited page; the page describes it as: 彩度較低的橙色，也是五間色「駵黃」[5]'
+  tags: { tradition: chinese, kind: colour-term }
+
+- type: name
+  id: zh-hese-name
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 褐色' }
+  concept: zh-hese
+  script: '褐色'
+  language: zh
+  transliteration: { system: Hanyu Pinyin, value: 'hèsè' }
+  meaning: 'a low-chroma orange; the page identifies it with the intermediate colour 駵黃'
+  confidence: { transcription: 0.9 }
+  notes: 'Pinyin supplied by the editor; the page gives none. The script is the form the page uses (it mixes simplified and traditional characters). The meaning is the editor''s summary of the page''s description.'
+
+- type: representation
+  id: zh-hese-srgb-zhwiki
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 褐色, hex #993300' }
+  concept: zh-hese
+  space: srgb
+  coords: [0.60000, 0.20000, 0.00000]
+  white: D65
+  method: 'sRGB hex #993300 as listed on the cited page (which names no source for its values), divided by 255.'
+  approximation_status: modern-approximation
+
+- type: concept
+  id: zh-yaqing
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 鴉青 (青色系)' }
+  label: '鴉青 (yāqīng)'
+  description: 'Chinese traditional colour name listed under 青色系 on the cited page; the page describes it as: 鸦羽的颜色。即黑而带有紫绿光的颜色'
+  tags: { tradition: chinese, kind: colour-term }
+
+- type: name
+  id: zh-yaqing-name
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 鴉青' }
+  concept: zh-yaqing
+  script: '鴉青'
+  language: zh
+  transliteration: { system: Hanyu Pinyin, value: 'yāqīng' }
+  meaning: 'crow-feather colour: black with a purple-green sheen'
+  confidence: { transcription: 0.9 }
+  notes: 'Pinyin supplied by the editor; the page gives none. The script is the form the page uses (it mixes simplified and traditional characters). The meaning is the editor''s summary of the page''s description.'
+
+- type: representation
+  id: zh-yaqing-srgb-zhwiki
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 鴉青, hex #424C50' }
+  concept: zh-yaqing
+  space: srgb
+  coords: [0.25882, 0.29804, 0.31373]
+  white: D65
+  method: 'sRGB hex #424C50 as listed on the cited page (which names no source for its values), divided by 255.'
+  approximation_status: modern-approximation
+
+- type: concept
+  id: zh-xuelanse
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 雪藍色 (蓝色系)' }
+  label: '雪藍色 (xuělánsè)'
+  description: 'Chinese traditional colour name listed under 蓝色系 on the cited page; the page describes it as: 雪藍色深度介于天蓝色和紫色之间，由于色调类似於大量的雪折射後呈現的藍色的顏色而得名。属于冷色。一般水彩或廣告顏料是以藍色對紅色21:20的比例來配出雪藍色，而光學配色是以紅色對綠色對藍色24:25:41的比例近似，而在電腦或顯示器上則以RGB為(119,123,206)來顯示出雪藍色。[6]'
+  tags: { tradition: chinese, kind: colour-term }
+
+- type: name
+  id: zh-xuelanse-name
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 雪藍色' }
+  concept: zh-xuelanse
+  script: '雪藍色'
+  language: zh
+  transliteration: { system: Hanyu Pinyin, value: 'xuělánsè' }
+  meaning: 'a blue between sky blue and purple, named after snow-refracted light; the page gives RGB (119, 123, 206)'
+  confidence: { transcription: 0.9 }
+  notes: 'Pinyin supplied by the editor; the page gives none. The script is the form the page uses (it mixes simplified and traditional characters). The meaning is the editor''s summary of the page''s description.'
+
+- type: representation
+  id: zh-xuelanse-srgb-zhwiki
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 雪藍色, hex #777BCE' }
+  concept: zh-xuelanse
+  space: srgb
+  coords: [0.46667, 0.48235, 0.80784]
+  white: D65
+  method: 'sRGB hex #777BCE as listed on the cited page (which names no source for its values), divided by 255.'
+  approximation_status: modern-approximation
+
+- type: concept
+  id: zh-jingbai
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 精白 (白色系)' }
+  label: '精白 (jīngbái)'
+  description: 'Chinese traditional colour name listed under 白色系 on the cited page; the page describes it as: 纯白，洁白，净白，粉白，立德粉色'
+  tags: { tradition: chinese, kind: colour-term }
+
+- type: name
+  id: zh-jingbai-name
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 精白' }
+  concept: zh-jingbai
+  script: '精白'
+  language: zh
+  transliteration: { system: Hanyu Pinyin, value: 'jīngbái' }
+  meaning: 'pure white'
+  confidence: { transcription: 0.9 }
+  notes: 'Pinyin supplied by the editor; the page gives none. The script is the form the page uses (it mixes simplified and traditional characters). The meaning is the editor''s summary of the page''s description.'
+
+- type: representation
+  id: zh-jingbai-srgb-zhwiki
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 精白, hex #FFFFFF' }
+  concept: zh-jingbai
+  space: srgb
+  coords: [1.00000, 1.00000, 1.00000]
+  white: D65
+  method: 'sRGB hex #FFFFFF as listed on the cited page (which names no source for its values), divided by 255.'
+  approximation_status: modern-approximation
+
+- type: concept
+  id: zh-xuebai
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 雪白 (白色系)' }
+  label: '雪白 (xuěbái)'
+  description: 'Chinese traditional colour name listed under 白色系 on the cited page; the page describes it as: 如雪般的潔白'
+  tags: { tradition: chinese, kind: colour-term }
+
+- type: name
+  id: zh-xuebai-name
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 雪白' }
+  concept: zh-xuebai
+  script: '雪白'
+  language: zh
+  transliteration: { system: Hanyu Pinyin, value: 'xuěbái' }
+  meaning: 'snow white'
+  confidence: { transcription: 0.9 }
+  notes: 'Pinyin supplied by the editor; the page gives none. The script is the form the page uses (it mixes simplified and traditional characters). The meaning is the editor''s summary of the page''s description.'
+
+- type: representation
+  id: zh-xuebai-srgb-zhwiki
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 雪白, hex #F0FCFF' }
+  concept: zh-xuebai
+  space: srgb
+  coords: [0.94118, 0.98824, 1.00000]
+  white: D65
+  method: 'sRGB hex #F0FCFF as listed on the cited page (which names no source for its values), divided by 255.'
+  approximation_status: modern-approximation
+
+- type: concept
+  id: zh-yuebai
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 月白 (白色系)' }
+  label: '月白 (yuèbái)'
+  description: 'Chinese traditional colour name listed under 白色系 on the cited page; the page describes it as: 淡藍色'
+  tags: { tradition: chinese, kind: colour-term }
+
+- type: name
+  id: zh-yuebai-name
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 月白' }
+  concept: zh-yuebai
+  script: '月白'
+  language: zh
+  transliteration: { system: Hanyu Pinyin, value: 'yuèbái' }
+  meaning: 'moon white: a pale blue'
+  confidence: { transcription: 0.9 }
+  notes: 'Pinyin supplied by the editor; the page gives none. The script is the form the page uses (it mixes simplified and traditional characters). The meaning is the editor''s summary of the page''s description.'
+
+- type: representation
+  id: zh-yuebai-srgb-zhwiki
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 月白, hex #D6ECF0' }
+  concept: zh-yuebai
+  space: srgb
+  coords: [0.83922, 0.92549, 0.94118]
+  white: D65
+  method: 'sRGB hex #D6ECF0 as listed on the cited page (which names no source for its values), divided by 255.'
+  approximation_status: modern-approximation
+
+- type: concept
+  id: zh-yudubai
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 魚肚白 (白色系)' }
+  label: '魚肚白 (yúdùbái)'
+  description: 'Chinese traditional colour name listed under 白色系 on the cited page; the page describes it as: 似鱼腹部的颜色，多指黎明时东方的天色颜色'
+  tags: { tradition: chinese, kind: colour-term }
+
+- type: name
+  id: zh-yudubai-name
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 魚肚白' }
+  concept: zh-yudubai
+  script: '魚肚白'
+  language: zh
+  transliteration: { system: Hanyu Pinyin, value: 'yúdùbái' }
+  meaning: 'fish-belly white: the colour of the eastern sky at dawn'
+  confidence: { transcription: 0.9 }
+  notes: 'Pinyin supplied by the editor; the page gives none. The script is the form the page uses (it mixes simplified and traditional characters). The meaning is the editor''s summary of the page''s description.'
+
+- type: representation
+  id: zh-yudubai-srgb-zhwiki
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 魚肚白, hex #FCEFE8' }
+  concept: zh-yudubai
+  space: srgb
+  coords: [0.98824, 0.93725, 0.90980]
+  white: D65
+  method: 'sRGB hex #FCEFE8 as listed on the cited page (which names no source for its values), divided by 255.'
+  approximation_status: modern-approximation
+
+- type: concept
+  id: zh-xiangyabai
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 象牙白 (白色系)' }
+  label: '象牙白 (xiàngyábái)'
+  description: 'Chinese traditional colour name listed under 白色系 on the cited page; the page describes it as: 乳白色'
+  tags: { tradition: chinese, kind: colour-term }
+
+- type: name
+  id: zh-xiangyabai-name
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 象牙白' }
+  concept: zh-xiangyabai
+  script: '象牙白'
+  language: zh
+  transliteration: { system: Hanyu Pinyin, value: 'xiàngyábái' }
+  meaning: 'ivory white: a milky white'
+  confidence: { transcription: 0.9 }
+  notes: 'Pinyin supplied by the editor; the page gives none. The script is the form the page uses (it mixes simplified and traditional characters). The meaning is the editor''s summary of the page''s description.'
+
+- type: representation
+  id: zh-xiangyabai-srgb-zhwiki
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 象牙白, hex #FFFBF0' }
+  concept: zh-xiangyabai
+  space: srgb
+  coords: [1.00000, 0.98431, 0.94118]
+  white: D65
+  method: 'sRGB hex #FFFBF0 as listed on the cited page (which names no source for its values), divided by 255.'
+  approximation_status: modern-approximation
+
+- type: concept
+  id: zh-gao
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 縞 (白色系)' }
+  label: '縞 (gǎo)'
+  description: 'Chinese traditional colour name listed under 白色系 on the cited page; the page describes it as: 白色'
+  tags: { tradition: chinese, kind: colour-term }
+
+- type: name
+  id: zh-gao-name
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 縞' }
+  concept: zh-gao
+  script: '縞'
+  language: zh
+  transliteration: { system: Hanyu Pinyin, value: 'gǎo' }
+  meaning: 'white (undyed silk)'
+  confidence: { transcription: 0.9 }
+  notes: 'Pinyin supplied by the editor; the page gives none. The script is the form the page uses (it mixes simplified and traditional characters). The meaning is the editor''s summary of the page''s description.'
+
+- type: representation
+  id: zh-gao-srgb-zhwiki
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 縞, hex #F2ECDE' }
+  concept: zh-gao
+  space: srgb
+  coords: [0.94902, 0.92549, 0.87059]
+  white: D65
+  method: 'sRGB hex #F2ECDE as listed on the cited page (which names no source for its values), divided by 255.'
+  approximation_status: modern-approximation
+
+- type: concept
+  id: zh-huise
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 灰色 (灰色系)' }
+  label: '灰色 (huīsè)'
+  description: 'Chinese traditional colour name listed under 灰色系 on the cited page; the page describes it as: 介於黑和白之間，也是五間色「緇」[7]'
+  tags: { tradition: chinese, kind: colour-term }
+
+- type: name
+  id: zh-huise-name
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 灰色' }
+  concept: zh-huise
+  script: '灰色'
+  language: zh
+  transliteration: { system: Hanyu Pinyin, value: 'huīsè' }
+  meaning: 'grey, between black and white; the page identifies it with the intermediate colour 緇'
+  confidence: { transcription: 0.9 }
+  notes: 'Pinyin supplied by the editor; the page gives none. The script is the form the page uses (it mixes simplified and traditional characters). The meaning is the editor''s summary of the page''s description.'
+
+- type: representation
+  id: zh-huise-srgb-zhwiki
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 灰色, hex #808080' }
+  concept: zh-huise
+  space: srgb
+  coords: [0.50196, 0.50196, 0.50196]
+  white: D65
+  method: 'sRGB hex #808080 as listed on the cited page (which names no source for its values), divided by 255.'
+  approximation_status: modern-approximation
+
+# The page lists 赭色 a second time, under 黄色系, with a different value from its 赭 entry (zh-zhe-srgb-zhwiki).
+- type: representation
+  id: zh-zhe-se-srgb-zhwiki
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 赭色 (黄色系), hex #CC7722' }
+  concept: zh-zhe
+  space: srgb
+  coords: [0.80000, 0.46667, 0.13333]
+  white: D65
+  method: 'sRGB hex #CC7722 for the entry 赭色 under 黄色系, as listed on the cited page (which names no source), divided by 255.'
+  approximation_status: modern-approximation
+  notes: 'The same page lists 赭 under 红色系 at #9C5333 (zh-zhe-srgb-zhwiki). The two entries disagree; both are kept, the single-character entry first.'
+
+# Classical quotations as relayed by the page. Each passage is the page's wording; none has been checked against an edition of the text named.
+- type: cultural-assertion
+  id: zh-jiang-shuowen
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 绛' }
+  concept: zh-jiang
+  claim: '绛 is a deep red ("great red"), per the Shuowen as quoted on the page.'
+  passage: '绛，大赤也'
+  community: Chinese
+  context: '《说文》 as quoted in the entry 绛'
+  notes: 'Quotation relayed by a Wikipedia page, not read in the source text; a specialist should check the edition and wording before anything above discovered.'
+
+- type: cultural-assertion
+  id: zh-chi-shuowen
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 赤' }
+  concept: zh-chi
+  claim: '赤 is the colour of the south, per the Shuowen as quoted on the page; the page adds that 尚書·洪範 calls it the colour of fire and that Zheng Xuan glossed it as deep 朱.'
+  passage: '赤，南方色也'
+  community: Chinese
+  context: '《說文》, 《尚書·洪範》 (赤者，火色也) and 鄭玄 on 《易經》 (朱深曰赤), as quoted in the entry 赤'
+  notes: 'Quotation relayed by a Wikipedia page, not read in the source text; a specialist should check the edition and wording before anything above discovered.'
+
+- type: cultural-assertion
+  id: zh-zhusha-shuowen
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 丹' }
+  concept: zh-zhusha
+  claim: '丹 is the red stone of Ba and Yue, that is cinnabar, per the Shuowen as quoted on the page; the page concludes that 丹 is the colour of cinnabar.'
+  passage: '丹，巴越之赤石也'
+  community: Chinese
+  context: '《說文》 as quoted in the entry 丹'
+  notes: 'Quotation relayed by a Wikipedia page, not read in the source text; a specialist should check the edition and wording before anything above discovered.'
+
+- type: cultural-assertion
+  id: zh-hong-shuowen
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 红' }
+  concept: zh-hong
+  claim: '红 is silk of a red-and-white colour (a light red), per the Shuowen as quoted on the page; the page adds Liu Xi (释名: a white resembling 绛) and Duan Yucai (what people now call 粉紅 or 桃紅), concluding that the traditional 红 is the modern pink.'
+  passage: '红，帛赤白色也'
+  community: Chinese
+  context: '《说文》, 《释名》 (白色之似绛者) and 段玉裁 on the Shuowen (此今人所謂粉紅、桃紅也), as quoted in the entry 红'
+  notes: 'Quotation relayed by a Wikipedia page, not read in the source text; a specialist should check the edition and wording before anything above discovered.'
+
+- type: cultural-assertion
+  id: zh-fei-shuowen
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 绯' }
+  concept: zh-fei
+  claim: '緋 is silk of a red colour, per Xu Xuan''s edition of the Shuowen as quoted on the page.'
+  passage: '緋，帛赤色也'
+  community: Chinese
+  context: '徐鉉校補《說文》 as quoted in the entry 绯'
+  notes: 'Quotation relayed by a Wikipedia page, not read in the source text; a specialist should check the edition and wording before anything above discovered.'
+
+- type: cultural-assertion
+  id: zh-zhe-shuowen
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 赭' }
+  concept: zh-zhe
+  claim: '赭 is red earth, per the Shuowen as quoted on the page.'
+  passage: '赭，赤土也'
+  community: Chinese
+  context: '《說文》 as quoted in the entry 赭'
+  notes: 'Quotation relayed by a Wikipedia page, not read in the source text; a specialist should check the edition and wording before anything above discovered.'
+
+- type: cultural-assertion
+  id: zh-xun-dyeing-sequence
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 纁' }
+  concept: zh-xun
+  claim: 'The Shuowen, as quoted on the page, defines 縓 as silk of a red-yellow colour and names the dyeing sequence: one dipping gives 縓, two give 䞓, three give 纁. The page links 纁 also with 曛, the colour of dusk.'
+  passage: '縓，帛赤黄色。一染谓之縓，再染谓之䞓，三染谓之纁'
+  community: Chinese
+  context: '《说文》 as quoted in the entries 纁, 縓 and 䞓'
+  notes: 'Quotation relayed by a Wikipedia page, not read in the source text; a specialist should check the edition and wording before anything above discovered.'
+
+- type: cultural-assertion
+  id: zh-hese-intermediate-colour
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 褐色' }
+  concept: zh-hese
+  claim: 'The page identifies 褐色 with 駵黃, one of the five intermediate colours (五間色).'
+  passage: '也是五間色「駵黃」'
+  community: Chinese
+  context: 'entry 褐色; the page footnotes the identification but the footnote text was not retrievable from the saved copy'
+  notes: 'Quotation relayed by a Wikipedia page, not read in the source text; a specialist should check the edition and wording before anything above discovered.'
+
+- type: cultural-assertion
+  id: zh-huise-intermediate-colour
+  review_state: discovered
+  rights_status: unreviewed
+  evidence: { source: wikipedia-zh-chinese-traditional-colours, locator: 'entry 灰色' }
+  concept: zh-huise
+  claim: 'The page identifies 灰色 with 緇, one of the five intermediate colours (五間色).'
+  passage: '也是五間色「緇」'
+  community: Chinese
+  context: 'entry 灰色; the page footnotes the identification but the footnote text was not retrievable from the saved copy'
+  notes: 'Quotation relayed by a Wikipedia page, not read in the source text; a specialist should check the edition and wording before anything above discovered.'

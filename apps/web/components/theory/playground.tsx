@@ -53,7 +53,7 @@ export function Playground({
   const [ghost, setGhost] = useState(false);
   const [tradition, setTradition] = useState('none');
   const [l, c, h] = v;
-  const traditions = [...new Set(points.map((p) => p.tradition ?? 'other'))].sort();
+  const traditions = [...new Set(points.map((p) => p.group))].sort();
   const value = colour('oklch', v, { kind: 'manual' });
   const hex = toHex(value);
   const near = nearestPoint(points, convert(value, 'oklab').coords as [number, number, number]);
@@ -101,7 +101,7 @@ export function Playground({
       tradition === 'none'
         ? []
         : points
-            .filter((p) => tradition === 'all' || (p.tradition ?? 'other') === tradition)
+            .filter((p) => tradition === 'all' || p.group === tradition)
             .map((p) => {
               const o = convert(colour('oklab', p.oklab), 'oklch').coords;
               return {
@@ -298,7 +298,7 @@ export function Playground({
                   <option value="all">all ({points.length})</option>
                   {traditions.map((tr) => (
                     <option key={tr} value={tr}>
-                      {tr} ({points.filter((p) => (p.tradition ?? 'other') === tr).length})
+                      {tr} ({points.filter((p) => p.group === tr).length})
                     </option>
                   ))}
                 </select>

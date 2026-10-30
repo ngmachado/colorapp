@@ -10,9 +10,9 @@
 - id: tradition-japanese-colour
   kind: tradition
   title: Japanese colour names, dictionaries and layering
-  summary: An authored dictionary (Wada), a traditional vocabulary (nihon no iro) and a clothing practice (kasane) are three different kinds of record. The app keeps them apart and shows each record's evidence and status.
-  explanation_limits: Do not prefilter Japanese records as "muted" or "minimalist". Wada records show bibliographic data only until permission exists.
-  sources: [seigensha-wada-vol1, seigensha-wada-vol2, japan-house-living-colours]
+  summary: An authored dictionary (Wada), a traditional vocabulary (nihon no iro), an industrial naming standard (JIS Z 8102, 269 names with Munsell notations) and a clothing practice (kasane) are different kinds of record. The app keeps them apart and shows each record's evidence and status.
+  explanation_limits: Do not prefilter Japanese records as "muted" or "minimalist". Wada records show bibliographic data only until permission exists. JIS names carry the standard's Munsell notation; the screen value beside it is a reference approximation, not a conversion of the notation.
+  sources: [seigensha-wada-vol1, seigensha-wada-vol2, japan-house-living-colours, jis-z8102-2001]
 
 - id: tradition-western
   kind: tradition

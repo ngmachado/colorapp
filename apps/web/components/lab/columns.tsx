@@ -332,7 +332,7 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
 
   const roles = ROLES.slice(0, palette.length);
   const nameOf = (i: number) => labels[i] || roles[i]!;
-  const traditions = [...new Set(points.map((p) => p.tradition ?? 'other'))].sort();
+  const traditions = [...new Set(points.map((p) => p.group))].sort();
   const byId = new Map(points.map((p) => [p.id, p]));
 
   /** Everything the generator needs from the screen, for the given rule. */
@@ -353,7 +353,7 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
       });
       const arc = options.hue.from === options.hue.to ? undefined : { ...options.hue };
       const sourcePoints = points.filter(
-        (pt) => options.source === 'all' || (pt.tradition ?? 'other') === options.source,
+        (pt) => options.source === 'all' || pt.group === options.source,
       );
       return {
         seed: next,
@@ -655,7 +655,7 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
     wheelTradition === 'none'
       ? []
       : points
-          .filter((pt) => wheelTradition === 'all' || (pt.tradition ?? 'other') === wheelTradition)
+          .filter((pt) => wheelTradition === 'all' || pt.group === wheelTradition)
           .map((pt) => ({
             id: pt.id,
             oklch: oklchOf(pt),
@@ -854,7 +854,7 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
               <option value="all">all ({points.length})</option>
               {traditions.map((t) => (
                 <option key={t} value={t}>
-                  {t} ({points.filter((p) => (p.tradition ?? 'other') === t).length})
+                  {t} ({points.filter((p) => p.group === t).length})
                 </option>
               ))}
             </select>
@@ -1570,7 +1570,7 @@ export function Columns({ points, initial, seedNote, sets = [], localLibrary = f
                   <option value="all">all ({points.length})</option>
                   {traditions.map((t) => (
                     <option key={t} value={t}>
-                      {t} ({points.filter((p) => (p.tradition ?? 'other') === t).length})
+                      {t} ({points.filter((p) => p.group === t).length})
                     </option>
                   ))}
                 </select>

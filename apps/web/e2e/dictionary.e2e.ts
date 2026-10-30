@@ -26,7 +26,7 @@ test('the grid shows colours only, Systems includes both documented systems, and
 });
 
 test('the list view shows the same records as rows', async ({ page }) => {
-  await page.goto('/dictionary?tradition=web');
+  await page.goto('/dictionary?tradition=web&q=rebeccapurple');
   const n = await page.getByTestId('card').count();
   await page.getByTestId('view-list').click();
   await expect(page.getByTestId('list')).toBeVisible();

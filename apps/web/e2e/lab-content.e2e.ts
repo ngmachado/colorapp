@@ -11,7 +11,7 @@ test('documented records open in the Laboratory as locked, named columns', async
   const columns = page.getByTestId('column');
   await expect(columns).toHaveCount(3);
   await expect(page.getByTestId('notice')).toContainText('Loaded 桜色');
-  await expect(columns.nth(0)).toHaveAttribute('data-source', 'ja-sakura-iro-srgb-wikipedia');
+  await expect(columns.nth(0)).toHaveAttribute('data-source', 'ja-sakura-iro-srgb-jis');
   await expect(columns.nth(2)).toHaveAttribute('data-locked', 'true');
   await expect(page.getByTestId('from-record')).toHaveCount(3);
   await settled(page);
@@ -115,7 +115,7 @@ test('a saved palette keeps its locks, names and records, and the share link car
   await page.getByRole('spinbutton', { name: 'dominant area weight', exact: true }).fill('7');
   await expect(page).toHaveURL(/names=%5B%22Sun%22/);
   await expect(page).toHaveURL(/locks=11/);
-  await expect(page).toHaveURL(/records=ja-sakura-iro-srgb-wikipedia/);
+  await expect(page).toHaveURL(/records=ja-sakura-iro-srgb-jis/);
   await page.getByTestId('save').click();
   await expect(page.getByTestId('notice')).toContainText('Saved as version 1');
   await settled(page);
@@ -129,6 +129,6 @@ test('a saved palette keeps its locks, names and records, and the share link car
   await expect(page.getByTestId('column').first()).toHaveAttribute('data-locked', 'true');
   await expect(page.getByTestId('column').first()).toHaveAttribute(
     'data-source',
-    'ja-sakura-iro-srgb-wikipedia',
+    'ja-sakura-iro-srgb-jis',
   );
 });

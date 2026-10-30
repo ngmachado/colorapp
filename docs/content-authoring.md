@@ -18,6 +18,14 @@ Knowledge records live in `content/knowledge/**/*.yaml`, curriculum topics in `c
 - Never add an RGB value without naming where it came from and that it is a modern approximation.
 - Open each page you cite and record the `access_date`.
 
+## Generated files
+
+`content/knowledge/japanese/jis-z8102.yaml` is written by `scripts/import-jis-z8102.mjs` from saved copies of the Japanese Wikipedia pages JIS慣用色名 and 日本の色の一覧 (download them with a descriptive User-Agent, keep them out of the repo). Edit the script's tables (existing-concept map, editor readings, notes), rerun it, then `pnpm content:build`. Do not hand-edit the generated file.
+
+`content/knowledge/web/css-named-colours.yaml` is written by `scripts/import-css-named-colours.mjs` from a saved copy of the CSS Color Module Level 4 specification; the same rule applies.
+
+A concept may carry `tags.standard` (for example `jis-z8102`) and `tags.munsell`; the app groups documented points by standard before tradition, and `primaryRepresentation` in `apps/web/lib/records.ts` decides which of several values an entry shows first.
+
 ## Review chain
 
 `discovered` → `bibliographic` → `extracted` → `rights-checked` → `specialist-reviewed` → `published`. Only the last two show as source-verified in the app. Promotion happens in a pull request with the reviewer named in the description.
