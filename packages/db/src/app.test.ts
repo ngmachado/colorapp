@@ -61,11 +61,15 @@ describe('personal data', () => {
     expect(bundle.user?.email).toBe('alice@example.com');
     expect(bundle.tables.projects).toHaveLength(1);
     expect(bundle.tables.projectVersions).toHaveLength(1);
-    expect(await alice.counts()).toEqual({ projects: 1, projectVersions: 1 });
+    expect(await alice.counts()).toEqual({ projects: 1, projectVersions: 1, apiKeys: 0 });
     expect(await alice.deleteAccount()).toBe(1);
     expect(await db.select().from(s.users)).toHaveLength(1);
-    expect(appData(db, aliceId).counts()).resolves.toEqual({ projects: 0, projectVersions: 0 });
-    expect(await bob.counts()).toEqual({ projects: 1, projectVersions: 1 });
+    expect(appData(db, aliceId).counts()).resolves.toEqual({
+      projects: 0,
+      projectVersions: 0,
+      apiKeys: 0,
+    });
+    expect(await bob.counts()).toEqual({ projects: 1, projectVersions: 1, apiKeys: 0 });
   });
 
   test('the browser-test login creates a user once and a session each time', async () => {

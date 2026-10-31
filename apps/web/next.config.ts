@@ -3,6 +3,9 @@ import { PHASE_DEVELOPMENT_SERVER } from 'next/constants';
 import { join } from 'node:path';
 
 const config: NextConfig = {
+  // Next 16 locks the build directory per process, so a second dev server (the browser tests run
+  // one without sign-in) needs its own; NEXT_DIST_DIR names it.
+  ...(process.env.NEXT_DIST_DIR ? { distDir: process.env.NEXT_DIST_DIR } : {}),
   // Standalone output is for the Docker image; Vercel builds its own functions.
   ...(process.env.VERCEL ? {} : { output: 'standalone' as const }),
   outputFileTracingRoot: join(import.meta.dirname, '..', '..'),
@@ -26,6 +29,8 @@ const config: NextConfig = {
       './tsconfig.tsbuildinfo',
       ...(process.env.VERCEL
         ? [
+            // Turbopack links each external package under .next/node_modules/<name>-<hash>.
+            './.next/node_modules/@electric-sql/**',
             '../../node_modules/.pnpm/@electric-sql+pglite*/**',
             './node_modules/@electric-sql/pglite/**',
             '../../node_modules/@electric-sql/pglite/**',

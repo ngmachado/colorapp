@@ -93,23 +93,25 @@ function root(): string {
       readFileSync(join(dir, 'pnpm-workspace.yaml'));
       return dir;
     } catch {
-      dir = join(dir, '..');
+      dir = join(/*turbopackIgnore: true*/ dir, '..');
     }
   }
   return process.cwd();
 }
+// The `turbopackIgnore` marks tell the bundler not to trace these reads: the path is found at run
+// time by walking up to the workspace, and the file is a personal copy that is never deployed.
 /** Where the table is read from: the repository copy a developer fetched, or a path given by the environment. */
 export function munsellPath(): string {
   return process.env.MUNSELL_DATA_PATH ?? join(root(), 'content/reference/munsell/real.dat');
 }
 /** The file is not in the repository (RIT's terms allow one personal copy); the page says so when it is absent. */
 export function munsellAvailable(): boolean {
-  return existsSync(munsellPath());
+  return existsSync(/*turbopackIgnore: true*/ munsellPath());
 }
 export function munsellTable(text?: string) {
   if (table && !text) return table;
   if (!text && !munsellAvailable()) return [];
-  const src = text ?? readFileSync(munsellPath(), 'utf8');
+  const src = text ?? readFileSync(/*turbopackIgnore: true*/ munsellPath(), 'utf8');
   const rows = src
     .split('\n')
     .slice(1)

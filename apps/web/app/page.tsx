@@ -175,7 +175,7 @@ export default function Home() {
           <div className="flex flex-col gap-1.5">
             <span className="font-semibold text-[var(--fg)]">About</span>
             <Link href="/about">About this release</Link>
-            {ACCOUNTS ? <Link href="/account">Your data</Link> : null}
+            {ACCOUNTS ? <Link href="/account">Your account</Link> : null}
           </div>
           <span className="ml-auto self-end font-mono">
             release {inv.content_version.slice(0, 8)} · self-hosted · no tracking

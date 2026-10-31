@@ -37,7 +37,7 @@ export default defineConfig({
     },
     {
       // VERCEL=1 hides the SMTP fallback. An invalid DB URL verifies that accounts-off pages never open a database.
-      command: `${env.replace('pglite://memory', 'unavailable://accounts-off')} VERCEL=1 pnpm exec next dev -p ${localPort}`,
+      command: `${env.replace('pglite://memory', 'unavailable://accounts-off')} VERCEL=1 NEXT_DIST_DIR=.next-local pnpm exec next dev -p ${localPort}`,
       port: localPort,
       reuseExistingServer: !process.env.CI,
       timeout: 120000,

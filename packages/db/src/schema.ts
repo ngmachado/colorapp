@@ -106,5 +106,28 @@ export const projectVersions = pgTable(
   (t) => [uniqueIndex('project_version_number').on(t.projectId, t.number)],
 );
 
+/**
+ * An API key: a bearer secret shown once at creation, kept here only as a SHA-256 hash with a short
+ * prefix for display. Usage counters are fixed windows (calendar month, clock minute) kept on the row
+ * and advanced by one conditional update per call, so a key over its quota is refused without a count.
+ */
+export const apiKeys = pgTable(
+  'api_key',
+  {
+    ...owned,
+    name: text('name').notNull(),
+    prefix: text('prefix').notNull(),
+    hash: text('hash').notNull(),
+    lastUsedAt: timestamp('last_used_at', { mode: 'date', withTimezone: true }),
+    revokedAt: timestamp('revoked_at', { mode: 'date', withTimezone: true }),
+    /** The month (YYYY-MM, UTC) and minute (ISO to the minute, UTC) the counters belong to. */
+    monthWindow: text('month_window'),
+    monthCount: integer('month_count').notNull().default(0),
+    minuteWindow: text('minute_window'),
+    minuteCount: integer('minute_count').notNull().default(0),
+  },
+  (t) => [uniqueIndex('api_key_hash').on(t.hash), index('api_key_owner').on(t.ownerId)],
+);
+
 /** Tables that hold user-owned rows, in dependency order, for export and counts. */
-export const OWNED_TABLES = { projects, projectVersions } as const;
+export const OWNED_TABLES = { projects, projectVersions, apiKeys } as const;

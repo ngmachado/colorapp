@@ -131,7 +131,7 @@ export default async function Library({
           </p>
           {user ? (
             <Link href="/account" className="underline underline-offset-2">
-              Your data
+              Your account
             </Link>
           ) : null}
           {user ? <LibraryImport /> : null}

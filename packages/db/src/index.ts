@@ -12,7 +12,7 @@ const require = createRequire(import.meta.url);
 
 export { schema };
 
-export const SCHEMA_VERSION = '2';
+export const SCHEMA_VERSION = '3';
 
 /** One Postgres database, whichever engine serves it. */
 export type Db = PgDatabase<PgQueryResultHKT, typeof schema>;
@@ -100,3 +100,4 @@ export async function getMeta(db: Db, key: string): Promise<string | undefined> 
 
 export { appData, type AppData } from './app';
 export { findOrCreateUser } from './users';
+export { KEY_LIMITS, verifyApiKey, type KeyCheck } from './api-keys';

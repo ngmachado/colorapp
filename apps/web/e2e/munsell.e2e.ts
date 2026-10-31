@@ -59,7 +59,8 @@ test('the Munsell reference lists nearest tabulated samples with conditions, and
   const grey = await page.getByTestId('munsell-interpolated').getAttribute('data-hex');
   expect(grey).toMatch(/^#7[a-f0-9]7[a-f0-9]7[a-f0-9]$/);
   await page.goto('/munsell?notation=nonsense');
-  await expect(page.getByRole('alert')).toContainText('Could not read');
+  // Next 16 adds its own role=alert route announcer, so the page's alert is picked by its text.
+  await expect(page.getByRole('alert').filter({ hasText: 'Could not read' })).toBeVisible();
 });
 
 test('a JIS record shows both pages’ values and the check against the standard’s notation', async ({
