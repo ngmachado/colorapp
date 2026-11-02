@@ -21,11 +21,12 @@ export interface PaletteColour {
   lab: Triple;
 }
 
-export function parseHexList(text: string): PaletteColour[] {
+/** Hex colours in free text, deduplicated, at most `max` of them. */
+export function parseHexList(text: string, max = 8): PaletteColour[] {
   const out: PaletteColour[] = [];
   for (const m of text.matchAll(/(?:#|\b)([0-9a-f]{6})\b/gi)) {
     const hex = `#${m[1]!.toLowerCase()}`;
-    if (out.some((c) => c.hex === hex) || out.length >= 8) continue;
+    if (out.some((c) => c.hex === hex) || out.length >= max) continue;
     const rgb = [0, 2, 4].map((i) => parseInt(hex.slice(1 + i, 3 + i), 16) / 255) as Triple;
     out.push({ hex, lab: convert(colour('srgb', rgb), 'oklab').coords as Triple });
   }

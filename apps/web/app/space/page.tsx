@@ -2,10 +2,10 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { SpaceMapLoader } from '@/components/space/space-map-loader';
 import { Toolbar } from '@/components/toolbar';
-import { knowledge } from '@/lib/knowledge';
 import { labFromHexes } from '@/lib/lab-links';
 import { namePoints } from '@/lib/palette-names';
 import { readState } from '@/lib/space';
+import { documentedEdges } from '@/lib/space-edges';
 
 export const dynamic = 'force-dynamic';
 export const metadata: Metadata = { title: 'Colour space map · Super Colour' };
@@ -20,12 +20,7 @@ export default async function Space({ searchParams }: { searchParams: Promise<Pa
   const sp = await searchParams;
   const initial = readState(sp);
   const points = namePoints();
-  const k = knowledge();
-  const withPoint = new Set(points.map((p) => p.conceptId));
-  const edges = k
-    .byType('relationship')
-    .filter((r) => r.edge === 'complement-of' && withPoint.has(r.from) && withPoint.has(r.to))
-    .map((r) => ({ from: r.from, to: r.to, label: 'Chevreul’s complementary pairs' }));
+  const edges = documentedEdges(points);
   return (
     <>
       <Toolbar current="/space" middle="Colour space map">

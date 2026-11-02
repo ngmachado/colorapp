@@ -83,9 +83,9 @@ export default async function Palettes({ searchParams }: { searchParams: Promise
                 data-kind={s.kind}
               >
                 <span className="flex h-16 overflow-hidden rounded-md" aria-hidden="true">
-                  {members.map((m) => (
+                  {members.map((m, i) => (
                     <span
-                      key={m.cid}
+                      key={`${i}-${m.cid}`}
                       className="flex-1 border border-[var(--line)]"
                       style={{ background: m.p?.hex ?? 'var(--accent-soft)' }}
                       title={
@@ -103,7 +103,8 @@ export default async function Palettes({ searchParams }: { searchParams: Promise
                 </span>
                 <span className="flex flex-wrap gap-x-2 text-xs">
                   {members.map((m, i) => (
-                    <span key={m.cid}>
+                    // A layering can repeat a concept (青 on 青), so the key is the position in the set.
+                    <span key={`${i}-${m.cid}`}>
                       {i ? '· ' : ''}
                       <Link href={`/dictionary/${m.cid}`} className="underline">
                         {m.label}

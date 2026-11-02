@@ -30,7 +30,8 @@ export default defineConfig({
   ],
   webServer: [
     {
-      command: `rm -rf .e2e && ${env} pnpm exec next dev -p ${port}`,
+      // Its own dist directory: Next 16 allows one dev server per directory, and a developer's own may be running.
+      command: `rm -rf .e2e && ${env} NEXT_DIST_DIR=.next-e2e pnpm exec next dev -p ${port}`,
       port,
       reuseExistingServer: !process.env.CI,
       timeout: 120000,

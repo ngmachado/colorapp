@@ -5,14 +5,16 @@ import { colour, contrastRatio, convert, type Triple } from '@sca/colour-engine'
 import type { Source } from '@sca/knowledge';
 import { Toolbar } from '@/components/toolbar';
 import { ColourInput, CopyValue } from '@/components/colour-input';
+import { InspectorMap } from '@/components/inspector-map';
 import { ColourVariations } from '@/components/colour-variations';
 import { ColourAccessibility } from '@/components/colour-accessibility';
 import { StatusBadge } from '@/components/badges';
 import { Citation } from '@/components/record';
-import { inspectHex } from '@/lib/colour-inspector';
+import { inspectHex, inspectorSpace } from '@/lib/colour-inspector';
 import { namePoints } from '@/lib/palette-names';
 import { knowledge } from '@/lib/knowledge';
 import { labFromHexes } from '@/lib/lab-links';
+import { documentedEdges } from '@/lib/space-edges';
 
 type Props = { params: Promise<{ hex: string }> };
 export const dynamic = 'force-dynamic';
@@ -37,7 +39,9 @@ export default async function Inspector({ params }: Props) {
   const { hex, value, values } = input;
   if (raw !== hex.slice(1)) permanentRedirect(`/colour/${hex.slice(1)}`);
   const lab = convert(value, 'oklab').coords as Triple;
-  const nearby = namePoints()
+  const space = inspectorSpace(value);
+  const points = namePoints();
+  const nearby = points
     .map((p) => ({ ...p, distance: Math.hypot(...p.oklab.map((n, i) => n - lab[i]!)) }))
     .sort((a, b) => a.distance - b.distance)
     .slice(0, 5);
@@ -107,6 +111,12 @@ export default async function Inspector({ params }: Props) {
           </section>
           <section id="variations" className="flex flex-col gap-4">
             <h2 className="text-2xl font-semibold">Variations</h2>
+            <p className="text-sm text-[var(--muted)]">
+              The colour in OKLab with the variations you choose plotted beside it, and the five
+              nearby records below as small points. Each plotted variation is a construction from
+              the inspected value by a stated rule; none is a documented relation.
+            </p>
+            <InspectorMap space={space} points={nearby} edges={documentedEdges(nearby)} />
             <ColourVariations value={value} />
           </section>
           <section id="contrast" className="flex flex-col gap-4">

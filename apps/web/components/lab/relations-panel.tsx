@@ -80,8 +80,9 @@ export function RelationsPanel({
                 {m.set.source ? ` · source ${m.set.source}` : ''}
               </span>
               <span className="flex flex-wrap gap-x-3 text-xs">
-                {m.members.map((x) => (
-                  <span key={x.conceptId} className="flex items-center gap-1">
+                {m.members.map((x, i) => (
+                  // A layering can repeat a concept (青 on 青), so the key is the position in the set.
+                  <span key={`${i}-${x.conceptId}`} className="flex items-center gap-1">
                     <span
                       aria-hidden="true"
                       className="inline-block h-2.5 w-2.5 rounded-full border border-[var(--line)]"

@@ -32,6 +32,7 @@ export default tseslint.config(
       '**/node_modules/**',
       '**/.next/**',
       '**/.next-local/**',
+      '**/.next-e2e/**',
       '**/.vercel/**',
       '**/dist/**',
       '**/next-env.d.ts',

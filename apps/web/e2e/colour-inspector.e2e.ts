@@ -103,3 +103,40 @@ test('inspector fits phone and desktop and has no automated accessibility violat
     await page.screenshot({ path: `/tmp/colour-inspector-${width}.png`, fullPage: true });
   }
 });
+
+test('the inspector plots the chosen constructions on the colour space map', async ({ page }) => {
+  await page.goto('/colour/2a6fbd');
+  const map = page.getByTestId('inspector-map');
+  await expect(map).toBeVisible();
+  const chip = (rule: string) => map.locator(`[data-testid="hue-rule"][data-rule="${rule}"]`);
+  // The map's own panel is not shown here; each palette colour has a numbered pin on the canvas.
+  await expect(map.getByTestId('space-palette')).toHaveCount(0);
+  const rows = map.locator('.space-pin');
+  // Complementary is chosen first: the inspected colour and one turn are the map's palette.
+  await expect(chip('complementary')).toHaveAttribute('aria-pressed', 'true');
+  await expect(map.getByTestId('hue-point')).toHaveCount(1);
+  await expect(rows).toHaveCount(2);
+  await expect(rows.first()).toContainText('1 · #2A6FBD');
+  // Rules accumulate; a turn two rules share is plotted once.
+  await chip('tetradic').click();
+  await expect(map.getByTestId('hue-point')).toHaveCount(3);
+  await expect(rows).toHaveCount(4);
+  await chip('triadic').click();
+  await chip('analogous').click();
+  await chip('split-complementary').click();
+  await expect(rows).toHaveCount(9);
+  // The steps join the palette too, beyond the map page's own cap of eight.
+  await map.getByTestId('show-lightness').check();
+  await expect(rows).toHaveCount(18);
+  await map.getByTestId('show-lightness').uncheck();
+  await chip('none').click();
+  await expect(map.getByTestId('hue-point')).toHaveCount(0);
+  await expect(rows).toHaveCount(1);
+  // The address stays the inspector's: the embedded map does not write its own.
+  await expect(page).toHaveURL(/\/colour\/2a6fbd$/);
+  await expect(map).toContainText('not documented pairs');
+  // A grey has no hue to turn.
+  await page.goto('/colour/808080');
+  await expect(page.getByTestId('hue-neutral')).toBeVisible();
+  await expect(page.getByTestId('hue-rule')).toHaveCount(0);
+});
