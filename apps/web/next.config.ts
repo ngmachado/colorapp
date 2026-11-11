@@ -9,6 +9,12 @@ const config: NextConfig = {
   // Standalone output is for the Docker image; Vercel builds its own functions.
   ...(process.env.VERCEL ? {} : { output: 'standalone' as const }),
   outputFileTracingRoot: join(import.meta.dirname, '..', '..'),
+  // The dev server refuses its own assets and HMR socket to any hostname but the one it started
+  // with. A phone or another machine on the LAN names this one by address: list it in DEV_ORIGINS.
+  allowedDevOrigins: (process.env.DEV_ORIGINS ?? '')
+    .split(',')
+    .map((s) => s.trim())
+    .filter(Boolean),
   // Files read at runtime that no import points at: the knowledge release, the migrations, the
   // workspace marker the knowledge loader walks up to.
   outputFileTracingIncludes: {
@@ -40,6 +46,7 @@ const config: NextConfig = {
   },
   transpilePackages: [
     '@sca/colour-engine',
+    '@sca/type-engine',
     '@sca/generator',
     '@sca/garment',
     '@sca/knowledge',

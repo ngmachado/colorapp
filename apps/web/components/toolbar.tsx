@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { unstable_rethrow } from 'next/navigation';
 import type { ReactNode } from 'react';
 import { ThemeToggle } from '@/components/theme-toggle';
+import { TypeNavLink } from '@/components/type/type-nav-link';
 import { ACCOUNTS } from '@/lib/accounts';
 import { currentUser } from '@/lib/current-user';
 
@@ -11,6 +12,7 @@ const NAV = [
   { href: '/dictionary', label: 'Dictionary' },
   { href: '/space', label: 'Map' },
   { href: '/palettes', label: 'Palettes' },
+  { href: '/type', label: 'Type' },
   { href: '/library', label: 'Library' },
 ] as const;
 
@@ -47,18 +49,23 @@ export async function Toolbar({
         Super Colour
       </Link>
       <nav aria-label="Sections" className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm">
-        {NAV.map((n) => (
-          <Link
-            key={n.href}
-            href={n.href}
-            className={
-              n.href === current ? 'font-semibold' : 'text-[var(--muted)] hover:text-[var(--fg)]'
-            }
-            aria-current={n.href === current ? 'page' : undefined}
-          >
-            {n.label}
-          </Link>
-        ))}
+        {NAV.map((n) =>
+          n.href === '/type' && current === '/lab' ? (
+            // From the Laboratory, the Type section carries the palette on the bench with it.
+            <TypeNavLink key={n.href} className="text-[var(--muted)] hover:text-[var(--fg)]" />
+          ) : (
+            <Link
+              key={n.href}
+              href={n.href}
+              className={
+                n.href === current ? 'font-semibold' : 'text-[var(--muted)] hover:text-[var(--fg)]'
+              }
+              aria-current={n.href === current ? 'page' : undefined}
+            >
+              {n.label}
+            </Link>
+          ),
+        )}
       </nav>
       <div className="hidden min-w-0 flex-1 truncate text-center text-sm text-[var(--muted)] sm:block">
         {middle}

@@ -18,6 +18,7 @@
     "@sca/db": "workspace:*",
     "@sca/generator": "workspace:*",
     "@sca/knowledge": "workspace:*",
+    "@sca/type-engine": "workspace:*",
     "@vercel/functions": "^3.10.1",
     "better-sqlite3": "^12.6.0",
     "next": "^16.4.3",

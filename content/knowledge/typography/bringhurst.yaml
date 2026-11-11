@@ -1,0 +1,119 @@
+# yaml-language-server: $schema=../schema.json
+# Typographic systems the Type laboratory checks against, each as a cited source with the claim in our own words
+# and a locator. Bringhurst is in copyright: nothing is quoted, and the edition is version 4.0 (Hartley & Marks,
+# 2012), the user's copy. A locator marked "to verify" has not yet been checked against that copy.
+
+- type: source
+  id: bringhurst-2012-elements-v4
+  review_state: bibliographic
+  rights_status: verified-restricted
+  author: Robert Bringhurst
+  title: The Elements of Typographic Style
+  publisher: Hartley & Marks, Point Roberts and Vancouver
+  date: '2012'
+  edition: Version 4.0 (fourth edition; first edition 1992)
+  isbn: '978-0-88179-212-6'
+  access_date: '2026-11-03'
+  rights_notes: >-
+    In copyright. Cited only: the laboratory states each claim in its own words with a section locator and
+    reproduces no passage. Section numbers are those of version 4.0; other editions differ.
+
+- type: concept
+  id: type-measure
+  review_state: extracted
+  rights_status: verified-restricted
+  evidence: { source: bringhurst-2012-elements-v4, locator: 'Section 2.1.2' }
+  label: Measure (line length)
+  description: >-
+    Bringhurst gives a working range for the measure of a single-column page of continuous text at text sizes:
+    roughly 45 to 75 characters per line, with about 66 characters as the figure he calls ideal, and he notes that
+    shorter measures suit multiple columns. The laboratory counts the characters its body column holds and reports
+    where the count falls against that range. The range is his, for that kind of page; it is not a rule for every
+    setting.
+  tags: { kind: typographic-system, system: bringhurst }
+
+- type: concept
+  id: type-leading
+  review_state: discovered
+  rights_status: verified-restricted
+  evidence: { source: bringhurst-2012-elements-v4, locator: 'Section 2.2, to verify' }
+  label: Leading (line spacing)
+  description: >-
+    Bringhurst treats leading as something chosen to suit the face, the measure and the text rather than as a
+    fixed number, and asks for more of it as the measure grows or the face darkens. The laboratory shows each
+    style's leading as a ratio of its size and makes no judgement of it.
+  scope: The section locator has not been checked against the user's copy of version 4.0.
+  tags: { kind: typographic-system, system: bringhurst }
+
+- type: concept
+  id: type-scale-ratios
+  review_state: discovered
+  rights_status: verified-restricted
+  evidence: { source: bringhurst-2012-elements-v4, locator: 'Chapter 8, Shaping the Page, to verify' }
+  label: Musical proportions as scale ratios
+  description: >-
+    Bringhurst relates page and type proportions to the intervals of the musical scale, such as the major second
+    (9:8), minor third (6:5), major third (5:4), perfect fourth (4:3), perfect fifth (3:2) and the golden section.
+    The laboratory offers these ratios by name for building a scale from a base size. A ratio is a construction;
+    the laboratory does not call any scale right.
+  scope: The chapter is cited for the use of musical proportions; the exact section has not been checked against the user's copy of version 4.0.
+  tags: { kind: typographic-system, system: bringhurst }
+
+- type: source
+  id: w3c-wcag-2-2
+  review_state: bibliographic
+  rights_status: verified-reusable
+  author: World Wide Web Consortium (W3C), Accessibility Guidelines Working Group
+  title: 'Web Content Accessibility Guidelines (WCAG) 2.2, W3C Recommendation'
+  date: '2023-10-05'
+  url: https://www.w3.org/TR/WCAG22/
+  access_date: '2026-11-03'
+  rights_notes: W3C document licence; cited for its success criteria and thresholds.
+
+- type: concept
+  id: type-text-spacing
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: w3c-wcag-2-2, locator: 'Success Criterion 1.4.12 Text Spacing (Level AA)' }
+  label: Text spacing test (WCAG 1.4.12)
+  description: >-
+    Content must lose nothing when a reader sets line height to at least 1.5 times the font size, spacing after
+    paragraphs to at least 2 times the font size, letter spacing to at least 0.12 times the font size and word
+    spacing to at least 0.16 times. The laboratory applies exactly these values to the specimen so the reader can
+    see whether the setting survives them. It is a test, not a recommendation.
+  tags: { kind: typographic-system, system: wcag }
+
+- type: concept
+  id: type-contrast-large-text
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: w3c-wcag-2-2, locator: 'Success Criteria 1.4.3 Contrast (Minimum) and 1.4.6 Contrast (Enhanced); glossary, large scale (text)' }
+  label: Contrast thresholds by text size (WCAG 2)
+  description: >-
+    Text needs a contrast ratio of at least 4.5:1 (7:1 at Level AAA), except large-scale text, which needs 3:1
+    (4.5:1 at AAA). Large scale means at least 18 point, or 14 point bold, which the W3C's guidance maps to 24
+    and about 18.67 CSS pixels. The laboratory applies the threshold each style's size and weight selects.
+  tags: { kind: typographic-system, system: wcag }
+
+- type: source
+  id: myndex-apca-w3
+  review_state: bibliographic
+  rights_status: verified-reusable
+  author: Andrew Somers (Myndex Research)
+  title: 'APCA W3 (Advanced Perceptual Contrast Algorithm), apca-w3 0.1.9, algorithm 0.0.98G-4g'
+  date: '2021-02-15'
+  url: https://github.com/Myndex/apca-w3
+  access_date: '2026-11-02'
+  rights_notes: Published with the W3C Community Contributor License Agreement for the WCAG 3 draft; the constants are reproduced in the type engine and tested against the published example values.
+
+- type: concept
+  id: type-contrast-apca
+  review_state: extracted
+  rights_status: verified-reusable
+  evidence: { source: myndex-apca-w3, locator: 'README, constants for 0.0.98G-4g and the fontLookupAPCA example' }
+  label: APCA lightness contrast (WCAG 3 draft)
+  description: >-
+    APCA reports contrast as a lightness difference, Lc, from about 0 to 106, with the sign telling dark-on-light
+    from light-on-dark. It is the method of the WCAG 3 working draft and is not a W3C Recommendation. The
+    laboratory shows Lc beside the WCAG 2 ratio, labelled as the draft method, and applies no threshold from it.
+  tags: { kind: typographic-system, system: wcag-3-draft }
