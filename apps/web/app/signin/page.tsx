@@ -30,12 +30,24 @@ const KEEPS = [
   },
 ] as const;
 
+/** What Auth.js sends in `?error=` when a sign-in does not complete, in the app's words. */
+const ERRORS: Record<string, string> = {
+  Verification: 'That sign-in link has been used or has expired. Send another one.',
+  AccessDenied: 'This account cannot sign in here.',
+  OAuthAccountNotLinked:
+    'This address already signed in another way. Use the method you used the first time.',
+  Configuration: 'Sign-in is not set up correctly on this server.',
+};
+const DEFAULT_ERROR = 'Sign-in did not complete. Try again.';
+
 /** Sign in with Google, or with a link by email, whichever is configured. Both return to where the user was. */
 export default async function SignIn({ searchParams }: { searchParams: Promise<Params> }) {
   if (!ACCOUNTS) redirect('/');
   const sp = await searchParams;
   const next = safePath(Array.isArray(sp.next) ? sp.next[0] : sp.next);
   if (await currentUser()) redirect(next);
+  const code = Array.isArray(sp.error) ? sp.error[0] : sp.error;
+  const error = code ? (ERRORS[code] ?? DEFAULT_ERROR) : null;
   return (
     <>
       <Toolbar />
@@ -48,6 +60,15 @@ export default async function SignIn({ searchParams }: { searchParams: Promise<P
                 No password. Your Library and settings then follow you to any browser
                 {next !== '/' ? ', and you come back to where you were' : ''}.
               </p>
+              {error ? (
+                <p
+                  role="alert"
+                  data-testid="signin-error"
+                  className="mt-4 rounded-md border border-[var(--danger)] px-3 py-2 text-sm text-[var(--danger)]"
+                >
+                  {error}
+                </p>
+              ) : null}
             </div>
             <ul className="flex flex-col gap-[1.125rem]">
               {KEEPS.map((k) => (

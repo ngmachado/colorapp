@@ -5,6 +5,7 @@ import { Toolbar } from '@/components/toolbar';
 import { redirect } from 'next/navigation';
 import { signOut } from '@/auth';
 import { ApiKeys } from '@/components/api-keys';
+import { DeleteAccount } from '@/components/delete-account';
 import { currentUser } from '@/lib/current-user';
 import { siteUrl } from '@/lib/site';
 
@@ -78,19 +79,12 @@ export default async function Account() {
           <pre className="overflow-x-auto rounded-lg border border-[var(--line)] bg-[var(--panel)] p-3 font-mono text-[0.78125rem] leading-relaxed">
             {`curl ${origin}/api/key \\\n  -H "Authorization: Bearer sc_live_…"`}
           </pre>
-          <p className="text-sm text-[var(--muted)]">
-            The MCP server is the next step and will take the same header at {origin}/api/mcp.
-          </p>
         </section>
 
         <section className="flex flex-col gap-3">
           <h2 className="text-xs tracking-[1px] text-[var(--muted)] uppercase">Account</h2>
           <div className="flex flex-wrap items-center gap-3">
-            <form action="/api/account/delete" method="post">
-              <button type="submit" className="btn border-[var(--danger)] text-[var(--danger)]">
-                Delete my account and all of its data
-              </button>
-            </form>
+            <DeleteAccount />
             <form
               action={async () => {
                 'use server';

@@ -49,6 +49,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth(() => ({
   providers: providers(),
   session: { strategy: 'database' },
   // Our own screens instead of the Auth.js defaults, so the toolbar and wording stay the app's.
-  pages: { signIn: '/signin', verifyRequest: '/signin/sent' },
+  // Errors land on the sign-in page too, which says what went wrong beside the ways back in.
+  pages: { signIn: '/signin', verifyRequest: '/signin/sent', error: '/signin' },
   trustHost: true,
 }));

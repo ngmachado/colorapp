@@ -73,3 +73,34 @@ test('the account page with a fresh key has no axe violations', async ({ page })
     results.violations.map((v) => `${v.id}: ${v.nodes.map((n) => n.target.join(' ')).join(', ')}`),
   ).toEqual([]);
 });
+
+test('deleting the account asks first, then removes everything and signs the user out', async ({
+  page,
+}) => {
+  await page.goto(`/api/test/login?email=delete-${test.info().project.name}@example.com`);
+  await page.goto('/account');
+  await expect(page.getByTestId('confirm-delete')).toHaveCount(0);
+  await page.getByTestId('delete-account').click();
+  await expect(page.getByTestId('confirm-delete')).toContainText('Delete this account?');
+  await page.getByRole('button', { name: 'Keep' }).click();
+  await expect(page.getByTestId('confirm-delete')).toHaveCount(0);
+  expect((await page.request.get('/api/settings')).status()).toBe(200);
+
+  await page.getByTestId('delete-account').click();
+  await page.getByTestId('confirm-delete').getByRole('button', { name: 'Delete' }).click();
+  await expect(page).toHaveURL('/');
+  expect((await page.request.get('/api/settings')).status()).toBe(401);
+  await page.goto('/account');
+  await expect(page).toHaveURL('/');
+});
+
+test('a sign-in that did not complete says why on the sign-in page', async ({ page }) => {
+  await page.goto('/signin?error=Verification');
+  await expect(page.getByTestId('signin-error')).toHaveText(
+    'That sign-in link has been used or has expired. Send another one.',
+  );
+  await page.goto('/signin?error=SomethingNew');
+  await expect(page.getByTestId('signin-error')).toHaveText('Sign-in did not complete. Try again.');
+  await page.goto('/signin');
+  await expect(page.getByTestId('signin-error')).toHaveCount(0);
+});
