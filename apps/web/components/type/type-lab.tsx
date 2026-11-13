@@ -370,7 +370,7 @@ export function TypeLab({ initial, sources }: { initial: TypeState; sources: Typ
               if (e.key === 'Enter') commitFace();
             }}
             placeholder={catalogue?.length ? 'Search Google Fonts' : 'Family name'}
-            className="field h-8 w-52 text-[13px]"
+            className="field h-8 w-52 text-[0.8125rem]"
             data-testid="face"
           />
           <datalist id="type-faces">
@@ -383,7 +383,7 @@ export function TypeLab({ initial, sources }: { initial: TypeState; sources: Typ
         </label>
         <button
           type="button"
-          className={`btn h-8 text-[13px] ${finder ? 'bg-[var(--fg)] text-[var(--bg)]' : ''}`}
+          className={`btn h-8 text-[0.8125rem] ${finder ? 'bg-[var(--fg)] text-[var(--bg)]' : ''}`}
           aria-pressed={finder}
           onClick={() => setFinder((v) => !v)}
           data-testid="faces-toggle"
@@ -406,7 +406,7 @@ export function TypeLab({ initial, sources }: { initial: TypeState; sources: Typ
                 ),
               })
             }
-            className="field h-8 w-16 text-[13px]"
+            className="field h-8 w-16 text-[0.8125rem]"
             aria-label="Base size in pixels"
             data-testid="base"
           />
@@ -416,7 +416,7 @@ export function TypeLab({ initial, sources }: { initial: TypeState; sources: Typ
           <select
             value={s.ratio}
             onChange={(e) => update({ ratio: Number(e.target.value) })}
-            className="field h-8 text-[13px]"
+            className="field h-8 text-[0.8125rem]"
             aria-label="Scale ratio"
             data-testid="ratio"
           >
@@ -441,6 +441,7 @@ export function TypeLab({ initial, sources }: { initial: TypeState; sources: Typ
             onChange={(e) => update({ measure: Number(e.target.value) })}
             className="w-32"
             aria-label="Width of the body column in pixels"
+            aria-valuetext={`${s.measure} pixels`}
             data-testid="measure"
           />
           <span className="font-mono text-xs text-[var(--muted)]">
@@ -468,7 +469,6 @@ export function TypeLab({ initial, sources }: { initial: TypeState; sources: Typ
               key={i}
               className="h-6 w-6 rounded-sm border border-[var(--line)]"
               style={{ background: h }}
-              title={h.toUpperCase()}
             >
               <span className="sr-only">{h.toUpperCase()}</span>
             </span>
@@ -513,11 +513,13 @@ export function TypeLab({ initial, sources }: { initial: TypeState; sources: Typ
                   data-style={st.id}
                 >
                   <div className="flex flex-col gap-1.5 text-xs text-[var(--muted)]">
-                    <span className="text-[13px] font-semibold text-[var(--fg)]">{st.label}</span>
-                    <span className="font-mono text-[11px]">
+                    <span className="text-[0.8125rem] font-semibold text-[var(--fg)]">
+                      {st.label}
+                    </span>
+                    <span className="font-mono text-[0.6875rem]">
                       {size} px · {st.weight} · leading {leading}
                     </span>
-                    <span className="font-mono text-[11px]">
+                    <span className="font-mono text-[0.6875rem]">
                       {v.large ? 'large text' : 'normal text'} for WCAG 2
                     </span>
                     {(['fg', 'bg'] as const).map((which) => (
@@ -532,7 +534,6 @@ export function TypeLab({ initial, sources }: { initial: TypeState; sources: Typ
                           <button
                             key={i}
                             type="button"
-                            title={h}
                             aria-label={`${which === 'fg' ? 'Text' : 'Background'} ${h}`}
                             aria-pressed={st[which] === i}
                             onClick={() => setStyle(st.id, { [which]: i })}
@@ -545,7 +546,7 @@ export function TypeLab({ initial, sources }: { initial: TypeState; sources: Typ
                     ))}
                     {st.id === 'body' && cpl !== null ? (
                       <span
-                        className={`inline-flex w-fit items-center gap-1.5 rounded-full border px-2 py-0.5 font-mono text-[11px] ${placement === 'within' ? 'border-[var(--line)] text-[var(--fg)]' : 'border-[var(--warn)] bg-[var(--warn-soft)] text-[var(--warn)]'}`}
+                        className={`inline-flex w-fit items-center gap-1.5 rounded-full border px-2 py-0.5 font-mono text-[0.6875rem] ${placement === 'within' ? 'border-[var(--line)] text-[var(--fg)]' : 'border-[var(--warn)] bg-[var(--warn-soft)] text-[var(--warn)]'}`}
                         data-testid="measure-check"
                         data-placement={placement ?? undefined}
                       >
@@ -610,7 +611,7 @@ export function TypeLab({ initial, sources }: { initial: TypeState; sources: Typ
         ) : (
           <aside className="flex min-w-0 flex-col gap-5 border-t border-[var(--line)] bg-[var(--panel)] px-5 py-4 md:border-t-0 md:border-l">
             <section data-testid="readings">
-              <h2 className="mb-2 font-mono text-[11px] tracking-[1px] text-[var(--muted)] uppercase">
+              <h2 className="mb-2 font-mono text-[0.6875rem] tracking-[1px] text-[var(--muted)] uppercase">
                 Read from the file
               </h2>
               <Readings r={loaded.status === 'read' ? loaded.reading : null} />
@@ -625,7 +626,7 @@ export function TypeLab({ initial, sources }: { initial: TypeState; sources: Typ
               </p>
             </section>
             <section data-testid="about">
-              <h2 className="mb-2 font-mono text-[11px] tracking-[1px] text-[var(--muted)] uppercase">
+              <h2 className="mb-2 font-mono text-[0.6875rem] tracking-[1px] text-[var(--muted)] uppercase">
                 About the face
               </h2>
               <dl className="m-0 grid grid-cols-[max-content_1fr] gap-x-3 gap-y-1 text-xs">
@@ -679,10 +680,10 @@ export function TypeLab({ initial, sources }: { initial: TypeState; sources: Typ
               </p>
             </section>
             <section data-testid="scale">
-              <h2 className="mb-2 font-mono text-[11px] tracking-[1px] text-[var(--muted)] uppercase">
+              <h2 className="mb-2 font-mono text-[0.6875rem] tracking-[1px] text-[var(--muted)] uppercase">
                 Scale
               </h2>
-              <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 font-mono text-[11.5px]">
+              <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 font-mono text-[0.71875rem]">
                 {steps.map((st) => (
                   <span key={st.step}>
                     {st.step === 0 ? <b>{st.px}</b> : st.px}
@@ -699,10 +700,11 @@ export function TypeLab({ initial, sources }: { initial: TypeState; sources: Typ
               </p>
             </section>
             <section data-testid="contrast">
-              <h2 className="mb-2 font-mono text-[11px] tracking-[1px] text-[var(--muted)] uppercase">
+              <h2 className="mb-2 font-mono text-[0.6875rem] tracking-[1px] text-[var(--muted)] uppercase">
                 Contrast per style
               </h2>
               <table className="w-full border-collapse text-xs">
+                <caption className="sr-only">Contrast of each text style on its background</caption>
                 <thead>
                   <tr className="text-left text-[var(--muted)]">
                     <th className="border-b border-[var(--line)] py-1 pr-2 font-medium">Style</th>
@@ -735,11 +737,11 @@ export function TypeLab({ initial, sources }: { initial: TypeState; sources: Typ
                           />
                           <span className="sr-only">{s.hexes[st.bg]}</span>
                         </td>
-                        <td className="border-b border-[var(--line)] py-1.5 pr-2 font-mono text-[11.5px]">
+                        <td className="border-b border-[var(--line)] py-1.5 pr-2 font-mono text-[0.71875rem]">
                           {v.ratio.toFixed(2)}:1 ·{' '}
                           {v.aaa.passes ? 'AAA' : v.aa.passes ? 'AA' : 'below AA'}
                         </td>
-                        <td className="border-b border-[var(--line)] py-1.5 font-mono text-[11.5px]">
+                        <td className="border-b border-[var(--line)] py-1.5 font-mono text-[0.71875rem]">
                           Lc {lc.toFixed(0)}
                         </td>
                       </tr>
@@ -766,12 +768,12 @@ export function TypeLab({ initial, sources }: { initial: TypeState; sources: Typ
         <span role="status" className="text-xs">
           {notice ?? ''}
         </span>
-        <Link href={labFromHexes(s.hexes)} className="btn h-8 text-[13px]">
+        <Link href={labFromHexes(s.hexes)} className="btn h-8 text-[0.8125rem]">
           Laboratory
         </Link>
         <button
           type="button"
-          className="btn h-8 text-[13px]"
+          className="btn h-8 text-[0.8125rem]"
           onClick={() => void copy(window.location.href, 'Link')}
           data-testid="copy-link"
         >
@@ -779,7 +781,7 @@ export function TypeLab({ initial, sources }: { initial: TypeState; sources: Typ
         </button>
         <button
           type="button"
-          className="btn h-8 text-[13px]"
+          className="btn h-8 text-[0.8125rem]"
           onClick={exportCss}
           data-testid="export-css"
         >
@@ -794,7 +796,7 @@ function Row({ k, v }: { k: string; v: string }) {
   return (
     <>
       <dt className="text-[var(--muted)]">{k}</dt>
-      <dd className="m-0 font-mono text-[11.5px] break-words">{v}</dd>
+      <dd className="m-0 font-mono text-[0.71875rem] break-words">{v}</dd>
     </>
   );
 }
@@ -849,7 +851,7 @@ function Tags({ items, empty }: { items: string[]; empty: string }) {
       {items.map((t) => (
         <span
           key={t}
-          className="rounded border border-[var(--line)] px-1.5 py-0.5 font-mono text-[11px]"
+          className="rounded border border-[var(--line)] px-1.5 py-0.5 font-mono text-[0.6875rem]"
         >
           {t}
         </span>

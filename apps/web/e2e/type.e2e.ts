@@ -156,17 +156,17 @@ test('the Laboratory hands its palette and the picked pairs to the Type laborato
   await expect(page).toHaveURL(/face=Test%20Sans/);
   const body = page.locator('[data-testid="style-row"][data-style="body"]');
   await expect(body.locator('[data-testid="pick-fg"][aria-pressed="true"]')).toHaveAttribute(
-    'title',
-    '#000000',
+    'aria-label',
+    'Text #000000',
   );
   await expect(body.locator('[data-testid="pick-bg"][aria-pressed="true"]')).toHaveAttribute(
-    'title',
-    '#ffffff',
+    'aria-label',
+    'Background #ffffff',
   );
   const display = page.locator('[data-testid="style-row"][data-style="display"]');
   await expect(display.locator('[data-testid="pick-fg"][aria-pressed="true"]')).toHaveAttribute(
-    'title',
-    '#663399',
+    'aria-label',
+    'Text #663399',
   );
 });
 

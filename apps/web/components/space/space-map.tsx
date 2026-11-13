@@ -305,7 +305,7 @@ export function SpaceMap({
         <div ref={labelsRef} />
         {hover ? (
           <div
-            className="pointer-events-none absolute min-w-[180px] rounded-md border border-[var(--line)] bg-[var(--surface)] px-2.5 py-2 text-[13px] shadow-sm"
+            className="pointer-events-none absolute min-w-[180px] rounded-md border border-[var(--line)] bg-[var(--surface)] px-2.5 py-2 text-[0.8125rem] shadow-sm"
             style={{ left: hover.x + 12, top: hover.y + 12 }}
             data-testid="space-tip"
           >
@@ -316,7 +316,7 @@ export function SpaceMap({
               />
               {hover.p.label}
             </span>
-            <span className="block font-mono text-[11px] leading-relaxed text-[var(--muted)]">
+            <span className="block font-mono text-[0.6875rem] leading-relaxed text-[var(--muted)]">
               {groupLabel(hover.p.group)} · {hover.p.hex.toUpperCase()}
               <br />L {hover.p.oklab[0].toFixed(3)} · a {hover.p.oklab[1].toFixed(3)} · b{' '}
               {hover.p.oklab[2].toFixed(3)}
@@ -339,7 +339,7 @@ export function SpaceMap({
       {panel ? (
         <aside className="flex min-w-0 flex-col gap-5 overflow-y-auto border-t border-[var(--line)] bg-[var(--panel)] px-5 py-4 md:border-t-0 md:border-l">
           <section>
-            <h2 className="mb-2 font-mono text-[11px] tracking-[1px] text-[var(--muted)] uppercase">
+            <h2 className="mb-2 font-mono text-[0.6875rem] tracking-[1px] text-[var(--muted)] uppercase">
               Collections
             </h2>
             <div className="flex flex-wrap gap-1.5" role="radiogroup" aria-label="Collection">
@@ -362,10 +362,10 @@ export function SpaceMap({
             </p>
           </section>
           <section>
-            <h2 className="mb-2 font-mono text-[11px] tracking-[1px] text-[var(--muted)] uppercase">
+            <h2 className="mb-2 font-mono text-[0.6875rem] tracking-[1px] text-[var(--muted)] uppercase">
               Lightness band
             </h2>
-            <label className="flex items-center gap-2 text-[13px]">
+            <label className="flex items-center gap-2 text-[0.8125rem]">
               <input
                 type="checkbox"
                 checked={band}
@@ -374,7 +374,10 @@ export function SpaceMap({
               />{' '}
               Only points near one lightness
             </label>
-            <label className="mt-2 flex items-center justify-between text-[13px]" htmlFor="space-l">
+            <label
+              className="mt-2 flex items-center justify-between text-[0.8125rem]"
+              htmlFor="space-l"
+            >
               <span>L centre</span>
               <span className="font-mono text-xs">{l.toFixed(2)}</span>
             </label>
@@ -385,6 +388,7 @@ export function SpaceMap({
               max={1}
               step={0.01}
               value={l}
+              aria-valuetext={`L ${l.toFixed(2)}`}
               onChange={(e) => {
                 setL(Number(e.target.value));
                 setBand(true);
@@ -396,14 +400,14 @@ export function SpaceMap({
             </p>
           </section>
           <section>
-            <h2 className="mb-2 font-mono text-[11px] tracking-[1px] text-[var(--muted)] uppercase">
+            <h2 className="mb-2 font-mono text-[0.6875rem] tracking-[1px] text-[var(--muted)] uppercase">
               Your palette
             </h2>
             <input
               id="space-palette"
               value={paletteText}
               onChange={(e) => setPaletteText(e.target.value)}
-              className="field w-full font-mono text-[13px]"
+              className="field w-full font-mono text-[0.8125rem]"
               aria-label="Palette as hex codes"
               placeholder="#663399 #ffffff"
               data-testid="space-palette"
@@ -420,10 +424,10 @@ export function SpaceMap({
             </p>
           </section>
           <section>
-            <h2 className="mb-2 font-mono text-[11px] tracking-[1px] text-[var(--muted)] uppercase">
+            <h2 className="mb-2 font-mono text-[0.6875rem] tracking-[1px] text-[var(--muted)] uppercase">
               Documented relations
             </h2>
-            <label className="flex items-center gap-2 text-[13px]">
+            <label className="flex items-center gap-2 text-[0.8125rem]">
               <input
                 type="checkbox"
                 checked={showEdges}
@@ -438,7 +442,7 @@ export function SpaceMap({
           </section>
           {selected ? (
             <section className="border-t border-[var(--line)] pt-4" data-testid="space-selected">
-              <h2 className="mb-2 font-mono text-[11px] tracking-[1px] text-[var(--muted)] uppercase">
+              <h2 className="mb-2 font-mono text-[0.6875rem] tracking-[1px] text-[var(--muted)] uppercase">
                 Selected
               </h2>
               <div className="flex items-center gap-2.5">
@@ -450,7 +454,7 @@ export function SpaceMap({
                   <Link href={`/dictionary/${selected.conceptId}`} className="font-semibold">
                     {selected.label}
                   </Link>
-                  <div className="font-mono text-[11px] leading-relaxed text-[var(--muted)]">
+                  <div className="font-mono text-[0.6875rem] leading-relaxed text-[var(--muted)]">
                     {groupLabel(selected.group)} · {selected.hex.toUpperCase()}
                     <br />L {selected.oklab[0].toFixed(3)} · a {selected.oklab[1].toFixed(3)} · b{' '}
                     {selected.oklab[2].toFixed(3)}
@@ -469,7 +473,7 @@ export function SpaceMap({
                     />
                     <Link href={`/dictionary/${n.conceptId}`}>{n.label}</Link>
                     <span className="text-[var(--muted)]">{groupLabel(n.group)}</span>
-                    <span className="ml-auto font-mono text-[11px] text-[var(--muted)]">
+                    <span className="ml-auto font-mono text-[0.6875rem] text-[var(--muted)]">
                       {n.distance.toFixed(3)}
                     </span>
                   </li>

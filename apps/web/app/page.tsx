@@ -54,10 +54,10 @@ export default function Home() {
       <Toolbar />
       <main id="main" className="flex flex-col">
         <div className="flex flex-col items-center gap-5 px-4 pt-24 pb-14 text-center">
-          <h1 className="max-w-[820px] text-[56px] leading-[1.05] font-bold tracking-[-1.5px]">
+          <h1 className="max-w-[820px] text-[3.5rem] leading-[1.05] font-bold tracking-[-1.5px]">
             Colour theory, with its sources.
           </h1>
-          <p className="max-w-[640px] text-[19px] leading-normal text-[var(--muted)]">
+          <p className="max-w-[640px] text-[1.1875rem] leading-normal text-[var(--muted)]">
             Generate palettes under rules you can name, read every colour in the space it was made
             in, and keep the record of where each documented colour came from.
           </p>
@@ -80,7 +80,7 @@ export default function Home() {
             <span key={h} className="flex-1" style={{ background: h }} />
           ))}
         </Link>
-        <div className="mx-12 mt-2.5 text-[13px] text-[var(--muted)]">
+        <div className="mx-12 mt-2.5 text-[0.8125rem] text-[var(--muted)]">
           The starting palette of the Laboratory · 5 roles · triadic
         </div>
 
@@ -97,7 +97,7 @@ export default function Home() {
               <span className="text-xs tracking-[1.2px] text-[var(--muted)] uppercase">
                 Record of the day
               </span>
-              <span className="text-[22px] font-semibold">{concept.label}</span>
+              <span className="text-[1.375rem] font-semibold">{concept.label}</span>
               <span className="text-sm text-[var(--muted)]">
                 {source
                   ? `${source.author}, ${source.title}${source.date ? ` (${source.date})` : ''}`
@@ -112,7 +112,7 @@ export default function Home() {
         ) : null}
 
         <div className="mx-12 mt-[72px]">
-          <h2 className="mb-5 text-[28px] font-bold tracking-tight">Four places</h2>
+          <h2 className="mb-5 text-[1.75rem] font-bold tracking-tight">Four places</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {TOOLS.map((t) => (
               <Link
@@ -125,7 +125,7 @@ export default function Home() {
                     <span key={i} className="flex-1" style={{ background: h }} />
                   ))}
                 </span>
-                <span className="text-[17px] font-semibold">{t.title}</span>
+                <span className="text-[1.0625rem] font-semibold">{t.title}</span>
                 <span className="text-sm leading-[1.45] text-[var(--muted)]">{t.text}</span>
               </Link>
             ))}
@@ -148,13 +148,13 @@ export default function Home() {
             ],
           ].map(([h, t]) => (
             <div key={h} className="flex flex-col gap-1.5 border-t-2 border-[var(--fg)] p-[22px]">
-              <span className="text-[15px] font-semibold">{h}</span>
+              <span className="text-[0.9375rem] font-semibold">{h}</span>
               <span className="text-sm leading-[1.45] text-[var(--muted)]">{t}</span>
             </div>
           ))}
         </div>
 
-        <footer className="mx-12 mt-20 mb-10 flex flex-wrap gap-12 border-t border-[var(--line)] pt-6 text-[13px] text-[var(--muted)]">
+        <footer className="mx-12 mt-20 mb-10 flex flex-wrap gap-12 border-t border-[var(--line)] pt-6 text-[0.8125rem] text-[var(--muted)]">
           <div className="flex flex-col gap-1.5">
             <span className="font-semibold text-[var(--fg)]">Places</span>
             <Link href="/lab">Laboratory</Link>

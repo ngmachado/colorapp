@@ -36,7 +36,7 @@ export default async function Account() {
       <Toolbar />
       <main id="main" className="flex max-w-[640px] flex-col gap-10 px-5 sm:px-12 pt-10 pb-16">
         <section className="flex flex-col gap-2">
-          <h1 className="text-[28px] font-bold tracking-[-0.3px]">Your account</h1>
+          <h1 className="text-[1.75rem] font-bold tracking-[-0.3px]">Your account</h1>
           <p className="text-[var(--muted)]">{user.email}</p>
         </section>
 
@@ -44,7 +44,7 @@ export default async function Account() {
           <h2 className="text-xs tracking-[1px] text-[var(--muted)] uppercase">
             Kept on this server
           </h2>
-          <p className="text-[15px]">
+          <p className="text-[0.9375rem]">
             {palettes} saved {palettes === 1 ? 'palette' : 'palettes'} and {colours} saved{' '}
             {colours === 1 ? 'colour' : 'colours'}, in the{' '}
             <Link href="/library" className="underline underline-offset-2">
@@ -61,7 +61,7 @@ export default async function Account() {
 
         <section className="flex flex-col gap-3" id="keys">
           <h2 className="text-xs tracking-[1px] text-[var(--muted)] uppercase">API keys</h2>
-          <p className="text-[15px]">
+          <p className="text-[0.9375rem]">
             A key lets a script or an agent use the API as you. Each key has its own name and quota
             and can be revoked at any time. Keys read the records and measure colours; they cannot
             change your Library.
@@ -71,11 +71,11 @@ export default async function Account() {
 
         <section className="flex flex-col gap-3">
           <h2 className="text-xs tracking-[1px] text-[var(--muted)] uppercase">Use a key</h2>
-          <p className="text-[15px]">
+          <p className="text-[0.9375rem]">
             Send it as a bearer token. This call answers with the key’s name and what it has used of
             its quota, so a script can check its key before doing anything else:
           </p>
-          <pre className="overflow-x-auto rounded-lg border border-[var(--line)] bg-[var(--panel)] p-3 font-mono text-[12.5px] leading-relaxed">
+          <pre className="overflow-x-auto rounded-lg border border-[var(--line)] bg-[var(--panel)] p-3 font-mono text-[0.78125rem] leading-relaxed">
             {`curl ${origin}/api/key \\\n  -H "Authorization: Bearer sc_live_…"`}
           </pre>
           <p className="text-sm text-[var(--muted)]">

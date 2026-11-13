@@ -38,7 +38,7 @@ export default async function Theory({ searchParams }: { searchParams: Promise<P
       <Toolbar current="/theory" />
       <main id="main" className="flex flex-col gap-16 px-5 sm:px-12 pt-10 pb-16">
         <header className="flex max-w-[960px] flex-col gap-4">
-          <h1 className="text-[34px] font-bold tracking-tight">Understanding colour</h1>
+          <h1 className="text-[2.125rem] font-bold tracking-tight">Understanding colour</h1>
           <p className="max-w-[760px] text-lg text-[var(--muted)]">
             Six short lessons with the tools between them. Start at the top or jump to one.
           </p>

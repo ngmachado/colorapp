@@ -34,25 +34,25 @@ function Revoke({ id, name }: { id: string; name: string }) {
   const [asking, setAsking] = useState(false);
   if (!asking)
     return (
-      <button type="button" className="btn h-8 text-[13px]" onClick={() => setAsking(true)}>
+      <button type="button" className="btn h-8 text-[0.8125rem]" onClick={() => setAsking(true)}>
         Revoke
       </button>
     );
   return (
     <form
       action={revokeKey}
-      className="flex flex-wrap items-center gap-2 text-[13px]"
+      className="flex flex-wrap items-center gap-2 text-[0.8125rem]"
       data-testid="confirm-revoke"
     >
       <input type="hidden" name="id" value={id} />
       <span>Revoke “{name}”? Anything using it stops working now.</span>
       <button
         type="submit"
-        className="btn h-8 border-[var(--danger)] text-[13px] text-[var(--danger)]"
+        className="btn h-8 border-[var(--danger)] text-[0.8125rem] text-[var(--danger)]"
       >
         Revoke
       </button>
-      <button type="button" className="btn h-8 text-[13px]" onClick={() => setAsking(false)}>
+      <button type="button" className="btn h-8 text-[0.8125rem]" onClick={() => setAsking(false)}>
         Keep
       </button>
     </form>
@@ -108,10 +108,10 @@ export function ApiKeys({
               className={`flex flex-wrap items-center justify-between gap-x-4 gap-y-1 rounded-lg border border-[var(--line)] px-3 py-2.5 ${k.revokedAt ? 'text-[var(--muted)]' : ''}`}
             >
               <span className="flex min-w-0 flex-col gap-0.5">
-                <span className={k.revokedAt ? 'line-through' : 'text-[15px] font-medium'}>
+                <span className={k.revokedAt ? 'line-through' : 'text-[0.9375rem] font-medium'}>
                   {k.name}
                 </span>
-                <span className="flex flex-wrap gap-x-3.5 gap-y-0.5 text-[13px] text-[var(--muted)]">
+                <span className="flex flex-wrap gap-x-3.5 gap-y-0.5 text-[0.8125rem] text-[var(--muted)]">
                   <code className="font-mono text-xs">{k.prefix}</code>
                   {k.revokedAt ? (
                     <span>revoked {day(k.revokedAt)}</span>
@@ -160,20 +160,20 @@ export function ApiKeys({
           <div className="flex flex-wrap items-center gap-2">
             <code
               id="new-key-secret"
-              className="min-w-0 flex-1 basis-64 rounded-md border border-[var(--line)] bg-[var(--surface)] px-2.5 py-2 font-mono text-[13px] break-all select-all"
+              className="min-w-0 flex-1 basis-64 rounded-md border border-[var(--line)] bg-[var(--surface)] px-2.5 py-2 font-mono text-[0.8125rem] break-all select-all"
               data-testid="new-key-secret"
             >
               {created.secret}
             </code>
             <Copy text={created.secret} target="new-key-secret" />
           </div>
-          <p className="rounded-r-md border-l-[3px] border-[var(--warn)] bg-[var(--warn-soft)] px-2.5 py-1.5 text-[13px] text-[var(--warn)]">
+          <p className="rounded-r-md border-l-[3px] border-[var(--warn)] bg-[var(--warn-soft)] px-2.5 py-1.5 text-[0.8125rem] text-[var(--warn)]">
             If you lose it, revoke it and create another. Only a hash is kept here.
           </p>
           <p>
             <button
               type="button"
-              className="btn h-8 text-[13px]"
+              className="btn h-8 text-[0.8125rem]"
               onClick={() => setDismissed(created.secret)}
             >
               Done
@@ -209,7 +209,7 @@ export function ApiKeys({
           {state.error}
         </p>
       ) : null}
-      <p className="text-[13px] text-[var(--muted)]">
+      <p className="text-[0.8125rem] text-[var(--muted)]">
         Quota: {limits.perMonth.toLocaleString('en-GB')} calls per key per month and{' '}
         {limits.perMinute} per minute. A call over the limit gets a 429 and nothing is counted.{' '}
         {limits.activeKeys} keys at a time

@@ -33,7 +33,7 @@ export function Traditions() {
   return (
     <section id="traditions" className="flex flex-col gap-[18px]">
       <div className="flex flex-col gap-1.5">
-        <h2 className="text-[28px] font-bold tracking-tight">Historical and cultural records</h2>
+        <h2 className="text-[1.75rem] font-bold tracking-tight">Historical and cultural records</h2>
         <p className="max-w-[760px] text-base text-[var(--muted)]">
           Historical systems, colour vocabularies and layering practices, each with its own sources.
           Read their relationships in context; screen swatches are modern interpretations.
@@ -45,7 +45,7 @@ export function Traditions() {
           data-testid="chevreul"
         >
           <ChevreulCircle compact />
-          <span className="text-[17px] font-semibold">Chevreul’s chromatic circle</span>
+          <span className="text-[1.0625rem] font-semibold">Chevreul’s chromatic circle</span>
           <span className="text-sm leading-[1.45] text-[var(--muted)]">
             Six landmarks from 72 scales, with complementary pairs and simultaneous contrast cited
             by paragraph. Swatches are editorial illustrations; open the entry to try each pair.
@@ -59,7 +59,7 @@ export function Traditions() {
           data-testid="munsell"
         >
           <SystemCircle system="munsell-system" compact />
-          <span className="text-[17px] font-semibold">Munsell’s colour notation</span>
+          <span className="text-[1.0625rem] font-semibold">Munsell’s colour notation</span>
           <span className="text-sm leading-[1.45] text-[var(--muted)]">
             Hue, value and chroma on a sphere, ten middle hues by initial, five pairs of opposites
             that balance in grey, and harmony left to the person, cited by paragraph of the 1907
@@ -74,7 +74,7 @@ export function Traditions() {
           data-testid="kandinsky"
         >
           <SystemCircle system="kandinsky-antitheses" compact />
-          <span className="text-[17px] font-semibold">Kandinsky’s antitheses</span>
+          <span className="text-[1.0625rem] font-semibold">Kandinsky’s antitheses</span>
           <span className="text-sm leading-[1.45] text-[var(--muted)]">
             Four pairs of opposites between white and black, with his sentence on each colour. He
             says himself these claims have no scientific basis; the records keep that framing.
@@ -121,7 +121,7 @@ export function Traditions() {
               </g>
             ))}
           </svg>
-          <span className="text-[17px] font-semibold">Five Phases 五行</span>
+          <span className="text-[1.0625rem] font-semibold">Five Phases 五行</span>
           <span className="text-sm leading-[1.45] text-[var(--muted)]">
             Five colours, two cycles, seasons and directions. Solid generates, dashed controls.{' '}
             {rels.length} relations, each with its passage.
@@ -159,7 +159,7 @@ export function Traditions() {
               <span className="text-sm text-[var(--muted)]">No layering in this release.</span>
             ) : null}
           </div>
-          <span className="text-[17px] font-semibold">Japanese colour 日本の伝統色</span>
+          <span className="text-[1.0625rem] font-semibold">Japanese colour 日本の伝統色</span>
           <span className="text-sm leading-[1.45] text-[var(--muted)]">
             Three kinds of record kept apart: an authored dictionary (bibliographic only), a
             vocabulary of {names.length} names, and a layering practice with order and season.

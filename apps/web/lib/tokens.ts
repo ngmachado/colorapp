@@ -12,6 +12,7 @@ export const THEMES = {
     fg: '#1a1a1a',
     muted: '#555555',
     line: '#e6e6e6',
+    controlLine: '#767676',
     accent: '#1a1a1a',
     accentFg: '#ffffff',
     accentSoft: '#f2f2f2',
@@ -28,6 +29,7 @@ export const THEMES = {
     fg: '#ececec',
     muted: '#a6a9ae',
     line: '#2b2d31',
+    controlLine: '#6f7277',
     accent: '#ececec',
     accentFg: '#111213',
     accentSoft: '#232528',
@@ -57,6 +59,12 @@ export const CONTRAST_PAIRS: [TokenName, TokenName][] = [
   ['fg', 'accentSoft'],
   ['fg', 'panel'],
   ['muted', 'panel'],
+];
+/** Boundaries of controls against their surface: 3:1, WCAG 1.4.11 non-text contrast. */
+export const BOUNDARY_PAIRS: [TokenName, TokenName][] = [
+  ['controlLine', 'bg'],
+  ['controlLine', 'surface'],
+  ['controlLine', 'panel'],
 ];
 /** Tokens that are not colours and so are not contrast-checked. */
 export const NON_COLOUR_TOKENS: TokenName[] = ['wheelBeyond'];

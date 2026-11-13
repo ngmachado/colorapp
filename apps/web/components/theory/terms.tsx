@@ -11,7 +11,7 @@ export function Terms() {
   return (
     <section id="terms" className="flex flex-col gap-[18px]">
       <div className="flex flex-col gap-1.5">
-        <h2 className="text-[28px] font-bold tracking-tight">Colour vocabulary reference</h2>
+        <h2 className="text-[1.75rem] font-bold tracking-tight">Colour vocabulary reference</h2>
         <p className="max-w-[760px] text-base text-[var(--muted)]">
           {terms.length} terms used in the lessons. Perceptual attributes, physical measurements and
           editing coordinates describe different things.
@@ -25,10 +25,10 @@ export function Terms() {
             className="flex flex-col gap-2 border-t border-[var(--line)] pt-3"
             data-testid="term"
           >
-            <dt className="text-[17px] font-semibold">{t.title}</dt>
+            <dt className="text-[1.0625rem] font-semibold">{t.title}</dt>
             <dd className="text-sm leading-[1.5]">{t.summary}</dd>
             {t.key_terms?.length ? (
-              <dd className="flex flex-col gap-1 text-[13px]">
+              <dd className="flex flex-col gap-1 text-[0.8125rem]">
                 {t.key_terms.map((kt) => (
                   <span key={kt.term}>
                     <span className="font-mono">{kt.term}</span>
@@ -38,7 +38,7 @@ export function Terms() {
               </dd>
             ) : null}
             {t.misconception ? (
-              <dd className="text-[13px] text-[var(--muted)]">
+              <dd className="text-[0.8125rem] text-[var(--muted)]">
                 <span className="font-semibold text-[var(--fg)]">Not so: </span>
                 {t.misconception}
               </dd>

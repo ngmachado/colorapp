@@ -16,7 +16,7 @@ export function LightnessPanel({ palette, names }: { palette: Oklch[]; names: st
   return (
     <section
       aria-label="Lightness view"
-      className="flex flex-col gap-3 border-t border-[var(--line)] px-5 py-3 text-[13px]"
+      className="flex flex-col gap-3 border-t border-[var(--line)] px-5 py-3 text-[0.8125rem]"
       data-testid="lightness"
     >
       <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
@@ -34,7 +34,7 @@ export function LightnessPanel({ palette, names }: { palette: Oklch[]; names: st
         {rows.map((r) => (
           <span
             key={r.i}
-            className="flex flex-1 items-end justify-center pb-1 font-mono text-[11px]"
+            className="flex flex-1 items-end justify-center pb-1 font-mono text-[0.6875rem]"
             style={{ background: r.grey, color: r.L > 0.6 ? '#1a1a1a' : '#ffffff' }}
             data-testid="lightness-grey"
             data-l={r.L.toFixed(3)}
@@ -52,7 +52,7 @@ export function LightnessPanel({ palette, names }: { palette: Oklch[]; names: st
         {[0, 0.25, 0.5, 0.75, 1].map((t) => (
           <span
             key={t}
-            className="absolute top-6 -translate-x-1/2 font-mono text-[10px] text-[var(--muted)]"
+            className="absolute top-6 -translate-x-1/2 font-mono text-[0.625rem] text-[var(--muted)]"
             style={{ left: `${t * 100}%` }}
             aria-hidden="true"
           >
@@ -64,9 +64,10 @@ export function LightnessPanel({ palette, names }: { palette: Oklch[]; names: st
             key={r.i}
             className="absolute top-1.5 h-5 w-5 -translate-x-1/2 rounded-full border-2 border-[var(--fg)]"
             style={{ left: `${r.L * 100}%`, background: r.hex }}
-            title={`${r.name} · L ${r.L.toFixed(3)}`}
             data-testid="lightness-marker"
-          />
+          >
+            <span className="sr-only">{`${r.name} · L ${r.L.toFixed(3)}`}</span>
+          </span>
         ))}
       </div>
       <ol

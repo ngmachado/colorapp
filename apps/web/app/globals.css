@@ -11,6 +11,18 @@ body {
   font-family: var(--font-sans);
 }
 
+/* Headings balance their lines; running text avoids a lone word on the last line. Never on `*`. */
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+p,
+li,
+dd {
+  text-wrap: pretty;
+}
+
 p a,
 dd a,
 li p a {
@@ -23,13 +35,30 @@ li p a {
   outline-offset: 2px;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
+/* The one transition in the app fades opacity, which reduced motion keeps; nothing moves, so no global override. */
+
+/* Windows High Contrast replaces author colours. Swatches, strips and the colour picker carry colour as information, so they keep theirs. */
+@media (forced-colors: active) {
+  .swatch-input,
+  input[type='range'].strip,
+  [style*='background'] {
+    forced-color-adjust: none;
   }
+}
+
+/* A native disclosure keeps a visible marker when its summary is styled as something else. */
+summary.disclosure::before {
+  content: '▸ ' / '';
+}
+details[open] > summary.disclosure::before {
+  content: '▾ ' / '';
+}
+
+/* Wheel points and dots are SVG groups acting as buttons: the focus ring is drawn on their first circle as well as the outline. */
+svg g[role='button']:focus-visible > circle:first-of-type {
+  stroke: var(--focus);
+  stroke-opacity: 1;
+  stroke-width: 3;
 }
 
 /* The native colour picker shown as a plain swatch. */
@@ -61,7 +90,7 @@ input[type='range'].strip {
   height: 28px;
   margin: 0;
   border-radius: 6px;
-  border: 1px solid var(--line);
+  border: 1px solid var(--control-line);
   background: var(--strip);
 }
 input[type='range'].strip::-webkit-slider-thumb {
@@ -82,19 +111,18 @@ input[type='range'].strip::-moz-range-thumb {
 }
 
 .btn {
-  height: 36px;
+  min-height: 2.25rem;
   padding: 0 12px;
   border: 1px solid var(--line);
   border-radius: 6px;
   background: var(--surface);
   color: var(--fg);
   font: inherit;
-  font-size: 14px;
+  font-size: 0.875rem;
   display: inline-flex;
   align-items: center;
   gap: 6px;
   text-decoration: none;
-  white-space: nowrap;
 }
 .btn-primary {
   background: var(--accent);
@@ -103,14 +131,31 @@ input[type='range'].strip::-moz-range-thumb {
   font-weight: 500;
 }
 .field {
-  height: 36px;
-  border: 1px solid var(--line);
+  min-height: 2.25rem;
+  border: 1px solid var(--control-line);
   border-radius: 6px;
   background: var(--surface);
   color: var(--fg);
   padding: 0 10px;
   font: inherit;
-  font-size: 14px;
+  /* At least 1rem, so iOS does not zoom the page when a field takes focus. */
+  font-size: max(1rem, 1em);
+}
+
+/* Touch screens get the larger target; a 24 px minimum holds for pointers. */
+@media (pointer: coarse) {
+  .btn,
+  .field,
+  select,
+  input:not([type='checkbox'], [type='radio'], [type='range']) {
+    min-block-size: 2.75rem;
+  }
+}
+
+/* Faces finder: cards past the first row render when they come near the viewport. */
+[data-testid='face-card']:nth-child(n + 5) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto none auto 280px;
 }
 
 /* Colour space map: labels projected from the scene onto the canvas. */
@@ -125,7 +170,7 @@ input[type='range'].strip::-moz-range-thumb {
   transform: translate(-50%, -50%);
   padding: 2px 5px;
   font-family: var(--font-mono, ui-monospace, monospace);
-  font-size: 11px;
+  font-size: 0.6875rem;
   font-weight: 500;
   color: var(--muted);
   background: color-mix(in srgb, var(--surface) 78%, transparent);
@@ -133,7 +178,7 @@ input[type='range'].strip::-moz-range-thumb {
 .space-pin {
   transform: translate(10px, -50%);
   padding: 3px 7px;
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 500;
   color: var(--fg);
   background: color-mix(in srgb, var(--surface) 88%, transparent);

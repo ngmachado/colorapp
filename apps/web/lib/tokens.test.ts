@@ -1,6 +1,12 @@
 import { colour, contrastRatio } from '@sca/colour-engine';
 import { describe, expect, test } from 'vitest';
-import { CONTRAST_PAIRS, NON_COLOUR_TOKENS, THEMES, type ThemeName } from './tokens';
+import {
+  BOUNDARY_PAIRS,
+  CONTRAST_PAIRS,
+  NON_COLOUR_TOKENS,
+  THEMES,
+  type ThemeName,
+} from './tokens';
 
 const hex = (h: string) =>
   colour('srgb', [
@@ -22,6 +28,12 @@ describe.each(Object.keys(THEMES) as ThemeName[])('%s theme', (theme) => {
     const ratio = contrastRatio(hex(THEMES[theme][fgName]), hex(THEMES[theme][bgName]));
     expect(ratio, `${theme} ${fgName} on ${bgName} = ${ratio.toFixed(2)}`).toBeGreaterThanOrEqual(
       4.5,
+    );
+  });
+  test.each(BOUNDARY_PAIRS)('%s on %s reaches 3:1', (fgName, bgName) => {
+    const ratio = contrastRatio(hex(THEMES[theme][fgName]), hex(THEMES[theme][bgName]));
+    expect(ratio, `${theme} ${fgName} on ${bgName} = ${ratio.toFixed(2)}`).toBeGreaterThanOrEqual(
+      3,
     );
   });
 });

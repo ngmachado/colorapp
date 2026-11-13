@@ -47,7 +47,7 @@ export default async function Palettes({ searchParams }: { searchParams: Promise
         className="mx-auto flex w-full max-w-[1100px] flex-col gap-6 px-5 py-8 sm:px-12"
       >
         <div className="flex flex-wrap items-baseline gap-x-5 gap-y-1">
-          <h1 className="m-0 text-[17px] font-semibold">Documented palettes</h1>
+          <h1 className="m-0 text-[1.0625rem] font-semibold">Documented palettes</h1>
           <p className="m-0 max-w-[70ch] text-sm text-[var(--muted)]">
             Every set of colours a source documents together: a system’s members, a pair an author
             attributes, a layering a page records. Each opens in the Laboratory as locked, named
@@ -88,15 +88,10 @@ export default async function Palettes({ searchParams }: { searchParams: Promise
                       key={`${i}-${m.cid}`}
                       className="flex-1 border border-[var(--line)]"
                       style={{ background: m.p?.hex ?? 'var(--accent-soft)' }}
-                      title={
-                        m.p
-                          ? `${m.label} ${m.p.hex.toUpperCase()}`
-                          : `${m.label}: no displayable value`
-                      }
                     />
                   ))}
                 </span>
-                <span className="text-[15px] font-semibold">{s.label}</span>
+                <span className="text-[0.9375rem] font-semibold">{s.label}</span>
                 <span className="text-xs text-[var(--muted)]">
                   {KIND_WORDS[s.kind ?? 'group']} · {members.filter((m) => m.p).length} of{' '}
                   {members.length} with a value
@@ -118,7 +113,7 @@ export default async function Palettes({ searchParams }: { searchParams: Promise
                 {members.filter((m) => m.p).length >= 2 ? (
                   <Link
                     href={labFromConcepts(s.conceptIds)}
-                    className="btn h-8 self-start text-[13px]"
+                    className="btn h-8 self-start text-[0.8125rem]"
                     data-testid="palette-to-lab"
                   >
                     Open in Laboratory

@@ -60,7 +60,7 @@ function Chip({
 }
 
 const H = ({ children }: { children: React.ReactNode }) => (
-  <h2 className="mb-1.5 font-mono text-[11px] tracking-[1px] text-[var(--muted)] uppercase">
+  <h2 className="mb-1.5 font-mono text-[0.6875rem] tracking-[1px] text-[var(--muted)] uppercase">
     {children}
   </h2>
 );
@@ -325,7 +325,7 @@ export function FacesFinder({
                     >
                       {sample.body}
                     </div>
-                    <footer className="flex flex-col gap-0.5 border-t border-[var(--line)] bg-[var(--panel)] px-3 py-2.5 text-[11.5px] text-[var(--muted)]">
+                    <footer className="flex flex-col gap-0.5 border-t border-[var(--line)] bg-[var(--panel)] px-3 py-2.5 text-[0.71875rem] text-[var(--muted)]">
                       <div>
                         <span className="font-mono text-xs text-[var(--fg)]">{f.family}</span>{' '}
                         {f.category} · Google Fonts’ label
@@ -513,13 +513,14 @@ export function CompareTray({
         </p>
         {entries.length ? (
           <table className="w-full table-fixed border-collapse text-xs">
+            <caption className="sr-only">Readings from the files of the compared faces</caption>
             <thead>
               <tr className="text-left text-[var(--muted)]">
                 <th className="w-[76px] border-b border-[var(--line)] py-1 pr-1 font-medium" />
                 {entries.map((f) => (
                   <th
                     key={f.family}
-                    className="border-b border-[var(--line)] py-1 pr-1 font-mono text-[11px] font-medium break-words"
+                    className="border-b border-[var(--line)] py-1 pr-1 font-mono text-[0.6875rem] font-medium break-words"
                   >
                     {f.family}
                   </th>
@@ -532,7 +533,7 @@ export function CompareTray({
                 {entries.map((f) => (
                   <td key={f.family} className="border-b border-[var(--line)] py-1 pr-1">
                     <div
-                      className="rounded px-1.5 py-1 text-[15px] leading-tight"
+                      className="rounded px-1.5 py-1 text-[0.9375rem] leading-tight"
                       style={{
                         fontFamily: `'${f.family}', serif`,
                         background: hexes[body.bg],
@@ -553,7 +554,7 @@ export function CompareTray({
                   {entries.map((f) => (
                     <td
                       key={f.family}
-                      className="border-b border-[var(--line)] py-1 pr-1 font-mono text-[11px] break-words"
+                      className="border-b border-[var(--line)] py-1 pr-1 font-mono text-[0.6875rem] break-words"
                     >
                       {cell(f, pick)}
                     </td>
@@ -567,7 +568,7 @@ export function CompareTray({
                     <div className="flex flex-wrap gap-1">
                       <button
                         type="button"
-                        className="btn h-6 px-1.5 text-[11px]"
+                        className="btn h-6 px-1.5 text-[0.6875rem]"
                         onClick={() => onSet(f.family)}
                         data-testid="compare-set"
                       >
@@ -575,7 +576,7 @@ export function CompareTray({
                       </button>
                       <button
                         type="button"
-                        className="btn h-6 px-1.5 text-[11px]"
+                        className="btn h-6 px-1.5 text-[0.6875rem]"
                         aria-label={`Remove ${f.family} from compare`}
                         onClick={() => onRemove(f.family)}
                       >

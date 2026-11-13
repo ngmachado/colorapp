@@ -130,7 +130,7 @@ export default async function Compare({ searchParams }: { searchParams: Promise<
         className="mx-auto flex w-full max-w-[1100px] flex-col gap-8 px-5 py-8 sm:px-12"
       >
         <div className="flex flex-wrap items-baseline gap-x-5 gap-y-1">
-          <h1 className="m-0 text-[17px] font-semibold">Compare two colours</h1>
+          <h1 className="m-0 text-[1.0625rem] font-semibold">Compare two colours</h1>
           <p className="m-0 max-w-[70ch] text-sm text-[var(--muted)]">
             Both values, two named difference metrics with their conditions, and the WCAG contrast
             between them. A difference is a number under stated conditions, not a judgement.
@@ -144,6 +144,7 @@ export default async function Compare({ searchParams }: { searchParams: Promise<
         <section className="flex flex-col gap-3" data-testid="differences">
           <h2 className="m-0 text-base font-semibold">Difference</h2>
           <table className="border-separate border-spacing-y-1 text-sm">
+            <caption className="sr-only">Differences between colour A and colour B</caption>
             <tbody>
               {cmp.differences.map((d) => (
                 <tr key={d.id} data-testid="difference" data-metric={d.id}>

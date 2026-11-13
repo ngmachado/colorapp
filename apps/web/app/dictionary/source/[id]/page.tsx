@@ -58,11 +58,11 @@ export default async function SourcePage({ params }: { params: Promise<{ id: str
               Sources
             </Link>
           </p>
-          <h1 className="text-[32px] leading-tight font-medium tracking-[-0.5px]">{s.title}</h1>
-          <p className="text-[17px] text-[var(--muted)]">{s.author}</p>
+          <h1 className="text-[2rem] leading-tight font-medium tracking-[-0.5px]">{s.title}</h1>
+          <p className="text-[1.0625rem] text-[var(--muted)]">{s.author}</p>
         </section>
 
-        <dl className="grid max-w-[900px] grid-cols-1 gap-x-6 gap-y-2.5 text-[15px] leading-normal sm:grid-cols-[180px_minmax(0,1fr)]">
+        <dl className="grid max-w-[900px] grid-cols-1 gap-x-6 gap-y-2.5 text-[0.9375rem] leading-normal sm:grid-cols-[180px_minmax(0,1fr)]">
           {rows
             .filter(([, v]) => v)
             .map(([label, v]) => (
@@ -74,7 +74,7 @@ export default async function SourcePage({ params }: { params: Promise<{ id: str
         </dl>
 
         <section className="flex flex-col gap-3.5">
-          <h2 className="text-[22px] font-bold">
+          <h2 className="text-[1.375rem] font-bold">
             Records from this source{' '}
             <span className="text-base font-normal text-[var(--muted)]">· {citing.length}</span>
           </h2>
@@ -83,7 +83,7 @@ export default async function SourcePage({ params }: { params: Promise<{ id: str
               None.{restricted ? ' Only the bibliographic record is held.' : ''}
             </p>
           ) : (
-            <ul className="grid gap-1.5 text-[15px] sm:grid-cols-2">
+            <ul className="grid gap-1.5 text-[0.9375rem] sm:grid-cols-2">
               {citing.map((r) => (
                 <li key={r.id} className="flex flex-wrap items-baseline gap-2">
                   <Link href={recordHref(r)} className="underline underline-offset-2">

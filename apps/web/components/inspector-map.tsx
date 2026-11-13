@@ -31,12 +31,15 @@ export function InspectorMap({
   const [showC, setShowC] = useState(false);
   const toggle = (r: HueRule) =>
     setRules((rs) =>
-      rs.includes(r) ? rs.filter((x) => x !== r) : HUE_RULES.filter((x) => x === r || rs.includes(x)),
+      rs.includes(r)
+        ? rs.filter((x) => x !== r)
+        : HUE_RULES.filter((x) => x === r || rs.includes(x)),
     );
   // A turn two rules share, such as 180° in complementary and tetradic, is plotted once.
   const turns = useMemo(() => {
     const seen = new Map<string, SpacePoint>();
-    for (const r of rules) for (const p of space.rules[r]) if (!seen.has(p.label)) seen.set(p.label, p);
+    for (const r of rules)
+      for (const p of space.rules[r]) if (!seen.has(p.label)) seen.set(p.label, p);
     return [...seen.values()];
   }, [space, rules]);
   const hexes = useMemo(
@@ -59,8 +62,8 @@ export function InspectorMap({
   return (
     <div className="flex flex-col gap-4" data-testid="inspector-map">
       <div className="flex flex-col gap-3 rounded-lg border border-[var(--line)] p-4">
-        <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-[13px]">
-          <span className="font-mono text-[11px] font-medium tracking-[1px] text-[var(--muted)] uppercase">
+        <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-[0.8125rem]">
+          <span className="font-mono text-[0.6875rem] font-medium tracking-[1px] text-[var(--muted)] uppercase">
             Plot
           </span>
           <label className="flex items-center gap-2">
@@ -87,8 +90,12 @@ export function InspectorMap({
             An achromatic colour has no hue to turn, so no hue construction is offered.
           </p>
         ) : (
-          <div className="flex flex-wrap items-center gap-1.5" role="group" aria-label="Hue constructions">
-            <span className="mr-2 font-mono text-[11px] font-medium tracking-[1px] text-[var(--muted)] uppercase">
+          <div
+            className="flex flex-wrap items-center gap-1.5"
+            role="group"
+            aria-label="Hue constructions"
+          >
+            <span className="mr-2 font-mono text-[0.6875rem] font-medium tracking-[1px] text-[var(--muted)] uppercase">
               Hue
             </span>
             <button
@@ -112,7 +119,9 @@ export function InspectorMap({
                 data-rule={r}
               >
                 {HUE_RULE_LABELS[r].name}
-                <span className="font-mono text-[11px] opacity-70">{HUE_RULE_LABELS[r].angles}</span>
+                <span className="font-mono text-[0.6875rem] opacity-70">
+                  {HUE_RULE_LABELS[r].angles}
+                </span>
               </button>
             ))}
           </div>
@@ -137,8 +146,8 @@ export function InspectorMap({
         <p className="m-0 text-xs text-[var(--muted)]">
           Hue turned in OKLCh with the inspected lightness and chroma held, using the Laboratory’s
           angles; steps as in the strips below. Geometric constructions, not documented pairs. The
-          small points are the five nearby records listed below; a line is drawn only where a
-          record documents a relation between two of them.
+          small points are the five nearby records listed below; a line is drawn only where a record
+          documents a relation between two of them.
         </p>
       </div>
       <div className="flex min-h-[560px] flex-col overflow-hidden rounded-lg border border-[var(--line)]">

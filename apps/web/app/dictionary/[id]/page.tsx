@@ -7,7 +7,7 @@ import { FIGURES, SystemCircle } from '@/components/system-circle';
 import { notFound } from 'next/navigation';
 import { Citation, Field, ShortCite } from '@/components/record';
 import { SaveColour } from '@/components/save-colour';
-import { ACCOUNTS } from '@/lib/accounts';
+import { signedIn } from '@/lib/current-user';
 import { Wheel } from '@/components/wheel';
 import { recordHref, recordTitle } from '@/components/search';
 import { Toolbar } from '@/components/toolbar';
@@ -145,10 +145,10 @@ export default async function Entry({ params }: { params: Promise<{ id: string }
       <Link
         href={labFromConcepts(members)}
         className="font-mono text-xs text-[var(--muted)] no-underline hover:underline"
-        title={`Open the Laboratory with the ${shownMembers.length} members of ${groupLabel}`}
         data-testid="set-to-lab"
       >
-        all {shownMembers.length} in the lab
+        all {shownMembers.length}
+        <span className="sr-only"> members of {groupLabel}</span> in the lab
       </Link>
     );
   };
@@ -171,14 +171,19 @@ export default async function Entry({ params }: { params: Promise<{ id: string }
           </Link>
         ) : null}
         {concept.tags?.munsell ? (
-          <Link
-            href={`/munsell?notation=${encodeURIComponent(concept.tags.munsell)}`}
-            className="btn"
-            title="The tabulated renotation value of the notation this record's source assigns"
-            data-testid="munsell-notation"
-          >
-            Munsell {concept.tags.munsell}
-          </Link>
+          <>
+            <Link
+              href={`/munsell?notation=${encodeURIComponent(concept.tags.munsell)}`}
+              className="btn"
+              aria-describedby="munsell-hint"
+              data-testid="munsell-notation"
+            >
+              Munsell {concept.tags.munsell}
+            </Link>
+            <span id="munsell-hint" className="sr-only">
+              The tabulated renotation value of the notation this record’s source assigns
+            </span>
+          </>
         ) : null}
         {hex ? (
           <Link href={`/colour/${hex.slice(1)}`} className="btn">
@@ -197,7 +202,7 @@ export default async function Entry({ params }: { params: Promise<{ id: string }
             On the map
           </Link>
         ) : null}
-        <SaveColour conceptId={id} label={concept.label} hex={hex} local={!ACCOUNTS} />
+        <SaveColour conceptId={id} label={concept.label} hex={hex} local={!(await signedIn())} />
       </Toolbar>
       <main id="main" className="flex flex-col">
         <div
@@ -207,14 +212,14 @@ export default async function Entry({ params }: { params: Promise<{ id: string }
         >
           <div className="flex flex-col gap-1.5">
             <h1
-              className="text-[60px] leading-none font-medium tracking-[-1px]"
+              className="text-[3.75rem] leading-none font-medium tracking-[-1px]"
               lang={primaryName?.language}
             >
               {primaryName?.script ?? concept.label}
             </h1>
-            <span className="text-[22px]">
+            <span className="text-[1.375rem]">
               {primaryName?.transliteration ? `${primaryName.transliteration.value} ` : ''}
-              <span title={primaryName?.transliteration?.system}>
+              <span>
                 {primaryName?.meaning
                   ? ` · ${primaryName.meaning}`
                   : primaryName
@@ -226,7 +231,7 @@ export default async function Entry({ params }: { params: Promise<{ id: string }
           <div className="ml-auto flex flex-col gap-1.5 text-right font-mono text-sm">
             {hex && lch ? (
               <>
-                <span className="text-[26px] font-medium">{hex.slice(1).toUpperCase()}</span>
+                <span className="text-[1.625rem] font-medium">{hex.slice(1).toUpperCase()}</span>
                 <span className="opacity-90">
                   oklch {lch[0].toFixed(3)} {lch[1].toFixed(3)}{' '}
                   {Number.isNaN(lch[2]) ? '—' : lch[2].toFixed(0)}
@@ -259,8 +264,8 @@ export default async function Entry({ params }: { params: Promise<{ id: string }
 
         <div className="flex max-w-[1100px] flex-col gap-14 px-5 sm:px-12 pt-10 pb-16">
           <section id="source" className="flex flex-col gap-3.5">
-            <h2 className="text-[22px] font-bold">Source</h2>
-            <dl className="grid grid-cols-1 sm:grid-cols-[180px_minmax(0,1fr)] gap-x-6 gap-y-2.5 text-[15px] leading-normal">
+            <h2 className="text-[1.375rem] font-bold">Source</h2>
+            <dl className="grid grid-cols-1 sm:grid-cols-[180px_minmax(0,1fr)] gap-x-6 gap-y-2.5 text-[0.9375rem] leading-normal">
               <Field label="Cited from">
                 <Citation source={source} locator={concept.evidence.locator} />
                 {source?.access_date ? (
@@ -296,7 +301,7 @@ export default async function Entry({ params }: { params: Promise<{ id: string }
           </section>
 
           <section id="values" className="flex flex-col gap-3.5">
-            <h2 className="text-[22px] font-bold">
+            <h2 className="text-[1.375rem] font-bold">
               Values{' '}
               <span className="text-base font-normal text-[var(--muted)]">
                 · how each value on screen was read from the source
@@ -343,7 +348,7 @@ export default async function Entry({ params }: { params: Promise<{ id: string }
               </div>
             )}
             {value && lch ? (
-              <div className="flex flex-wrap gap-6 font-mono text-[13px] text-[var(--muted)]">
+              <div className="flex flex-wrap gap-6 font-mono text-[0.8125rem] text-[var(--muted)]">
                 <span>
                   oklab{' '}
                   {convert(value, 'oklab')
@@ -381,7 +386,7 @@ export default async function Entry({ params }: { params: Promise<{ id: string }
                     ...partners.map((p) => ({ oklch: p.oklch, hex: p.hex, label: p.label })),
                   ]}
                 />
-                <div className="flex max-w-[260px] flex-col gap-1.5 text-[13px]">
+                <div className="flex max-w-[260px] flex-col gap-1.5 text-[0.8125rem]">
                   <span className="font-semibold">On the wheel</span>
                   <span className="font-mono text-xs text-[var(--muted)]">
                     h {Number.isNaN(lch[2]) ? '—' : lch[2].toFixed(0)}° · C {lch[1].toFixed(3)} · L{' '}
@@ -404,7 +409,7 @@ export default async function Entry({ params }: { params: Promise<{ id: string }
 
           {noMeaning ? null : (
             <section id="meaning" className="flex flex-col gap-3.5">
-              <h2 className="text-[22px] font-bold">
+              <h2 className="text-[1.375rem] font-bold">
                 Meaning{' '}
                 <span className="text-base font-normal text-[var(--muted)]">
                   · documented relations only
@@ -414,7 +419,7 @@ export default async function Entry({ params }: { params: Promise<{ id: string }
                 <p className="text-sm text-[var(--muted)]">{notDocumented}</p>
               ) : (
                 <dl
-                  className="grid grid-cols-1 sm:grid-cols-[180px_minmax(0,1fr)] gap-x-6 gap-y-2.5 text-[15px] leading-normal"
+                  className="grid grid-cols-1 sm:grid-cols-[180px_minmax(0,1fr)] gap-x-6 gap-y-2.5 text-[0.9375rem] leading-normal"
                   data-testid="meaning"
                 >
                   {[...relationGroups.entries()].map(([label, items]) => {
@@ -449,7 +454,6 @@ export default async function Entry({ params }: { params: Promise<{ id: string }
                                 <Link
                                   href={labFromConcepts([id, it.otherId])}
                                   className="font-mono text-xs text-[var(--muted)] no-underline hover:underline"
-                                  title={`Open the Laboratory with ${concept.label} and ${it.other.label}`}
                                   data-testid="pair-to-lab"
                                 >
                                   pair in the lab
@@ -480,7 +484,7 @@ export default async function Entry({ params }: { params: Promise<{ id: string }
                                 />
                                 {a.passage ? (
                                   <details className="mt-0.5">
-                                    <summary className="flex min-h-11 items-center cursor-pointer list-none text-[13px] text-[var(--muted)] underline underline-offset-2">
+                                    <summary className="disclosure flex min-h-11 items-center cursor-pointer list-none text-[0.8125rem] text-[var(--muted)] underline underline-offset-2">
                                       source text
                                     </summary>
                                     <q className="mt-1 block max-w-[640px] border-l border-[var(--line)] pl-3 text-sm text-[var(--muted)]">
@@ -502,7 +506,7 @@ export default async function Entry({ params }: { params: Promise<{ id: string }
 
           {noCombos ? null : (
             <section id="combinations" className="flex flex-col gap-3.5">
-              <h2 className="text-[22px] font-bold">Combinations</h2>
+              <h2 className="text-[1.375rem] font-bold">Combinations</h2>
               {combos.length === 0 ? (
                 <p className="text-sm text-[var(--muted)]">{notDocumented}</p>
               ) : (
@@ -527,8 +531,8 @@ export default async function Entry({ params }: { params: Promise<{ id: string }
                             />
                           ))}
                         </span>
-                        <span className="text-[15px] font-semibold">{c.label}</span>
-                        <span className="text-[13px] text-[var(--muted)]">
+                        <span className="text-[0.9375rem] font-semibold">{c.label}</span>
+                        <span className="text-[0.8125rem] text-[var(--muted)]">
                           {c.items
                             .map(
                               (it) =>
@@ -544,7 +548,6 @@ export default async function Entry({ params }: { params: Promise<{ id: string }
                         <Link
                           href={labFromConcepts(c.items.map((it) => it.concept))}
                           className="self-start font-mono text-xs text-[var(--muted)] no-underline hover:underline"
-                          title={`Open the Laboratory with the layers of ${c.label}, in order`}
                           data-testid="combination-to-lab"
                         >
                           layers in the lab
@@ -568,7 +571,7 @@ export default async function Entry({ params }: { params: Promise<{ id: string }
           ) : null}
 
           <section id="structures" className="flex flex-col gap-3.5">
-            <h2 className="text-[22px] font-bold">
+            <h2 className="text-[1.375rem] font-bold">
               Structures from here{' '}
               <span className="text-base font-normal text-[var(--muted)]">
                 · rules applied on the OKLCh wheel, not documented relations
@@ -614,7 +617,7 @@ export default async function Entry({ params }: { params: Promise<{ id: string }
                     );
                   })}
                 </div>
-                <span className="text-[13px] text-[var(--muted)]">
+                <span className="text-[0.8125rem] text-[var(--muted)]">
                   Each opens the Laboratory with this colour locked as dominant and the rule set.
                 </span>
               </>
@@ -624,7 +627,7 @@ export default async function Entry({ params }: { params: Promise<{ id: string }
           </section>
 
           <section id="similar" className="flex flex-col gap-3.5">
-            <h2 className="text-[22px] font-bold">
+            <h2 className="text-[1.375rem] font-bold">
               Similar{' '}
               <span className="text-base font-normal text-[var(--muted)]">
                 · closest by colour distance; a small distance is not a cultural link
@@ -653,7 +656,7 @@ export default async function Entry({ params }: { params: Promise<{ id: string }
           </section>
 
           <section id="accessibility" className="flex flex-col gap-3.5">
-            <h2 className="text-[22px] font-bold">Accessibility</h2>
+            <h2 className="text-[1.375rem] font-bold">Accessibility</h2>
             {value ? <ColourAccessibility value={value} /> : <p>No displayable value to check.</p>}
           </section>
         </div>

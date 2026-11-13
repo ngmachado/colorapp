@@ -72,13 +72,21 @@ export default async function Library({
         <LocalLibrary />
       </>
     );
+  // Signed out, the Library is the browser's, with a line saying that an account keeps it.
   const user = await currentUser();
-  const projects = user ? await user.data.projects.list() : [];
+  if (!user)
+    return (
+      <>
+        <Toolbar current="/library" middle="kept in this browser" />
+        <LocalLibrary signIn />
+      </>
+    );
+  const projects = await user.data.projects.list();
   const byName = (name: string) => projects.find((p) => p.name === name);
   const paletteProject = byName('Saved palettes');
   const colourProject = byName('Saved colours');
   const palettes = paletteProject
-    ? (await user!.data.projects.versions(paletteProject.id))
+    ? (await user.data.projects.versions(paletteProject.id))
         .map((v) => ({ number: v.number, note: v.note, snap: v.snapshot as PaletteSnapshot }))
         .filter((v) => v.snap.kind === 'palette')
         .filter(
@@ -93,7 +101,7 @@ export default async function Library({
         .reverse()
     : [];
   const colours = colourProject
-    ? (await user!.data.projects.versions(colourProject.id))
+    ? (await user.data.projects.versions(colourProject.id))
         .map((v) => ({ number: v.number, snap: v.snapshot as ColourSnapshot }))
         .filter((v) => v.snap.kind === 'colour')
         .filter(
@@ -108,47 +116,37 @@ export default async function Library({
     <>
       <Toolbar
         current="/library"
-        middle={user ? `${palettes.length} palettes · ${colours.length} colours` : undefined}
+        middle={`${palettes.length} palettes · ${colours.length} colours`}
       />
       <main id="main" className="flex flex-col sm:flex-row">
         <aside className="flex w-full shrink-0 flex-col gap-[22px] border-b border-[var(--line)] p-4 text-sm sm:w-60 sm:border-r sm:border-b-0">
-          {user ? (
-            <AutoForm className="flex flex-col gap-1" role="search">
+          <search className="contents">
+            <AutoForm className="flex flex-col gap-1">
               <input
                 type="search"
                 name="q"
                 defaultValue={q}
                 placeholder="name, rule, hex…"
                 aria-label="Search the Library"
+                enterKeyHint="search"
                 className="field h-9"
                 data-testid="library-search"
               />
             </AutoForm>
-          ) : null}
+          </search>
           <p className="text-[var(--muted)]">
             Palettes keep their rule and seed, so a saved draw is reproducible. Colours keep their
             record id, so the entry stays the source of truth.
           </p>
-          {user ? (
-            <Link href="/account" className="underline underline-offset-2">
-              Your account
-            </Link>
-          ) : null}
-          {user ? <LibraryImport /> : null}
+          <Link href="/account" className="underline underline-offset-2">
+            Your account
+          </Link>
+          <LibraryImport />
         </aside>
 
         <div className="flex min-w-0 flex-1 flex-col gap-8 px-6 pt-5 pb-10">
-          {!user ? (
-            <p className="text-sm" data-testid="library-signin">
-              <Link href="/signin?next=/library" className="underline underline-offset-2">
-                Sign in
-              </Link>{' '}
-              to keep palettes and colours.
-            </p>
-          ) : null}
-
           <section className="flex flex-col gap-3" data-testid="library-palettes">
-            <h1 className="text-[22px] font-bold">Saved palettes</h1>
+            <h1 className="text-[1.375rem] font-bold">Saved palettes</h1>
             {palettes.length === 0 && q ? (
               <p className="text-sm text-[var(--muted)]">No saved palette matches “{q}”.</p>
             ) : palettes.length === 0 ? (
@@ -190,10 +188,13 @@ export default async function Library({
                         name="note"
                         defaultValue={v.note ?? `${v.snap.structure} · seed ${v.snap.seed}`}
                         aria-label={`Name of version ${v.number}`}
+                        aria-describedby={`rename-hint-${v.number}`}
                         maxLength={80}
-                        title="Press Enter to rename"
-                        className="field h-8 max-w-sm text-[15px]"
+                        className="field h-8 max-w-sm text-[0.9375rem]"
                       />
+                      <span id={`rename-hint-${v.number}`} className="sr-only">
+                        Press Enter to rename
+                      </span>
                       <span className="font-mono text-xs text-[var(--muted)]">
                         {v.snap.structure} · seed {v.snap.seed} · {v.snap.palette.length} roles
                       </span>
@@ -223,7 +224,7 @@ export default async function Library({
           </section>
 
           <section className="flex flex-col gap-3" data-testid="library-colours">
-            <h2 className="text-[22px] font-bold">Saved colours</h2>
+            <h2 className="text-[1.375rem] font-bold">Saved colours</h2>
             {colours.length === 0 && q ? (
               <p className="text-sm text-[var(--muted)]">No saved colour matches “{q}”.</p>
             ) : colours.length === 0 ? (
@@ -254,8 +255,8 @@ export default async function Library({
                         </span>
                       )}
                       <span className="flex flex-col gap-[3px] px-3 pt-2.5">
-                        <span className="text-[15px]">{c.snap.label}</span>
-                        <span className="font-mono text-[11px] text-[var(--muted)]">
+                        <span className="text-[0.9375rem]">{c.snap.label}</span>
+                        <span className="font-mono text-[0.6875rem] text-[var(--muted)]">
                           {c.snap.hex ? c.snap.hex.slice(1).toUpperCase() : 'no fixed value'}
                         </span>
                       </span>

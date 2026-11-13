@@ -42,14 +42,16 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <meta name="text-scale" content="scale" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
           href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500&family=Noto+Sans+SC:wght@400;500&display=swap"
           rel="stylesheet"
         />
         <style dangerouslySetInnerHTML={{ __html: themeCss }} />
       </head>
-      <body className="min-h-screen">{children}</body>
+      <body className="min-h-dvh">{children}</body>
     </html>
   );
 }

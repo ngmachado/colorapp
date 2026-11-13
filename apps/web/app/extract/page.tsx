@@ -19,7 +19,7 @@ export default function Extract() {
         className="mx-auto flex w-full max-w-[1100px] flex-col gap-6 px-5 py-8 sm:px-12"
       >
         <div className="flex flex-col gap-2">
-          <h1 className="m-0 text-[17px] font-semibold">Image colours</h1>
+          <h1 className="m-0 text-[1.0625rem] font-semibold">Image colours</h1>
           <p className="m-0 max-w-[75ch] text-sm text-[var(--muted)]">
             The main colours of an image as observations: a value and the share of the image it
             covers. The image is decoded and measured in your browser and never leaves it. Nearby

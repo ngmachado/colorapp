@@ -6,7 +6,7 @@ import { addColour } from '@/lib/local-library';
 
 /**
  * Saves a documented colour to the Library. The record id is what is kept, never a bare value.
- * With `local`, the Library is this browser's; otherwise the server's, behind sign-in.
+ * With `local` (signed out, or no accounts configured) the Library is this browser's; otherwise the server's.
  */
 export function SaveColour({
   conceptId,

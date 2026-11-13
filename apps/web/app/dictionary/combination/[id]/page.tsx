@@ -53,7 +53,7 @@ export default async function CombinationPage({ params }: { params: Promise<{ id
       : '#ffffff';
   const name = (it: (typeof ordered)[number]) => it.concept?.label ?? it.conceptId;
   const row =
-    'grid grid-cols-1 gap-x-6 gap-y-2.5 text-[15px] leading-normal sm:grid-cols-[180px_minmax(0,1fr)]';
+    'grid grid-cols-1 gap-x-6 gap-y-2.5 text-[0.9375rem] leading-normal sm:grid-cols-[180px_minmax(0,1fr)]';
 
   return (
     <>
@@ -87,7 +87,7 @@ export default async function CombinationPage({ params }: { params: Promise<{ id
                     }
               }
             >
-              <span className="text-[28px] leading-none font-medium tracking-[-0.5px]">
+              <span className="text-[1.75rem] leading-none font-medium tracking-[-0.5px]">
                 {name(it)}
               </span>
               <span className="mt-2 text-xs font-semibold tracking-[1px] uppercase opacity-90">
@@ -105,7 +105,7 @@ export default async function CombinationPage({ params }: { params: Promise<{ id
                 Combinations
               </Link>
             </p>
-            <h1 className="text-[40px] leading-none font-medium tracking-[-1px]">{c.label}</h1>
+            <h1 className="text-[2.5rem] leading-none font-medium tracking-[-1px]">{c.label}</h1>
             {restricted ? (
               <span className="text-sm text-[var(--muted)]">
                 The source does not allow its content to be reproduced; only the citation is shown.
@@ -114,7 +114,7 @@ export default async function CombinationPage({ params }: { params: Promise<{ id
           </section>
 
           <section className="flex flex-col gap-3.5">
-            <h2 className="text-[22px] font-bold">Source</h2>
+            <h2 className="text-[1.375rem] font-bold">Source</h2>
             <dl className={row}>
               <dt className="text-[var(--muted)]">Cited from</dt>
               <dd>
@@ -147,16 +147,16 @@ export default async function CombinationPage({ params }: { params: Promise<{ id
           </section>
 
           <section className="flex flex-col gap-3.5">
-            <h2 className="text-[22px] font-bold">
+            <h2 className="text-[1.375rem] font-bold">
               Layers{' '}
               <span className="text-base font-normal text-[var(--muted)]">
                 · {c.order_documented ? 'inner to outer, as documented' : 'order not documented'}
               </span>
             </h2>
-            <ol className="flex flex-col gap-2 text-[15px]" data-testid="layers">
+            <ol className="flex flex-col gap-2 text-[0.9375rem]" data-testid="layers">
               {ordered.map((it) => (
                 <li key={it.i} className="flex items-center gap-4">
-                  <span className="w-5 font-mono text-[13px] text-[var(--muted)]">
+                  <span className="w-5 font-mono text-[0.8125rem] text-[var(--muted)]">
                     {c.order_documented ? (it.layer_index ?? it.i) + 1 : '·'}
                   </span>
                   <span
@@ -173,7 +173,7 @@ export default async function CombinationPage({ params }: { params: Promise<{ id
                   >
                     {name(it)}
                   </Link>
-                  <span className="text-[13px] text-[var(--muted)]">
+                  <span className="text-[0.8125rem] text-[var(--muted)]">
                     {[
                       it.position,
                       it.role && it.role !== it.position ? it.role : null,
@@ -187,16 +187,16 @@ export default async function CombinationPage({ params }: { params: Promise<{ id
                 </li>
               ))}
             </ol>
-            <p className="text-[13px] text-[var(--muted)]">
+            <p className="text-[0.8125rem] text-[var(--muted)]">
               Values belong to each colour&apos;s entry. This record keeps only the documented
               relationship.
             </p>
           </section>
 
           <section className="flex flex-col gap-3.5">
-            <h2 className="text-[22px] font-bold">In the Laboratory</h2>
+            <h2 className="text-[1.375rem] font-bold">In the Laboratory</h2>
             {shownLayers >= 2 ? (
-              <p className="flex flex-wrap items-center gap-4 text-[15px]">
+              <p className="flex flex-wrap items-center gap-4 text-[0.9375rem]">
                 <Link href={labFromConcepts(ordered.map((it) => it.conceptId))} className="btn">
                   Open the layers as columns
                 </Link>

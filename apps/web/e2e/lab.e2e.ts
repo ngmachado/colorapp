@@ -42,10 +42,15 @@ test('a seed from the dictionary locks the dominant column and the rule follows 
   await expect(page.getByTestId('column').nth(0)).toHaveAttribute('data-hex', '#663399');
 });
 
-test('saving a palette needs an account and then stores a version', async ({ page }) => {
+test('saving a palette signed out keeps it in the browser; signed in it stores a version', async ({
+  page,
+}) => {
   await page.goto('/lab');
   await page.getByTestId('save').click();
-  await expect(page.getByTestId('notice')).toContainText('Sign in to save');
+  await expect(page.getByTestId('notice')).toContainText('Saved in this browser');
+  await page.goto('/library');
+  await expect(page.getByTestId('library-signin')).toBeVisible();
+  await expect(page.getByTestId('saved-palette')).toHaveCount(1);
   await page.goto(`/api/test/login?email=lab-${test.info().project.name}@example.com`);
   await page.goto('/lab');
   await page.getByTestId('save').click();

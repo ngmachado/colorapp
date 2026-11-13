@@ -8,7 +8,8 @@ export function ScalesPanel({ palette, names }: { palette: Oklch[]; names: strin
   return (
     <section
       aria-label="Tonal scales"
-      className="flex flex-col gap-3 overflow-x-auto border-t border-[var(--line)] px-5 py-3 text-[13px]"
+      tabIndex={0}
+      className="flex flex-col gap-3 overflow-x-auto border-t border-[var(--line)] px-5 py-3 text-[0.8125rem]"
       data-testid="scales"
     >
       <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
@@ -21,6 +22,7 @@ export function ScalesPanel({ palette, names }: { palette: Oklch[]; names: strin
         </span>
       </div>
       <table className="border-separate border-spacing-1 text-xs">
+        <caption className="sr-only">Eleven lightness steps for each column</caption>
         <thead>
           <tr>
             <th scope="col" className="pr-2 text-left font-normal text-[var(--muted)]">
@@ -50,13 +52,15 @@ export function ScalesPanel({ palette, names }: { palette: Oklch[]; names: strin
                         outline: s.step === own ? '2px solid var(--fg)' : undefined,
                         outlineOffset: 1,
                       }}
-                      title={`${names[i]} ${s.step} · ${s.hex.toUpperCase()} · L ${s.l.toFixed(3)}${s.mapped ? ' · outside sRGB, mapped' : ''}`}
                       data-testid="scale-stop"
                       data-step={s.step}
                       data-hex={s.hex}
                       data-mapped={s.mapped || undefined}
                       data-own={s.step === own || undefined}
                     >
+                      <span className="sr-only">
+                        {`${names[i]} ${s.step} · ${s.hex.toUpperCase()} · L ${s.l.toFixed(3)}${s.mapped ? ' · outside sRGB, mapped' : ''}`}
+                      </span>
                       {s.mapped ? (
                         <span
                           aria-hidden="true"

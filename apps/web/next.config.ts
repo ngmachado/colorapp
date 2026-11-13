@@ -53,6 +53,23 @@ const config: NextConfig = {
     '@sca/db',
   ],
   serverExternalPackages: ['better-sqlite3', '@electric-sql/pglite', 'pg'],
+  // Response headers every route sends. HSTS comes from the host. Nothing here is framed by
+  // another site, and no page asks for a camera, microphone or position.
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
+          { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+          { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
+          { key: 'X-Frame-Options', value: 'DENY' },
+          { key: 'Content-Security-Policy', value: "frame-ancestors 'none'" },
+          { key: 'Cross-Origin-Opener-Policy', value: 'same-origin-allow-popups' },
+        ],
+      },
+    ];
+  },
 };
 
 // The test route's extension is recognized only by an explicitly opted-in dev server.

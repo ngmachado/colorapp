@@ -32,13 +32,13 @@ export default async function Space({ searchParams }: { searchParams: Promise<Pa
       </Toolbar>
       <main id="main" className="flex min-h-0 flex-1 flex-col">
         <div className="flex flex-wrap items-baseline gap-x-5 gap-y-1 border-b border-[var(--line)] px-5 py-3 sm:px-12">
-          <h1 className="m-0 text-[17px] font-semibold">Colour space map</h1>
+          <h1 className="m-0 text-[1.0625rem] font-semibold">Colour space map</h1>
           <p className="m-0 max-w-[70ch] text-sm text-[var(--muted)]">
             Every documented colour at its position in OKLab: lightness up, red–green across,
             yellow–blue in depth. Distance here is roughly how different two colours look. A small
             distance is not a cultural link.
           </p>
-          <span className="ml-auto rounded-full border border-[var(--line)] px-2 py-1 font-mono text-[11px] tracking-[1px] text-[var(--muted)] uppercase">
+          <span className="ml-auto rounded-full border border-[var(--line)] px-2 py-1 font-mono text-[0.6875rem] tracking-[1px] text-[var(--muted)] uppercase">
             {points.length} documented · sRGB solid
           </span>
         </div>

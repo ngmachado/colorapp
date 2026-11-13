@@ -64,9 +64,9 @@ export function Applied({
 
   return (
     <div className="flex min-h-0 flex-1 flex-col lg:flex-row">
-      <aside className="flex shrink-0 flex-col gap-4 border-b border-[var(--line)] px-5 py-4 text-[13px] lg:w-[320px] lg:border-r lg:border-b-0">
+      <aside className="flex shrink-0 flex-col gap-4 border-b border-[var(--line)] px-5 py-4 text-[0.8125rem] lg:w-[320px] lg:border-r lg:border-b-0">
         <div>
-          <h1 className="m-0 text-[17px] font-semibold">Applied preview</h1>
+          <h1 className="m-0 text-[1.0625rem] font-semibold">Applied preview</h1>
           <p className="m-0 mt-1 text-xs text-[var(--muted)]">
             The page on the right is drawn with the palette. Assign columns to its parts; the
             contrast below is measured on what is drawn.
@@ -79,7 +79,7 @@ export function Applied({
               <select
                 value={slots[s]}
                 onChange={(e) => setSlots((x) => ({ ...x, [s]: Number(e.target.value) }))}
-                className="field h-8 w-40 text-[13px]"
+                className="field h-8 w-40 text-[0.8125rem]"
                 aria-label={`Column for ${SLOT_WORDS[s]}`}
                 data-testid={`slot-${s}`}
               >
@@ -130,7 +130,7 @@ export function Applied({
           {dark ? (
             <Link
               href={labFromHexes(hexes)}
-              className="btn h-8 text-[13px]"
+              className="btn h-8 text-[0.8125rem]"
               data-testid="dark-to-lab"
             >
               Open the dark set in the Laboratory

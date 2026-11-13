@@ -23,11 +23,11 @@ export default function About() {
   const list = (title: string, items: readonly (readonly [string, number])[]) => (
     <div className="flex flex-col gap-2">
       <h2 className="text-xs tracking-[1px] text-[var(--muted)] uppercase">{title}</h2>
-      <dl className="grid grid-cols-[minmax(0,1fr)_auto] gap-x-6 gap-y-1 text-[15px]">
+      <dl className="grid grid-cols-[minmax(0,1fr)_auto] gap-x-6 gap-y-1 text-[0.9375rem]">
         {items.map(([label, n]) => (
           <div key={label} className="contents">
             <dt>{label}</dt>
-            <dd className="text-right font-mono text-[13px] text-[var(--muted)]">{n}</dd>
+            <dd className="text-right font-mono text-[0.8125rem] text-[var(--muted)]">{n}</dd>
           </div>
         ))}
       </dl>
@@ -38,8 +38,8 @@ export default function About() {
       <Toolbar />
       <main id="main" className="flex max-w-[1100px] flex-col gap-12 px-5 sm:px-12 pt-10 pb-16">
         <section className="flex flex-col gap-3" data-testid="about">
-          <h1 className="text-[28px] font-bold tracking-[-0.3px]">About this release</h1>
-          <p className="max-w-[620px] text-[15px] leading-normal text-[var(--muted)]">
+          <h1 className="text-[1.75rem] font-bold tracking-[-0.3px]">About this release</h1>
+          <p className="max-w-[620px] text-[0.9375rem] leading-normal text-[var(--muted)]">
             {inv.total} records, built {k.release.built_at.slice(0, 10)}. Every colour in the app
             comes from one of them, and every record names its source. This is an inventory of what
             the build contains, not a claim that any tradition or publication is covered completely.
@@ -49,9 +49,9 @@ export default function About() {
 
         <section
           id="coverage"
-          className="flex max-w-[760px] scroll-mt-6 flex-col gap-3 text-[15px] leading-normal"
+          className="flex max-w-[760px] scroll-mt-6 flex-col gap-3 text-[0.9375rem] leading-normal"
         >
-          <h2 className="text-[22px] font-bold">Collection coverage</h2>
+          <h2 className="text-[1.375rem] font-bold">Collection coverage</h2>
           <p>
             This is a small collection of source records and display approximations. Chinese display
             values remain unverified, and some categories have no value. The Japanese dictionary
@@ -62,8 +62,8 @@ export default function About() {
 
         <section className="grid gap-10 sm:grid-cols-3">{list('In this release', types)}</section>
 
-        <section className="flex max-w-[760px] flex-col gap-3.5 text-[15px] leading-normal">
-          <h2 className="text-[22px] font-bold">What a value on screen means</h2>
+        <section className="flex max-w-[760px] flex-col gap-3.5 text-[0.9375rem] leading-normal">
+          <h2 className="text-[1.375rem] font-bold">What a value on screen means</h2>
           <p>
             A documented colour is a word in a source before it is a value. When the app shows one
             on screen it is a modern sRGB reading of that word, and the entry says who read it and

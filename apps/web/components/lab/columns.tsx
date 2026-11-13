@@ -116,7 +116,7 @@ interface Props {
   seedNote?: string;
   /** Documented sets the wheel panel can load whole. */
   sets?: ColourSet[];
-  /** Save into this browser's Library instead of the server's (no accounts configured). */
+  /** Save into this browser's Library instead of the server's: signed out, or no accounts configured. */
   localLibrary?: boolean;
 }
 /** Keyboard shortcuts, shown behind the ? key. */
@@ -201,7 +201,7 @@ function NumberField({
         step={step}
         value={value}
         aria-label={label}
-        className="field h-8 w-24 text-[13px]"
+        className="field h-8 w-24 text-[0.8125rem]"
         onChange={(e) => {
           const n = Number(e.target.value);
           if (Number.isFinite(n)) onChange(n);
@@ -250,7 +250,7 @@ function HexField({
       value={text}
       aria-label={label}
       aria-invalid={parseHex(text) ? undefined : true}
-      className="field h-8 w-24 font-mono text-[13px] uppercase"
+      className="field h-8 w-24 font-mono text-[0.8125rem] uppercase"
       onChange={(e) => {
         const t = e.target.value;
         setText(t);
@@ -954,29 +954,16 @@ export function Columns({
           Options
         </button>
         <span className="mx-1 hidden h-6 w-px bg-[var(--line)] sm:block" aria-hidden="true" />
-        <button
-          type="button"
-          onClick={draw}
-          className="btn btn-primary"
-          title="Generate the next palette under the rule; locked columns keep their colour (space)"
-          data-testid="draw"
-        >
+        <button type="button" onClick={draw} className="btn btn-primary" data-testid="draw">
           Generate
         </button>
-        <button
-          type="button"
-          onClick={vary}
-          className="btn"
-          title="Move every unlocked colour a little around where it is"
-          data-testid="vary"
-        >
+        <button type="button" onClick={vary} className="btn" data-testid="vary">
           Variations
         </button>
         <button
           type="button"
           onClick={drawCandidates}
           className="btn"
-          title="Eight different palettes under the same rule, to choose from"
           data-testid="candidates-button"
         >
           Alternatives
@@ -992,7 +979,7 @@ export function Columns({
           Add
         </button>
         <details ref={exportRef} className="relative">
-          <summary className="btn cursor-pointer list-none" data-testid="export">
+          <summary className="btn disclosure cursor-pointer list-none" data-testid="export">
             Export
           </summary>
           <div className="absolute right-0 z-10 mt-1 flex w-64 flex-col rounded-md border border-[var(--line)] bg-[var(--surface)] py-1 text-sm shadow-sm">
@@ -1089,7 +1076,7 @@ export function Columns({
 
       {showKeys ? (
         <dl
-          className="grid grid-cols-[max-content_minmax(0,1fr)] gap-x-5 gap-y-1 border-b border-[var(--line)] px-5 py-3 text-[13px]"
+          className="grid grid-cols-[max-content_minmax(0,1fr)] gap-x-5 gap-y-1 border-b border-[var(--line)] px-5 py-3 text-[0.8125rem]"
           data-testid="keys"
         >
           {KEYS.map(([k, what]) => (
@@ -1107,7 +1094,7 @@ export function Columns({
 
       {showOptions ? (
         <div
-          className="flex flex-wrap items-end gap-x-6 gap-y-3 border-b border-[var(--line)] px-5 py-3 text-[13px]"
+          className="flex flex-wrap items-end gap-x-6 gap-y-3 border-b border-[var(--line)] px-5 py-3 text-[0.8125rem]"
           data-testid="options"
         >
           <fieldset className="flex items-end gap-2">
@@ -1199,7 +1186,7 @@ export function Columns({
             <select
               value={options.vary}
               onChange={(e) => setOptions((o) => ({ ...o, vary: e.target.value as VaryAmount }))}
-              className="field h-8 text-[13px]"
+              className="field h-8 text-[0.8125rem]"
               data-testid="vary-amount"
             >
               {(Object.keys(VARY) as VaryAmount[]).map((k) => (
@@ -1212,7 +1199,7 @@ export function Columns({
           <button
             type="button"
             onClick={() => setOptions(DEFAULT_OPTIONS)}
-            className="btn h-8 text-[13px]"
+            className="btn h-8 text-[0.8125rem]"
           >
             Reset
           </button>
@@ -1268,6 +1255,7 @@ export function Columns({
                   step="1"
                   value={weights[i]}
                   aria-label={`${roles[i]} area slider`}
+                  aria-valuetext={`${((100 * weights[i]!) / weights.reduce((a, b) => a + b, 0)).toFixed(1)} percent of the area`}
                   onChange={(e) => {
                     remember(`weight-${i}`);
                     setWeights((w) => w.map((x, j) => (j === i ? Number(e.target.value) : x)));
@@ -1412,9 +1400,16 @@ export function Columns({
                   </button>
                   <button
                     type="button"
-                    onClick={() =>
-                      navigator.clipboard.writeText(hex).then(() => setNotice(`${hex} copied.`))
-                    }
+                    onClick={async () => {
+                      try {
+                        await navigator.clipboard.writeText(hex);
+                        setNotice(`${hex} copied.`);
+                      } catch {
+                        setNotice(
+                          `The clipboard is not available here; select ${hex} in the field and copy it.`,
+                        );
+                      }
+                    }}
                     aria-label={`Copy ${hex}`}
                     className="grid h-11 w-11 place-items-center rounded-md"
                     style={chip}
@@ -1490,7 +1485,6 @@ export function Columns({
                         type="color"
                         value={hex}
                         aria-label={`Pick ${role}`}
-                        title="Pick a colour"
                         className="swatch-input h-8 w-10 cursor-pointer"
                         style={{ boxShadow: `inset 0 0 0 2px ${ink}` }}
                         onChange={(e) => setColour(i, oklchOfHex(e.target.value), `pick-${i}`)}
@@ -1530,6 +1524,7 @@ export function Columns({
                             )
                           }
                           aria-label={`${role} ${k === 'L' ? 'lightness' : k === 'C' ? 'chroma' : 'hue'}`}
+                          aria-valuetext={`${c[j]!.toFixed(j === 2 ? 0 : 3)}${j === 2 ? ' degrees' : ''}`}
                         />
                       </label>
                     ))}
@@ -1585,7 +1580,7 @@ export function Columns({
                     setScale(null);
                   }}
                   aria-label={`Edit ${role}, ${hex}`}
-                  className="rounded-sm font-mono text-[30px] font-medium tracking-wide"
+                  className="rounded-sm font-mono text-[1.875rem] font-medium tracking-wide"
                   data-testid="hex"
                 >
                   {hex.slice(1).toUpperCase()}
@@ -1602,7 +1597,7 @@ export function Columns({
                 {source ? (
                   <Link
                     href={`/dictionary/${source.conceptId}`}
-                    className="mt-3.5 flex items-center gap-1.5 text-[13px]"
+                    className="mt-3.5 flex items-center gap-1.5 text-[0.8125rem]"
                     style={{ color: ink }}
                     data-testid="from-record"
                   >
@@ -1617,7 +1612,7 @@ export function Columns({
                 ) : near && near.distance < 0.25 ? (
                   <Link
                     href={`/dictionary/${near.conceptId}`}
-                    className="mt-3.5 flex items-center gap-1.5 text-[13px]"
+                    className="mt-3.5 flex items-center gap-1.5 text-[0.8125rem]"
                     style={{ color: ink }}
                     data-testid="nearest"
                   >
@@ -1631,7 +1626,7 @@ export function Columns({
                     {near.distance >= 0.02 ? ` · distance ${near.distance.toFixed(2)}` : ''}
                   </Link>
                 ) : (
-                  <span className="mt-3.5 text-[13px]">no documented colour near</span>
+                  <span className="mt-3.5 text-[0.8125rem]">no documented colour near</span>
                 )}
                 <input
                   value={labels[i] ?? ''}
@@ -1645,8 +1640,7 @@ export function Columns({
                   aria-label={`Name of the ${role} column`}
                   maxLength={24}
                   size={nameOf(i).length + 4}
-                  title="Rename this column"
-                  className="mt-2.5 rounded-sm border border-transparent bg-transparent px-1 text-center text-[11px] tracking-[1.2px] uppercase placeholder:text-current placeholder:opacity-100 hover:border-current/40 focus:border-current focus:outline-none"
+                  className="mt-2.5 rounded-sm border border-transparent bg-transparent px-1 text-center text-[0.6875rem] tracking-[1.2px] uppercase placeholder:text-current placeholder:opacity-100 hover:border-current/40 focus:border-current focus:outline-none"
                   style={{ color: ink }}
                   data-testid="role-name"
                 />
@@ -1760,7 +1754,10 @@ export function Columns({
               </button>
             </div>
             {showOverlay ? (
-              <p className="m-0 text-[11px] text-[var(--muted)]" data-testid="wheel-overlay-note">
+              <p
+                className="m-0 text-[0.6875rem] text-[var(--muted)]"
+                data-testid="wheel-overlay-note"
+              >
                 {overlayPoints.length} of {setPoints.length} within L ±{OVERLAY_BAND} of this slice;
                 move the lightness slider to see the others. Click a point to add it as a column,
                 with its record.
@@ -1772,7 +1769,7 @@ export function Columns({
 
       {candidates.length ? (
         <div className="flex min-h-[72px] shrink-0 flex-wrap items-center gap-3 border-t border-[var(--line)] px-5 py-2">
-          <span className="text-[13px] text-[var(--muted)]">Candidates</span>
+          <span className="text-[0.8125rem] text-[var(--muted)]">Candidates</span>
           <div className="flex flex-1 gap-2 overflow-x-auto" data-testid="candidates">
             {candidates.map((p, n) => (
               <button
@@ -1842,7 +1839,7 @@ export function Columns({
       ) : null}
 
       <div className="flex min-h-[72px] shrink-0 flex-wrap items-center gap-3 border-t border-[var(--line)] px-5 py-2">
-        <span className="text-[13px] text-[var(--muted)]">History</span>
+        <span className="text-[0.8125rem] text-[var(--muted)]">History</span>
         <div className="flex flex-1 gap-2 overflow-x-auto" data-testid="filmstrip">
           {history.map((p, n) => (
             <button
@@ -1879,7 +1876,7 @@ export function Columns({
             onClick={undo}
             disabled={!past.length}
             aria-label="Undo"
-            title="Undo (⌘Z)"
+            aria-keyshortcuts="Meta+Z"
             className="btn h-8 w-8 justify-center px-0 disabled:opacity-30"
             data-testid="undo"
           >
@@ -1890,7 +1887,7 @@ export function Columns({
             onClick={redo}
             disabled={!future.length}
             aria-label="Redo"
-            title="Redo (⇧⌘Z)"
+            aria-keyshortcuts="Shift+Meta+Z"
             className="btn h-8 w-8 justify-center px-0 disabled:opacity-30"
             data-testid="redo"
           >
@@ -1902,7 +1899,7 @@ export function Columns({
               value={view}
               onChange={(e) => setView(e.target.value as 'normal' | CvdType)}
               aria-label="View"
-              className="field h-8 text-[13px]"
+              className="field h-8 text-[0.8125rem]"
               data-testid="view"
             >
               {VIEWS.map((v) => (
@@ -1918,8 +1915,7 @@ export function Columns({
               value={options.source}
               onChange={(e) => setOptions((o) => ({ ...o, source: e.target.value }))}
               aria-label="Documented colours"
-              title="Which documented colours the nearest readout, source draws and the wheel use"
-              className="field h-8 text-[13px]"
+              className="field h-8 text-[0.8125rem]"
               data-testid="documented"
             >
               <option value="all">near: all ({points.length})</option>
@@ -1933,7 +1929,7 @@ export function Columns({
           <button
             type="button"
             onClick={() => setShowContrast((s) => !s)}
-            className="btn h-8 text-[13px]"
+            className="btn h-8 text-[0.8125rem]"
             aria-expanded={showContrast}
             data-testid="contrast-button"
           >
@@ -1942,7 +1938,7 @@ export function Columns({
           <button
             type="button"
             onClick={() => setShowAreas((s) => !s)}
-            className="btn h-8 text-[13px]"
+            className="btn h-8 text-[0.8125rem]"
             aria-expanded={showAreas}
             data-testid="proportions-button"
           >
@@ -1956,8 +1952,7 @@ export function Columns({
                 setView2(e.target.value === 'none' ? null : (e.target.value as typeof view2))
               }
               aria-label="Inspection panel"
-              title="Lightness, neighbours, gradients or documented relations below the columns"
-              className="field h-8 text-[13px]"
+              className="field h-8 text-[0.8125rem]"
               data-testid="panel"
             >
               <option value="none">panel: none</option>
@@ -1972,7 +1967,7 @@ export function Columns({
           <button
             type="button"
             onClick={() => setShowWheel((s) => !s)}
-            className={`btn h-8 text-[13px] ${showWheel ? 'btn-primary' : ''}`}
+            className={`btn h-8 text-[0.8125rem] ${showWheel ? 'btn-primary' : ''}`}
             aria-pressed={showWheel}
             data-testid="wheel-button"
           >
@@ -1980,15 +1975,14 @@ export function Columns({
           </button>
           <Link
             href={`/space?hex=${palette.map((c) => hexOf(c).slice(1)).join(',')}${options.source !== 'all' ? `&set=${options.source}` : ''}`}
-            className="btn h-8 text-[13px]"
+            className="btn h-8 text-[0.8125rem]"
             data-testid="map-link"
           >
             Map
           </Link>
           <Link
             href={`/preview?${stateParams({ palette, structure, seed, locked, labels, weights, sourceIds, pairs })}`}
-            className="btn h-8 text-[13px]"
-            title="See this palette applied to an interface"
+            className="btn h-8 text-[0.8125rem]"
             data-testid="preview-link"
           >
             Preview

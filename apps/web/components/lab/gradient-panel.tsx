@@ -41,7 +41,7 @@ export function GradientPanel({
     <select
       value={value}
       onChange={(e) => set(Number(e.target.value))}
-      className="field h-8 text-[13px]"
+      className="field h-8 text-[0.8125rem]"
       aria-label={label}
       data-testid={testid}
     >
@@ -55,7 +55,7 @@ export function GradientPanel({
   return (
     <section
       aria-label="Gradients"
-      className="flex flex-col gap-3 border-t border-[var(--line)] px-5 py-3 text-[13px]"
+      className="flex flex-col gap-3 border-t border-[var(--line)] px-5 py-3 text-[0.8125rem]"
       data-testid="gradients"
     >
       <div className="flex flex-wrap items-center gap-3">
@@ -68,7 +68,7 @@ export function GradientPanel({
           <select
             value={hue}
             onChange={(e) => setHue(e.target.value as HueArc)}
-            className="field h-8 text-[13px]"
+            className="field h-8 text-[0.8125rem]"
             aria-label="Hue path for OKLCh"
             data-testid="gradient-hue"
           >
@@ -81,7 +81,7 @@ export function GradientPanel({
         </label>
         <button
           type="button"
-          className="btn h-8 text-[13px]"
+          className="btn h-8 text-[0.8125rem]"
           onClick={async () => {
             await navigator.clipboard.writeText(gradientSnippet(ha, hb, hue, STEPS));
             onNotice('Gradient CSS copied: both interpolations, each with its stop-list fallback.');
@@ -112,7 +112,6 @@ export function GradientPanel({
                 key={s.t}
                 className="relative flex-1"
                 style={{ background: s.hex }}
-                title={`${Math.round(s.t * 100)}% ${s.hex.toUpperCase()}${s.mapped ? ' (mapped)' : ''}`}
                 data-testid="gradient-stop"
                 data-hex={s.hex}
                 data-mapped={s.mapped || undefined}

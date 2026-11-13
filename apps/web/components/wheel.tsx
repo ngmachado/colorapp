@@ -385,7 +385,7 @@ export function Wheel({
                 role="button"
                 tabIndex={0}
                 aria-label={`Add ${p.label}`}
-                className="cursor-pointer focus:outline-none"
+                className="cursor-pointer"
                 onClick={() => onPick(p)}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
@@ -459,7 +459,7 @@ export function Wheel({
                 tabIndex={readOnly ? -1 : 0}
                 role={readOnly ? 'img' : 'button'}
                 aria-label={`${d.label} ${d.hex}${d.locked ? ', locked' : ''}`}
-                className={readOnly ? undefined : 'cursor-grab focus:outline-none'}
+                className={readOnly ? undefined : 'cursor-grab'}
                 onPointerDown={onDotDown(i)}
                 onPointerMove={onDotMove}
                 onPointerUp={onDotUp}
@@ -512,6 +512,7 @@ export function Wheel({
             max={1}
             step={0.01}
             value={slice}
+            aria-valuetext={`lightness ${slice.toFixed(2)}`}
             onChange={(e) => onSlice(Number(e.target.value))}
             className="w-full"
             data-testid="wheel-slice"
@@ -521,7 +522,7 @@ export function Wheel({
 
       {activeDot && !readOnly ? (
         <div
-          className="flex items-center gap-2.5 rounded-md border border-[var(--line)] px-2.5 py-2 text-[13px]"
+          className="flex items-center gap-2.5 rounded-md border border-[var(--line)] px-2.5 py-2 text-[0.8125rem]"
           data-testid="wheel-readout"
         >
           <span
@@ -534,7 +535,7 @@ export function Wheel({
               <span className="font-semibold">{activeDot.label}</span> ·{' '}
               <span className="font-mono">{activeDot.hex.slice(1).toUpperCase()}</span>
             </span>
-            <span className="font-mono text-[11px] text-[var(--muted)]">
+            <span className="font-mono text-[0.6875rem] text-[var(--muted)]">
               {fmt(activeDot.oklch)}
             </span>
             {near && near.distance < 0.25 ? (
@@ -551,7 +552,7 @@ export function Wheel({
       ) : null}
 
       {hint ? (
-        <p className="m-0 text-[11px] leading-[1.45] text-[var(--muted)]">
+        <p className="m-0 text-[0.6875rem] leading-[1.45] text-[var(--muted)]">
           {hint} Grey is outside sRGB at this lightness; a dashed ring marks a dot that is.
         </p>
       ) : null}

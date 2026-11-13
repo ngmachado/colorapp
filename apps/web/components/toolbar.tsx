@@ -45,7 +45,7 @@ export async function Toolbar({
       >
         Skip to content
       </a>
-      <Link href="/" className="text-[17px] font-bold tracking-tight whitespace-nowrap">
+      <Link href="/" className="text-[1.0625rem] font-bold tracking-tight whitespace-nowrap">
         Super Colour
       </Link>
       <nav aria-label="Sections" className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm">

@@ -34,7 +34,7 @@ export function RelationsPanel({
   return (
     <section
       aria-label="Documented relations near this palette"
-      className="flex flex-col gap-3 border-t border-[var(--line)] px-5 py-3 text-[13px]"
+      className="flex flex-col gap-3 border-t border-[var(--line)] px-5 py-3 text-[0.8125rem]"
       data-testid="relations"
     >
       <div className="flex flex-wrap items-center gap-3">
@@ -49,6 +49,7 @@ export function RelationsPanel({
             value={distance}
             onChange={(e) => setDistance(Number(e.target.value))}
             aria-label="Largest OKLab distance a member may be from a column"
+            aria-valuetext={`${distance} in OKLab`}
             data-testid="relations-distance"
           />
           <span className="font-mono" data-testid="relations-distance-value">

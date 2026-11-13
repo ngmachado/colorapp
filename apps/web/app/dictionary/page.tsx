@@ -1,5 +1,5 @@
 import { colour, convert } from '@sca/colour-engine';
-import type { Combination, Concept, Representation } from '@sca/knowledge';
+import type { Combination, Concept, Name, Representation } from '@sca/knowledge';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { AutoForm } from '@/components/auto-form';
@@ -10,7 +10,6 @@ import {
   groupLabel,
   isColour,
   isRestricted,
-  KIND_WORDS,
   pointGroup,
   primaryRepresentation,
 } from '@/lib/records';
@@ -29,6 +28,8 @@ interface Card {
   /** Collection: a naming standard such as jis-z8102 when the concept belongs to one, else its tradition. */
   group: string;
   matched?: string;
+  /** Language of the concept's first name record, so a native-script label is read in its own language. */
+  lang?: string;
 }
 
 export default async function Dictionary({ searchParams }: { searchParams: Promise<Params> }) {
@@ -78,6 +79,7 @@ export default async function Dictionary({ searchParams }: { searchParams: Promi
         .forConcept(concept.id)
         .filter((r): r is Representation => r.type === 'representation');
       const rep = primaryRepresentation(reps) ?? null;
+      const lang = k.forConcept(concept.id).find((r): r is Name => r.type === 'name')?.language;
       const point = rep ? points.find((p) => p.id === rep.id) : undefined;
       const restricted = isRestricted(concept) || (!rep && reps.some(isRestricted));
       const oklab = point?.oklab ?? null;
@@ -91,6 +93,7 @@ export default async function Dictionary({ searchParams }: { searchParams: Promi
             ? Math.hypot(oklab[0] - nearLab[0], oklab[1] - nearLab[1], oklab[2] - nearLab[2])
             : null,
         group: pointGroup(concept),
+        lang,
         matched:
           hits?.get(concept.id) ??
           (hitConcepts?.has(concept.id)
@@ -147,87 +150,90 @@ export default async function Dictionary({ searchParams }: { searchParams: Promi
         }
       />
       <main id="main" className="flex flex-1 flex-wrap">
-        <AutoForm
-          className="order-last flex w-full shrink-0 flex-col gap-[22px] border-t border-[var(--line)] p-4 text-sm sm:order-none sm:w-60 sm:border-t-0 sm:border-r"
-          data-testid="filters"
-        >
-          {view !== 'grid' ? <input type="hidden" name="view" value={view} /> : null}
-          <label className="flex flex-col gap-1.5">
-            <span className="text-xs tracking-[1px] text-[var(--muted)] uppercase">Search</span>
-            <input
-              type="search"
-              name="q"
-              defaultValue={q}
-              placeholder="name, script, hex…"
-              className="field"
-            />
-          </label>
-          <Link
-            href="/about#coverage"
-            className="text-xs text-[var(--muted)] underline underline-offset-2"
+        <search className="contents">
+          <AutoForm
+            className="order-last flex w-full shrink-0 flex-col gap-[22px] border-t border-[var(--line)] p-4 text-sm sm:order-none sm:w-60 sm:border-t-0 sm:border-r"
+            data-testid="filters"
           >
-            Collection coverage and sources
-          </Link>
-          <fieldset className="flex flex-col gap-2">
-            <legend className="mb-1 text-xs tracking-[1px] text-[var(--muted)] uppercase">
-              Show
-            </legend>
-            {['colours', ...(roots.length > 1 ? ['systems'] : []), 'combinations', 'sources'].map(
-              (v) => (
-                <label key={v} className="flex items-center gap-2">
-                  <input type="radio" name="kind" value={v} defaultChecked={kind === v} />{' '}
-                  {v[0]!.toUpperCase() + v.slice(1)}
-                </label>
-              ),
-            )}
-          </fieldset>
-          <fieldset className="flex flex-col gap-2">
-            <legend className="mb-1 text-xs tracking-[1px] text-[var(--muted)] uppercase">
-              Collection
-            </legend>
-            {allGroups.map((t) => (
-              <label key={t} className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  name="tradition"
-                  value={t}
-                  defaultChecked={traditions.includes(t)}
-                />{' '}
-                <span>{groupLabel(t)}</span>
-                <span className="ml-auto font-mono text-xs text-[var(--muted)]">
-                  {colourConcepts.filter((c) => pointGroup(c) === t).length}
-                </span>
-              </label>
-            ))}
-          </fieldset>
-          <label className="flex flex-col gap-1.5">
-            <span className="text-xs tracking-[1px] text-[var(--muted)] uppercase">
-              Near a colour
-            </span>
-            <span className="flex items-center gap-2">
-              <span
-                className="h-9 w-9 shrink-0 rounded-md border border-[var(--line)]"
-                style={{ background: nearLab ? `#${near.replace('#', '')}` : 'transparent' }}
-              />
+            {view !== 'grid' ? <input type="hidden" name="view" value={view} /> : null}
+            <label className="flex flex-col gap-1.5">
+              <span className="text-xs tracking-[1px] text-[var(--muted)] uppercase">Search</span>
               <input
-                type="text"
-                name="near"
-                defaultValue={near}
-                placeholder="#663399"
-                pattern="#?[0-9a-fA-F]{6}"
-                className="field min-w-0 font-mono text-[13px]"
-                aria-label="Hex to search near"
+                type="search"
+                name="q"
+                defaultValue={q}
+                placeholder="name, script, hex…"
+                enterKeyHint="search"
+                className="field"
               />
-            </span>
-            <span className="text-xs text-[var(--muted)]">
-              Closest colours first. Distance is not meaning.
-            </span>
-          </label>
-          {hidden('sort', sort ? [sort] : [])}
-          <button type="submit" className="sr-only">
-            Apply
-          </button>
-        </AutoForm>
+            </label>
+            <Link
+              href="/about#coverage"
+              className="text-xs text-[var(--muted)] underline underline-offset-2"
+            >
+              Collection coverage and sources
+            </Link>
+            <fieldset className="flex flex-col gap-2">
+              <legend className="mb-1 text-xs tracking-[1px] text-[var(--muted)] uppercase">
+                Show
+              </legend>
+              {['colours', ...(roots.length > 1 ? ['systems'] : []), 'combinations', 'sources'].map(
+                (v) => (
+                  <label key={v} className="flex items-center gap-2">
+                    <input type="radio" name="kind" value={v} defaultChecked={kind === v} />{' '}
+                    {v[0]!.toUpperCase() + v.slice(1)}
+                  </label>
+                ),
+              )}
+            </fieldset>
+            <fieldset className="flex flex-col gap-2">
+              <legend className="mb-1 text-xs tracking-[1px] text-[var(--muted)] uppercase">
+                Collection
+              </legend>
+              {allGroups.map((t) => (
+                <label key={t} className="flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    name="tradition"
+                    value={t}
+                    defaultChecked={traditions.includes(t)}
+                  />{' '}
+                  <span>{groupLabel(t)}</span>
+                  <span className="ml-auto font-mono text-xs text-[var(--muted)]">
+                    {colourConcepts.filter((c) => pointGroup(c) === t).length}
+                  </span>
+                </label>
+              ))}
+            </fieldset>
+            <label className="flex flex-col gap-1.5">
+              <span className="text-xs tracking-[1px] text-[var(--muted)] uppercase">
+                Near a colour
+              </span>
+              <span className="flex items-center gap-2">
+                <span
+                  className="h-9 w-9 shrink-0 rounded-md border border-[var(--line)]"
+                  style={{ background: nearLab ? `#${near.replace('#', '')}` : 'transparent' }}
+                />
+                <input
+                  type="text"
+                  name="near"
+                  defaultValue={near}
+                  placeholder="#663399"
+                  pattern="#?[0-9a-fA-F]{6}"
+                  className="field min-w-0 font-mono text-[0.8125rem]"
+                  aria-label="Hex to search near"
+                />
+              </span>
+              <span className="text-xs text-[var(--muted)]">
+                Closest colours first. Distance is not meaning.
+              </span>
+            </label>
+            {hidden('sort', sort ? [sort] : [])}
+            <button type="submit" className="sr-only">
+              Apply
+            </button>
+          </AutoForm>
+        </search>
 
         <div className="flex min-w-0 flex-[999_1_560px] flex-col gap-[18px] px-6 pt-5 pb-10">
           {kind === 'colours' ? (
@@ -259,7 +265,7 @@ export default async function Dictionary({ searchParams }: { searchParams: Promi
                       <Link
                         key={v}
                         href={`/dictionary?${qs}`}
-                        className={`btn h-8 text-[13px] ${view === v ? 'btn-primary' : ''}`}
+                        className={`btn h-8 text-[0.8125rem] ${view === v ? 'btn-primary' : ''}`}
                         aria-current={view === v ? 'true' : undefined}
                         data-testid={`view-${v}`}
                       >
@@ -275,7 +281,7 @@ export default async function Dictionary({ searchParams }: { searchParams: Promi
                   {view !== 'grid' ? <input type="hidden" name="view" value={view} /> : null}
                   <label className="flex items-center gap-2">
                     Sort
-                    <select name="sort" defaultValue={sort} className="field h-8 text-[13px]">
+                    <select name="sort" defaultValue={sort} className="field h-8 text-[0.8125rem]">
                       {['distance', 'tradition', 'lightness', 'hue', 'name'].map((s) => (
                         <option key={s}>{s}</option>
                       ))}
@@ -311,11 +317,13 @@ export default async function Dictionary({ searchParams }: { searchParams: Promi
                         ) : (
                           <span className="h-9 w-14 shrink-0 rounded-md bg-[var(--accent-soft)]" />
                         )}
-                        <span className="w-64 text-[15px]">{c.concept.label}</span>
+                        <span className="w-64 text-[0.9375rem]" lang={c.lang}>
+                          {c.concept.label}
+                        </span>
                         <span className="w-40 text-xs text-[var(--muted)]">
                           {groupLabel(c.group)}
                         </span>
-                        <span className="font-mono text-[11px] text-[var(--muted)]">
+                        <span className="font-mono text-[0.6875rem] text-[var(--muted)]">
                           {c.distance != null ? `distance ${c.distance.toFixed(3)} · ` : ''}
                           {c.hex
                             ? c.hex.slice(1).toUpperCase()
@@ -324,7 +332,7 @@ export default async function Dictionary({ searchParams }: { searchParams: Promi
                               : 'no value yet'}
                         </span>
                         {c.matched ? (
-                          <span className="text-[11px] text-[var(--muted)]">
+                          <span className="text-[0.6875rem] text-[var(--muted)]">
                             matched {c.matched}
                           </span>
                         ) : null}
@@ -351,9 +359,11 @@ export default async function Dictionary({ searchParams }: { searchParams: Promi
                         <span className="h-[110px] bg-[var(--accent-soft)]" />
                       )}
                       <span className="flex flex-col gap-[3px] px-3 py-2.5">
-                        <span className="text-[15px]">{c.concept.label}</span>
+                        <span className="text-[0.9375rem]" lang={c.lang}>
+                          {c.concept.label}
+                        </span>
                         <span className="text-xs text-[var(--muted)]">{groupLabel(c.group)}</span>
-                        <span className="font-mono text-[11px] text-[var(--muted)]">
+                        <span className="font-mono text-[0.6875rem] text-[var(--muted)]">
                           {c.distance != null ? `distance ${c.distance.toFixed(3)} · ` : ''}
                           {c.hex
                             ? c.hex.slice(1).toUpperCase()
@@ -362,7 +372,7 @@ export default async function Dictionary({ searchParams }: { searchParams: Promi
                               : 'no value yet'}
                         </span>
                         {c.matched ? (
-                          <span className="text-[11px] text-[var(--muted)]">
+                          <span className="text-[0.6875rem] text-[var(--muted)]">
                             matched {c.matched}
                           </span>
                         ) : null}
@@ -434,7 +444,7 @@ export default async function Dictionary({ searchParams }: { searchParams: Promi
                   >
                     <Link
                       href={`/dictionary/${root.id}`}
-                      className="text-[22px] font-bold no-underline hover:underline"
+                      className="text-[1.375rem] font-bold no-underline hover:underline"
                     >
                       {root.label}
                     </Link>
@@ -442,7 +452,7 @@ export default async function Dictionary({ searchParams }: { searchParams: Promi
                       {root.tags?.tradition ?? ''}
                     </span>
                     {root.description ? (
-                      <p className="max-w-[720px] text-[15px] leading-normal text-[var(--muted)]">
+                      <p className="max-w-[720px] text-[0.9375rem] leading-normal text-[var(--muted)]">
                         {root.description}
                       </p>
                     ) : null}
@@ -453,7 +463,6 @@ export default async function Dictionary({ searchParams }: { searchParams: Promi
                             key={c.id}
                             href={`/dictionary/${c.id}`}
                             className="underline underline-offset-2"
-                            title={KIND_WORDS[String(c.tags?.kind)] ?? ''}
                           >
                             {c.label}
                           </Link>

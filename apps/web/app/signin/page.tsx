@@ -65,8 +65,13 @@ export default async function SignIn({ searchParams }: { searchParams: Promise<P
                 id="email"
                 name="email"
                 type="email"
+                inputMode="email"
                 required
                 autoComplete="email"
+                autoCapitalize="none"
+                autoCorrect="off"
+                spellCheck={false}
+                enterKeyHint="send"
                 className="field max-w-xs"
               />
               <button type="submit" className="btn justify-self-start">

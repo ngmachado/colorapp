@@ -101,7 +101,7 @@ export default async function Munsell({ searchParams }: { searchParams: Promise<
         className="mx-auto flex w-full max-w-[1100px] flex-col gap-8 px-5 py-8 sm:px-12"
       >
         <div className="flex flex-col gap-2">
-          <h1 className="m-0 text-[17px] font-semibold">Munsell reference</h1>
+          <h1 className="m-0 text-[1.0625rem] font-semibold">Munsell reference</h1>
           <p className="m-0 max-w-[75ch] text-sm text-[var(--muted)]">
             A lookup in the 1943 Munsell renotation table, as transcribed by RIT’s Munsell Color
             Science Laboratory. For a colour it lists the nearest tabulated samples and the distance

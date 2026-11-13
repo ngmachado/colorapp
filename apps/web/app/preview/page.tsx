@@ -30,7 +30,7 @@ export default async function Preview({ searchParams }: { searchParams: Promise<
           id="main"
           className="mx-auto flex w-full max-w-[1100px] flex-col gap-4 px-5 py-8 sm:px-12"
         >
-          <h1 className="m-0 text-[17px] font-semibold">Applied preview</h1>
+          <h1 className="m-0 text-[1.0625rem] font-semibold">Applied preview</h1>
           <p className="m-0 max-w-[70ch] text-sm text-[var(--muted)]">
             Open this page from the Laboratory’s Preview button, or give it a palette in the
             address:

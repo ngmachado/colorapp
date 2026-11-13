@@ -15,7 +15,6 @@ export function TypeNavLink({ className }: { className?: string }) {
     <Link
       href="/type"
       className={className}
-      title="Set the palette on the bench in a face"
       data-testid="type-link"
       onClick={(e) => {
         const hexes = [...document.querySelectorAll('[data-testid="column"]')]

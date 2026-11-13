@@ -18,13 +18,12 @@ export function ThemeToggle() {
   return (
     <button
       type="button"
-      className="btn h-8 px-2.5 text-[13px]"
+      className="btn h-8 px-2.5 text-[0.8125rem]"
       onClick={() => {
         applyTheme(next);
         setTheme(next);
       }}
       aria-label={label}
-      title={label}
       aria-pressed={theme === 'dark'}
       data-testid="theme-toggle"
       data-theme-shown={theme}

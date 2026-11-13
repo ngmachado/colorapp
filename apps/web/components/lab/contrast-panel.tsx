@@ -49,8 +49,10 @@ export function ContrastPanel({
     onPairs([...pairs, p]);
   };
   return (
-    <div
-      className="flex flex-col gap-3 overflow-x-auto border-t border-[var(--line)] px-5 py-3 text-[13px]"
+    <section
+      aria-label="Contrast"
+      tabIndex={0}
+      className="flex flex-col gap-3 overflow-x-auto border-t border-[var(--line)] px-5 py-3 text-[0.8125rem]"
       data-testid="contrast"
     >
       <div className="flex flex-wrap items-center gap-3">
@@ -60,7 +62,7 @@ export function ContrastPanel({
           <select
             value={fg}
             onChange={(e) => setFg(Number(e.target.value))}
-            className="field h-8 text-[13px]"
+            className="field h-8 text-[0.8125rem]"
             aria-label="Text colour"
             data-testid="pair-fg"
           >
@@ -76,7 +78,7 @@ export function ContrastPanel({
           <select
             value={bg}
             onChange={(e) => setBg(Number(e.target.value))}
-            className="field h-8 text-[13px]"
+            className="field h-8 text-[0.8125rem]"
             aria-label="Background colour"
             data-testid="pair-bg"
           >
@@ -91,7 +93,7 @@ export function ContrastPanel({
           type="button"
           onClick={add}
           disabled={fg === bg || exists([fg, bg])}
-          className="btn h-8 text-[13px]"
+          className="btn h-8 text-[0.8125rem]"
           data-testid="pair-add"
         >
           Add pair
@@ -193,6 +195,7 @@ export function ContrastPanel({
       )}
       <h2 className="m-0 mt-1 text-sm font-semibold">Every pair</h2>
       <table className="border-separate border-spacing-1 text-xs">
+        <caption className="sr-only">Contrast of every colour as text on every other</caption>
         <thead>
           <tr>
             <th scope="col" className="pr-2 text-left font-normal text-[var(--muted)]">
@@ -242,7 +245,9 @@ export function ContrastPanel({
                       Aa
                     </span>{' '}
                     {ratio.toFixed(2)}
-                    <span className="block text-[10px] tracking-[0.5px] uppercase">{grade}</span>
+                    <span className="block text-[0.625rem] tracking-[0.5px] uppercase">
+                      {grade}
+                    </span>
                   </td>
                 );
               })}
@@ -255,6 +260,6 @@ export function ContrastPanel({
         and 7 for AAA; large text (24 px, or 18.67 px bold) and interface parts need 3. A ratio says
         nothing about harmony.
       </span>
-    </div>
+    </section>
   );
 }

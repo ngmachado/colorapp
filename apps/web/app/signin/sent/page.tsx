@@ -8,8 +8,8 @@ export default function Sent() {
     <>
       <Toolbar />
       <main id="main" className="flex max-w-[640px] flex-col gap-4 px-5 pt-16 pb-16 sm:px-12">
-        <h1 className="text-[28px] font-bold tracking-[-0.3px]">Check your email</h1>
-        <p className="text-[15px] leading-normal text-[var(--muted)]">
+        <h1 className="text-[1.75rem] font-bold tracking-[-0.3px]">Check your email</h1>
+        <p className="text-[0.9375rem] leading-normal text-[var(--muted)]">
           A sign-in link is on its way. Open it on this device to come back signed in. If nothing
           arrives within a few minutes, check the spam folder or send another one.
         </p>

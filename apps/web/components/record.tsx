@@ -25,7 +25,7 @@ export function Field({ label, children }: { label: string; children?: React.Rea
   );
 }
 
-/** A citation short enough to sit inline: surname and year, then the locator. The full reference is the tooltip and the link. */
+/** A citation short enough to sit inline: surname and year, then the locator. The link opens the full reference. */
 export function ShortCite({ source, locator }: { source: Source | undefined; locator?: string }) {
   if (!source) return <span className="text-xs text-[var(--muted)]">{notDocumented}</span>;
   const first = source.author.split(/[;,]/)[0]!.trim();
@@ -37,7 +37,6 @@ export function ShortCite({ source, locator }: { source: Source | undefined; loc
     <Link
       href={`/dictionary/source/${source.id}`}
       className="inline-block max-w-[260px] truncate align-bottom font-mono text-xs text-[var(--muted)] no-underline hover:underline"
-      title={`${source.author}, ${source.title}${locator ? `, ${locator}` : ''}`}
     >
       {who}
       {year ? ` ${year}` : ''}

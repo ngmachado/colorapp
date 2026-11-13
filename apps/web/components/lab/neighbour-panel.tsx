@@ -9,7 +9,8 @@ export function NeighbourPanel({ palette, names }: { palette: Oklch[]; names: st
   return (
     <section
       aria-label="Neighbour view"
-      className="flex flex-col gap-3 overflow-x-auto border-t border-[var(--line)] px-5 py-3 text-[13px]"
+      tabIndex={0}
+      className="flex flex-col gap-3 overflow-x-auto border-t border-[var(--line)] px-5 py-3 text-[0.8125rem]"
       data-testid="neighbours"
     >
       <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
@@ -20,6 +21,9 @@ export function NeighbourPanel({ palette, names }: { palette: Oklch[]; names: st
         </span>
       </div>
       <table className="border-separate border-spacing-1 text-xs">
+        <caption className="sr-only">
+          Each colour as a sample on each other colour as ground
+        </caption>
         <thead>
           <tr>
             <th scope="col" className="pr-2 text-left font-normal text-[var(--muted)]">
@@ -28,7 +32,7 @@ export function NeighbourPanel({ palette, names }: { palette: Oklch[]; names: st
             {hexes.map((h, j) => (
               <th key={j} scope="col" className="font-normal">
                 {names[j]}
-                <span className="block font-mono text-[10px] text-[var(--muted)]">
+                <span className="block font-mono text-[0.625rem] text-[var(--muted)]">
                   {h.slice(1).toUpperCase()}
                 </span>
               </th>
@@ -40,7 +44,7 @@ export function NeighbourPanel({ palette, names }: { palette: Oklch[]; names: st
             <tr key={i}>
               <th scope="row" className="pr-2 text-left font-normal">
                 {names[i]}
-                <span className="block font-mono text-[10px] text-[var(--muted)]">
+                <span className="block font-mono text-[0.625rem] text-[var(--muted)]">
                   {sample.slice(1).toUpperCase()}
                 </span>
               </th>

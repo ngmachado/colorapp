@@ -13,7 +13,7 @@ export function DistinctPanel({ palette, names }: { palette: Oklch[]; names: str
   return (
     <section
       aria-label="Distinctness under colour-vision simulation"
-      className="flex flex-col gap-3 overflow-x-auto border-t border-[var(--line)] px-5 py-3 text-[13px]"
+      className="flex flex-col gap-3 overflow-x-auto border-t border-[var(--line)] px-5 py-3 text-[0.8125rem]"
       data-testid="distinct"
     >
       <div className="flex flex-wrap items-center gap-3">
@@ -28,6 +28,7 @@ export function DistinctPanel({ palette, names }: { palette: Oklch[]; names: str
             value={flag}
             onChange={(e) => setFlag(Number(e.target.value))}
             aria-label="Working distance below which a pair is flagged"
+            aria-valuetext={`${flag} in OKLab`}
             data-testid="distinct-flag"
           />
           <span className="font-mono" data-testid="distinct-flag-value">
@@ -60,7 +61,7 @@ export function DistinctPanel({ palette, names }: { palette: Oklch[]; names: str
               weakest: {names[v.weakest.a]} · {names[v.weakest.b]} at{' '}
               <span className="font-mono">{v.weakest.distance.toFixed(3)}</span>
             </span>
-            <ul className="m-0 flex list-none flex-col gap-0.5 p-0 font-mono text-[11px]">
+            <ul className="m-0 flex list-none flex-col gap-0.5 p-0 font-mono text-[0.6875rem]">
               {v.pairs.map((p) => (
                 <li
                   key={`${p.a}-${p.b}`}

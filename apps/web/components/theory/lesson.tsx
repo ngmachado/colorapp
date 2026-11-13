@@ -15,7 +15,7 @@ export function Lesson({ topic, number }: { topic?: CurriculumTopic; number: num
     >
       <header className="flex flex-col gap-1.5">
         <p className="text-xs tracking-widest text-[var(--muted)] uppercase">Lesson {number}</p>
-        <h2 className="text-[28px] font-bold tracking-tight">{topic.title}</h2>
+        <h2 className="text-[1.75rem] font-bold tracking-tight">{topic.title}</h2>
         <p className="text-base text-[var(--muted)]">{lesson.objective}</p>
       </header>
       <div className="flex flex-col gap-3 text-base leading-relaxed">

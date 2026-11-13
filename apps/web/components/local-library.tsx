@@ -16,8 +16,11 @@ import {
 import { LibraryImport } from '@/components/library-import';
 import { stateParams } from '@/lib/palette-param';
 
-/** The Library when it lives in this browser: the same two sections as the server one, read from local storage. */
-export function LocalLibrary() {
+/**
+ * The Library when it lives in this browser: the same two sections as the server one, read from local
+ * storage. With `signIn`, accounts exist on this server and a line says that signing in keeps items in one.
+ */
+export function LocalLibrary({ signIn = false }: { signIn?: boolean }) {
   const [palettes, setPalettes] = useState<SavedPalette[]>([]);
   const [colours, setColours] = useState<SavedColour[]>([]);
   const [q, setQ] = useState('');
@@ -55,15 +58,26 @@ export function LocalLibrary() {
   return (
     <main id="main" className="flex flex-col sm:flex-row">
       <aside className="flex w-full shrink-0 flex-col gap-[22px] border-b border-[var(--line)] p-4 text-sm sm:w-60 sm:border-r sm:border-b-0">
-        <input
-          type="search"
-          value={q}
-          onChange={(e) => setQ(e.target.value)}
-          placeholder="name, rule, hex…"
-          aria-label="Search the Library"
-          className="field h-9"
-          data-testid="library-search"
-        />
+        <search className="contents">
+          <input
+            type="search"
+            value={q}
+            onChange={(e) => setQ(e.target.value)}
+            placeholder="name, rule, hex…"
+            aria-label="Search the Library"
+            enterKeyHint="search"
+            className="field h-9"
+            data-testid="library-search"
+          />
+        </search>
+        {signIn ? (
+          <p data-testid="library-signin">
+            <Link href="/signin?next=/library" className="underline underline-offset-2">
+              Sign in
+            </Link>{' '}
+            to keep palettes and colours in your account.
+          </p>
+        ) : null}
         <p className="text-[var(--muted)]">
           Kept in this browser, on this device. Palettes keep their rule, seed, locks and names;
           colours keep their record. Clearing site data clears the Library.
@@ -81,7 +95,7 @@ export function LocalLibrary() {
 
       <div className="flex min-w-0 flex-1 flex-col gap-8 px-6 pt-5 pb-10">
         <section className="flex flex-col gap-3" data-testid="library-palettes">
-          <h1 className="text-[22px] font-bold">Saved palettes</h1>
+          <h1 className="text-[1.375rem] font-bold">Saved palettes</h1>
           {!loaded ? null : shownPalettes.length === 0 && needle ? (
             <p className="text-sm text-[var(--muted)]">No saved palette matches “{q}”.</p>
           ) : shownPalettes.length === 0 ? (
@@ -116,9 +130,9 @@ export function LocalLibrary() {
                     <input
                       defaultValue={p.note}
                       aria-label={`Name of ${p.note}`}
+                      aria-describedby={`rename-hint-${p.id}`}
                       maxLength={80}
-                      title="Press Enter to rename"
-                      className="field h-8 max-w-sm text-[15px]"
+                      className="field h-8 max-w-sm text-[0.9375rem]"
                       onKeyDown={(e) => {
                         if (e.key === 'Enter') e.currentTarget.blur();
                       }}
@@ -130,6 +144,9 @@ export function LocalLibrary() {
                         }
                       }}
                     />
+                    <span id={`rename-hint-${p.id}`} className="sr-only">
+                      Press Enter to rename
+                    </span>
                     <span className="font-mono text-xs text-[var(--muted)]">
                       {p.state.structure} · seed {p.state.seed} · {p.state.palette.length} roles
                     </span>
@@ -156,7 +173,7 @@ export function LocalLibrary() {
         </section>
 
         <section className="flex flex-col gap-3" data-testid="library-colours">
-          <h2 className="text-[22px] font-bold">Saved colours</h2>
+          <h2 className="text-[1.375rem] font-bold">Saved colours</h2>
           {!loaded ? null : shownColours.length === 0 && needle ? (
             <p className="text-sm text-[var(--muted)]">No saved colour matches “{q}”.</p>
           ) : shownColours.length === 0 ? (
@@ -187,8 +204,8 @@ export function LocalLibrary() {
                       </span>
                     )}
                     <span className="flex flex-col gap-[3px] px-3 pt-2.5">
-                      <span className="text-[15px]">{c.label}</span>
-                      <span className="font-mono text-[11px] text-[var(--muted)]">
+                      <span className="text-[0.9375rem]">{c.label}</span>
+                      <span className="font-mono text-[0.6875rem] text-[var(--muted)]">
                         {c.hex ? c.hex.slice(1).toUpperCase() : 'no fixed value'}
                       </span>
                     </span>

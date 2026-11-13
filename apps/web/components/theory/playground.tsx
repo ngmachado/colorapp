@@ -131,7 +131,7 @@ export function Playground({
     <>
       <section id="dimensions" className="flex flex-col gap-[18px]">
         <div className="flex flex-col gap-1.5">
-          <h3 className="text-[28px] font-bold tracking-tight">
+          <h3 className="text-[1.75rem] font-bold tracking-tight">
             Explore hue, lightness and chroma
           </h3>
           <p className="max-w-[720px] text-base text-[var(--muted)]">
@@ -151,7 +151,7 @@ export function Playground({
                     <span className="font-mono" data-testid={`value-${i}`}>
                       {v[i]!.toFixed(i === 2 ? 1 : 3)}
                     </span>
-                    <label className="flex items-center gap-1.5 text-[13px] text-[var(--muted)]">
+                    <label className="flex items-center gap-1.5 text-[0.8125rem] text-[var(--muted)]">
                       <input
                         type="checkbox"
                         checked={locks[i]}
@@ -171,6 +171,7 @@ export function Playground({
                   max={ranges[i]!.max}
                   step={ranges[i]!.step}
                   value={v[i]}
+                  aria-valuetext={`${v[i]!.toFixed(i === 2 ? 1 : 3)} ${ranges[i]!.unit}`}
                   disabled={locks[i]}
                   onChange={(e) => set(i, Number(e.target.value))}
                   style={{
@@ -181,7 +182,7 @@ export function Playground({
                 />
               </div>
             ))}
-            <p className="text-[13px] text-[var(--muted)]">
+            <p className="text-[0.8125rem] text-[var(--muted)]">
               <strong className="text-[var(--fg)]">Keep apart:</strong> lightness is not brightness;
               chroma is not saturation; hue is undefined for greys.
             </p>
@@ -192,12 +193,12 @@ export function Playground({
               style={{ background: hex }}
               data-testid="swatch"
             />
-            <div className="flex justify-between text-[13px]">
+            <div className="flex justify-between text-[0.8125rem]">
               <span className="text-[var(--muted)]">read in</span>
               <select
                 value={space}
                 onChange={(e) => setSpace(e.target.value as SpaceId)}
-                className="field h-7 text-[13px]"
+                className="field h-7 text-[0.8125rem]"
                 aria-label="Read in space"
               >
                 {SPACES.map((s) => (
@@ -206,7 +207,7 @@ export function Playground({
               </select>
             </div>
             <div
-              className="flex flex-col gap-0.5 font-mono text-[13px] text-[var(--muted)]"
+              className="flex flex-col gap-0.5 font-mono text-[0.8125rem] text-[var(--muted)]"
               data-testid="readout"
             >
               <span>
@@ -225,7 +226,7 @@ export function Playground({
             {near ? (
               <Link
                 href={`/dictionary/${near.conceptId}`}
-                className="text-[13px] underline underline-offset-2"
+                className="text-[0.8125rem] underline underline-offset-2"
               >
                 nearest documented: {near.label} · distance {near.distance.toFixed(2)}
               </Link>
@@ -241,7 +242,7 @@ export function Playground({
 
       <section id="structures" className="flex flex-col gap-[18px]">
         <div className="flex flex-col gap-1.5">
-          <h2 className="text-[28px] font-bold tracking-tight">Palette recipes on the wheel</h2>
+          <h2 className="text-[1.75rem] font-bold tracking-tight">Palette recipes on the wheel</h2>
           <p className="max-w-[760px] text-base text-[var(--muted)]">
             Each rule applied from the hue above, next to a plain random draw with the same seed and
             bounds. The wheel shows the chosen rule at the lightness above, with the sRGB edge drawn
@@ -324,7 +325,10 @@ export function Playground({
               </span>
             </div>
             {ghost ? (
-              <p className="m-0 max-w-[420px] text-[13px] leading-[1.5]" data-testid="ghost-note">
+              <p
+                className="m-0 max-w-[420px] text-[0.8125rem] leading-[1.5]"
+                data-testid="ghost-note"
+              >
                 The dashed rings are the same rule measured on the HSL wheel, shown where OKLCh puts
                 those colours. The spaces serve different purposes: HSL follows sRGB geometry; OKLCh
                 aims at more perceptually useful spacing. Equal angles do not guarantee equal visual
@@ -352,7 +356,11 @@ export function Playground({
                     {describeDefaults(r.defaults)}
                   </span>
                 </span>
-                <span className="flex h-14 overflow-hidden rounded-lg" title={r.description}>
+                <span
+                  className="flex h-14 overflow-hidden rounded-lg"
+                  role="img"
+                  aria-label={r.description}
+                >
                   {r.withRule.map((x, i) => (
                     <span key={i} className="flex-1" style={{ background: x.hex }} />
                   ))}
@@ -362,7 +370,7 @@ export function Playground({
                     <span key={i} className="flex-1" style={{ background: x.hex }} />
                   ))}
                 </span>
-                <span className="flex items-center gap-2 text-[13px]">
+                <span className="flex items-center gap-2 text-[0.8125rem]">
                   <button
                     type="button"
                     onClick={() => setShownRule(r.structure)}
@@ -383,14 +391,14 @@ export function Playground({
             ))}
           </div>
         </div>
-        <div className="flex flex-wrap items-center gap-4 text-[13px] text-[var(--muted)]">
+        <div className="flex flex-wrap items-center gap-4 text-[0.8125rem] text-[var(--muted)]">
           <label className="flex items-center gap-2">
             Seed{' '}
             <input
               type="number"
               value={seed}
               onChange={(e) => setSeed(Number(e.target.value) || 0)}
-              className="field h-7 w-16 font-mono text-[13px]"
+              className="field h-7 w-16 font-mono text-[0.8125rem]"
             />
           </label>
           <span>Lightness 0.45 to 0.8 · chroma 0.08 to 0.2 · hue space OKLCh</span>
