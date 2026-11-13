@@ -1,4 +1,4 @@
-import { connect, type Db } from '@sca/db';
+import { connect, stampSchemaVersion, type Db } from '@sca/db';
 import { attachDatabasePool } from '@vercel/functions';
 
 const g = globalThis as typeof globalThis & { __scaDb?: { db: Db; ready: Promise<void> } };
@@ -22,7 +22,7 @@ function handle() {
     );
     // On Vercel, Fluid compute keeps the pool alive across requests and drains it before suspending.
     if (pool && process.env.VERCEL) attachDatabasePool(pool);
-    g.__scaDb = { db, ready: migrate() };
+    g.__scaDb = { db, ready: migrate().then(() => stampSchemaVersion(db)) };
   }
   return g.__scaDb;
 }

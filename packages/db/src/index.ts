@@ -85,11 +85,16 @@ export function connect(url: string, migrateUrl?: string): Connection {
 export async function openDb(url: string, migrateUrl?: string): Promise<Db> {
   const { db, migrate } = connect(url, migrateUrl);
   await migrate();
+  await stampSchemaVersion(db);
+  return db;
+}
+
+/** Records the schema version this code expects, so an operator can read it beside the migrations. */
+export async function stampSchemaVersion(db: Db): Promise<void> {
   await db
     .insert(schema.meta)
     .values({ key: 'schema_version', value: SCHEMA_VERSION })
     .onConflictDoUpdate({ target: schema.meta.key, set: { value: SCHEMA_VERSION } });
-  return db;
 }
 
 /** Reads one value from the meta table. */

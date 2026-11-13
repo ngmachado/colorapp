@@ -76,8 +76,26 @@ export default async function Account() {
             Send it as a bearer token. This call answers with the key’s name and what it has used of
             its quota, so a script can check its key before doing anything else:
           </p>
-          <pre className="overflow-x-auto rounded-lg border border-[var(--line)] bg-[var(--panel)] p-3 font-mono text-[0.78125rem] leading-relaxed">
+          <pre
+            tabIndex={0}
+            className="overflow-x-auto rounded-lg border border-[var(--line)] bg-[var(--panel)] p-3 font-mono text-[0.78125rem] leading-relaxed"
+          >
             {`curl ${origin}/api/key \\\n  -H "Authorization: Bearer sc_live_…"`}
+          </pre>
+        </section>
+
+        <section className="flex flex-col gap-3" id="mcp">
+          <h2 className="text-xs tracking-[1px] text-[var(--muted)] uppercase">Connect an agent</h2>
+          <p className="text-[0.9375rem]">
+            The MCP server takes the same header. It measures colours, checks palettes, draws
+            palettes from measurable requirements and reads the records with their sources; it
+            cannot change your Library. Each request counts one call. In Claude Code:
+          </p>
+          <pre
+            tabIndex={0}
+            className="overflow-x-auto rounded-lg border border-[var(--line)] bg-[var(--panel)] p-3 font-mono text-[0.78125rem] leading-relaxed"
+          >
+            {`claude mcp add --transport http supercolour ${origin}/api/mcp \\\n  --header "Authorization: Bearer sc_live_…"`}
           </pre>
         </section>
 

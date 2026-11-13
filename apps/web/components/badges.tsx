@@ -9,7 +9,8 @@ export type StatusKind =
   | 'restricted'
   | 'adaptation';
 
-const LABEL: Record<StatusKind, string> = {
+/** The words each status takes on screen and in API answers. */
+export const STATUS_LABELS: Record<StatusKind, string> = {
   'source-verified': 'Source-verified',
   'display-approximation': 'Display approximation',
   'exploratory-render': 'Exploratory render',
@@ -43,7 +44,7 @@ export function StatusBadge({ kind, children }: { kind: StatusKind; children?: R
             ? '◇'
             : '▲'}
       </span>
-      {children ?? LABEL[kind]}
+      {children ?? STATUS_LABELS[kind]}
     </span>
   );
 }
