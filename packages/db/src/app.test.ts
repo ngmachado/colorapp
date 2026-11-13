@@ -61,15 +61,44 @@ describe('personal data', () => {
     expect(bundle.user?.email).toBe('alice@example.com');
     expect(bundle.tables.projects).toHaveLength(1);
     expect(bundle.tables.projectVersions).toHaveLength(1);
-    expect(await alice.counts()).toEqual({ projects: 1, projectVersions: 1, apiKeys: 0 });
+    await alice.settings.set('theme', 'dark');
+    expect(bundle.tables.settings).toEqual([]);
+    expect((await alice.exportAll()).tables.settings).toEqual([
+      expect.objectContaining({ key: 'theme', value: 'dark' }),
+    ]);
+    expect(await alice.counts()).toEqual({
+      projects: 1,
+      projectVersions: 1,
+      apiKeys: 0,
+      settings: 1,
+    });
     expect(await alice.deleteAccount()).toBe(1);
     expect(await db.select().from(s.users)).toHaveLength(1);
     expect(appData(db, aliceId).counts()).resolves.toEqual({
       projects: 0,
       projectVersions: 0,
       apiKeys: 0,
+      settings: 0,
     });
-    expect(await bob.counts()).toEqual({ projects: 1, projectVersions: 1, apiKeys: 0 });
+    expect(await bob.counts()).toEqual({
+      projects: 1,
+      projectVersions: 1,
+      apiKeys: 0,
+      settings: 0,
+    });
+  });
+
+  test('a setting is one row per key, replaced on set, and never visible to another user', async () => {
+    const { alice, bob } = await fresh();
+    expect(await alice.settings.get('theme')).toBeUndefined();
+    await alice.settings.set('theme', 'dark');
+    await alice.settings.set('theme', 'light');
+    expect(await alice.settings.get('theme')).toBe('light');
+    expect(await alice.settings.all()).toEqual({ theme: 'light' });
+    expect(await bob.settings.all()).toEqual({});
+    expect(await bob.settings.remove('theme')).toBeUndefined();
+    expect(await alice.settings.remove('theme')).toEqual({ key: 'theme' });
+    expect(await alice.settings.all()).toEqual({});
   });
 
   test('the browser-test login creates a user once and a session each time', async () => {

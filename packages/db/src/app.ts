@@ -158,9 +158,47 @@ export function appData(db: Db, ownerId: string) {
     },
   };
 
+  const settings = {
+    /** Every setting as one object, key to value. */
+    async all(): Promise<Record<string, unknown>> {
+      const rows = await db.select().from(s.settings).where(own(s.settings));
+      return Object.fromEntries(rows.map((r) => [r.key, r.value]));
+    },
+    async get(key: string): Promise<unknown> {
+      return first(
+        await db
+          .select({ value: s.settings.value })
+          .from(s.settings)
+          .where(and(own(s.settings), eq(s.settings.key, key))),
+      )?.value;
+    },
+    /** Sets one setting, replacing any earlier value. */
+    async set(key: string, value: unknown) {
+      return first(
+        await db
+          .insert(s.settings)
+          .values({ ownerId, key, value })
+          .onConflictDoUpdate({
+            target: [s.settings.ownerId, s.settings.key],
+            set: { value, updatedAt: new Date() },
+          })
+          .returning(),
+      )!;
+    },
+    async remove(key: string) {
+      return first(
+        await db
+          .delete(s.settings)
+          .where(and(own(s.settings), eq(s.settings.key, key)))
+          .returning({ key: s.settings.key }),
+      );
+    },
+  };
+
   return {
     projects,
     keys,
+    settings,
 
     /** Everything this user owns, table by table. The app wraps it in a bundle. Key hashes stay out. */
     async exportAll() {

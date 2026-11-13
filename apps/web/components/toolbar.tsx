@@ -5,6 +5,7 @@ import { ThemeToggle } from '@/components/theme-toggle';
 import { TypeNavLink } from '@/components/type/type-nav-link';
 import { ACCOUNTS } from '@/lib/accounts';
 import { currentUser } from '@/lib/current-user';
+import { isTheme } from '@/lib/theme-value';
 
 const NAV = [
   { href: '/lab', label: 'Laboratory' },
@@ -37,6 +38,17 @@ export async function Toolbar({
     console.error('toolbar: current user unavailable', e);
     return null;
   });
+  // The account's theme, so a signed-in user sees their choice in any browser. Unset until they switch once.
+  const accountTheme = user
+    ? await user.data.settings
+        .get('theme')
+        .then((t) => (isTheme(t) ? t : null))
+        .catch((e: unknown) => {
+          unstable_rethrow(e);
+          console.error('toolbar: settings unavailable', e);
+          return null;
+        })
+    : null;
   return (
     <header className="flex min-h-14 shrink-0 flex-wrap items-center gap-x-5 gap-y-1 border-b border-[var(--line)] bg-[var(--surface)] px-5 py-2">
       <a
@@ -72,7 +84,7 @@ export async function Toolbar({
       </div>
       <div className="ml-auto flex flex-wrap items-center gap-2">
         {children}
-        <ThemeToggle />
+        <ThemeToggle signedIn={!!user} accountTheme={accountTheme} />
         {user ? (
           <Link href="/account" className="text-sm text-[var(--muted)] hover:text-[var(--fg)]">
             {user.email ?? 'Account'}

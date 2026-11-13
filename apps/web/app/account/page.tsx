@@ -50,7 +50,7 @@ export default async function Account() {
             <Link href="/library" className="underline underline-offset-2">
               Library
             </Link>
-            . Nothing else: no history, no ratings, no tracking.
+            , and your choice of light or dark. Nothing else: no history, no ratings, no tracking.
           </p>
           <p>
             <a href="/api/account/export" className="btn">

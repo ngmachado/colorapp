@@ -129,5 +129,19 @@ export const apiKeys = pgTable(
   (t) => [uniqueIndex('api_key_hash').on(t.hash), index('api_key_owner').on(t.ownerId)],
 );
 
+/**
+ * A setting the account keeps across browsers: one row per key, today only `theme`. The value is
+ * JSON, so a new setting needs no migration.
+ */
+export const settings = pgTable(
+  'setting',
+  {
+    ...owned,
+    key: text('key').notNull(),
+    value: jsonb('value').notNull(),
+  },
+  (t) => [uniqueIndex('setting_owner_key').on(t.ownerId, t.key)],
+);
+
 /** Tables that hold user-owned rows, in dependency order, for export and counts. */
-export const OWNED_TABLES = { projects, projectVersions, apiKeys } as const;
+export const OWNED_TABLES = { projects, projectVersions, apiKeys, settings } as const;

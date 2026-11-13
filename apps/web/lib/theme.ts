@@ -2,8 +2,10 @@
 
 import { useEffect, useState } from 'react';
 
+import type { Theme } from '@/lib/theme-value';
+
+export type { Theme };
 export const THEME_KEY = 'sca.theme';
-export type Theme = 'light' | 'dark';
 
 /** The reader's stored choice. White is the default; storage can be missing or blocked, so every access is guarded. */
 export function readTheme(): Theme {

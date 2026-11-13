@@ -31,6 +31,40 @@ test('white is the default even when the OS prefers dark; dark is a choice that 
   expect(await bodyBackground(page)).toBe('rgb(255, 255, 255)');
 });
 
+test('signed in, the choice is kept on the account and follows the user to another browser', async ({
+  page,
+  browser,
+}) => {
+  const email = `theme-${test.info().project.name}@example.com`;
+  await page.goto(`/api/test/login?email=${email}`);
+  await page.goto('/dictionary');
+  await expect(page.getByTestId('theme-toggle')).toHaveAttribute('data-theme-shown', 'light');
+  await page.getByTestId('theme-toggle').click();
+  await expect(page.getByTestId('theme-toggle')).toHaveAttribute('data-theme-shown', 'dark');
+  await expect
+    .poll(async () => (await page.request.get('/api/settings').then((r) => r.json())).theme)
+    .toBe('dark');
+
+  // A second browser with nothing stored: the account's choice arrives with the page.
+  const other = await browser.newContext();
+  const page2 = await other.newPage();
+  await page2.goto(`/api/test/login?email=${email}`);
+  await page2.goto('/theory');
+  await expect(page2.locator('html')).toHaveAttribute('data-theme', 'dark');
+  expect(await bodyBackground(page2)).toBe('rgb(17, 18, 19)');
+
+  // Switching back there is kept too, and the first browser follows on its next page.
+  await page2.getByTestId('theme-toggle').click();
+  await expect(page2.getByTestId('theme-toggle')).toHaveAttribute('data-theme-shown', 'light');
+  await expect
+    .poll(async () => (await page2.request.get('/api/settings').then((r) => r.json())).theme)
+    .toBe('light');
+  await other.close();
+  await page.goto('/dictionary');
+  await expect(page.getByTestId('theme-toggle')).toHaveAttribute('data-theme-shown', 'light');
+  await expect(page.locator('html')).not.toHaveAttribute('data-theme', /.+/);
+});
+
 test('the Laboratory wheel repaints its out-of-gamut grey for the theme', async ({ page }) => {
   await page.goto('/lab?palette=0.72,0.16,40;0.72,0.16,160;0.72,0.16,280&structure=triadic&n=4030');
   await expect(page).toHaveURL(/palette=/);
