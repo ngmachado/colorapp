@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { CATALOGUE_REVALIDATE, CATALOGUE_SOURCE, fetchCatalogue } from '@/lib/catalogue';
+import { CATALOGUE_SOURCE, fetchCatalogue } from '@/lib/catalogue';
 
 export type { CatalogueFace } from '@/lib/catalogue';
 
@@ -9,7 +9,8 @@ export type { CatalogueFace } from '@/lib/catalogue';
  * browser downloads the chosen face from Google and reads it there.
  */
 
-export const revalidate = CATALOGUE_REVALIDATE;
+// A literal, as Next requires of a segment setting; the same day as `CATALOGUE_REVALIDATE`.
+export const revalidate = 86400;
 
 export async function GET() {
   const key = process.env.GOOGLE_FONTS_KEY;
