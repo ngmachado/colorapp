@@ -1,6 +1,6 @@
 /**
- * The MCP server: six tools, three resource families, one prompt and the instructions, all over the
- * functions in ./tools. A new instance serves each request; nothing is kept between calls.
+ * The MCP server: the colour, record, Library and type tools, five resource families, one prompt and the
+ * instructions, all over the functions in ./tools, ./library and ./type. A new instance serves each request; nothing is kept between calls.
  */
 import { McpServer, ResourceTemplate } from '@modelcontextprotocol/sdk/server/mcp.js';
 import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js';
@@ -8,7 +8,19 @@ import { Role } from '@sca/generator';
 import { z } from 'zod';
 import { GUIDE, INSTRUCTIONS } from './instructions';
 import {
+  deleteSaved,
+  getPalette,
+  listLibrary,
+  restoreSaved,
+  saveColour,
+  savePalette,
+  type Caller,
+} from './library';
+import { lookupFace, measureSetting } from './type';
+import {
   checkPalette,
+  collections,
+  colourOfTheDay,
   contrastPair,
   findRecords,
   inspectColour,
@@ -30,9 +42,9 @@ const colourField = z
   .describe('A hex such as #663399, or oklch(L C h) with L on 0–1 and h in degrees.');
 
 /** A tool answer: the JSON as text for every client, and as structured content for those that read it. */
-function answer(fn: () => unknown): CallToolResult {
+async function answer(fn: () => unknown | Promise<unknown>): Promise<CallToolResult> {
   try {
-    const result = fn();
+    const result = await fn();
     return {
       content: [{ type: 'text', text: JSON.stringify(result, null, 2) }],
       structuredContent: result as Record<string, unknown>,
@@ -57,7 +69,7 @@ const markdown = (uri: string, text: string) => ({
   contents: [{ uri, mimeType: 'text/markdown', text }],
 });
 
-export function mcpServer(): McpServer {
+export function mcpServer(caller: Caller): McpServer {
   const server = new McpServer(
     { name: SERVER_NAME, version: SERVER_VERSION },
     { instructions: INSTRUCTIONS },
@@ -206,6 +218,205 @@ export function mcpServer(): McpServer {
     ({ id }) => answer(() => lookupRecord(id)),
   );
 
+  server.registerTool(
+    'colour_of_the_day',
+    {
+      title: 'Colour of the day',
+      description:
+        'One documented record for a calendar day, chosen by the date alone from every concept with a displayable value, so everyone who asks that day gets the same one: its value, status and citation, the full record, and links to its entry, the inspector and the Laboratory. A selection rule, never a meaning; say so when you pass it on. Optional collection narrows the pool to one group of the Dictionary.',
+      inputSchema: {
+        date: z.string().optional().describe('A calendar day, YYYY-MM-DD. Default today, UTC.'),
+        collection: z
+          .string()
+          .optional()
+          .describe(
+            'all (default), or one Dictionary group: jis-z8102, japanese, chinese, western, css-color-4.',
+          ),
+      },
+      annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: false },
+    },
+    (input) => answer(() => colourOfTheDay(input)),
+  );
+
+  server.registerTool(
+    'measure_setting',
+    {
+      title: 'Measure a type setting',
+      description:
+        'The Type laboratory’s measurements for a setting: a scale from base × ratio with the musical ratios named, each text style’s size, weight, leading, WCAG 2 ratio at the threshold its size and weight select, and APCA Lc labelled as the WCAG 3 draft; the count of characters per line in the body column from the face’s own advance widths against Bringhurst’s cited range; WCAG 1.4.12’s spacing values as a test. Every check names its source. Nothing here says a setting is good. Name a face from Google Fonts for the count per line; without one the rest is measured. A Type laboratory link reproduces the setting.',
+      inputSchema: {
+        face: z.string().optional().describe('A family name from Google Fonts, such as Inter.'),
+        base: z.number().optional().describe('Base size in CSS px, 10 to 32. Default 16.'),
+        ratio: z
+          .number()
+          .optional()
+          .describe('Scale ratio, 1.05 to 2. Default 1.25 (major third).'),
+        measure: z
+          .number()
+          .optional()
+          .describe('Width of the body column in CSS px, 240 to 1200. Default 640.'),
+        colours: z
+          .array(colourField)
+          .optional()
+          .describe('The palette, 2 to 8 colours. Default the page’s own five.'),
+        styles: z
+          .array(
+            z.object({
+              style: z.enum(['display', 'heading', 'body', 'caption']),
+              text: z.number().int().describe('Index into colours for the text.'),
+              background: z.number().int().describe('Index into colours for the ground.'),
+            }),
+          )
+          .optional()
+          .describe(
+            'Which palette colours each text style uses. A style left out keeps the default.',
+          ),
+        spacing: z
+          .boolean()
+          .optional()
+          .describe('Whether WCAG 1.4.12’s spacing values are applied.'),
+      },
+      annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: true },
+    },
+    (input) => answer(() => measureSetting(input)),
+  );
+
+  server.registerTool(
+    'lookup_face',
+    {
+      title: 'Look up a face',
+      description:
+        'One face from Google Fonts by its family name: what the catalogue states (Google’s category as Google’s, variable axes or static weights, script subsets) and what its file carries (designer, manufacturer, version, licence, units per em, x-height, cap height, ascender, descender, glyph count, axes, OpenType features, Unicode blocks covered), with a Type laboratory link and the specimen page. The file is read from the address Google gives and dropped; no file is taken from you. No classification beyond Google’s, no pairing, no ranking. A name not in the catalogue is refused with the names that contain it.',
+      inputSchema: {
+        family: z.string().describe('The family name as Google Fonts spells it.'),
+      },
+      annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: true },
+    },
+    (input) => answer(() => lookupFace(input.family)),
+  );
+
+  server.registerResource(
+    'colour-of-the-day',
+    'supercolour://colour-of-the-day',
+    {
+      title: 'Colour of the day',
+      description: `Today's documented record (UTC), chosen by the date alone. Collections: ${collections()
+        .map((g) => g.id)
+        .join(', ')}.`,
+      mimeType: 'application/json',
+    },
+    (uri) => json(uri.href, colourOfTheDay()),
+  );
+
+  const kind = z.enum(['palette', 'colour']);
+  server.registerTool(
+    'list_library',
+    {
+      title: 'List the Library',
+      description:
+        "The person's saved palettes and colours, newest first, with a Laboratory link per palette and the entry link per colour, then the Deleted list. Also says whether this key may save.",
+      inputSchema: {},
+      annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: false },
+    },
+    () => answer(() => listLibrary(caller)),
+  );
+
+  server.registerTool(
+    'get_palette',
+    {
+      title: 'Get a saved palette',
+      description:
+        'One saved palette by its number: colours, names, records, rule, seed, pairs and the Laboratory link. Pass its colours to check_palette to measure it.',
+      inputSchema: { number: z.number().int().min(1) },
+      annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: false },
+    },
+    ({ number }) => answer(() => getPalette(caller, number)),
+  );
+
+  server.registerTool(
+    'save_palette',
+    {
+      title: 'Save a palette to the Library',
+      description:
+        'Adds a palette to the person\'s Library as a new numbered version, marked as saved by this key. Needs a key made with "May save to the Library"; otherwise the answer says so. Save when the person asked for it or the work is done, not on every draft.',
+      inputSchema: {
+        name: z.string().min(1).max(80).describe('Its name on the Library page.'),
+        colours: z.array(colourField).min(2).max(5),
+        names: z.array(z.string().max(24)).optional().describe('One per colour, in order.'),
+        records: z
+          .array(z.string().nullable())
+          .optional()
+          .describe('One per colour: the record id the colour came from, or null.'),
+        rule: z.string().optional().describe('The hue rule it was drawn with. Default free-form.'),
+        seed: z.number().int().min(0).optional().describe('The seed it was drawn from. Default 0.'),
+        pairs: z
+          .array(z.object({ text: z.number().int(), background: z.number().int() }))
+          .optional()
+          .describe('Intended text-on-background pairs, by index from 0.'),
+      },
+      annotations: {
+        readOnlyHint: false,
+        destructiveHint: false,
+        idempotentHint: false,
+        openWorldHint: false,
+      },
+    },
+    (input) => answer(() => savePalette(caller, input)),
+  );
+
+  server.registerTool(
+    'save_colour',
+    {
+      title: 'Save a documented colour to the Library',
+      description:
+        "Adds a documented colour to the person's Library by its concept id; the entry stays the source of truth, and a colour already there is not added twice. Needs a key that may save.",
+      inputSchema: {
+        record: z.string().min(1).describe('A concept id, from find_records or lookup_record.'),
+      },
+      annotations: {
+        readOnlyHint: false,
+        destructiveHint: false,
+        idempotentHint: true,
+        openWorldHint: false,
+      },
+    },
+    ({ record }) => answer(() => saveColour(caller, record)),
+  );
+
+  server.registerTool(
+    'delete_saved',
+    {
+      title: 'Move a saved item to the Deleted list',
+      description:
+        'Moves a saved palette or colour to the Deleted list on the Library page, where the person or restore_saved can bring it back. Nothing is removed for good from here. Needs a key that may save.',
+      inputSchema: { kind, number: z.number().int().min(1) },
+      annotations: {
+        readOnlyHint: false,
+        destructiveHint: true,
+        idempotentHint: true,
+        openWorldHint: false,
+      },
+    },
+    ({ kind: k, number }) => answer(() => deleteSaved(caller, k, number)),
+  );
+
+  server.registerTool(
+    'restore_saved',
+    {
+      title: 'Restore a deleted item',
+      description:
+        'Brings a palette or colour back from the Deleted list. Needs a key that may save.',
+      inputSchema: { kind, number: z.number().int().min(1) },
+      annotations: {
+        readOnlyHint: false,
+        destructiveHint: false,
+        idempotentHint: true,
+        openWorldHint: false,
+      },
+    },
+    ({ kind: k, number }) => answer(() => restoreSaved(caller, k, number)),
+  );
+
   server.registerResource(
     'guide',
     'supercolour://guide',
@@ -336,5 +547,5 @@ export function paletteWorkflow(brief?: string): string {
 3. Call check_palette on the result with the pairs you mean to use as text on background. Read the contrast for every pair, the closest pair, and the distinctness views.
 4. For any colour that fails, call inspect_colour and adjust one number at a time; then request again with the same seed, or a new seed if the rule cannot meet the requirements.
 5. For any record you keep or mention, call lookup_record and cite its source and locator exactly as given. A nearby record is a distance, not a name: say "within 0.03 of X in OKLab", never "this is X".
-6. Hand back the palette as hex and OKLCh with the measured results, and the Laboratory link so the person can open it. Nothing is saved on their behalf.`;
+6. Hand back the palette as hex and OKLCh with the measured results, and the Laboratory link so the person can open it. If they asked for it to be kept and the key may save, save_palette with a name they would recognise, and say what was saved; otherwise leave the save to them.`;
 }

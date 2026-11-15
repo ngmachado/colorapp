@@ -28,6 +28,7 @@ import { namePoints, type NamePoint } from '@/lib/palette-names';
 import { stateParams, type Oklch, type Pair } from '@/lib/palette-param';
 import {
   evidenceOf,
+  groupLabel,
   isRestricted,
   orderRepresentations,
   primaryRepresentation,
@@ -974,4 +975,76 @@ export function lessonText(id: string): string | null {
     lines.push(`- ${c?.text ?? ref.source} — ${ref.url}`);
   }
   return lines.join('\n');
+}
+
+// ---------------------------------------------------------------------------------------------
+// colour_of_the_day
+
+/** FNV-1a over a string: a fixed, well-known hash, so the day's choice is the same on every server. */
+const fnv1a = (text: string) => {
+  let h = 0x811c9dc5;
+  for (const ch of new TextEncoder().encode(text)) h = Math.imul(h ^ ch, 0x01000193) >>> 0;
+  return h >>> 0;
+};
+
+/** The collections a day's colour can be drawn from: the Dictionary's groups. */
+export function collections() {
+  return [...new Set(namePoints().map((p) => p.group))]
+    .sort()
+    .map((g) => ({ id: g, label: groupLabel(g) }));
+}
+
+/**
+ * One documented record per day, chosen by the date alone from every concept with a displayable
+ * value, so everyone who asks on that day gets the same answer. A selection rule, never a meaning.
+ */
+export function colourOfTheDay(input: { date?: string; collection?: string } = {}) {
+  const date = input.date ?? new Date().toISOString().slice(0, 10);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || Number.isNaN(Date.parse(`${date}T00:00:00Z`)))
+    throw new Refusal('date is a calendar day written YYYY-MM-DD.');
+  const collection = input.collection ?? 'all';
+  const known = collections();
+  if (collection !== 'all' && !known.some((g) => g.id === collection))
+    throw new Refusal(
+      `No collection "${collection}". Collections: all, ${known.map((g) => g.id).join(', ')}.`,
+    );
+  const seen = new Set<string>();
+  const pool: NamePoint[] = [];
+  // namePoints lists a concept's preferred representation first; one entry per concept, in id order.
+  for (const p of namePoints()) {
+    if (collection !== 'all' && p.group !== collection) continue;
+    if (seen.has(p.conceptId)) continue;
+    seen.add(p.conceptId);
+    pool.push(p);
+  }
+  pool.sort((a, b) => a.conceptId.localeCompare(b.conceptId));
+  if (!pool.length) throw new Refusal(`Nothing displayable in "${collection}".`);
+  const index = fnv1a(`${date}:${collection}`) % pool.length;
+  const p = pool[index]!;
+  const lab = p.oklab;
+  const oklch = oklchOf(colour('oklab', lab));
+  return {
+    date,
+    collection: collection === 'all' ? 'all' : groupLabel(collection),
+    method: `One of ${pool.length} documented records with a displayable value${
+      collection === 'all' ? '' : ` in ${groupLabel(collection)}`
+    }, chosen by the date alone (FNV-1a of "${date}:${collection}" modulo ${pool.length}, records in id order). The same for everyone on that day. A selection rule, not a meaning.`,
+    colour: {
+      concept: p.conceptId,
+      record: p.id,
+      label: p.label,
+      collection: groupLabel(p.group),
+      hex: p.hex,
+      oklch: { L: round(oklch[0]), C: round(oklch[1]), h: round(oklch[2], 3) },
+      status: status(p.status),
+      ...(p.queue ? { researchQueue: true } : {}),
+      citation: citation(knowledge().record(p.id) ? evidenceOf(knowledge().record(p.id)!) : null),
+    },
+    record: lookupRecord(p.conceptId),
+    links: {
+      entry: `${origin()}/dictionary/${encodeURIComponent(p.conceptId)}`,
+      inspector: `${origin()}/colour/${p.hex.slice(1)}`,
+      laboratory: `${origin()}${labFromHexes([p.hex])}`,
+    },
+  };
 }

@@ -1,4 +1,4 @@
-import { and, eq, isNull, sql } from 'drizzle-orm';
+import { and, eq, isNotNull, isNull, sql } from 'drizzle-orm';
 import type { AnyPgColumn } from 'drizzle-orm/pg-core';
 import { displayPrefix, displaySuffix, hashSecret, KEY_LIMITS, newSecret } from './api-keys';
 import type { Db } from './index';
@@ -71,11 +71,18 @@ export function appData(db: Db, ownerId: string) {
           .returning(),
       )!;
     },
-    versions(projectId: string) {
+    /** The live versions in number order; with `deleted`, the ones in the Deleted list instead. */
+    versions(projectId: string, deleted = false) {
       return db
         .select()
         .from(s.projectVersions)
-        .where(and(eq(s.projectVersions.projectId, projectId), own(s.projectVersions)))
+        .where(
+          and(
+            eq(s.projectVersions.projectId, projectId),
+            own(s.projectVersions),
+            deleted ? isNotNull(s.projectVersions.deletedAt) : isNull(s.projectVersions.deletedAt),
+          ),
+        )
         .orderBy(s.projectVersions.number);
     },
     /** Renames a version by replacing its note. Returns the row, or undefined when it is not the owner's. */
@@ -94,8 +101,45 @@ export function appData(db: Db, ownerId: string) {
           .returning(),
       );
     },
-    /** Deletes one version. Later numbers keep their numbers, so links stay stable. */
+    /**
+     * Moves one live version to the Deleted list, where the Library page can restore it. Numbers are
+     * never reused, so links stay stable. Returns the row, or undefined when there was nothing live to move.
+     */
     async removeVersion(projectId: string, number: number) {
+      return first(
+        await db
+          .update(s.projectVersions)
+          .set({ deletedAt: new Date() })
+          .where(
+            and(
+              eq(s.projectVersions.projectId, projectId),
+              eq(s.projectVersions.number, number),
+              own(s.projectVersions),
+              isNull(s.projectVersions.deletedAt),
+            ),
+          )
+          .returning(),
+      );
+    },
+    /** Brings a version back from the Deleted list. */
+    async restoreVersion(projectId: string, number: number) {
+      return first(
+        await db
+          .update(s.projectVersions)
+          .set({ deletedAt: null })
+          .where(
+            and(
+              eq(s.projectVersions.projectId, projectId),
+              eq(s.projectVersions.number, number),
+              own(s.projectVersions),
+              isNotNull(s.projectVersions.deletedAt),
+            ),
+          )
+          .returning(),
+      );
+    },
+    /** Removes a version from the Deleted list for good. Only the person does this, from the Library page. */
+    async purgeVersion(projectId: string, number: number) {
       return first(
         await db
           .delete(s.projectVersions)
@@ -104,6 +148,7 @@ export function appData(db: Db, ownerId: string) {
               eq(s.projectVersions.projectId, projectId),
               eq(s.projectVersions.number, number),
               own(s.projectVersions),
+              isNotNull(s.projectVersions.deletedAt),
             ),
           )
           .returning(),
@@ -125,7 +170,7 @@ export function appData(db: Db, ownerId: string) {
      * Makes a key and returns the secret once; only its hash is kept. Refuses when the owner already
      * has the allowed number of live keys.
      */
-    async create(name: string) {
+    async create(name: string, options: { writes?: boolean } = {}) {
       const live = await db
         .select({ n: sql<number>`count(*)` })
         .from(s.apiKeys)
@@ -141,6 +186,7 @@ export function appData(db: Db, ownerId: string) {
             name,
             prefix: `${displayPrefix(secret)}…${displaySuffix(secret)}`,
             hash: hashSecret(secret),
+            writes: options.writes ?? false,
           })
           .returning(),
       )!;

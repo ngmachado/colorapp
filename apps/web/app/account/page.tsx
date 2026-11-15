@@ -30,6 +30,7 @@ export default async function Account() {
     lastUsedAt: k.lastUsedAt?.toISOString() ?? null,
     revokedAt: k.revokedAt?.toISOString() ?? null,
     monthCount: k.monthWindow === new Date().toISOString().slice(0, 7) ? k.monthCount : 0,
+    writes: k.writes,
   }));
   const origin = siteUrl.origin;
   return (
@@ -64,8 +65,10 @@ export default async function Account() {
           <h2 className="text-xs tracking-[1px] text-[var(--muted)] uppercase">API keys</h2>
           <p className="text-[0.9375rem]">
             A key lets a script or an agent use the API as you. Each key has its own name and quota
-            and can be revoked at any time. Keys read the records and measure colours; they cannot
-            change your Library.
+            and can be revoked at any time. Every key reads the records, measures colours and reads
+            your Library. A key made with “May save to the Library” can also save palettes and
+            colours and move them to the Deleted list; nothing is removed for good except by you, on
+            the Library page.
           </p>
           <ApiKeys keys={keys} limits={KEY_LIMITS} now={Date.now()} />
         </section>
@@ -88,8 +91,9 @@ export default async function Account() {
           <h2 className="text-xs tracking-[1px] text-[var(--muted)] uppercase">Connect an agent</h2>
           <p className="text-[0.9375rem]">
             The MCP server takes the same header. It measures colours, checks palettes, draws
-            palettes from measurable requirements and reads the records with their sources; it
-            cannot change your Library. Each request counts one call. In Claude Code:
+            palettes from measurable requirements, reads the records with their sources and reads
+            your Library; with a key that may save, it also saves to it. Each request counts one
+            call. In Claude Code:
           </p>
           <pre
             tabIndex={0}

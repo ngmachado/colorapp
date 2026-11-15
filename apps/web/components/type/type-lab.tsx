@@ -18,6 +18,9 @@ import { labFromHexes } from '@/lib/lab-links';
 import {
   DEFAULT_STYLES,
   LIMITS,
+  MEASURE_RANGE,
+  PAD,
+  RATIOS,
   writeTypeState,
   type StyleSetting,
   type TypeState,
@@ -42,24 +45,12 @@ export interface TypeSources {
   apca: Citation;
 }
 
-/** Musical intervals as ratios; the names and their use are the cited source's, the numbers are arithmetic. */
-const RATIOS: { value: number; name: string }[] = [
-  { value: 1.125, name: 'major second 9:8' },
-  { value: 1.2, name: 'minor third 6:5' },
-  { value: 1.25, name: 'major third 5:4' },
-  { value: 1.333, name: 'perfect fourth 4:3' },
-  { value: 1.5, name: 'perfect fifth 3:2' },
-  { value: 1.618, name: 'golden section' },
-];
-/** Bringhurst's range for a single-column text page; the citation is shown beside the count. */
-const MEASURE_RANGE = { min: 45, max: 75, ideal: 66 };
 const SAMPLE: Record<StyleSetting['id'], string> = {
   display: 'Colour is a tool',
   heading: 'Every value has an origin',
   body: 'The laboratory sets the palette in a face at real size and weight, and measures what it can measure: line length against a documented range, leading, and the contrast of each text style. Distance between two colours is never taken for identity, and a rule never stands in for a judgement. Nothing on this page says a setting is good; it says what the setting is.',
   caption: 'Figure 3 · Measured on the file the browser downloaded from Google Fonts',
 };
-const PAD = 18;
 /** One line of the body sample, for the finder's cards. */
 const SAMPLE_SHORT = 'Every value has an origin. Distance is never identity.';
 /** The weights the text styles use; a static family's files for them are loaded beside its regular. */

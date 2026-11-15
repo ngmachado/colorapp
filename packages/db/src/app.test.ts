@@ -45,6 +45,16 @@ describe('versions', () => {
     const v3 = await alice.projects.addVersion(p.id, {});
     expect(v3.number).toBe(3);
     expect((await alice.projects.versions(p.id)).map((v) => v.number)).toEqual([2, 3]);
+    // A removed version waits in the Deleted list until it is restored or purged; only the owner sees it.
+    expect((await alice.projects.versions(p.id, true)).map((v) => v.number)).toEqual([1]);
+    expect(await alice.projects.removeVersion(p.id, 1)).toBeUndefined();
+    expect(await bob.projects.restoreVersion(p.id, 1)).toBeUndefined();
+    expect(await alice.projects.purgeVersion(p.id, 2)).toBeUndefined();
+    expect((await alice.projects.restoreVersion(p.id, 1))?.deletedAt).toBeNull();
+    expect((await alice.projects.versions(p.id)).map((v) => v.number)).toEqual([1, 2, 3]);
+    await alice.projects.removeVersion(p.id, 1);
+    expect(await alice.projects.purgeVersion(p.id, 1)).toBeDefined();
+    expect(await alice.projects.versions(p.id, true)).toEqual([]);
     expect(await bob.projects.noteVersion(p.id, 2, 'mine')).toBeUndefined();
     expect((await alice.projects.noteVersion(p.id, 2, 'renamed'))?.note).toBe('renamed');
   });

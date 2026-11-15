@@ -29,7 +29,16 @@ export const monthWindow = (d: Date) => d.toISOString().slice(0, 7);
 export const minuteWindow = (d: Date) => d.toISOString().slice(0, 16);
 
 export type KeyCheck =
-  | { status: 'ok'; ownerId: string; keyId: string; name: string; month: number; minute: number }
+  | {
+      status: 'ok';
+      ownerId: string;
+      keyId: string;
+      name: string;
+      /** Whether the key may change the Library. */
+      writes: boolean;
+      month: number;
+      minute: number;
+    }
   | { status: 'unknown' }
   | { status: 'revoked' }
   | { status: 'limited'; window: 'minute' | 'month'; retryAfterSeconds: number };
@@ -80,6 +89,7 @@ export async function verifyApiKey(db: Db, secret: string, now = new Date()): Pr
       ownerId: updated.ownerId,
       keyId: updated.id,
       name: updated.name,
+      writes: updated.writes,
       month: updated.monthCount,
       minute: updated.minuteCount,
     };

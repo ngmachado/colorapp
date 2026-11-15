@@ -13,7 +13,9 @@ Every value carries its origin. When you cite a record, cite the source and loca
 
 Order of work: request_palette from requirements, check_palette on the result, inspect_colour on what fails, lookup_record to cite what you keep. The "palette" prompt walks through this.
 
-Nothing here writes to the person's Library. The Laboratory link in a result is the way to hand work back to them.`;
+Type is measured the same way. measure_setting gives the sizes, the count per line against Bringhurst's cited range, and the contrast of each text style; lookup_face reads a face's file. Neither scores a pairing or calls a setting good, and no face is recommended over another.
+
+The Library is the person's. Read it freely; save to it only with a key made for that and when the person asked or the work is done, and say what was saved. A delete moves an item to the Deleted list, where it can be restored; nothing is removed for good from here. The Laboratory link in a result is the other way to hand work back.`;
 
 export const GUIDE = `# Super Colour for agents
 
@@ -21,18 +23,26 @@ ${INSTRUCTIONS}
 
 ## Tools
 
-Every tool is deterministic and read-only. Colours are sent as a hex (#663399) or as oklch(L C h) with L on 0–1 and h in degrees. Distances are Euclidean in OKLab with L on 0–1. Contrast is the WCAG 2.1 ratio on the sRGB values as displayed.
+Every tool measures or reads; the Library tools below are the only ones that change anything. Colours are sent as a hex (#663399) or as oklch(L C h) with L on 0–1 and h in degrees. Distances are Euclidean in OKLab with L on 0–1. Contrast is the WCAG 2.1 ratio on the sRGB values as displayed.
 
 - inspect_colour { colour }: the values the inspector shows (sRGB, HSL, OKLCh, CIELAB with its illuminant, XYZ), the nearest Munsell notations when the renotation table is installed, and the five nearest documented records with distance, status and citation.
 - contrast_pair { text, background }: the WCAG 2.1 ratio with every threshold named by its success criterion, plus CIEDE2000 and OKLab differences with their conditions.
 - check_palette { colours, names?, pairs?, flagDistance? }: contrast for the pairs you mean to use and for every pair, lightness spread, the closest pair, distinctness under protan, deutan and tritan simulation, the nearest records to each colour, and documented pairs, groups or layerings whose members all lie near the palette. A Laboratory link reproduces it.
 - request_palette { roles?, rule?, fixed?, startFrom?, hue?, lightness?, chroma?, contrast?, minimumSeparation?, gamut?, seed?, count? }: draws candidates with the Laboratory's generator under your numbers and returns the first that meets every requirement, or the one with the fewest failures, with a pass or fail per requirement and a Laboratory link. The field "words" exists only to be refused: anything written there is answered with its measurable form.
+- colour_of_the_day { date?, collection? }: one documented record for a calendar day, chosen by the date alone from every concept with a displayable value, with its citation, status and the full record. A selection rule, never a meaning.
+- list_library {}: the person's saved palettes and colours, the Deleted list, and whether this key may save.
+- get_palette { number }: one saved palette in full.
+- save_palette { name, colours, names?, records?, rule?, seed?, pairs? } and save_colour { record }: add to the Library, marked as saved by this key. Need a key made with "May save to the Library".
+- delete_saved { kind, number } and restore_saved { kind, number }: move an item to the Deleted list on the Library page, or bring it back. Removing for good stays the person's click on the page. Need a key that may save.
+- measure_setting { face?, base?, ratio?, measure?, colours?, styles?, spacing? }: the Type laboratory's measurements for a setting: the scale with musical ratios named, each text style's size, weight, leading, WCAG 2 ratio at the threshold its size and weight select and APCA Lc labelled as the WCAG 3 draft, the count per line in the body column from the face's own advance widths against Bringhurst's range, and WCAG 1.4.12's spacing values as a test. Each check carries its claim and citation. A Type laboratory link reproduces the setting.
+- lookup_face { family }: one face from Google Fonts: the catalogue's facts (category as Google's, axes or static weights, subsets) and the file's (names, licence, metrics, axes, features, Unicode blocks), with a Type laboratory link and the specimen page. A name not in the catalogue is refused with the names that contain it.
 - find_records { text }: text search over names, transliterations, aliases, labels and titles.
 - lookup_record { id }: a concept with its names, representations (space, coordinates, method, approximation), passages, relations, combinations and members, each with its citation; or a source's bibliographic record. A restricted record returns its bibliographic record only.
 
 ## Resources
 
 - supercolour://guide: this text.
+- supercolour://colour-of-the-day: today's record (UTC), as colour_of_the_day returns it.
 - supercolour://records/{id}: any concept or source, as lookup_record returns it.
 - supercolour://systems/{id}: a documented system (such as the Five Phases or Chevreul's circle) with its members and the passages that document it.
 - supercolour://lessons/{id}: a lesson from the Theory section, with its references.
@@ -43,7 +53,7 @@ Every tool is deterministic and read-only. Colours are sent as a hex (#663399) o
 
 ## Not provided
 
-Saving to a Library, scoring harmonies, naming a colour from a distance, physical matching, and anything that needs a hosted model. Each is either the person's own act or a claim this server cannot source.
+Removing anything for good, scoring harmonies or type pairings, recommending a face, naming a colour from a distance, physical matching, reading a font file you send, and anything that needs a hosted model. Each is either the person's own act or a claim this server cannot source.
 
 ## Quota
 

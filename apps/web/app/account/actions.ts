@@ -17,7 +17,9 @@ export async function createKey(
     .slice(0, 40);
   if (!name) return { error: 'Give the key a name, so you know what to revoke later.' };
   try {
-    const { secret } = await user.data.keys.create(name);
+    const { secret } = await user.data.keys.create(name, {
+      writes: formData.get('writes') === 'on',
+    });
     revalidatePath('/account');
     return { created: { name, secret } };
   } catch (e) {

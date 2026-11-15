@@ -1,4 +1,5 @@
 import {
+  boolean,
   index,
   integer,
   jsonb,
@@ -102,6 +103,8 @@ export const projectVersions = pgTable(
     /** Snapshot of the saved thing at this version: a palette with its state, or a colour's record id. */
     snapshot: jsonb('snapshot').notNull(),
     note: text('note'),
+    /** Set when the version is in the Library's Deleted list; cleared on restore. Null means live. */
+    deletedAt: timestamp('deleted_at', { mode: 'date', withTimezone: true }),
   },
   (t) => [uniqueIndex('project_version_number').on(t.projectId, t.number)],
 );
@@ -125,6 +128,8 @@ export const apiKeys = pgTable(
     monthCount: integer('month_count').notNull().default(0),
     minuteWindow: text('minute_window'),
     minuteCount: integer('minute_count').notNull().default(0),
+    /** Whether the key may save to and delete from the Library. Chosen when the key is made. */
+    writes: boolean('writes').notNull().default(false),
   },
   (t) => [uniqueIndex('api_key_hash').on(t.hash), index('api_key_owner').on(t.ownerId)],
 );

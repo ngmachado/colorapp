@@ -1,6 +1,8 @@
 import { describe, expect, test } from 'vitest';
 import {
   checkPalette,
+  collections,
+  colourOfTheDay,
   contrastPair,
   findRecords,
   inspectColour,
@@ -203,5 +205,28 @@ describe('records', () => {
     expect(text.startsWith(`# ${lessons[0]!.title}`)).toBe(true);
     expect(text).toContain('## References');
     expect(lessonText('nope')).toBeNull();
+  });
+});
+
+describe('colour_of_the_day', () => {
+  test('one record per day, the same on every call, with its citation and the method stated', () => {
+    const a = colourOfTheDay({ date: '2026-11-13' });
+    const b = colourOfTheDay({ date: '2026-11-13' });
+    expect(a).toEqual(b);
+    expect(a.colour.hex).toMatch(/^#[0-9a-f]{6}$/);
+    expect(a.colour.citation?.text).toBeTruthy();
+    expect(a.method).toContain('not a meaning');
+    expect(a.record).toMatchObject({ type: 'concept', id: a.colour.concept });
+    expect(a.links.entry).toContain(`/dictionary/${a.colour.concept}`);
+    const next = colourOfTheDay({ date: '2026-11-14' });
+    expect(next.colour.concept === a.colour.concept && next.date === a.date).toBe(false);
+  });
+  test('a collection narrows the pool; a bad date or collection is refused', () => {
+    expect(collections().map((g) => g.id)).toContain('jis-z8102');
+    const jis = colourOfTheDay({ date: '2026-11-13', collection: 'jis-z8102' });
+    expect(jis.colour.collection).toBe('JIS Z 8102');
+    expect(() => colourOfTheDay({ date: '13/11/2026' })).toThrow(Refusal);
+    expect(() => colourOfTheDay({ collection: 'moods' })).toThrow('Collections: all');
+    expect(colourOfTheDay().date).toMatch(/^\d{4}-\d{2}-\d{2}$/);
   });
 });

@@ -43,6 +43,20 @@ export const DEFAULT_STYLES: StyleSetting[] = [
   { id: 'caption', label: 'Caption', step: -1, weight: 500, leading: 1.4, fg: 2, bg: 4 },
 ];
 
+/** Musical intervals as ratios; the names and their use are the cited source's, the numbers are arithmetic. */
+export const RATIOS: { value: number; name: string }[] = [
+  { value: 1.125, name: 'major second 9:8' },
+  { value: 1.2, name: 'minor third 6:5' },
+  { value: 1.25, name: 'major third 5:4' },
+  { value: 1.333, name: 'perfect fourth 4:3' },
+  { value: 1.5, name: 'perfect fifth 3:2' },
+  { value: 1.618, name: 'golden section' },
+];
+/** Bringhurst's range for a single-column text page; the citation is shown beside the count. */
+export const MEASURE_RANGE = { min: 45, max: 75, ideal: 66 };
+/** Padding of the body column on the page, in CSS px; the count per line is taken inside it. */
+export const PAD = 18;
+
 export const LIMITS = { base: [10, 32], ratio: [1.05, 2], measure: [240, 1200] } as const;
 const clamp = (v: number, [lo, hi]: readonly [number, number]) => Math.min(hi, Math.max(lo, v));
 const num = (s: string | undefined, fallback: number, range: readonly [number, number]) => {

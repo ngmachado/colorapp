@@ -99,3 +99,15 @@ describe('keys', () => {
     expect(await verifyApiKey(db, secret, t3)).toMatchObject({ status: 'ok', month: 1 });
   });
 });
+
+describe('what a key may do', () => {
+  test('a key reads only unless it was made to write, and the check says which', async () => {
+    const { db, alice } = await fresh();
+    const reader = await alice.keys.create('reader');
+    const writer = await alice.keys.create('writer', { writes: true });
+    expect(reader.key.writes).toBe(false);
+    expect(writer.key.writes).toBe(true);
+    expect(await verifyApiKey(db, reader.secret)).toMatchObject({ status: 'ok', writes: false });
+    expect(await verifyApiKey(db, writer.secret)).toMatchObject({ status: 'ok', writes: true });
+  });
+});

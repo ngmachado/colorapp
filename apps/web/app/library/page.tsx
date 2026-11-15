@@ -8,33 +8,41 @@ import { LocalLibrary } from '@/components/local-library';
 import { ACCOUNTS } from '@/lib/accounts';
 import { Toolbar } from '@/components/toolbar';
 import { currentUser } from '@/lib/current-user';
-import { stateParams, type Oklch } from '@/lib/palette-param';
+import { stateParams } from '@/lib/palette-param';
+import type { ColourSnapshot, PaletteSnapshot } from '@/lib/library';
 
 export const dynamic = 'force-dynamic';
 
-interface PaletteSnapshot {
-  kind: 'palette';
-  palette: Oklch[];
-  structure: string;
-  seed: number;
-  locked?: boolean[];
-  weights?: number[];
-  labels?: (string | null)[];
-  sourceIds?: (string | null)[];
-}
-interface ColourSnapshot {
-  kind: 'colour';
-  conceptId: string;
-  label: string;
-  hex: string | null;
-}
-
-/** Deletes one saved version. Only the owner's rows match, so a wrong id is a no-op. */
+/** Moves one saved version to the Deleted list. Only the owner's rows match, so a wrong id is a no-op. */
 async function removeVersion(formData: FormData) {
   'use server';
   const user = await currentUser();
   if (!user) return;
   await user.data.projects.removeVersion(
+    String(formData.get('project')),
+    Number(formData.get('number')),
+  );
+  revalidatePath('/library');
+}
+
+/** Brings a version back from the Deleted list. */
+async function restoreVersion(formData: FormData) {
+  'use server';
+  const user = await currentUser();
+  if (!user) return;
+  await user.data.projects.restoreVersion(
+    String(formData.get('project')),
+    Number(formData.get('number')),
+  );
+  revalidatePath('/library');
+}
+
+/** Removes a deleted version for good. Only the person does this; no key or agent can. */
+async function purgeVersion(formData: FormData) {
+  'use server';
+  const user = await currentUser();
+  if (!user) return;
+  await user.data.projects.purgeVersion(
     String(formData.get('project')),
     Number(formData.get('number')),
   );
@@ -111,6 +119,32 @@ export default async function Library({
         )
         .reverse()
     : [];
+
+  // The Deleted list: what a click here or an agent removed, until it is restored or removed for good.
+  const deleted = [
+    ...(paletteProject
+      ? (await user.data.projects.versions(paletteProject.id, true)).map((v) => ({
+          project: paletteProject.id,
+          number: v.number,
+          kind: 'palette' as const,
+          label:
+            v.note ??
+            `${(v.snapshot as PaletteSnapshot).structure} · seed ${(v.snapshot as PaletteSnapshot).seed}`,
+          hexes: (v.snapshot as PaletteSnapshot).palette.map((c) => toHex(colour('oklch', c))),
+          deletedAt: v.deletedAt,
+        }))
+      : []),
+    ...(colourProject
+      ? (await user.data.projects.versions(colourProject.id, true)).map((v) => ({
+          project: colourProject.id,
+          number: v.number,
+          kind: 'colour' as const,
+          label: (v.snapshot as ColourSnapshot).label,
+          hexes: [(v.snapshot as ColourSnapshot).hex ?? 'transparent'],
+          deletedAt: v.deletedAt,
+        }))
+      : []),
+  ].sort((a, b) => (b.deletedAt?.getTime() ?? 0) - (a.deletedAt?.getTime() ?? 0));
 
   return (
     <>
@@ -278,6 +312,57 @@ export default async function Library({
               </div>
             )}
           </section>
+
+          {deleted.length ? (
+            <section className="flex flex-col gap-3" data-testid="library-deleted">
+              <h2 className="text-[1.375rem] font-bold">Deleted</h2>
+              <p className="text-sm text-[var(--muted)]">
+                Removed here or by an agent with a key that may save. Restore brings an item back;
+                Remove for good cannot be undone, and only you can do it.
+              </p>
+              <ul className="flex flex-col gap-2">
+                {deleted.map((d) => (
+                  <li
+                    key={`${d.kind}-${d.number}`}
+                    className="flex flex-wrap items-center gap-4 rounded-lg border border-[var(--line)] p-2.5"
+                    data-testid="deleted-item"
+                    data-kind={d.kind}
+                  >
+                    <span
+                      className="flex h-8 w-24 shrink-0 overflow-hidden rounded-md"
+                      aria-hidden="true"
+                    >
+                      {d.hexes.map((h, i) => (
+                        <span key={i} className="flex-1" style={{ background: h }} />
+                      ))}
+                    </span>
+                    <span className="min-w-0 flex-1 text-[0.9375rem]">
+                      {d.label}
+                      <span className="ml-2 text-xs text-[var(--muted)]">{d.kind}</span>
+                    </span>
+                    <form action={restoreVersion}>
+                      <input type="hidden" name="project" value={d.project} />
+                      <input type="hidden" name="number" value={d.number} />
+                      <button type="submit" className="btn" data-testid="restore-item">
+                        Restore
+                      </button>
+                    </form>
+                    <form action={purgeVersion}>
+                      <input type="hidden" name="project" value={d.project} />
+                      <input type="hidden" name="number" value={d.number} />
+                      <button
+                        type="submit"
+                        className="btn border-[var(--danger)] text-[var(--danger)]"
+                        data-testid="purge-item"
+                      >
+                        Remove for good
+                      </button>
+                    </form>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ) : null}
         </div>
       </main>
     </>

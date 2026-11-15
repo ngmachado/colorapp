@@ -5,6 +5,8 @@ export type KeyUser = {
   id: string;
   keyId: string;
   keyName: string;
+  /** Whether the key may change the Library. */
+  writes: boolean;
   data: AppData;
   check: KeyCheck & { status: 'ok' };
 };
@@ -44,6 +46,7 @@ export async function requireKey(req: Request): Promise<KeyUser | Response> {
     id: check.ownerId,
     keyId: check.keyId,
     keyName: check.name,
+    writes: check.writes,
     data: appData(d, check.ownerId),
     check,
   };

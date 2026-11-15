@@ -1,6 +1,7 @@
 import { validWeights } from '@/lib/palette-param';
 import { Structure } from '@sca/generator';
 import { currentUser } from '@/lib/current-user';
+import { savePalette } from '@/lib/library';
 
 const MAX_COLUMNS = 5;
 const isTriple = (v: unknown): v is [number, number, number] =>
@@ -57,23 +58,20 @@ export async function POST(req: Request) {
       { error: 'weights must match the palette and be integers from 1 to 100' },
       { status: 400 },
     );
-  const project =
-    (await user.data.projects.list()).find((p) => p.name === 'Saved palettes') ??
-    (await user.data.projects.create({ name: 'Saved palettes' }));
-  const version = await user.data.projects.addVersion(
-    project.id,
+  const saved = await savePalette(
+    user.data,
     {
       kind: 'palette',
       space: 'oklch',
       palette,
       structure: structure.data,
       seed,
-      ...(body.weights ? { weights: body.weights } : {}),
+      ...(body.weights ? { weights: body.weights as number[] } : {}),
       ...(locked ? { locked } : {}),
       ...(labels ? { labels } : {}),
       ...(sourceIds ? { sourceIds } : {}),
     },
     `${structure.data} · seed ${seed}`,
   );
-  return Response.json({ projectId: project.id, number: version.number });
+  return Response.json(saved);
 }

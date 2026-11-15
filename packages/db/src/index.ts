@@ -12,7 +12,7 @@ const require = createRequire(import.meta.url);
 
 export { schema };
 
-export const SCHEMA_VERSION = '4';
+export const SCHEMA_VERSION = '5';
 
 /** One Postgres database, whichever engine serves it. */
 export type Db = PgDatabase<PgQueryResultHKT, typeof schema>;

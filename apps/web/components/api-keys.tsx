@@ -11,6 +11,8 @@ export interface KeyRow {
   lastUsedAt: string | null;
   revokedAt: string | null;
   monthCount: number;
+  /** Whether the key may save to and delete from the Library. */
+  writes: boolean;
 }
 
 const dateFmt = new Intl.DateTimeFormat('en-GB', {
@@ -113,6 +115,9 @@ export function ApiKeys({
                 </span>
                 <span className="flex flex-wrap gap-x-3.5 gap-y-0.5 text-[0.8125rem] text-[var(--muted)]">
                   <code className="font-mono text-xs">{k.prefix}</code>
+                  {k.writes && !k.revokedAt ? (
+                    <span data-testid="key-writes-mark">saves to the Library</span>
+                  ) : null}
                   {k.revokedAt ? (
                     <span>revoked {day(k.revokedAt)}</span>
                   ) : (
@@ -195,6 +200,15 @@ export function ApiKeys({
           required
           disabled={live >= limits.activeKeys}
         />
+        <label className="flex items-center gap-1.5 text-sm">
+          <input
+            type="checkbox"
+            name="writes"
+            disabled={live >= limits.activeKeys}
+            data-testid="key-writes"
+          />
+          May save to the Library
+        </label>
         <button
           type="submit"
           className="btn btn-primary"
